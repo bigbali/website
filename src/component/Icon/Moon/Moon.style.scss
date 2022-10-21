@@ -1,0 +1,37 @@
+.Icon {
+    &-Chevron {
+        display: grid;
+        place-items: center;
+
+        &>svg {
+            transition: rotate 0.2s, translate 0.2s;
+        }
+
+        &_DIRECTION_LEFT>svg {
+            rotate: -90deg;
+        }
+
+        &_DIRECTION_RIGHT>svg {
+            rotate: 90deg;
+        }
+
+        &_DIRECTION_UP>svg {
+            rotate: 0deg;
+        }
+
+        &_DIRECTION_DOWN>svg {
+            rotate: 180deg;
+        }
+
+        >svg>path {
+            fill: var(--color-content-primary);
+            transition: fill 0.2s;
+        }
+
+        &:hover {
+            >svg>path {
+                fill: var(--color-theme);
+            }
+        }
+    }
+}

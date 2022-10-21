@@ -1,0 +1,59 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "allowUmdGlobalAccess": true,
+        "moduleResolution": "node",
+        "resolveJsonModule": true, // Enable importing .json files
+        "allowJs": true, // Allow JavaScript files to be a part of your program.
+        "checkJs": false, // Enable error reporting in type-checked JavaScript files.
+        "esModuleInterop": true, // Emit additional JavaScript to ease support for importing CommonJS modules.
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "baseUrl": "./",
+        "jsx": "preserve",
+        "paths": {
+            "Style": [
+                "src/style"
+            ],
+            "Component": [
+                "src/component"
+            ],
+            "Route": [
+                "src/route"
+            ],
+            "Store": [
+                "src/store"
+            ],
+            "Util": [
+                "src/util/index"
+            ],
+            "Type": [
+                "src/type"
+            ],
+            "Style/*": [
+                "src/style/*"
+            ],
+            "Component/*": [
+                "src/component/*"
+            ],
+            "Route/*": [
+                "src/route/*"
+            ],
+            "Store/*": [
+                "src/store/*"
+            ],
+            "Util/*": [
+                "src/util/*"
+            ],
+            "Type/*": [
+                "src/type/*"
+            ]
+        }
+    },
+    "exclude": [
+        "*.config.js",
+        "build",
+        "node_modules"
+    ]
+}

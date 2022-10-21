@@ -1,0 +1,218 @@
+@import 'variables';
+@import 'font';
+
+:root {
+    --color-white: #fff;
+    --color-black: #000;
+
+    --color-background-primary-light: rgb(250, 250, 250);
+    --color-background-primary-light-transparent: rgba(250, 250, 250, 0.75);
+    --color-background-primary-dark: rgb(30, 30, 35);
+    --color-background-primary-dark-transparent: rgba(30, 30, 35, 0.75);
+
+    --color-background-primary-dark-transparent-less-transparent: rgba(30, 30, 35, 0.9);
+
+    --color-background-secondary-light: rgb(238, 241, 247);
+    --color-background-secondary-light-transparent: rgba(238, 241, 247, 0.75);
+    --color-background-secondary-dark: rgb(35, 35, 40);
+    --color-background-secondary-dark-transparent: rgba(35, 35, 40, 0.75);
+
+    --color-content-primary-light: rgb(25, 30, 30);
+    --color-content-primary-light-transparent: rgba(25, 30, 30, 0.75);
+    --color-content-primary-dark: rgb(240, 240, 240);
+    --color-content-primary-dark-transparent: rgba(240, 240, 240, 0.75);
+
+    --color-content-secondary-light: rgb(43, 49, 56);
+    --color-content-secondary-light-transparent: rgba(43, 49, 56, 0.75);
+    --color-content-secondary-dark: rgb(220, 225, 230);
+    --color-content-secondary-dark-transparent: rgba(220, 225, 230, 0.75);
+
+    --color-theme-initial: rgb(204, 18, 18);
+    --color-theme: var(--color-theme-initial);
+
+    --color-border-light: rgb(225, 225, 235);
+    --color-border-light-transparent: rgba(225, 225, 235, 0.75);
+    --color-border-dark: rgb(50, 50, 55);
+    --color-border-dark-transparent: rgba(50, 50, 55, 0.75);
+
+    --color-primary-content: rgb(25, 30, 30);
+    --color-secondary-content: rgb(43, 49, 56);
+    --color-primary-background: var(--color-white);
+    --color-secondary-background: rgb(238, 241, 247);
+    --color-primary-background-transparent: rgba(255, 255, 255, 0.75);
+
+    --color-neutral-background: rgb(27, 152, 168);
+    --color-neutral-foreground: var(--color-white);
+    --color-success-background: rgb(23, 185, 85);
+    --color-success-foreground: var(--color-white);
+    --color-warning-background: rgb(230, 195, 43);
+    --color-warning-foreground: var(--color-black);
+    --color-error-background: rgb(212, 46, 46);
+    --color-error-foreground: var(--color-white);
+
+    --content-padding: 2rem;
+    --header-height: 3.75rem;
+    --blur-background: 16px;
+
+    @include mobile {
+        --content-padding: 1.5rem;
+        --header-height: 2.5rem;
+    }
+}
+
+.theme-dark {
+    --color-background-primary: var(--color-background-primary-dark);
+    --color-background-primary-transparent: var(--color-background-primary-dark-transparent);
+    --color-background-secondary: var(--color-background-secondary-dark);
+    --color-background-secondary-transparent: var(--color-background-secondary-dark-transparent);
+    --color-content-primary: var(--color-content-primary-dark);
+    --color-content-primary-transparent: var(--color-content-primary-dark-transparent);
+    --color-content-secondary: var(--color-content-secondary-dark);
+    --color-content-secondary-transparent: var(--color-content-secondary-dark-transparent);
+
+    --color-header-background: var(--color-background-primary-dark-transparent);
+    --color-border: var(--color-border-dark);
+    --color-border-transparent: var(--color-border-dark-transparent);
+}
+
+.theme-light {
+    --color-background-primary: var(--color-background-primary-light);
+    --color-background-primary-transparent: var(--color-background-primary-light-transparent);
+    --color-background-secondary: var(--color-background-primary);
+    --color-background-secondary-transparent: var(--color-background-secondary-light-transparent);
+    --color-content-primary: var(--color-content-primary-light);
+    --color-content-primary-transparent: var(--color-content-primary-light-transparent);
+    --color-content-secondary: var(--color-content-secondary-light);
+    --color-content-secondary-transparent: var(--color-content-secondary-light-transparent);
+
+    --color-header-background: var(--color-background-primary-light-transparent);
+    --color-border: var(--color-border-light);
+    --color-border-transparent: var(--color-border-light-transparent);
+}
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+    color: var(--color-content-primary);
+    transition: color 0.2s, background-color 0.2s, font-size 0.1s;
+    font-family: $raleway;
+}
+
+body,
+.root {
+    margin: 0;
+    background-color: var(--color-background-primary);
+    min-height: 100vh;
+}
+
+body {
+    &.disable-scrolling {
+        overflow: hidden;
+    }
+}
+
+.root {
+    scrollbar-gutter: stable both-edges;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    word-break: break-word;
+}
+
+main {
+    &.Page {
+        &>div {
+            padding-block-start: var(--header-height);
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100vh;
+        }
+
+        &>div::before {
+            content: "";
+            display: block;
+            position: fixed;
+            inset: 0;
+            background-color: var(--color-background-primary-transparent);
+            backdrop-filter: blur(1rem);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        &.cross-page {
+            &_enter {
+                >div {
+                    @include desktop {
+                        scale: 1.1;
+                    }
+
+                }
+
+                &>div::before {
+                    opacity: 1;
+                }
+            }
+
+            &_exit {
+                scale: 1;
+
+                &>div::before {
+                    opacity: 0;
+                }
+            }
+
+            &_enter-active {
+                >div {
+                    scale: 1;
+                    transition: scale 0.2s;
+                    transition-timing-function: ease-out;
+
+                }
+
+                &>div::before {
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                    transition-timing-function: ease-out;
+                }
+            }
+
+            &_enter-done>div::before {
+                display: none;
+            }
+
+            &_exit-active {
+                >div {
+                    @include desktop {
+                        scale: 1.1;
+                        transition: scale 0.1s;
+                        transition-timing-function: ease-out;
+                    }
+
+                }
+
+                &>div::before {
+                    opacity: 1;
+                    transition: opacity 0.1s;
+                    transition-timing-function: ease-out;
+                }
+            }
+        }
+    }
+}
+
+button {
+    cursor: pointer;
+
+    &:hover {
+        >.Icon>svg>path {
+            fill: var(--color-theme);
+        }
+    }
+}

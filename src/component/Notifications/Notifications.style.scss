@@ -1,0 +1,100 @@
+.NotificationContainer {
+    position: fixed;
+    inset-block-start: var(--header-height);
+    inset-block-end: 0;
+    inset-inline: 0;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: flex-end;
+    z-index: 98;
+    padding: 1rem;
+    pointer-events: none;
+
+    .Notification {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        width: fit-content;
+        min-width: 25%;
+        padding: 1rem;
+        margin-top: 1rem;
+        border: 1px solid;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        background-color: var(--color-background-primary-transparent);
+        backdrop-filter: blur(10px);
+        flex: none;
+        pointer-events: all;
+
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            inset-block-start: 0;
+            inset-inline: 0;
+            height: 0.5rem;
+        }
+
+        &_INFO {
+            border-color: var(--color-neutral-background);
+        }
+
+        &_SUCCESS {
+            border-color: var(--color-success-background);
+        }
+
+        &_WARNING {
+            border-color: var(--color-warning-background);
+        }
+
+        &_ERROR {
+            border-color: var(--color-error-background);
+        }
+
+        &_INFO::before {
+            background-color: var(--color-neutral-background);
+        }
+
+        &_SUCCESS::before {
+            background-color: var(--color-success-background);
+        }
+
+        &_WARNING::before {
+            background-color: var(--color-warning-background);
+        }
+
+        &_ERROR::before {
+            background-color: var(--color-error-background);
+        }
+
+        &-Content {
+            width: 100%;
+        }
+
+        &-Close {
+            margin-inline-start: auto;
+            background: none;
+            border: none;
+            width: fit-content;
+            height: fit-content;
+            padding: 0;
+            translate: 0.5rem 0;
+            pointer-events: all;
+
+            >.Icon {
+                width: 2rem;
+                height: 2rem;
+            }
+        }
+
+        &-Title {
+            margin-block: 0;
+        }
+
+        &-Message {
+            margin-block: 0.5rem 0;
+        }
+    }
+}

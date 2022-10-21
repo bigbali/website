@@ -1,0 +1,30 @@
+.TermsOfUsePage {
+    &-MainContent {
+        padding-inline: calc(var(--content-padding) + 5rem);
+        padding-block-start: calc(var(--header-height) + 5rem);
+
+        @include mobile {
+            padding-inline: var(--content-padding);
+            padding-block-start: var(--header-height);
+        }
+    }
+
+    &-Header {
+        margin-block-start: 0;
+        margin-block-end: 1rem;
+        font-size: 4rem;
+
+        @include mobile {
+            font-size: 2rem;
+        }
+    }
+
+    &-TextContent {
+        font-size: 1rem;
+        margin-block-start: 0;
+
+        @include desktop {
+            max-width: 50%;
+        }
+    }
+}

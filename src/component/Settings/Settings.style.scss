@@ -1,0 +1,241 @@
+.Settings {
+    &-Desktop {
+        &-Expander {
+            border: none;
+            background-color: transparent;
+            padding: 0;
+
+            &>.Icon {
+                width: 2.75rem;
+                height: 2.75rem;
+                margin-inline-start: 1rem;
+            }
+        }
+
+        &-Overlay {
+            position: fixed;
+            inset-block-start: calc(var(--header-height) + 1rem);
+            inset-inline-end: calc(var(--content-padding) + 1rem); // + 1rem, as header is offset negatively
+            padding-inline: 1rem;
+            padding-block: 0.5rem 1rem;
+            background-color: var(--color-background-primary-transparent);
+            backdrop-filter: blur(var(--blur-background));
+            border: 1px solid var(--color-border);
+            pointer-events: none;
+            opacity: 0;
+            scale: 0.85;
+            translate: 0 2rem;
+            transition-timing-function: ease-in;
+            transition: opacity 0.2s,
+                translate 0.2s,
+                scale 0.2s;
+
+            &>.Switch {
+                margin-block-end: 1.5rem;
+
+                &>.Switch {
+                    &-Value {
+                        width: 12.5rem;
+                    }
+
+                    &-Label {
+                        font-weight: 500;
+                    }
+                }
+            }
+
+            &>.Slider {
+                margin-block-end: 1.5rem;
+
+                &>.Slider {
+                    &-Input {
+                        width: 12.5rem;
+                    }
+
+                    &-Label {
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+
+        &-SettingsLabel {
+            margin-block-start: 0;
+            margin-block-end: 1.5rem;
+            padding-block-end: 1rem;
+            font-size: 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        &-ColorPicker {
+            display: flex;
+            justify-content: space-between;
+            margin-block-end: 1.5rem;
+
+            &-ColorsContainer {
+                display: flex;
+                flex: auto;
+                justify-content: space-between;
+                width: 12.5rem;
+                max-width: 12.5rem;
+
+                &>button {
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    border: none;
+                }
+
+                &>.DefaultColor {
+                    background-color: var(--color-theme-initial);
+
+                    &.Outline {
+                        outline: 3px solid var(--color-border);
+                    }
+                }
+            }
+        }
+
+        &-ColorLabel {
+            display: flex;
+            align-items: center;
+            margin-inline-start: auto;
+            margin-block: 0;
+            font-weight: 500;
+            font-size: 1rem; // turns out, setting font-size explicitly removes turd looking animation
+            user-select: none;
+        }
+
+        &-Reset {
+            border: 1px solid var(--color-border);
+            background-color: var(--color-background-secondary-transparent);
+            color: var(--color-content-primary);
+            padding-inline: 1rem;
+            padding-block: 0.5rem;
+            width: 7.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.2s;
+
+            &:hover {
+                background-color: var(--color-background-primary);
+            }
+        }
+
+        &_isExpanded {
+            >.Settings-Desktop-Overlay {
+                opacity: 1;
+                pointer-events: all;
+                translate: 0 0;
+                scale: 1;
+                transition-timing-function: ease-out;
+            }
+        }
+    }
+
+    &-Mobile {
+        &>.Switch {
+            flex-direction: column-reverse;
+            margin-block-end: 1.5rem;
+
+            &>.Switch {
+                &-Value {
+                    width: 100%;
+                    margin-inline-end: 0;
+                }
+
+                &-Label {
+                    font-weight: 500;
+                    margin-block-end: 0.75rem;
+                }
+            }
+        }
+
+        &>.Slider {
+            flex-direction: column-reverse;
+            margin-block-end: 1.5rem;
+
+            &>.Slider {
+                &-Input {
+                    width: 100%;
+                }
+
+                &-Label {
+                    font-weight: 500;
+                    margin-inline-start: 0;
+                    margin-block-end: 0.75rem;
+                }
+            }
+        }
+
+        &-SettingsLabel {
+            margin-block-start: 0;
+            margin-block-end: 1.5rem;
+            padding-block-end: 1rem;
+            font-size: 1.5rem;
+            font-weight: 500;
+            text-align: center;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        &-ColorPicker {
+            display: flex;
+            flex-direction: column-reverse;
+            justify-content: space-between;
+            margin-block-end: 1.5rem;
+
+            &-ColorsContainer {
+                display: flex;
+                flex: auto;
+                justify-content: space-between;
+                width: 100%;
+
+                &>button {
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    border: none;
+                }
+
+                &>.DefaultColor {
+                    background-color: var(--color-theme-initial);
+
+                    &.Outline {
+                        outline: 3px solid var(--color-border);
+                    }
+                }
+            }
+        }
+
+        &-ColorLabel {
+            display: flex;
+            align-items: center;
+            margin-block-start: 0;
+            margin-block-end: 0.75rem;
+            font-weight: 500;
+            font-size: 1rem;
+            text-align: end;
+            user-select: none;
+        }
+
+        &-Reset {
+            border: 1px solid var(--color-border);
+            background-color: var(--color-background-secondary-transparent);
+            color: var(--color-content-primary);
+            padding-inline: 1rem;
+            padding-block: 0.5rem;
+            width: 7.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        &_isExpanded {
+            >.Settings-Desktop-Overlay {
+                opacity: 1;
+                pointer-events: all;
+                translate: 0 0;
+                scale: 1;
+                transition-timing-function: ease-out;
+            }
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "plugins": [
+        [
+            "transform-jsx-bem-attributes",
+            {}
+        ]
+    ]
+    // "retainLines": true
+}

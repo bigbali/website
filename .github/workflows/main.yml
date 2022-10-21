@@ -1,0 +1,36 @@
+name: Build test
+
+on:
+  push:
+    branches:
+      - master
+      - development
+  pull_request:
+    branches:
+      - master
+      - development
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  compile_test:
+    runs-on: windows-latest
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        env:
+         CI: false
+        run: |
+          echo "Running 'yarn'"
+          yarn
+        
+      - name: Build
+        env:
+         CI: false
+        run: |
+          echo "Running 'yarn build'"
+          yarn build

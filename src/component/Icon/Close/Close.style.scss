@@ -1,0 +1,12 @@
+.Icon {
+    width: 16px;
+    height: 16px;
+
+    &-Close {
+        &:hover {
+            >path {
+                fill: var(--color-theme);
+            }
+        }
+    }
+}

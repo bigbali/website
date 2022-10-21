@@ -1,0 +1,46 @@
+.Footer {
+    display: flex;
+    justify-content: space-between;
+    padding-inline: var(--content-padding);
+    padding-block: 1.5rem;
+    background-color: var(--color-background-secondary-dark);
+    border-block-start: 1px solid var(--color-border);
+
+    span,
+    a {
+        font-size: 1rem;
+        color: var(--color-content-secondary-dark);
+    }
+
+    span {
+        flex: 1;
+    }
+
+    &-By:not(.\9) {
+        // trick to increase specificity
+        text-align: start;
+
+        @include mobile {
+            flex: 2;
+        }
+    }
+
+    &-Date {
+        text-align: end;
+    }
+
+    &-Navigation {
+        display: flex;
+        justify-content: center;
+        flex: 1;
+        gap: 1.5rem;
+
+        >a {
+            transition: color 0.2s;
+
+            &:hover {
+                color: var(--color-theme);
+            }
+        }
+    }
+}

@@ -1,0 +1,98 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    ],
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+    },
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaVersion": 2022,
+        "project": [
+            "eslint.tsconfig.json"
+        ]
+    },
+    "rules": {
+        "linebreak-style": 0,
+        "comma-dangle": 0,
+        "max-len": [
+            "error",
+            135
+        ],
+        "object-curly-spacing": [
+            "error",
+            "always"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "no-trailing-spaces": "error",
+        "semi": "error",
+        "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "no-redeclare": [
+            "error",
+            {
+                "builtinGlobals": false
+            }
+        ],
+        // "sort-imports-es6-autofix/sort-imports-es6": [
+        //     2,
+        //     {
+        //         "ignoreCase": false,
+        //         "ignoreMemberSort": false,
+        //         "memberSyntaxSortOrder": [
+        //             "single",
+        //             "multiple",
+        //             "all",
+        //             "none"
+        //         ]
+        //     }
+        // ],
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-extra-semi": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/semi": "error",
+        "@typescript-eslint/naming-convention": [
+            "error",
+            {
+                "selector": "enumMember",
+                "format": [
+                    "UPPER_CASE"
+                ],
+                "custom": {
+                    "regex": "[A-Z]",
+                    "match": true
+                }
+            },
+            {
+                "selector": "interface",
+                "format": [
+                    "PascalCase"
+                ],
+                "custom": {
+                    "regex": "^I?[A-Z]",
+                    "match": true
+                }
+            }
+        ],
+        "@typescript-eslint/no-unsafe-assignment": "off"
+    }
+}
