@@ -1,3 +1,4 @@
+$font-weight-thin: 100;
 $font-weight-extralight: 200;
 $font-weight-light: 300;
 $font-weight-regular: 400;
@@ -65,6 +66,15 @@ $font-weight-black: 800;
     src: url("./fonts/Raleway-Black.ttf") format('woff2'),
         url("./fonts/Raleway-Black.ttf") format('woff');
     font-weight: $font-weight-black;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Caveat';
+    src: url("./fonts/Caveat-Regular.ttf") format('woff2'),
+        url("./fonts/Caveat-Regular.ttf") format('woff');
+    font-weight: $font-weight-regular;
     font-style: normal;
     font-display: swap;
 }

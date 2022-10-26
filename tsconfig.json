@@ -31,6 +31,9 @@
             "Type": [
                 "src/type"
             ],
+            "Media": [
+                "src/media"
+            ],
             "Style/*": [
                 "src/style/*"
             ],
@@ -48,6 +51,9 @@
             ],
             "Type/*": [
                 "src/type/*"
+            ],
+            "Media/*": [
+                "src/media/*"
             ]
         }
     },

@@ -1,21 +1,97 @@
 .IndexPage {
-    display: grid;
-    place-items: center;
     min-height: 100vh;
+    overflow-x: hidden;
+    background-color: var(--color-background-primary);
 
-    &-MainContent {
-        margin-top: calc(-3 * var(--header-height));
+    >section {
         padding-inline: var(--content-padding);
+
+        &.SectionHome {
+            z-index: 1;
+            position: relative;
+            padding-block-start: 20rem;
+            padding-inline: var(--content-padding-inner);
+
+            .ContentWrapper {
+                display: flex;
+
+                &-Left {
+                    >h1 {
+                        margin-block: 0;
+                        font-size: 3rem;
+
+                        >span {
+                            font-size: 5rem;
+                        }
+                    }
+
+                    >h2 {
+                        margin-block: 0;
+                        margin-inline-start: -1rem;
+                        padding-inline-start: 1rem;
+                        font-size: 4rem;
+                        background-color: var(--color-background-secondary-dark);
+                        color: var(--color-content-primary-dark);
+                        font-weight: 600;
+
+                        @at-root .theme-dark & {
+                            background-color: var(--color-background-secondary-light);
+                            color: var(--color-content-primary-light);
+                        }
+                    }
+                }
+
+                &-Right {
+                    position: relative;
+                    flex: auto;
+
+                    h2 {
+                        position: absolute;
+                        inset-block-end: 0;
+                        inset-inline: 0;
+                        margin-inline-end: calc(-1 * var(--content-padding-inner));
+                        margin-block: 0;
+                        font-size: 4rem;
+                        font-weight: 600;
+                        background-color: var(--color-background-secondary-dark);
+
+                        span {
+                            display: block;
+                            background-image: url(../../media/gif/gif.gif);
+                            background-repeat: no-repeat;
+                            background-size: cover;
+                            background-clip: text;
+                            color: transparent;
+                            font-weight: 700;
+
+                            -webkit-text-stroke: 1px var(--color-background-primary);
+                            text-stroke: 1px var(--color-background-primary);
+                        }
+
+                        @at-root .theme-dark & {
+                            background-color: var(--color-background-secondary-light);
+                        }
+                    }
+
+                    >video {
+                        position: absolute;
+                        z-index: -1;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
     }
 
-    &-Header {
-        margin-block: 0;
-        font-size: 4rem;
-    }
-
-    &-Subheader {
-        margin-block-start: 0.5rem;
-        margin-block-end: 0;
-        font-size: 2.5rem;
+    &-AbsoluteBackground {
+        position: absolute;
+        inset-inline-start: 0;
+        inset-block-start: 0;
+        background-color: var(--color-background-secondary);
+        width: 72%;
+        height: 112vh;
+        border-inline-end: 1px solid var(--color-border);
     }
 }

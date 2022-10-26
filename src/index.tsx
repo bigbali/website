@@ -105,7 +105,7 @@ const Layout = () => {
             body.style.removeProperty('--color-theme');
         }
 
-        html.style.fontSize = `${16 * (fontSize || 1)}px`;
+        html.style.fontSize = `${(fontSize || 1)}em`;
         html.style.filter = `contrast(${contrast || 1})`;
 
     }, [theme, accentColor, fontSize, contrast]);
@@ -117,12 +117,6 @@ const Layout = () => {
             <Cookies />
             <SwitchTransition>
                 <Transition
-                    onEntered={() => { // when transitioning, prevent scrollbars
-                        document.querySelector('body')!.classList.remove('disable-scrolling');
-                    }}
-                    onExit={() => {
-                        document.querySelector('body')!.classList.add('disable-scrolling');
-                    }}
                     key={location.key}
                     nodeRef={nodeRef}
                     classNames="cross-page"

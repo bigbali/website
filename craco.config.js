@@ -16,7 +16,8 @@ module.exports = {
             'Store': path.resolve(__dirname, 'src/store'),
             'Util': path.resolve(__dirname, 'src/util'),
             'Style': path.resolve(__dirname, 'src/style'),
-            'Type': path.resolve(__dirname, 'src/type')
+            'Type': path.resolve(__dirname, 'src/type'),
+            'Media': path.resolve(__dirname, 'src/media')
         },
         configure: webpackConfig => { // Remove the need for '.scss' when importing styles
             webpackConfig.resolve.extensions.push('.scss');

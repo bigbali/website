@@ -9,7 +9,7 @@ export const Header = () => {
     return (
         <div block='Header'>
             <h1 elem='Branding'>
-                Template
+                balázs burján
             </h1>
             {isDesktop
                 ? <Navigation.Desktop />
