@@ -1,97 +1,126 @@
+$section-home-padding-block-start: 20rem;
+
 .IndexPage {
     min-height: 100vh;
     overflow-x: hidden;
-    background-color: var(--color-background-primary);
+
+    &-Loading {
+        position: fixed;
+        inset: 0;
+        background-color: red;
+        display: grid;
+        place-items: center;
+        font-size: 5rem;
+        transition: opacity 0.2s;
+        z-index: 99;
+
+        &_exit-active {
+            opacity: 0;
+        }
+    }
 
     >section {
-        padding-inline: var(--content-padding);
+        padding-inline: var(--content-padding-inner);
+    }
 
-        &.SectionHome {
-            z-index: 1;
-            position: relative;
-            padding-block-start: 20rem;
-            padding-inline: var(--content-padding-inner);
+    .SectionHome {
+        z-index: 1;
+        position: relative;
+        padding-block-start: $section-home-padding-block-start;
+        height: 100vh;
 
-            .ContentWrapper {
-                display: flex;
+        >h1 {
+            font-size: 4.5rem;
+            font-weight: 500;
+            margin-block: 0;
 
-                &-Left {
-                    >h1 {
-                        margin-block: 0;
-                        font-size: 3rem;
+            >span {
+                position: relative;
+                font-size: 6rem;
+                font-weight: 700;
+                letter-spacing: 0.4rem;
 
-                        >span {
-                            font-size: 5rem;
-                        }
-                    }
-
-                    >h2 {
-                        margin-block: 0;
-                        margin-inline-start: -1rem;
-                        padding-inline-start: 1rem;
-                        font-size: 4rem;
-                        background-color: var(--color-background-secondary-dark);
-                        color: var(--color-content-primary-dark);
-                        font-weight: 600;
-
-                        @at-root .theme-dark & {
-                            background-color: var(--color-background-secondary-light);
-                            color: var(--color-content-primary-light);
-                        }
-                    }
+                &::after {
+                    content: '';
+                    position: absolute;
+                    inset-block-end: 0;
+                    display: block;
+                    width: 100%;
+                    border-block-end: 1px solid var(--color-border);
                 }
 
-                &-Right {
-                    position: relative;
-                    flex: auto;
+                >span {
+                    color: var(--color-theme);
+                }
+            }
+        }
 
-                    h2 {
-                        position: absolute;
-                        inset-block-end: 0;
-                        inset-inline: 0;
-                        margin-inline-end: calc(-1 * var(--content-padding-inner));
-                        margin-block: 0;
-                        font-size: 4rem;
-                        font-weight: 600;
-                        background-color: var(--color-background-secondary-dark);
+        >h2 {
+            display: flex;
+            flex-direction: column;
+            margin-block-start: 1rem;
+            // margin-inline-start: calc(-1 * var(--content-padding-inner) - 2rem);
+            padding-block: 1rem;
+            font-size: 4rem;
+            color: var(--color-content-secondary);
+            width: fit-content;
+            // background-color: var(--color-background-secondary-transparent-2);
+            // backdrop-filter: blur(1rem);
+            border-radius: 2rem;
 
-                        span {
-                            display: block;
-                            background-image: url(../../media/gif/gif.gif);
-                            background-repeat: no-repeat;
-                            background-size: cover;
-                            background-clip: text;
-                            color: transparent;
-                            font-weight: 700;
+            @include theme-dark(&) {
+                // color: var(--color-content-primary-light);
+            }
 
-                            -webkit-text-stroke: 1px var(--color-background-primary);
-                            text-stroke: 1px var(--color-background-primary);
-                        }
+            >span {
+                font-weight: 700;
+                font-size: 8rem;
+                color: transparent;
+                background-image: url(../../media/gif/ocean.gif);
+                background-clip: text;
+                // align-self: flex-end;
+                line-height: 7.5rem;
 
-                        @at-root .theme-dark & {
-                            background-color: var(--color-background-secondary-light);
-                        }
-                    }
+                text-stroke: 2px var(--color-theme);
+                -webkit-text-stroke: 2px var(--color-theme);
+            }
+        }
 
-                    >video {
-                        position: absolute;
-                        z-index: -1;
-                        width: 100%;
-                        height: 100%;
-                        object-fit: cover;
-                    }
+        &-SplineWrapper {
+            z-index: -1;
+            position: absolute;
+            inset-inline-end: 0;
+            inset-block-start: 0;
+            height: 100%;
+            padding-inline-start: var(--content-padding-inner);
+            padding-inline-end: var(--content-padding);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            overflow: hidden;
+
+            >canvas {
+                animation-name: CanvasFadeIn;
+                animation-duration: 1s;
+                // animation-delay: 1s;
+                animation-fill-mode: forwards;
+                opacity: 0;
+
+                @include to-fhd {
+                    scale: 0.8;
                 }
             }
         }
     }
+}
 
-    &-AbsoluteBackground {
-        position: absolute;
-        inset-inline-start: 0;
-        inset-block-start: 0;
-        background-color: var(--color-background-secondary);
-        width: 72%;
-        height: 112vh;
-        border-inline-end: 1px solid var(--color-border);
+@keyframes CanvasFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
     }
 }

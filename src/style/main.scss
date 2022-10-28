@@ -13,20 +13,24 @@
     --color-background-primary-light-transparent-less-transparent: rgba(250, 250, 250, 0.9);
     --color-background-primary-dark-transparent-less-transparent: rgba(30, 30, 35, 0.9);
 
-    --color-background-secondary-light: rgb(238, 241, 247);
-    --color-background-secondary-light-transparent: rgba(238, 241, 247, 0.75);
+    --color-background-secondary-light: rgb(211, 217, 228);
+    --color-background-secondary-light-transparent: rgba(211, 217, 228, 0.9);
+    --color-background-secondary-light-transparent-2: rgba(211, 217, 228, 0.75);
     --color-background-secondary-dark: rgb(35, 35, 40);
-    --color-background-secondary-dark-transparent: rgba(35, 35, 40, 0.75);
+    --color-background-secondary-dark-transparent: rgba(35, 35, 40, 0.9);
+    --color-background-secondary-dark-transparent-2: rgba(35, 35, 40, 0.75);
 
-    --color-content-primary-light: rgb(25, 30, 30);
-    --color-content-primary-light-transparent: rgba(25, 30, 30, 0.75);
+    --color-content-primary-light: rgb(35, 35, 40);
+    --color-content-primary-light-transparent: rgba(25, 30, 30, 0.9);
+    --color-content-primary-light-transparent-2: rgba(25, 30, 30, 0.75);
     --color-content-primary-dark: rgb(240, 240, 240);
-    --color-content-primary-dark-transparent: rgba(240, 240, 240, 0.75);
+    --color-content-primary-dark-transparent: rgba(240, 240, 240, 0.9);
+    --color-content-primary-dark-transparent-2: rgba(240, 240, 240, 0.75);
 
-    --color-content-secondary-light: rgb(43, 49, 56);
-    --color-content-secondary-light-transparent: rgba(43, 49, 56, 0.75);
-    --color-content-secondary-dark: rgb(220, 225, 230);
-    --color-content-secondary-dark-transparent: rgba(220, 225, 230, 0.75);
+    --color-content-secondary-light: rgb(60, 65, 70);
+    --color-content-secondary-light-transparent: rgba(60, 65, 70, 0.9);
+    --color-content-secondary-dark: rgb(205, 210, 220);
+    --color-content-secondary-dark-transparent: rgba(205, 210, 220, 0.9);
 
     --color-theme-initial: rgb(204, 18, 18);
     --color-theme: var(--color-theme-initial);
@@ -52,29 +56,25 @@
     --color-error-foreground: var(--color-white);
 
     --content-padding: 5rem;
-    --content-padding-inner: 7.5rem;
+    --content-padding-inner: calc(var(--content-padding) * 1.5);
     --header-height: 3.75rem;
     --blur-background: 16px;
 
     @include mobile {
         --content-padding: 1.5rem;
-        --content-padding-inner: 2.25rem;
         --header-height: 2.5rem;
     }
 
-    @media (min-width: 2000px) and (min-width: 1999px) {
+    @include uhd {
+        --content-padding: 30rem;
+    }
+
+    @include qhd {
         --content-padding: 20rem;
-        --content-padding-inner: 25rem;
     }
 
-    @media (max-width: 1999px) and (min-width: 1400px) {
-        --content-padding: 15rem;
-        --content-padding-inner: 18.75rem;
-    }
-
-    @media (max-width: 1400px) and (min-width: 1000px) {
+    @include fhd {
         --content-padding: 10rem;
-        --content-padding-inner: 12.5rem;
     }
 }
 
@@ -83,6 +83,7 @@
     --color-background-primary-transparent: var(--color-background-primary-dark-transparent);
     --color-background-secondary: var(--color-background-secondary-dark);
     --color-background-secondary-transparent: var(--color-background-secondary-dark-transparent);
+    --color-background-secondary-transparent-2: var(--color-content-secondary-dark-transparent-2);
     --color-content-primary: var(--color-content-primary-dark);
     --color-content-primary-transparent: var(--color-content-primary-dark-transparent);
     --color-content-secondary: var(--color-content-secondary-dark);
@@ -100,6 +101,7 @@
     --color-background-primary-transparent: var(--color-background-primary-light-transparent);
     --color-background-secondary: var(--color-background-secondary-light);
     --color-background-secondary-transparent: var(--color-background-secondary-light-transparent);
+    --color-background-secondary-transparent-2: var(--color-background-secondary-light-transparent-2);
     --color-content-primary: var(--color-content-primary-light);
     --color-content-primary-transparent: var(--color-content-primary-light-transparent);
     --color-content-secondary: var(--color-content-secondary-light);
@@ -119,6 +121,10 @@
     color: var(--color-content-primary);
     transition: color 0.2s, background-color 0.2s, font-size 0.1s;
     font-family: $raleway;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body,

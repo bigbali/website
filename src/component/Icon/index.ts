@@ -1,6 +1,7 @@
 export * from './Chevron';
 
 import { default as Base } from './Base';
+import { default as Cat } from './Cat';
 import { default as Close } from './Close';
 import { default as Chevron } from './Chevron';
 import { default as HamburgerMenu } from './HamburgerMenu';
@@ -10,6 +11,7 @@ import { default as Moon } from './Moon';
 
 const Icon = {
     Base,
+    Cat,
     Close,
     Chevron,
     HamburgerMenu,

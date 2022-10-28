@@ -9,6 +9,8 @@
         "@craco/craco": "7.0.0-alpha.7",
         "@formkit/auto-animate": "^1.0.0-beta.3",
         "@reduxjs/toolkit": "^1.8.3",
+        "@splinetool/react-spline": "^2.2.3",
+        "@splinetool/runtime": "^0.9.133",
         "gsap": "^3.10.4",
         "lodash": "^4.17.21",
         "react": "^18.2.0",

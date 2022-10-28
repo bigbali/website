@@ -131,7 +131,7 @@ const Layout = () => {
                     )}
                 </Transition>
             </SwitchTransition>
-            <Footer />
+            {/* <Footer /> */}
         </>
     );
 };
