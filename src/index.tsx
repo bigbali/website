@@ -73,7 +73,7 @@ const routes = [
 
 const Layout = () => {
     const location = useLocation();
-    const [showNotification] = useNotification();
+    // const [showNotification] = useNotification();
     const { isMobile } = useDevice();
     const [{ theme, accentColor, fontSize, contrast }] = useSettings();
     const currentOutlet = useOutlet();
@@ -82,12 +82,12 @@ const Layout = () => {
     ) ?? {};
 
     useEffect(() => {
-        showNotification({
-            timeout: 5000,
-            title: 'Hey',
-            message: `We believe you are browsing this page from a ${isMobile ? 'mobile' : 'desktop'} device. That is very cool!`,
-            status: NotificationStatus.INFO
-        });
+        // showNotification({
+        //     timeout: 5000,
+        //     title: 'Hey',
+        //     message: `We believe you are browsing this page from a ${isMobile ? 'mobile' : 'desktop'} device. That is very cool!`,
+        //     status: NotificationStatus.INFO
+        // });
     }, [isMobile]);
 
     useEffect(() => {

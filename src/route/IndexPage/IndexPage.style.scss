@@ -1,126 +1,87 @@
-$section-home-padding-block-start: 20rem;
-
 .IndexPage {
     min-height: 100vh;
-    overflow-x: hidden;
+    // overflow-x: hidden;
+
+    >section {
+        min-height: 100vh;
+    }
+
+    .accent {
+        color: var(--color-theme);
+        font-weight: 900;
+    }
 
     &-Loading {
         position: fixed;
         inset: 0;
-        background-color: red;
+        background-color: var(--color-background-secondary);
         display: grid;
         place-items: center;
         font-size: 5rem;
+        font-weight: 100;
         transition: opacity 0.2s;
         z-index: 99;
+        font-family: 'Caveat';
 
         &_exit-active {
-            opacity: 0;
+            animation-name: cover-exit;
+            animation-duration: 0.5s;
+            animation-fill-mode: forwards;
+            animation-timing-function: ease-in-out;
         }
     }
 
-    >section {
-        padding-inline: var(--content-padding-inner);
-    }
-
-    .SectionHome {
-        z-index: 1;
-        position: relative;
-        padding-block-start: $section-home-padding-block-start;
-        height: 100vh;
-
+    .SectionAbout {
         >h1 {
-            font-size: 4.5rem;
-            font-weight: 500;
-            margin-block: 0;
-
-            >span {
-                position: relative;
-                font-size: 6rem;
-                font-weight: 700;
-                letter-spacing: 0.4rem;
-
-                &::after {
-                    content: '';
-                    position: absolute;
-                    inset-block-end: 0;
-                    display: block;
-                    width: 100%;
-                    border-block-end: 1px solid var(--color-border);
-                }
-
-                >span {
-                    color: var(--color-theme);
-                }
-            }
+            font-size: 3rem;
         }
+    }
 
-        >h2 {
-            display: flex;
-            flex-direction: column;
-            margin-block-start: 1rem;
-            // margin-inline-start: calc(-1 * var(--content-padding-inner) - 2rem);
-            padding-block: 1rem;
-            font-size: 4rem;
-            color: var(--color-content-primary-dark);
-            width: fit-content;
-            background-color: var(--color-content-secondary);
-            backdrop-filter: blur(1rem);
-            // border-radius: 2rem;
-
-            @include theme-dark(&) {
-                // color: var(--color-content-primary-light);
-            }
-
-            >span {
-                font-weight: 700;
-                font-size: 8rem;
-                color: transparent;
-                background-image: url(../../media/gif/ocean.gif);
-                background-clip: text;
-                // align-self: flex-end;
-                line-height: 7.5rem;
-
-                text-stroke: 2px var(--color-theme);
-                -webkit-text-stroke: 2px var(--color-theme);
-            }
-        }
-
-        &-SplineWrapper {
-            z-index: -1;
-            position: absolute;
-            inset-inline-end: 0;
-            inset-block-start: 0;
-            height: 100%;
-            padding-inline-start: var(--content-padding-inner);
-            padding-inline-end: var(--content-padding);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-end;
-            overflow: hidden;
-
-            >canvas {
-                animation-name: CanvasFadeIn;
-                animation-duration: 1s;
-                // animation-delay: 1s;
-                animation-fill-mode: forwards;
-                opacity: 0;
-
-                @include to-fhd {
-                    scale: 0.8;
-                }
-            }
+    .SectionContact {
+        >h1 {
+            font-size: 3rem;
         }
     }
 }
 
-@keyframes CanvasFadeIn {
+@keyframes canvas-fade-in {
     from {
         opacity: 0;
     }
 
     to {
         opacity: 1;
+    }
+}
+
+@keyframes initial-main-animation {
+    from {
+        translate: 0 -5rem;
+        opacity: 0;
+    }
+
+    to {
+        translate: 0 0;
+        opacity: 1;
+    }
+}
+
+@keyframes initial-separator-animation {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes cover-exit {
+    from {
+        clip-path: inset(0);
+    }
+
+    to {
+        clip-path: inset(100% 0 0 0);
     }
 }

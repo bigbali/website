@@ -3,7 +3,6 @@
     inset-block-end: 0;
     inset-inline: 0;
     width: 100%;
-    padding-bottom: 32px;
     background-color: var(--color-background-primary-dark-transparent-less-transparent);
     backdrop-filter: blur(var(--blur-background));
     z-index: 98;
@@ -37,7 +36,7 @@
     &-Header {
         display: flex;
         align-items: center;
-        padding-block: 4px;
+        padding-block: 0.125rem;
         padding-inline: var(--content-padding);
         font-size: 1.25rem;
         background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
@@ -76,22 +75,49 @@
         }
     }
 
+    &-Accept {
+        background-color: var(--color-theme);
+        color: var(--color-white);
+        border: none;
+        font-size: 1.5rem;
+        width: 10rem;
+        height: 3rem;
+    }
+
+    &-Decline {
+        background-color: var(--color-content-secondary);
+        color: var(--color-white);
+        border: 1px solid var(--color-white);
+        font-size: 1.5rem;
+        width: 10rem;
+        height: 3rem;
+    }
+
     &-Body {
-        font-size: 1rem;
-        padding-block: 8px;
+        display: flex;
+        justify-content: space-between;
         padding-inline: var(--content-padding);
-        color: var(--color-content-primary-dark);
-        line-height: 1.5rem;
+
+        &-Left {
+            font-size: 1.25rem;
+            padding-block: 1rem;
+            color: var(--color-content-primary-dark);
+            line-height: 1.5rem;
+        }
+
+        &-Right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
     }
 
     &-CookiePolicy {
-        display: block;
         width: fit-content;
         padding-inline: 0.5rem;
-        margin-block-start: 1rem;
         border-radius: 50vmin;
         text-decoration: none;
-        background-color: var(--color-theme);
+        background-color: var(--color-content-tertiary-light);
         color: var(--color-white); // since background is colored, content-primary might not provide enough contrast
         font-weight: 500;
         letter-spacing: 0.2px;

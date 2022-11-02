@@ -32,6 +32,9 @@
     --color-content-secondary-dark: rgb(205, 210, 220);
     --color-content-secondary-dark-transparent: rgba(205, 210, 220, 0.9);
 
+    --color-content-tertiary-light: rgb(102, 114, 129);
+    --color-content-tertiary-dark: rgb(160, 166, 179);
+
     --color-theme-initial: rgb(204, 18, 18);
     --color-theme: var(--color-theme-initial);
 
@@ -66,15 +69,15 @@
     }
 
     @include uhd {
-        --content-padding: 30rem;
+        --content-padding: 35rem;
     }
 
     @include qhd {
-        --content-padding: 20rem;
+        --content-padding: 25rem;
     }
 
     @include fhd {
-        --content-padding: 10rem;
+        --content-padding: 17.5rem;
     }
 }
 
@@ -88,6 +91,7 @@
     --color-content-primary-transparent: var(--color-content-primary-dark-transparent);
     --color-content-secondary: var(--color-content-secondary-dark);
     --color-content-secondary-transparent: var(--color-content-secondary-dark-transparent);
+    --color-content-tertiary: var(--color-content-tertiary-dark);
 
     --color-background-primary-transparent-less-transparent: var(--color-background-primary-dark-transparent-less-transparent);
 
@@ -106,6 +110,7 @@
     --color-content-primary-transparent: var(--color-content-primary-light-transparent);
     --color-content-secondary: var(--color-content-secondary-light);
     --color-content-secondary-transparent: var(--color-content-secondary-light-transparent);
+    --color-content-tertiary: var(--color-content-tertiary-light);
 
     --color-background-primary-transparent-less-transparent: var(--color-background-primary-light-transparent-less-transparent);
 
@@ -135,7 +140,8 @@ body,
 }
 
 body {
-    overflow-x: hidden;
+
+    // overflow-x: hidden;
 
     &.disable-scrolling {
         overflow: hidden;

@@ -1,0 +1,113 @@
+.ProjectCard {
+    position: relative;
+    display: flex;
+    margin-block-end: 3rem;
+
+    &:nth-of-type(2n) {
+        // flex-direction: row-reverse;
+    }
+
+    &_REVERSE {
+        animation-name: x;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+        animation-delay: 0.5s;
+    }
+
+    &-Details {
+        flex: 1.4;
+        position: relative;
+        z-index: 1;
+
+        >h3 {
+            font-size: 2rem;
+            font-weight: 500;
+            margin-block-start: 0;
+            margin-block-end: 1rem;
+        }
+
+        >p {
+            font-size: 1.25rem;
+            background-color: var(--color-background-secondary-dark-transparent-2);
+            color: var(--color-white);
+            padding: 1rem;
+            margin-inline-end: -5rem;
+            backdrop-filter: blur(var(--blur-background));
+            min-height: 10rem;
+            margin-block: 0;
+        }
+    }
+
+    &-TagsAndAnchors {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem;
+    }
+
+    &-Tags {
+        display: flex;
+        gap: 1rem;
+        height: 2rem;
+
+        >span {
+            display: flex;
+            align-items: center;
+            padding-inline: 0.5rem;
+            font-size: 1.25rem;
+            border-radius: 0.25rem;
+            background-color: var(--color-content-secondary-light);
+            color: var(--color-content-primary-dark);
+        }
+    }
+
+    &-Anchors {
+        display: flex;
+        gap: 0.5rem;
+        // position: absolute;
+
+        .Icon {
+            width: 3rem;
+            height: 3rem;
+        }
+    }
+
+    &-Status {
+        color: #A7B4C3;
+        font-size: 1.25rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        position: absolute;
+        inset-block-end: 0;
+        padding-inline-start: 0.5rem;
+    }
+
+    &-Thumbnail {
+        flex: 1;
+        aspect-ratio: 1.46 / 1;
+    }
+}
+
+@keyframes x {
+    0% {
+        opacity: 1;
+        flex-direction: row
+    }
+
+    50% {
+        opacity: 0;
+        flex-direction: row;
+        scale: 0.8;
+    }
+
+    51% {
+        flex-direction: row-reverse;
+        opacity: 0;
+        scale: 0.8;
+    }
+
+    100% {
+        opacity: 1;
+        flex-direction: row-reverse;
+        scale: 1;
+    }
+}

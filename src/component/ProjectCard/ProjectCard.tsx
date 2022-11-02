@@ -1,14 +1,16 @@
 import './ProjectCard.style';
 import gif from '../../media/gif/gif.gif';
+import { Link } from 'react-router-dom';
+import Icon from 'Component/Icon';
 
-enum ProjectStatus {
+export enum ProjectStatus {
     FINISHED = 'Finished',
     IN_PROGRESS = 'In Progress',
     PAUSED = 'Paused',
     UNFINISHED = 'Unfinished'
 }
 
-enum Tag {
+export enum Tag {
     JS = 'JavaScript',
     TS = 'TypeScript',
     JAVA = 'Java',
@@ -31,13 +33,13 @@ enum Tag {
     GUN = 'Gun.js'
 }
 
-enum Weight {
+export enum Weight {
     HIGH = 1,
     MEDIUM = 2,
     LOW = 3
 }
 
-interface IProjectCard {
+export interface IProjectCard {
     title: string,
     description: string,
     thumbnail: string,
@@ -78,7 +80,7 @@ export const projects: IProjectCard[] = [
             Tag.REACT,
             Tag.SASS
         ],
-        github: '',
+        github: 'https://github.com/bigbali/react-template',
         slug: 'react-template'
     },
     {
@@ -206,9 +208,48 @@ export const projects: IProjectCard[] = [
     },
 ];
 
-const ProjectCard = ({ title, description, thumbnail, github, slug: page, theme }: IProjectCard) => {
+const ProjectCard = ({ title, description, thumbnail, github, slug, tags, theme, status, index }: IProjectCard
+    & { index: number }) => {
+    const isReverse = index % 2 !== 0;
+
     return (
-        <div>ProjectCard</div>
+        <div block='ProjectCard' mods={{ REVERSE: isReverse }}>
+            <div elem='Details'>
+                <h3>
+                    {title}
+                </h3>
+                <p>
+                    {description}
+                </p>
+                <div elem='TagsAndAnchors'>
+                    <div elem='Tags'>
+                        {tags.map((tag) => (
+                            <span key={tag}>
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                    <div elem='Anchors'>
+                        {!!github && (
+                            <a href={github} target='_blank' rel="noopener noreferrer" >
+                                <Icon.Cat />
+                            </a>
+                        )}
+                        {!!slug && (
+                            <a href={`project/${slug}`}>
+                                <Icon.Moon />
+                            </a>
+                        )}
+                    </div>
+                </div>
+                <div elem='Status'>
+                    {status}
+                </div>
+            </div>
+            <img
+                elem='Thumbnail'
+                src={thumbnail} />
+        </div>
     );
 };
 

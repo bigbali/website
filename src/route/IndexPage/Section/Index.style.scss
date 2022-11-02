@@ -1,0 +1,123 @@
+$section-home-padding-block-start: 20rem;
+
+.SectionHome {
+    z-index: 1;
+    position: relative;
+    padding-block-start: $section-home-padding-block-start;
+    padding-inline: var(--content-padding);
+    height: 100vh;
+
+    >h1 {
+        font-size: 4rem;
+        font-weight: 600;
+        margin-block: 0;
+        animation-name: initial-main-animation;
+        animation-duration: 0.5s;
+        animation-timing-function: ease-out;
+        animation-fill-mode: forwards;
+        animation-delay: 1.5s;
+        opacity: 0;
+
+        >span {
+            position: relative;
+            font-size: 5rem;
+            font-weight: 700;
+            letter-spacing: 0.4rem;
+
+            &::after {
+                content: '';
+                position: absolute;
+                inset-block-end: 0;
+                display: block;
+                width: 100%;
+                border-block-end: 1px solid var(--color-border);
+                animation-name: initial-separator-animation;
+                animation-duration: 1s;
+                animation-timing-function: ease-out;
+                animation-fill-mode: forwards;
+                animation-delay: 2s;
+                opacity: 0;
+            }
+
+            >span {
+                color: var(--color-theme);
+            }
+        }
+    }
+
+    >h2 {
+        margin-block-start: 1rem;
+        margin-block-end: 0;
+        font-weight: 400;
+        font-size: 3rem;
+        animation-name: initial-main-animation;
+        animation-duration: 0.5s;
+        animation-timing-function: ease-out;
+        animation-fill-mode: forwards;
+        animation-delay: 1.75s;
+        opacity: 0;
+
+
+        >span {
+            font-weight: 600;
+        }
+    }
+
+    >h3 {
+        width: fit-content;
+        margin-block-start: 1rem;
+        font-size: 3rem;
+        font-weight: 700;
+        animation-name: initial-main-animation;
+        animation-duration: 0.5s;
+        animation-timing-function: ease-out;
+        animation-fill-mode: forwards;
+        animation-delay: 2s;
+        opacity: 0;
+
+        >span {
+            display: block;
+            color: var(--color-content-tertiary);
+
+            &:nth-of-type(2) {
+                position: relative;
+                width: fit-content;
+                font-size: 4rem;
+                font-weight: 900;
+                color: transparent;
+                background-image: url(../../../media/gif/ocean.gif);
+                background-clip: text;
+                background-size: cover;
+                -webkit-text-stroke: 1px var(--color-background-primary);
+                text-stroke: 1px var(--color-background-primary);
+            }
+        }
+    }
+
+    &-SplineWrapper {
+        z-index: -1;
+        position: absolute;
+        inset-inline-end: 0;
+        inset-block-start: 0;
+        height: 100%;
+        padding-inline-start: var(--content-padding-inner);
+        padding-inline-end: var(--content-padding);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        overflow: hidden;
+
+        >canvas {
+            pointer-events: none;
+            animation-name: canvas-fade-in;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+            opacity: 0;
+
+            @include to-fhd {
+                scale: 0.8;
+            }
+        }
+    }
+}

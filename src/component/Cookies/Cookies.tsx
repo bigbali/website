@@ -12,7 +12,13 @@ export const Cookies = () => {
     const { isMobile } = useDevice();
     const ref = useRef(null);
 
-    const tapOrClick = isMobile ? 'Tap' : 'Click';
+    const cookiesAccept = () => {
+
+    };
+
+    const cookiesDecline = () => {
+
+    };
 
     return (
         <TransitionGroup component={null}>
@@ -29,7 +35,7 @@ export const Cookies = () => {
                 >
                     <div block='Cookies' ref={ref}>
                         <div elem='Header'>
-                            Cookies notice
+                            You have a choice
                             <div elem='Close'>
                                 <button
                                     elem='CloseButton'
@@ -42,18 +48,27 @@ export const Cookies = () => {
                             </div>
                         </div>
                         <div elem='Body'>
-                            We must inform you that we are using cookies to
-                            ensure your experience browsing this page is nothing less than amazing.
-                            <br />
-                            By continuing to browse this page, you automatically agree to our cookie policy.
-                            <br />
-                            <Link
-                                elem='CookiePolicy'
-                                to='cookie-policy'
-                                target='_blank'
-                            >
-                                {tapOrClick} here to read about our Cookie Policy.
-                            </Link>
+                            <div elem='Body-Left'>
+                                I utilize your browser’s built-in storage system to store some data in order
+                                to improve your experience while browsing this site.
+                                <br />
+                                You can read more about my&nbsp;
+                                <Link
+                                    elem='CookiePolicy'
+                                    to='cookie-policy'
+                                    target='_blank'
+                                >
+                                    cookie policy here.
+                                </Link>
+                            </div>
+                            <div elem='Body-Right'>
+                                <button elem='Accept' onClick={cookiesAccept}>
+                                    Accept
+                                </button>
+                                <button elem='Decline' onClick={cookiesDecline}>
+                                    Decline
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </Transition>
