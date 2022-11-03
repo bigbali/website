@@ -1,4 +1,4 @@
-.SectionProjects {
+.Projects {
     padding-inline: var(--content-padding);
 
     >h1 {
@@ -85,6 +85,6 @@
     &-ProjectCards {
         padding-inline: calc(var(--content-padding-inner) - var(--content-padding));
         margin-block-start: 8rem;
-        margin-block-end: 10rem;
+        margin-block-end: 20rem;
     }
 }

@@ -3,17 +3,16 @@ import { Application as SplineApplication } from '@splinetool/runtime';
 import { useEffect, useRef } from 'react';
 import { Theme } from 'Store';
 import { useSettings } from 'Util';
-import './Index.style.scss';
+import './Landing.style.scss';
 
 const SplineURL = {
     light: 'https://prod.spline.design/QtRgBHPKynDO4AfI/scene.splinecode',
     dark: 'https://prod.spline.design/XmIopwGYaPfZKReY/scene.splinecode'
 };
 
-const Index = ({ onReady }: { onReady: () => void }) => {
+const Landing = ({ onReady }: { onReady: () => void }) => {
     const [{ theme }] = useSettings();
     const spline = useRef<SplineApplication>();
-
 
     useEffect(() => {
         const id = setTimeout(() => {
@@ -33,7 +32,7 @@ const Index = ({ onReady }: { onReady: () => void }) => {
 
 
     return (
-        <section id='Home' block='SectionHome'>
+        <section id='Landing' block='Landing'>
             <h1>
                 Hey, my name is
                 <br />
@@ -78,4 +77,4 @@ const Index = ({ onReady }: { onReady: () => void }) => {
     );
 };
 
-export default Index;
+export default Landing;

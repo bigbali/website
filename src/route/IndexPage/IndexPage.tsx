@@ -2,9 +2,7 @@
 import { useState } from 'react';
 import { TransitionGroup } from 'react-transition-group';
 import Transition from 'Component/Transition';
-import Index from './Section/Index';
-import Projects from './Section/Projects';
-import About from './Section/About';
+import Section from './Section';
 import './IndexPage.style';
 
 export const IndexPage = () => {
@@ -21,14 +19,10 @@ export const IndexPage = () => {
                     </Transition>
                 )}
             </TransitionGroup>
-            <Index onReady={() => setIsReady(true)} />
-            <Projects />
-            <About />
-            <section id='Contact' block='SectionContact'>
-                <h1>
-                    Reach out to me
-                </h1>
-            </section>
+            <Section.Landing onReady={() => setIsReady(true)} />
+            <Section.Projects />
+            <Section.About />
+            <Section.Contact />
         </div>
     );
 };

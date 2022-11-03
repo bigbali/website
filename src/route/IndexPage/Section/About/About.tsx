@@ -5,7 +5,7 @@ import './About.style';
 
 const About = () => {
     return (
-        <section id='About' block='SectionAbout'>
+        <section id='About' block='About'>
             <div elem="Header">
                 <h1>
                     Who I am

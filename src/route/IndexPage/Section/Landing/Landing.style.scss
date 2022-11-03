@@ -1,6 +1,6 @@
 $section-home-padding-block-start: 20rem;
 
-.SectionHome {
+.Landing {
     z-index: 1;
     position: relative;
     padding-block-start: $section-home-padding-block-start;
@@ -85,7 +85,7 @@ $section-home-padding-block-start: 20rem;
                 font-size: 4rem;
                 font-weight: 900;
                 color: transparent;
-                background-image: url(../../../media/gif/ocean.gif);
+                background-image: url(../../../../media/gif/ocean.gif);
                 background-clip: text;
                 background-size: cover;
                 -webkit-text-stroke: 1px var(--color-background-primary);

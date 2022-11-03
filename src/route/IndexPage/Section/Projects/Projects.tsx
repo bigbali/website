@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import ProjectCard, { IProjectCard, projects, ProjectStatus, Tag } from 'Component/ProjectCard/ProjectCard';
-import './Projects.style.scss';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+import './Projects.style.scss';
 
 const Projects = () => {
     const [status, setStatus] = useState<ProjectStatus | 'any'>('any');
@@ -33,7 +33,7 @@ const Projects = () => {
     }, [status, title, tag, limit]);
 
     return (
-        <section id='Projects' block='SectionProjects'>
+        <section id='Projects' block='Projects'>
             <h1>
                 Some projects I've worked on
             </h1>
