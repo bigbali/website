@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { TransitionGroup } from 'react-transition-group';
 import Transition from 'Component/Transition';
 import Index from './Section/Index';
-import './IndexPage.style';
 import Projects from './Section/Projects';
+import About from './Section/About';
+import './IndexPage.style';
 
 export const IndexPage = () => {
     const [isReady, setIsReady] = useState(false);
-
 
     return (
         <div block='IndexPage'>
@@ -23,11 +23,7 @@ export const IndexPage = () => {
             </TransitionGroup>
             <Index onReady={() => setIsReady(true)} />
             <Projects />
-            <section id='About' block='SectionAbout'>
-                <h1>
-                    Who I am
-                </h1>
-            </section>
+            <About />
             <section id='Contact' block='SectionContact'>
                 <h1>
                     Reach out to me

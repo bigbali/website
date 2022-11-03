@@ -5,6 +5,12 @@
         display: inline-block;
         margin-block: 0;
         font-size: 3rem;
+        position: relative;
+
+        @include separator {
+            width: 63%;
+            inset-block-end: -1rem;
+        }
     }
 
     &-Filter {
@@ -78,6 +84,7 @@
 
     &-ProjectCards {
         padding-inline: calc(var(--content-padding-inner) - var(--content-padding));
-        margin-block-start: 5rem;
+        margin-block-start: 8rem;
+        margin-block-end: 10rem;
     }
 }

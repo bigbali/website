@@ -1,6 +1,5 @@
 .IndexPage {
     min-height: 100vh;
-    // overflow-x: hidden;
 
     >section {
         min-height: 100vh;
@@ -14,7 +13,8 @@
     &-Loading {
         position: fixed;
         inset: 0;
-        background-color: var(--color-background-secondary);
+        background-color: rgb(15, 20, 25);
+        color: var(--color-theme);
         display: grid;
         place-items: center;
         font-size: 5rem;

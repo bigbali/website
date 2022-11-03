@@ -34,6 +34,8 @@
 
     --color-content-tertiary-light: rgb(102, 114, 129);
     --color-content-tertiary-dark: rgb(160, 166, 179);
+    --color-content-quaternary-light: rgb(135, 149, 166);
+    --color-content-quaternary-dark: rgb(135, 149, 166);
 
     --color-theme-initial: rgb(204, 18, 18);
     --color-theme: var(--color-theme-initial);
@@ -48,6 +50,9 @@
     --color-primary-background: var(--color-white);
     --color-secondary-background: rgb(238, 241, 247);
     --color-primary-background-transparent: rgba(255, 255, 255, 0.75);
+
+    --color-icon-light: #EEF1F7;
+    --color-icon-dark: black;
 
     --color-neutral-background: rgb(27, 152, 168);
     --color-neutral-foreground: var(--color-white);
@@ -92,6 +97,9 @@
     --color-content-secondary: var(--color-content-secondary-dark);
     --color-content-secondary-transparent: var(--color-content-secondary-dark-transparent);
     --color-content-tertiary: var(--color-content-tertiary-dark);
+    --color-content-quaternary: var(--color-content-quaternary-dark);
+
+    --color-icon: var(--color-icon-dark);
 
     --color-background-primary-transparent-less-transparent: var(--color-background-primary-dark-transparent-less-transparent);
 
@@ -111,6 +119,9 @@
     --color-content-secondary: var(--color-content-secondary-light);
     --color-content-secondary-transparent: var(--color-content-secondary-light-transparent);
     --color-content-tertiary: var(--color-content-tertiary-light);
+    --color-content-quaternary: var(--color-content-quaternary-light);
+
+    --color-icon: var(--color-icon-light);
 
     --color-background-primary-transparent-less-transparent: var(--color-background-primary-light-transparent-less-transparent);
 
@@ -140,9 +151,6 @@ body,
 }
 
 body {
-
-    // overflow-x: hidden;
-
     &.disable-scrolling {
         overflow: hidden;
     }

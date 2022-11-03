@@ -72,8 +72,20 @@
     }
 }
 
-@mixin theme-light {
-    @at-root .theme-light {
+@mixin theme-light($selector) {
+    @at-root .theme-light #{$selector} {
+        @content;
+    }
+}
+
+@mixin separator {
+    position: relative;
+
+    &::after {
+        content: '';
+        position: absolute;
+        inset-inline: 0;
+        border-block-end: 1px solid var(--color-border);
         @content;
     }
 }

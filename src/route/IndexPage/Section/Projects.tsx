@@ -23,9 +23,6 @@ const Projects = () => {
         : project.tags.some((projectTag) => projectTag.toLowerCase().includes(tag.toLowerCase()));
 
 
-    // const projectCards = useMemo(() => {
-    //     return filterStatus(projects, status).map((project) => <ProjectCard {...project} key={project.title} />);
-    // }, [status, title, limit]);
     const projectCards = useMemo(() => {
         return projects
             .filter(filterStatus)
@@ -34,7 +31,6 @@ const Projects = () => {
             .sort((p1, p2) => p1.weight - p2.weight)
             .map((project, index) => <ProjectCard {...project} key={project.title} index={index} />);
     }, [status, title, tag, limit]);
-
 
     return (
         <section id='Projects' block='SectionProjects'>

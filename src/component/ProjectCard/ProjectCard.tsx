@@ -232,12 +232,12 @@ const ProjectCard = ({ title, description, thumbnail, github, slug, tags, theme,
                     <div elem='Anchors'>
                         {!!github && (
                             <a href={github} target='_blank' rel="noopener noreferrer" >
-                                <Icon.Cat />
+                                <Icon.GitHub />
                             </a>
                         )}
                         {!!slug && (
                             <a href={`project/${slug}`}>
-                                <Icon.Moon />
+                                <Icon.Anchor />
                             </a>
                         )}
                     </div>
