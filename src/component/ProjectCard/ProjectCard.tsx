@@ -138,7 +138,7 @@ export const projects: IProjectCard[] = [
             path: Image.This.PATH,
             hash: Image.This.HASH
         },
-        github: '',
+        github: 'https://github.com/bigbali/website',
         slug: 'this'
     },
     {
@@ -174,7 +174,7 @@ export const projects: IProjectCard[] = [
             path: Image.BabelPLugin.PATH,
             hash: Image.BabelPLugin.HASH
         },
-        github: '',
+        github: 'https://github.com/bigbali/babel-plugin-transform-jsx-bem-attributes',
         slug: 'babel-plugin'
     },
     {
@@ -194,7 +194,7 @@ export const projects: IProjectCard[] = [
             path: Image.SDL.PATH,
             hash: Image.SDL.HASH
         },
-        github: '',
+        github: 'https://github.com/bigbali/sdl-csharp',
         slug: 'sdl'
     },
     {
@@ -211,7 +211,7 @@ export const projects: IProjectCard[] = [
             path: Image.StardustDark.PATH,
             hash: Image.StardustDark.HASH
         },
-        github: '',
+        github: 'https://github.com/bigbali/stardust-dark-vscode',
         link: 'https://marketplace.visualstudio.com/items?itemName=Starcrusher.stardust-dark',
         slug: 'stardust-dark'
     },
@@ -232,7 +232,6 @@ export const projects: IProjectCard[] = [
             path: Image.FamilyPhotos.PATH,
             hash: Image.FamilyPhotos.HASH
         },
-        github: '',
         slug: 'family-photos'
     },
     {
@@ -250,7 +249,7 @@ export const projects: IProjectCard[] = [
             path: Image.EShop.PATH,
             hash: Image.EShop.HASH
         },
-        github: '',
+        github: 'https://github.com/bigbali/eshop',
         slug: 'eshop'
     },
     {
@@ -274,7 +273,7 @@ export const projects: IProjectCard[] = [
             path: Image.Tankstats.PATH,
             hash: Image.Tankstats.HASH
         },
-        github: '',
+        github: 'https://github.com/bigbali/tankstats-frontend',
         slug: 'tankstats'
     },
     {
@@ -292,7 +291,7 @@ export const projects: IProjectCard[] = [
             path: Image.MinecraftPLugin.PATH,
             hash: Image.MinecraftPLugin.HASH
         },
-        github: '',
+        github: 'https://github.com/bigbali/paper-plugin',
         slug: 'minecraft-plugin'
     },
     {
