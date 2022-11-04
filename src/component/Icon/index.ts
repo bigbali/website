@@ -7,6 +7,7 @@ import { default as Cat } from './Cat';
 import { default as Close } from './Close';
 import { default as Chevron } from './Chevron';
 import { default as GitHub } from './GitHub';
+import { default as File } from './File';
 import { default as HamburgerMenu } from './HamburgerMenu';
 import { default as Location } from './Location';
 import { default as Settings } from './Settings';
@@ -20,6 +21,7 @@ const Icon = {
     Cat,
     Close,
     Chevron,
+    File,
     GitHub,
     HamburgerMenu,
     Location,

@@ -109,6 +109,7 @@ export interface IProjectCard {
     weight: number,
     tags: Tag[],
     github?: string,
+    link?: string,
     slug?: string,
     theme?: string
 };
@@ -211,6 +212,7 @@ export const projects: IProjectCard[] = [
             hash: Image.StardustDark.HASH
         },
         github: '',
+        link: 'https://marketplace.visualstudio.com/items?itemName=Starcrusher.stardust-dark',
         slug: 'stardust-dark'
     },
     {
@@ -308,7 +310,7 @@ export const projects: IProjectCard[] = [
     }
 ];
 
-const ProjectCard = ({ title, description, thumbnail, github, slug, tags, theme, status, index }: IProjectCard
+const ProjectCard = ({ title, description, thumbnail, github, slug, link, tags, theme, status, index }: IProjectCard
     & { index: number }) => {
     const isReverse = index % 2 !== 0;
     const [isReady, setIsReady] = useState(false);
@@ -341,6 +343,11 @@ const ProjectCard = ({ title, description, thumbnail, github, slug, tags, theme,
                         )}
                         {!!slug && (
                             <a href={`project/${slug}`}>
+                                <Icon.File />
+                            </a>
+                        )}
+                        {!!link && (
+                            <a href={link} target='_blank' rel="noopener noreferrer">
                                 <Icon.Anchor />
                             </a>
                         )}
@@ -353,7 +360,6 @@ const ProjectCard = ({ title, description, thumbnail, github, slug, tags, theme,
             <div elem='Thumbnail'>
                 <div>
                     <img src={thumbnail.path} onLoad={() => setIsReady(true)} loading='lazy' alt={title} />
-                    {/* ↓ this renders a canvas inside a div */}
                     <BlurhashCanvas
                         hash={thumbnail.hash}
                         width={146}
