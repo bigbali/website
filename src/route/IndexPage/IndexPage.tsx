@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { TransitionGroup } from 'react-transition-group';
 import Transition from 'Component/Transition';
 import Section from './Section';
@@ -7,6 +7,7 @@ import './IndexPage.style';
 
 export const IndexPage = () => {
     const [isReady, setIsReady] = useState(false);
+    const onReady = useCallback(() => setIsReady(true), []);
 
     return (
         <div block='IndexPage'>
@@ -19,7 +20,7 @@ export const IndexPage = () => {
                     </Transition>
                 )}
             </TransitionGroup>
-            <Section.Landing onReady={() => setIsReady(true)} />
+            <Section.Landing onReady={onReady} />
             <Section.Projects />
             <Section.About />
             <Section.Contact />

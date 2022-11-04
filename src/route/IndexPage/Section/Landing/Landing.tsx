@@ -1,6 +1,6 @@
 import Spline from '@splinetool/react-spline';
 import { Application as SplineApplication } from '@splinetool/runtime';
-import { useEffect, useRef } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import { Theme } from 'Store';
 import { useSettings } from 'Util';
 import './Landing.style.scss';
@@ -10,7 +10,7 @@ const SplineURL = {
     dark: 'https://prod.spline.design/XmIopwGYaPfZKReY/scene.splinecode'
 };
 
-const Landing = ({ onReady }: { onReady: () => void }) => {
+const Landing = memo(({ onReady }: { onReady: () => void }) => {
     const [{ theme }] = useSettings();
     const spline = useRef<SplineApplication>();
 
@@ -75,6 +75,6 @@ const Landing = ({ onReady }: { onReady: () => void }) => {
             </div>
         </section>
     );
-};
+});
 
 export default Landing;

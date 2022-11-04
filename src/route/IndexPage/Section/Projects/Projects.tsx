@@ -8,7 +8,7 @@ const Projects = () => {
     const [title, setTitle] = useState<string>();
     const [tag, setTag] = useState<string>();
     const [limit, setLimit] = useState<number>(3);
-    const [animationRef] = useAutoAnimate<HTMLDivElement>();
+    const [animationRef] = useAutoAnimate<HTMLDivElement>({ duration: 200 });
 
     const filterStatus = (project: IProjectCard) => status === 'any'
         ? true
