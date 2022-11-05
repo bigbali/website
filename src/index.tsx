@@ -156,12 +156,12 @@ const router = createBrowserRouter([
 
 const root = createRoot(rootElement);
 root.render(
-    <StrictMode>
-        <Provider store={store}>
-            <NotificationContextProvider>
-                <RouterProvider router={router} />
-            </NotificationContextProvider>
-        </Provider>
-    </StrictMode>
+    // <StrictMode>
+    <Provider store={store}>
+        <NotificationContextProvider>
+            <RouterProvider router={router} />
+        </NotificationContextProvider>
+    </Provider>
+    // </StrictMode>
 );
 

@@ -54,9 +54,10 @@ const Projects = () => {
                         <select
                             name='status'
                             id='status'
+                            defaultValue='any'
                             onChange={(e) => setStatus(e.currentTarget.value as ProjectStatus & 'any')}
                         >
-                            <option value='any' selected>
+                            <option value='any'>
                                 Any
                             </option>
                             {Object.values(ProjectStatus).map((status) => (

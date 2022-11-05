@@ -86,7 +86,9 @@ export const SettingsDesktop = () => {
             mods={{ isExpanded }}>
             <button
                 elem='Expander'
-                onClick={() => setIsExpanded((state) => !state)}>
+                onClick={() => setIsExpanded((state) => !state)}
+                title='Expand Settings'
+            >
                 <Icon.Settings isExpanded={isExpanded} />
             </button>
             <div elem='Overlay'>

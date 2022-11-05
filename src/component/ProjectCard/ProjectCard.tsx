@@ -1,19 +1,19 @@
-import Icon from 'Component/Icon';
 import { useState } from 'react';
 import { BlurhashCanvas } from 'react-blurhash';
+import Icon from 'Component/Icon';
 import './ProjectCard.style';
 
-/* =========| Images |========= */
-import image__this from '../../media/gif/gif.gif';
+/* ========= Images ========= */
+import image__this from 'Media/jpg/none.jpg';
 import image__sdl from 'Media/png/sdl.png';
 import image__react_template from 'Media/png/template.png';
-import image__babel_plugin from '../../media/gif/gif.gif';
+import image__babel_plugin from 'Media/jpg/none.jpg';
 import image__stardust_dark from 'Media/png/stardust_dark.png';
-import image__family_photos from '../../media/gif/gif.gif';
-import image__eshop from '../../media/gif/gif.gif';
-import image__tankstats from '../../media/gif/gif.gif';
-import image__minecraft_plugin from '../../media/gif/gif.gif';
-import image__none from '../../media/gif/gif.gif';
+import image__family_photos from 'Media/jpg/none.jpg';
+import image__eshop from 'Media/png/eshop.png';
+import image__tankstats from 'Media/png/tankstats.png';
+import image__minecraft_plugin from 'Media/jpg/none.jpg';
+import image__none from 'Media/jpg/none.jpg';
 
 const DefaultHash = 'L34CI;o~IARP?wWVMxaeM{tRofae';
 
@@ -83,11 +83,13 @@ export enum Tag {
     C = 'C',
     SASS = 'SASS',
     REACT = 'React',
-    AWS = 'AWS',
-    AWS_S3 = 'AWS S3',
     HEROKU = 'Heroku',
     NODE = 'Node.js',
-    GUN = 'Gun.js'
+    GUN = 'Gun.js',
+    BABEL = 'Babel',
+    EXPRESS = 'Express',
+    AWS_RDS = 'Amazon RDS',
+    AWS_S3 = 'Amazon S3',
 }
 
 export enum Weight {
@@ -168,7 +170,10 @@ export const projects: IProjectCard[] = [
         status: ProjectStatus.IN_PROGRESS,
         weight: Weight.HIGH,
         tags: [
-            Tag.TS
+            Tag.JS,
+            Tag.TS,
+            Tag.BABEL,
+            Tag.NODE
         ],
         thumbnail: {
             path: Image.BabelPLugin.PATH,
@@ -224,7 +229,6 @@ export const projects: IProjectCard[] = [
         tags: [
             Tag.PYTHON,
             Tag.DJANGO,
-            Tag.AWS,
             Tag.AWS_S3,
             Tag.HEROKU
         ],
@@ -243,7 +247,9 @@ export const projects: IProjectCard[] = [
         tags: [
             Tag.PYTHON,
             Tag.FLASK,
-            Tag.MYSQL
+            Tag.MYSQL,
+            Tag.JS,
+            Tag.SASS
         ],
         thumbnail: {
             path: Image.EShop.PATH,
@@ -254,20 +260,18 @@ export const projects: IProjectCard[] = [
     },
     {
         title: 'Tankstats',
-        description: `An application centered on strategies and statistics in World of Tanks.
-                      It's on pause of now, but when finished, it will: allow to create encrypted strategic maps,
-                      show statistics of both players and clans, display information about in-game maps
-                      (even the 3D maps from the game, though I couldn't figure that out yet).
-                      It could also authenticate to Wargaming.net using OpenID authentication.
-                      It uses React with TypeScript for the frontend with Gun.js (a decentralized graph database
-                      that allows to implement security features relatively easily). For the backend I wanted to use Django,
-                      but I switched to Node.js so I can use it as a Gun.js server.`,
+        description: 'An application centered on strategies and statistics in World of Tanks.',
         status: ProjectStatus.PAUSED,
         weight: Weight.MEDIUM,
         tags: [
             Tag.NODE,
+            Tag.EXPRESS,
+            Tag.JS,
             Tag.TS,
-            Tag.GUN
+            Tag.GUN,
+            Tag.DJANGO,
+            Tag.AWS_S3,
+            Tag.AWS_RDS
         ],
         thumbnail: {
             path: Image.Tankstats.PATH,
@@ -336,17 +340,17 @@ const ProjectCard = ({ title, description, thumbnail, github, slug, link, tags, 
                     </div>
                     <div elem='Anchors'>
                         {!!github && (
-                            <a href={github} target='_blank' rel="noopener noreferrer" >
+                            <a href={github} target='_blank' rel="noopener noreferrer" aria-label='Go to GitHub page'>
                                 <Icon.GitHub />
                             </a>
                         )}
                         {!!slug && (
-                            <a href={`project/${slug}`}>
+                            <a href={`project/${slug}`} aria-label='Go to project details'>
                                 <Icon.File />
                             </a>
                         )}
                         {!!link && (
-                            <a href={link} target='_blank' rel="noopener noreferrer">
+                            <a href={link} target='_blank' rel="noopener noreferrer" aria-label='Go to external page'>
                                 <Icon.Anchor />
                             </a>
                         )}

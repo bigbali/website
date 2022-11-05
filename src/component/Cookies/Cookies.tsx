@@ -39,6 +39,7 @@ export const Cookies = () => {
                             <div elem='Close'>
                                 <button
                                     elem='CloseButton'
+                                    title='Close Cookies Notice'
                                     onClick={() => {
                                         localStorage.setItem('is_cookies_notice_closed', 'true');
                                         setIsClosed(true);
