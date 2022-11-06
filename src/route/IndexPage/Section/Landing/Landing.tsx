@@ -44,7 +44,7 @@ const Landing = memo(({ onReady, loadingRef }: { onReady: () => void, loadingRef
             loadingRef.current && loadingRef.current.classList.add('IndexPage-Loading_FONTS_READY');
 
             timeoutId = setTimeout(() => {
-                triggerAnimation();
+                // triggerAnimation();
                 onReady();
             }, 1000);
         };
