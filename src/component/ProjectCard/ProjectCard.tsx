@@ -23,7 +23,9 @@ const Image = {
         HASH: DefaultHash
     },
     ReactTemplate: {
-        PATH: image__react_template,
+        // PATH: image__react_template,
+        // eslint-disable-next-line max-len
+        PATH: 'https://www.gom.com/-/media/gom-website/global/topics/digital-image-correlation/gom_topics_dic_teaser.jpg?as=0&dmc=0&thn=0',
         HASH: DefaultHash
     },
     BabelPLugin: {
@@ -362,7 +364,10 @@ const ProjectCard = ({ title, description, thumbnail, github, slug, link, tags, 
             </div>
             <div elem='Thumbnail'>
                 <div>
-                    <img src={thumbnail.path} onLoad={() => setIsReady(true)} loading='lazy' alt={title} />
+                    <img src={thumbnail.path} onLoad={() => {
+                        console.log(title, 'loaded');
+                        setIsReady(true);
+                    }} loading='lazy' alt={title} />
                     <BlurhashCanvas
                         hash={thumbnail.hash}
                         width={146}

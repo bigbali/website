@@ -97,17 +97,6 @@
     }
 }
 
-@keyframes initial-main-animation {
-    from {
-        translate: 0 -5rem;
-        opacity: 0;
-    }
-
-    to {
-        translate: 0 0;
-        opacity: 1;
-    }
-}
 
 @keyframes initial-separator-animation {
     from {

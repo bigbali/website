@@ -4,23 +4,18 @@ $section-home-padding-block-start: 25rem;
     z-index: 1;
     position: relative;
     padding-inline-start: var(--content-padding);
-    height: 100vh;
+    height: 500vh;
     display: flex;
 
     &-Content {
         padding-block-start: $section-home-padding-block-start;
         flex: 0.6;
+        opacity: 0;
 
         >h1 {
             font-size: 4rem;
             font-weight: 600;
             margin-block: 0;
-            animation-name: initial-main-animation;
-            animation-duration: 0.5s;
-            animation-timing-function: ease-out;
-            animation-fill-mode: forwards;
-            animation-delay: 1.5s;
-            opacity: 0;
 
             >span {
                 position: relative;
@@ -35,12 +30,6 @@ $section-home-padding-block-start: 25rem;
                     display: block;
                     width: 100%;
                     border-block-end: 1px solid var(--color-border);
-                    animation-name: initial-separator-animation;
-                    animation-duration: 1s;
-                    animation-timing-function: ease-out;
-                    animation-fill-mode: forwards;
-                    animation-delay: 2s;
-                    opacity: 0;
                 }
 
                 >span {
@@ -54,13 +43,6 @@ $section-home-padding-block-start: 25rem;
             margin-block-end: 0;
             font-weight: 400;
             font-size: 3rem;
-            animation-name: initial-main-animation;
-            animation-duration: 0.5s;
-            animation-timing-function: ease-out;
-            animation-fill-mode: forwards;
-            animation-delay: 1.75s;
-            opacity: 0;
-
 
             >span {
                 font-weight: 600;
@@ -71,29 +53,28 @@ $section-home-padding-block-start: 25rem;
             margin-block-start: 1rem;
             font-size: 2rem;
             font-weight: 400;
-            animation-name: initial-main-animation;
-            animation-duration: 0.5s;
-            animation-timing-function: ease-out;
-            animation-fill-mode: forwards;
-            animation-delay: 2s;
-            opacity: 0;
 
             >span {
                 color: var(--color-content-tertiary);
             }
+        }
+
+        &_BEGIN_ANIMATION {
+            animation-name: initial-main-animation;
+            animation-duration: 0.75s;
+            animation-delay: 0.75s;
+            animation-timing-function: ease-out;
+            animation-fill-mode: forwards;
         }
     }
 
 
     &-Spline {
         z-index: -1;
-        // position: absolute;
         inset-inline-end: 0;
         inset-block-start: 0;
         height: 100vh;
         flex: 1;
-        // padding-inline-start: var(--content-padding-inner);
-        // padding-inline-end: var(--content-padding);
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -102,14 +83,22 @@ $section-home-padding-block-start: 25rem;
 
         >canvas {
             pointer-events: none;
-            // animation-name: canvas-fade-in;
-            // animation-duration: 1s;
-            // animation-fill-mode: forwards;
-            // opacity: 0;
 
             @include to-fhd {
                 // scale: 0.8;
             }
         }
+    }
+}
+
+@keyframes initial-main-animation {
+    from {
+        translate: 0 -5rem;
+        opacity: 0;
+    }
+
+    to {
+        translate: 0 0;
+        opacity: 1;
     }
 }
