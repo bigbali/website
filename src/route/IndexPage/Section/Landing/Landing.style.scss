@@ -9,8 +9,12 @@ $section-home-padding-block-start: 25rem;
 
     &-Content {
         padding-block-start: $section-home-padding-block-start;
-        flex: 0.6;
+        flex: 0.8;
         opacity: 0;
+
+        @include from-fhd {
+            flex: 0.6;
+        }
 
         >h1 {
             font-size: 4rem;
@@ -39,30 +43,28 @@ $section-home-padding-block-start: 25rem;
         }
 
         >h2 {
-            margin-block-start: 1rem;
+            margin-block-start: 2rem;
             margin-block-end: 0;
             font-weight: 400;
             font-size: 3rem;
 
             >span {
                 font-weight: 600;
+                color: inherit;
             }
         }
 
-        >h3 {
+        >p {
             margin-block-start: 1rem;
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 400;
-
-            >span {
-                color: var(--color-content-tertiary);
-            }
+            color: var(--color-content-tertiary);
         }
 
         &_BEGIN_ANIMATION {
             animation-name: initial-main-animation;
             animation-duration: 0.75s;
-            animation-delay: 0.75s;
+            animation-delay: 0.25s;
             animation-timing-function: ease-out;
             animation-fill-mode: forwards;
         }
@@ -81,19 +83,19 @@ $section-home-padding-block-start: 25rem;
         align-items: center;
         overflow: hidden;
 
+        @include from-fhd {
+            padding-inline-end: 5rem;
+        }
+
         >canvas {
             pointer-events: none;
-
-            @include to-fhd {
-                // scale: 0.8;
-            }
         }
     }
 }
 
 @keyframes initial-main-animation {
     from {
-        translate: 0 -5rem;
+        translate: 0 -10rem;
         opacity: 0;
     }
 

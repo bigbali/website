@@ -1,8 +1,15 @@
+import {
+    memo,
+    RefObject,
+    useEffect,
+    useRef,
+    lazy
+} from 'react';
 import { Application as SplineApplication } from '@splinetool/runtime';
-import { memo, RefObject, useEffect, useRef, lazy } from 'react';
+import { fromEvent, throttleTime } from 'rxjs';
+import FontFaceObserver from 'fontfaceobserver';
 import { Theme } from 'Store';
 import { useSettings } from 'Util';
-import FontFaceObserver from 'fontfaceobserver';
 import './Landing.style.scss';
 
 const Spline = lazy(() => import('@splinetool/react-spline'));
@@ -28,15 +35,25 @@ const fontsReady = async () => {
 const Landing = memo(({ onReady, loadingRef }: { onReady: () => void, loadingRef: RefObject<HTMLDivElement> }) => {
     const [{ theme }] = useSettings();
     const spline = useRef<SplineApplication>();
+    const splineCanvas = useRef<HTMLCanvasElement>();
     const landingContentRef = useRef<HTMLDivElement>(null);
 
     const onLoad = (splineApp: SplineApplication) => {
         spline.current = splineApp;
+        splineCanvas.current = document.querySelector('.Landing-Spline canvas') as HTMLCanvasElement;
     };
 
     const triggerAnimation = () => {
         spline.current?.emitEvent('mouseHover', 'All');
     };
+
+    function translateCanvas(e: MouseEvent) {
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        const x = (e.clientX - windowWidth / 2) / 100 * -1;
+        const y = (e.clientY - windowHeight / 2) / 100 * -1;
+        splineCanvas.current!.style.translate = `${x}px ${y}px`;
+    }
 
     useEffect(() => {
         const timeoutId: {
@@ -53,6 +70,14 @@ const Landing = memo(({ onReady, loadingRef }: { onReady: () => void, loadingRef
 
             timeoutId.value = setTimeout(() => {
                 landingContentRef.current && landingContentRef.current.classList.add('Landing-Content_BEGIN_ANIMATION');
+
+                // as this runs after page load, tell TypeScript that the elements are definitely there
+                fromEvent([landingContentRef.current!.parentElement!, document.querySelector('.Header')!], 'mousemove')
+                    .pipe(
+                        throttleTime(10),
+                    )
+                    .subscribe((e: Event) => translateCanvas(e as MouseEvent));
+
                 triggerAnimation();
                 onReady();
             }, 1000);
@@ -85,12 +110,10 @@ const Landing = memo(({ onReady, loadingRef }: { onReady: () => void, loadingRef
                         </span>
                     </span>
                 </h2>
-                <h3>
-                    <span>
-                        I craft applications with beautiful user interfaces and user experience in mind,
-                        for both the web and desktop platforms.
-                    </span>
-                </h3>
+                <p>
+                    I craft applications with beautiful user interfaces and user experience in mind
+                    for the web and desktop.
+                </p>
             </div>
             <div elem='Spline'>
                 <Spline

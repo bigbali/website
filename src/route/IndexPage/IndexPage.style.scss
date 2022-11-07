@@ -20,6 +20,7 @@
         align-items: center;
         gap: 2rem;
         z-index: 99;
+        will-change: clip-path;
 
         &_exit-active {
             animation-name: cover-exit;
@@ -56,6 +57,7 @@
                 border-radius: 50%;
                 z-index: 2;
                 transition: border-width 0.5s;
+                will-change: border-width;
             }
         }
 
