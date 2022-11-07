@@ -97,12 +97,22 @@
         display: flex;
         justify-content: space-between;
         padding-inline: var(--content-padding);
+        padding-block-end: 1rem;
 
         &-Left {
-            font-size: 1.25rem;
-            padding-block: 1rem;
-            color: var(--color-content-primary-dark);
-            line-height: 1.5rem;
+            >p {
+                margin-block: 0;
+                padding-block: 0.5rem;
+                font-size: 1.25rem;
+                color: var(--color-content-primary-dark);
+                line-height: 1.5rem;
+
+            }
+
+            >span {
+                color: var(--color-content-primary-dark);
+                font-size: 1.25rem;
+            }
         }
 
         &-Right {

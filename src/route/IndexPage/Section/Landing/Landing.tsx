@@ -56,7 +56,7 @@ const Landing = memo(({ onReady, loadingRef }: { onReady: () => void, loadingRef
     }
 
     useEffect(() => {
-        const timeoutId: {
+        const timeoutId: { // let's remember the timeout so we can clean it up like a proper gentleman
             value: NodeJS.Timeout | undefined
         } = {
             value: undefined

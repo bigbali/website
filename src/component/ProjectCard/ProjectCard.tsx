@@ -23,9 +23,7 @@ const Image = {
         HASH: DefaultHash
     },
     ReactTemplate: {
-        // PATH: image__react_template,
-        // eslint-disable-next-line max-len
-        PATH: 'https://www.gom.com/-/media/gom-website/global/topics/digital-image-correlation/gom_topics_dic_teaser.jpg?as=0&dmc=0&thn=0',
+        PATH: image__react_template,
         HASH: DefaultHash
     },
     BabelPLugin: {

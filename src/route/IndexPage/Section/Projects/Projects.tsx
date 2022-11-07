@@ -1,14 +1,24 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import ProjectCard, { IProjectCard, projects, ProjectStatus, Tag } from 'Component/ProjectCard/ProjectCard';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import './Projects.style.scss';
+
+const DEFAULT_LIMIT = 3;
 
 const Projects = () => {
     const [status, setStatus] = useState<ProjectStatus | 'any'>('any');
     const [title, setTitle] = useState<string>();
     const [tag, setTag] = useState<string>();
-    const [limit, setLimit] = useState<number>(3);
+    const [limit, setLimit] = useState<number>(DEFAULT_LIMIT);
     const [animationRef] = useAutoAnimate<HTMLDivElement>({ duration: 200 });
+    const projectsRef = useRef<HTMLElement>(null);
+    const previousLength = useRef(0);
+
+    const getShowMoreCount = () => {
+        return projectsByStatus.length - projectCards.length <= DEFAULT_LIMIT
+            ? projectsByStatus.length - projectCards.length
+            : DEFAULT_LIMIT;
+    };
 
     const filterStatus = (project: IProjectCard) => status === 'any'
         ? true
@@ -22,18 +32,28 @@ const Projects = () => {
         ? true
         : project.tags.some((projectTag) => projectTag.toLowerCase().includes(tag.toLowerCase()));
 
+    const projectsByStatus = useMemo(() => projects.filter(filterStatus), [status]);
 
     const projectCards = useMemo(() => {
-        return projects
-            .filter(filterStatus)
+        return projectsByStatus
             .filter(filterTitle)
             .filter(filterTag)
+            .slice(0, limit)
             .sort((p1, p2) => p1.weight - p2.weight)
             .map((project, index) => <ProjectCard {...project} key={project.title} index={index} />);
     }, [status, title, tag, limit]);
 
+    useEffect(() => {
+        if (projectCards.length < previousLength.current) {
+            window.scrollTo({
+                top: projectsRef.current!.offsetTop - 100
+            });
+        }
+        previousLength.current = projectCards.length;
+    }, [projectCards.length]);
+
     return (
-        <section id='Projects' block='Projects'>
+        <section id='Projects' block='Projects' ref={projectsRef}>
             <h1>
                 Some projects I've worked on
             </h1>
@@ -55,7 +75,10 @@ const Projects = () => {
                             name='status'
                             id='status'
                             defaultValue='any'
-                            onChange={(e) => setStatus(e.currentTarget.value as ProjectStatus & 'any')}
+                            onChange={(e) => {
+                                setStatus(e.currentTarget.value as ProjectStatus & 'any');
+                                setLimit(DEFAULT_LIMIT);
+                            }}
                         >
                             <option value='any'>
                                 Any
@@ -96,13 +119,23 @@ const Projects = () => {
             <div elem='ProjectCards' ref={animationRef}>
                 {projectCards}
             </div>
-            {/* <button onClick={() => {
-                if (limit > projectCards.length) {
-                    return projectCards.length;
-                }
-            }}>
-                Show More
-            </button> */}
+            {limit <= projectCards.length && (
+                <div block='Projects' elem='ShowMore'>
+                    <button
+                        title='Show More Projects'
+                        onClick={() => {
+                            if (limit > projectCards.length) {
+                                return;
+                            }
+
+                            setLimit((currentLimit) => currentLimit + 3);
+                        }}
+                    >
+                        Show {getShowMoreCount()} More
+                    </button>
+                </div>
+            )}
+
         </section>
     );
 };

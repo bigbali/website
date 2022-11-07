@@ -32,12 +32,6 @@ jobs:
       - name: GitHub Pages Setup
         uses: actions/configure-pages@v2
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: "16"
-          cache: yarn
-        
       - name: Install dependencies
         env:
          CI: false

@@ -1,5 +1,6 @@
 .Projects {
     padding-inline: var(--content-padding);
+    margin-block-end: 20rem;
 
     >h1 {
         display: inline-block;
@@ -85,6 +86,21 @@
     &-ProjectCards {
         padding-inline: calc(var(--content-padding-inner) - var(--content-padding));
         margin-block-start: 8rem;
-        margin-block-end: 20rem;
+    }
+
+    &-ShowMore {
+        display: flex;
+        justify-content: center;
+        margin-block-start: 5rem;
+
+        >button {
+            padding-inline: 1rem;
+            padding-block: 0.5rem;
+            font-size: 1.5rem;
+            background-color: var(--color-background-secondary-dark);
+            color: var(--color-content-primary-dark);
+            border: none;
+            border-radius: 50vmin;
+        }
     }
 }
