@@ -83,7 +83,7 @@ export const SettingsDesktop = () => {
         <div
             ref={ref}
             block='Settings-Desktop'
-            mods={{ isExpanded }}>
+        >
             <button
                 elem='Expander'
                 onClick={() => setIsExpanded((state) => !state)}
