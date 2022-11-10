@@ -83,6 +83,7 @@ export const SettingsDesktop = () => {
         <div
             ref={ref}
             block='Settings-Desktop'
+            mods={{ isExpanded: isExpanded }}
         >
             <button
                 elem='Expander'
