@@ -41,7 +41,7 @@
         "@types/uuid": "^8.3.4",
         "@typescript-eslint/eslint-plugin": "^5.30.0",
         "@typescript-eslint/parser": "^5.30.0",
-        "babel-plugin-transform-jsx-bem-attributes": "https://github.com/bigbali/babel-plugin-transform-jsx-bem-attributes#build",
+        "babel-plugin-transform-jsx-bem-attributes": "^0.1.1",
         "eslint": "^8.18.0",
         "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
         "react-scripts": "5.0.1",
