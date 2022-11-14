@@ -45,74 +45,39 @@
         border-block-end: 1px solid rgba(255, 255, 255, 0.15);
     }
 
-    &-Close {
-        display: flex;
-        align-items: center;
-        margin-inline-start: auto;
-    }
-
-    &-CloseButton {
-        width: fit-content;
-        height: fit-content;
-        margin-inline-end: -0.5rem;
-        padding: 0;
-        border: none;
-        background-color: transparent;
-
-        >.Icon {
-            width: 2rem;
-            height: 2rem;
-
-            >svg>path {
-                fill: var(--color-content-primary-dark);
-            }
-        }
-
-        &:hover {
-            >.Icon>svg>path {
-                fill: var(--color-theme);
-            }
-        }
-    }
-
     &-Accept {
         background-color: var(--color-theme);
         color: var(--color-white);
         border: none;
-        font-size: 1.5rem;
-        width: 10rem;
-        height: 3rem;
-    }
-
-    &-Decline {
-        background-color: var(--color-content-secondary);
-        color: var(--color-white);
-        border: 1px solid var(--color-white);
-        font-size: 1.5rem;
-        width: 10rem;
-        height: 3rem;
+        font-size: 1.25rem;
+        font-weight: 500;
+        padding-inline: 3rem;
+        padding-block: 0.5rem;
+        border-radius: 50vmin;
     }
 
     &-Body {
         display: flex;
         justify-content: space-between;
         padding-inline: var(--content-padding);
-        padding-block-end: 1rem;
+        padding-block: 0.6rem;
 
         &-Left {
             >p {
                 margin-block: 0;
                 padding-block: 0.5rem;
-                font-size: 1.25rem;
-                color: var(--color-content-primary-dark);
+                font-size: 1.1rem;
                 line-height: 1.5rem;
-
-            }
-
-            >span {
                 color: var(--color-content-primary-dark);
-                font-size: 1.25rem;
+
+                >span {
+                    margin-block-start: 0.25rem;
+                    display: block;
+                    color: var(--color-content-primary-dark);
+                    font-size: 1.1rem;
+                }
             }
+
         }
 
         &-Right {

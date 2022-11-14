@@ -1,6 +1,6 @@
 .Projects {
     padding-inline: var(--content-padding);
-    margin-block-end: 20rem;
+    margin-block-end: 10rem;
 
     >h1 {
         display: inline-block;
@@ -102,5 +102,11 @@
             border: none;
             border-radius: 50vmin;
         }
+    }
+
+    &-NotFound {
+        margin-block-start: 20rem;
+        text-align: center;
+        font-size: 2rem;
     }
 }

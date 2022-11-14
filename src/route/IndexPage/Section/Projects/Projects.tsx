@@ -63,7 +63,7 @@ const Projects = () => {
                         Filter
                     </p>
                     <p>
-                        {`Showing ${projectCards.length} ${projectCards.length > 1 ? 'elements' : 'element'}.`}
+                        {`Showing ${projectCards.length} ${projectCards.length === 1 ? 'element' : 'elements'}.`}
                     </p>
                 </div>
                 <div elem='Controls'>
@@ -119,7 +119,7 @@ const Projects = () => {
             <div elem='ProjectCards' ref={animationRef}>
                 {projectCards}
             </div>
-            {limit <= projectCards.length && (
+            {limit < projectsByStatus.length && projectCards.length !== 0 && (
                 <div block='Projects' elem='ShowMore'>
                     <button
                         title='Show More Projects'
@@ -135,7 +135,11 @@ const Projects = () => {
                     </button>
                 </div>
             )}
-
+            {projectCards.length === 0 && (
+                <p block='Projects' elem='NotFound'>
+                    It looks like there's no such project yet.
+                </p>
+            )}
         </section>
     );
 };

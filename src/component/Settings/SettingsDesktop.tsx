@@ -115,6 +115,8 @@ export const SettingsDesktop = () => {
                     name='fontsize'
                     label='Font Size'
                     externalValue={settings.fontSize}
+                    title={`Multiplier: ${settings.fontSize.toString()}`}
+
                 />
                 <Slider
                     onChange={(e) => handleChangeContrast(Number.parseFloat(e.currentTarget.value))}
@@ -124,6 +126,7 @@ export const SettingsDesktop = () => {
                     name='contrast'
                     label='Contrast'
                     externalValue={settings.contrast}
+                    title={`Multiplier: ${settings.contrast.toString()}`}
                 />
                 <div elem='ColorPicker'>
                     <div elem='ColorPicker-ColorsContainer'>

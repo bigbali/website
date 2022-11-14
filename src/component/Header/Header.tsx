@@ -2,19 +2,18 @@ import { useDevice } from 'Util';
 import Navigation from 'Component/Navigation/';
 import Settings from 'Component/Settings';
 import './Header.style';
+import NavigationLink from 'Component/Navigation/NavigationLink';
 
 export const Header = () => {
     const { isDesktop } = useDevice();
 
     return (
         <div block='Header'>
-            <h1 elem='Branding'>
+            <NavigationLink to='/' elem='Branding'>
                 balázs burján
-            </h1>
-            {isDesktop
-                ? <Navigation.Desktop />
-                : <Navigation.Mobile />}
+            </NavigationLink>
             {isDesktop && <Settings.Desktop />}
+            {!isDesktop && <Navigation.Mobile />}
         </div>
     );
 };

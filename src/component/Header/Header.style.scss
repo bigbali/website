@@ -1,6 +1,7 @@
 .Header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     position: fixed;
     inset-block-start: 0;
     inset-inline: 0;
@@ -45,6 +46,7 @@
         font-size: 2rem;
         font-weight: 400;
         font-family: 'Caveat';
+        text-decoration: none;
 
         @include mobile {
             font-size: 1.5rem;

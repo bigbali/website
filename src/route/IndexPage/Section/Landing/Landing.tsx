@@ -3,16 +3,18 @@ import {
     RefObject,
     useEffect,
     useRef,
-    lazy
 } from 'react';
 import { Application as SplineApplication } from '@splinetool/runtime';
-import { fromEvent, throttleTime } from 'rxjs';
+import Spline from '@splinetool/react-spline';
+import {
+    fromEvent,
+    Subscription,
+    throttleTime
+} from 'rxjs';
 import FontFaceObserver from 'fontfaceobserver';
 import { Theme } from 'Store';
 import { useSettings } from 'Util';
 import './Landing.style.scss';
-
-const Spline = lazy(() => import('@splinetool/react-spline'));
 
 const SplineURL = {
     Light: 'https://prod.spline.design/QtRgBHPKynDO4AfI/scene.splinecode',
@@ -56,10 +58,12 @@ const Landing = memo(({ onReady, loadingRef }: { onReady: () => void, loadingRef
     }
 
     useEffect(() => {
-        const timeoutId: { // let's remember the timeout so we can clean it up like a proper gentleman
-            value: NodeJS.Timeout | undefined
+        const cleanups: { // let's remember the timeout so we can clean it up like a proper gentleman
+            timeout: NodeJS.Timeout | undefined,
+            listener: Subscription | undefined
         } = {
-            value: undefined
+            timeout: undefined,
+            listener: undefined
         };
 
         const effect = async () => {
@@ -68,11 +72,14 @@ const Landing = memo(({ onReady, loadingRef }: { onReady: () => void, loadingRef
             // Wait till we have the fonts loaded so we don't see the font flicker
             loadingRef.current && loadingRef.current.classList.add('IndexPage-Loading_FONTS_READY');
 
-            timeoutId.value = setTimeout(() => {
+            cleanups.timeout = setTimeout(() => {
                 landingContentRef.current && landingContentRef.current.classList.add('Landing-Content_BEGIN_ANIMATION');
 
                 // as this runs after page load, tell TypeScript that the elements are definitely there
-                fromEvent([landingContentRef.current!.parentElement!, document.querySelector('.Header')!], 'mousemove')
+                cleanups.listener = fromEvent(
+                    [landingContentRef.current!.parentElement!, document.querySelector('.Header')!],
+                    'mousemove'
+                )
                     .pipe(
                         throttleTime(10),
                     )
@@ -85,7 +92,10 @@ const Landing = memo(({ onReady, loadingRef }: { onReady: () => void, loadingRef
 
         void effect();
 
-        return () => clearTimeout(timeoutId.value);
+        return () => {
+            clearTimeout(cleanups.timeout);
+            cleanups.listener?.unsubscribe();
+        };
     }, [theme]);
 
     return (

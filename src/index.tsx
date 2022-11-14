@@ -1,7 +1,6 @@
 import {
-    StrictMode,
     useEffect,
-    createRef
+    createRef,
 } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
@@ -13,19 +12,15 @@ import {
 import { Provider } from 'react-redux';
 import { SwitchTransition } from 'react-transition-group';
 import {
-    useDevice,
-    useNotification,
     useSettings
 } from 'Util';
 import store, { Theme } from 'Store';
 import Header from 'Component/Header';
 import Cookies from 'Component/Cookies';
 import Notifications, {
-    NotificationContextProvider,
-    NotificationStatus
+    NotificationContextProvider
 } from 'Component/Notifications';
 import Transition from 'Component/Transition';
-import Footer from 'Component/Footer';
 import Page from 'Route';
 import 'Style/main';
 
@@ -40,28 +35,8 @@ const routes = [
         nodeRef: createRef<any>()
     },
     {
-        path: 'about',
-        element: <Page.About />,
-        nodeRef: createRef<any>()
-    },
-    {
         path: 'cookie-policy',
         element: <Page.CookiePolicy />,
-        nodeRef: createRef<any>(),
-    },
-    {
-        path: 'contact',
-        element: <Page.Contact />,
-        nodeRef: createRef<any>(),
-    },
-    {
-        path: 'terms-of-use',
-        element: <Page.TermsOfUse />,
-        nodeRef: createRef<any>(),
-    },
-    {
-        path: 'example/:id',
-        element: <Page.Example />,
         nodeRef: createRef<any>(),
     },
     {
@@ -73,22 +48,12 @@ const routes = [
 
 const Layout = () => {
     const location = useLocation();
-    // const [showNotification] = useNotification();
-    const { isMobile } = useDevice();
     const [{ theme, accentColor, fontSize, contrast }] = useSettings();
     const currentOutlet = useOutlet();
     const { nodeRef } = routes.find(
         (route) => route.path === location.pathname
     ) ?? {};
 
-    useEffect(() => {
-        // showNotification({
-        //     timeout: 5000,
-        //     title: 'Hey',
-        //     message: `We believe you are browsing this page from a ${isMobile ? 'mobile' : 'desktop'} device. That is very cool!`,
-        //     status: NotificationStatus.INFO
-        // });
-    }, [isMobile]);
 
     useEffect(() => {
         if (theme === Theme.LIGHT) {
@@ -156,12 +121,10 @@ const router = createBrowserRouter([
 
 const root = createRoot(rootElement);
 root.render(
-    // <StrictMode>
     <Provider store={store}>
         <NotificationContextProvider>
             <RouterProvider router={router} />
         </NotificationContextProvider>
     </Provider>
-    // </StrictMode>
 );
 

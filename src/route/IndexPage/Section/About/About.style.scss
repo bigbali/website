@@ -1,5 +1,7 @@
 .About {
     padding-inline: var(--content-padding);
+    padding-block-start: 10rem;
+    height: 100vh;
     overflow-x: hidden;
 
     &-Header {
@@ -78,18 +80,6 @@
                     flex-direction: column;
                     align-items: center;
 
-                    &:hover {
-                        a {
-                            >span {
-                                color: var(--color-theme);
-                            }
-
-                            >.Icon>svg>path {
-                                fill: var(--color-theme);
-                            }
-                        }
-                    }
-
                     >div {
                         width: 1px;
                         height: 3rem;
@@ -100,6 +90,16 @@
                         position: relative;
                         display: flex;
                         align-items: center;
+
+                        &:hover {
+                            >span {
+                                color: var(--color-theme);
+                            }
+
+                            >.Icon>svg>path {
+                                fill: var(--color-theme);
+                            }
+                        }
 
                         >span {
                             position: absolute;
@@ -145,6 +145,71 @@
 
             circle {
                 fill: var(--color-content-secondary);
+            }
+        }
+    }
+
+    &-Technologies {
+        padding-inline: 3rem;
+
+        h2 {
+            margin-block-start: 5rem;
+            width: fit-content;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--color-content-tertiary);
+
+            @include separator {
+                inset-block-end: -1rem;
+                width: 60%;
+            }
+        }
+
+        >ul {
+            display: flex;
+            gap: 15rem;
+            margin-inline-start: 3rem;
+            margin-block-start: 3rem;
+
+            >div {
+                >li {
+                    position: relative;
+                    padding: 2rem;
+                    width: fit-content;
+                    list-style: none;
+
+                    >span {
+                        font-size: 1.25rem;
+                        font-weight: 600;
+                        color: var(--color-content-quaternary);
+                    }
+
+                    >.Icon {
+                        position: absolute;
+                        width: 5rem;
+                        height: 5rem;
+                        inset-inline-start: -1.5rem;
+                        inset-block-start: 2rem;
+                        z-index: -1;
+
+                        >svg>path {
+                            fill: var(--color-background-secondary);
+                        }
+
+                        &-WPF {
+                            height: fit-content;
+                            width: 6rem;
+                            inset-inline-start: -3rem;
+                        }
+                    }
+
+                    &:nth-of-type(2n) {
+                        >.Icon {
+                            inset-inline-start: unset;
+                            inset-inline-end: -1.5rem;
+                        }
+                    }
+                }
             }
         }
     }
