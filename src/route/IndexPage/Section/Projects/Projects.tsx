@@ -14,12 +14,6 @@ const Projects = () => {
     const projectsRef = useRef<HTMLElement>(null);
     const previousLength = useRef(0);
 
-    const getShowMoreCount = () => {
-        return projectsByStatus.length - projectCards.length <= DEFAULT_LIMIT
-            ? projectsByStatus.length - projectCards.length
-            : DEFAULT_LIMIT;
-    };
-
     const filterStatus = (project: IProjectCard) => status === 'any'
         ? true
         : project.status === status;
@@ -32,12 +26,22 @@ const Projects = () => {
         ? true
         : project.tags.some((projectTag) => projectTag.toLowerCase().includes(tag.toLowerCase()));
 
-    const projectsByStatus = useMemo(() => projects.filter(filterStatus), [status]);
+    const projectsFiltered = useMemo(
+        () => projects
+            .filter(filterStatus)
+            .filter(filterTitle)
+            .filter(filterTag),
+        [status, title, tag]
+    );
+
+    const getShowMoreCount = () => {
+        return projectsFiltered.length - projectCards.length <= DEFAULT_LIMIT
+            ? projectsFiltered.length - projectCards.length
+            : DEFAULT_LIMIT;
+    };
 
     const projectCards = useMemo(() => {
-        return projectsByStatus
-            .filter(filterTitle)
-            .filter(filterTag)
+        return projectsFiltered
             .slice(0, limit)
             .sort((p1, p2) => p1.weight - p2.weight)
             .map((project, index) => <ProjectCard {...project} key={project.title} index={index} />);
@@ -119,7 +123,7 @@ const Projects = () => {
             <div elem='ProjectCards' ref={animationRef}>
                 {projectCards}
             </div>
-            {limit < projectsByStatus.length && projectCards.length !== 0 && (
+            {projectsFiltered.length !== 0 && projectsFiltered.length !== projectCards.length && (
                 <div block='Projects' elem='ShowMore'>
                     <button
                         title='Show More Projects'

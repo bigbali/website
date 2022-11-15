@@ -151,25 +151,12 @@
 
     &-Technologies {
         padding-inline: 3rem;
-
-        h2 {
-            margin-block-start: 5rem;
-            width: fit-content;
-            font-size: 1.75rem;
-            font-weight: 600;
-            color: var(--color-content-tertiary);
-
-            @include separator {
-                inset-block-end: -1rem;
-                width: 60%;
-            }
-        }
+        opacity: 0.3;
 
         >ul {
             display: flex;
-            gap: 15rem;
-            margin-inline-start: 3rem;
-            margin-block-start: 3rem;
+            justify-content: space-between;
+            margin-block-start: 8rem;
 
             >div {
                 >li {
@@ -179,8 +166,8 @@
                     list-style: none;
 
                     >span {
-                        font-size: 1.25rem;
-                        font-weight: 600;
+                        font-size: 1.5rem;
+                        font-weight: 700;
                         color: var(--color-content-quaternary);
                     }
 

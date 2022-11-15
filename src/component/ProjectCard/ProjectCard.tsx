@@ -65,14 +65,12 @@ export enum ProjectStatus {
 export enum Tag {
     JS = 'JavaScript',
     TS = 'TypeScript',
-    JAVA = 'Java',
     WPF = 'WPF',
     DOTNET = '.NET',
     CSHARP = 'C#',
     PYTHON = 'Python',
     FLASK = 'Flask',
     DJANGO = 'Django',
-    DJANGO_REST_FRAMEWORK = 'Django REST Framework',
     MYSQL = 'MySQL',
     SQLITE = 'SQLite',
     C = 'C',
@@ -190,7 +188,8 @@ export const projects: IProjectCard[] = [
         weight: Weight.HIGH,
         tags: [
             Tag.CSHARP,
-            Tag.WPF
+            Tag.WPF,
+            Tag.DOTNET
         ],
         thumbnail: {
             path: Image.SDL.PATH,

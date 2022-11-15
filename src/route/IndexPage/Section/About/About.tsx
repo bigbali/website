@@ -69,9 +69,6 @@ const About = () => {
                 </figure>
             </div>
             <div elem='Technologies'>
-                <h2>
-                    Tools I've used recently
-                </h2>
                 <ul>
                     <div>
                         <li>
@@ -123,6 +120,26 @@ const About = () => {
                                 {Tag.NODE}
                             </span>
                             <Icon.NodeJS />
+                        </li>
+                    </div>
+                    <div>
+                        <li>
+                            <span>
+                                {Tag.REACT}
+                            </span>
+                            <Icon.React />
+                        </li>
+                        <li>
+                            <span>
+                                VS Code
+                            </span>
+                            <Icon.VSCode />
+                        </li>
+                        <li>
+                            <span>
+                                Visual Studio
+                            </span>
+                            <Icon.VS />
                         </li>
                     </div>
                 </ul>

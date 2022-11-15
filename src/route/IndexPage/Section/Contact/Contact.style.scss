@@ -1,1 +1,62 @@
-.Contact {}
+.Contact {
+    position: relative;
+    padding-inline: var(--content-padding);
+    height: 100vh;
+
+    &-Header {
+        >h1 {
+            margin-block: 0;
+            font-size: 3rem;
+        }
+
+        >p {
+            // position: relative;
+            // margin-inline-end: -2rem;
+            margin-block-start: 0.5rem;
+            // text-align: end;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+
+            &::before {
+                content: '';
+                // position
+                border-block-start: 1px solid var(--color-border);
+                width: 12rem;
+            }
+
+            span {
+                font-size: 1.25rem;
+                color: var(--color-content-tertiary);
+            }
+        }
+    }
+
+    &-Icons {
+        position: absolute;
+        inset-block-start: 0;
+        inset-inline: var(--content-padding);
+        display: flex;
+        z-index: -1;
+
+        >.Icon {
+            width: 12rem;
+            height: 12rem;
+
+            >svg>path {
+                fill: var(--color-icon);
+            }
+
+            &:nth-of-type(1) {
+                margin-block-start: -2rem;
+                margin-inline-start: -5rem;
+            }
+
+            &:nth-of-type(2) {
+                margin-block-start: 6rem;
+                margin-inline-start: 4rem;
+                scale: -1 1; // flips horizontally
+            }
+        }
+    }
+}

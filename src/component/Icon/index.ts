@@ -13,13 +13,17 @@ import { default as File } from './File';
 import { default as HamburgerMenu } from './HamburgerMenu';
 import { default as JavaScript } from './JavaScript';
 import { default as Location } from './Location';
+import { default as Message } from './Message';
 import { default as Moon } from './Moon';
 import { default as NodeJS } from './NodeJS';
 import { default as Python } from './Python';
+import { default as React } from './React';
 import { default as SASS } from './SASS';
 import { default as Settings } from './Settings';
 import { default as Sun } from './Sun';
 import { default as TypeScript } from './TypeScript';
+import { default as VS } from './VS';
+import { default as VSCode } from './VSCode';
 import { default as WPF } from './WPF';
 
 const Icon = {
@@ -36,13 +40,17 @@ const Icon = {
     HamburgerMenu,
     JavaScript,
     Location,
+    Message,
     Moon,
     NodeJS,
     Python,
+    React,
     SASS,
     Settings,
     Sun,
     TypeScript,
+    VS,
+    VSCode,
     WPF
 };
 

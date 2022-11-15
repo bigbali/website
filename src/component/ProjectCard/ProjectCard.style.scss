@@ -2,7 +2,12 @@
     position: relative;
     display: flex;
     margin-block-end: 3rem;
+    background: var(--color-background-primary);
+    box-shadow: 8px 8px 32px #dddddd,
+        -8px -8px 32px #ffffff;
+    border-radius: 2rem 0 0 2rem;
     transition: scale 0.5s;
+    border: 1px solid var(--color-border-transparent);
 
     &:hover {
         scale: 1.01;
@@ -10,6 +15,7 @@
 
     &_REVERSE {
         flex-direction: row-reverse;
+        border-radius: 0 2rem 2rem 0;
 
         .ProjectCard {
             &-Details {
@@ -29,10 +35,14 @@
             }
 
             &-Status {
-                text-align: end;
+                inset-inline-start: 1rem;
+                inset-inline-end: unset;
             }
 
             &-Thumbnail {
+                border-inline-start: unset;
+                border-inline-end: 1px solid var(--color-border-transparent);
+
                 &:hover {
                     >div {
                         >img {
@@ -51,8 +61,8 @@
         z-index: 1;
 
         >h3 {
-            margin-block-start: 0;
-            margin-block-end: 1rem;
+            margin-block: 0;
+            padding: 1rem;
             font-size: 2rem;
             font-weight: 500;
         }
@@ -72,7 +82,6 @@
     &-TagsAndAnchors {
         display: flex;
         justify-content: space-between;
-        padding: 0.5rem;
         gap: 2rem;
     }
 
@@ -82,6 +91,8 @@
         column-gap: 1rem;
         row-gap: 0.5rem;
         height: 2rem;
+        padding-block-start: 0.5rem;
+        padding-inline: 0.5rem;
 
         >span {
             display: flex;
@@ -105,23 +116,21 @@
 
     &-Status {
         position: absolute;
-        inset-inline: 0;
-        inset-block-end: 0;
-        padding-inline-start: 0.5rem;
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: #A7B4C3;
-        text-transform: uppercase;
+        inset-inline-end: 1rem;
+        inset-block-end: 0.5rem;
+        font-size: 1.15rem;
+        font-weight: 500;
+        color: var(--color-content-tertiary);
     }
 
     &-Thumbnail {
         position: relative;
         flex: 1;
         aspect-ratio: 1.46 / 1;
-        border: 1px solid var(--color-border);
         background-image: url(../../media/svg/frame.svg);
         background-size: cover;
         background-position: 50%;
+        border-inline-start: 1px solid var(--color-border-transparent);
 
         >div {
             position: absolute;
