@@ -1,6 +1,6 @@
-import Icon from 'Component/Icon';
-import { NotificationStatus } from 'Component/Notifications';
 import { useNotification } from 'Util';
+import { NotificationStatus } from 'Component/Notifications';
+import Icon from 'Component/Icon';
 import './Contact.style';
 
 const EMAIL = 'hello@balazsburjan.com';
