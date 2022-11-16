@@ -1,0 +1,58 @@
+.SectionSelector {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    inset-inline-end: 2rem;
+    inset-block: 0;
+    z-index: 96;
+
+    >div {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 1rem;
+        height: 1rem;
+
+        >div {
+            position: absolute;
+            inset-inline-end: 3rem;
+            background-color: var(--color-background-primary-dark);
+            color: var(--color-content-primary-dark);
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            opacity: 0;
+            translate: -2rem 0;
+            scale: 1.1;
+            transition: opacity 0.2s, translate 0.2s, scale 0.2s;
+        }
+
+        &:hover {
+            >div {
+                opacity: 1;
+                translate: 0 0;
+                scale: 1;
+            }
+
+            >button {
+                border-color: var(--color-content-primary);
+            }
+        }
+
+        >button {
+            width: 1rem;
+            height: 1rem;
+            padding: 0;
+            border: 3px solid var(--color-content-tertiary);
+            border-radius: 50vmin;
+            background-color: var(--color-background-primary-transparent-2);
+            backdrop-filter: blur(0.5rem);
+            transition: border-color 0.2s;
+
+            &.active {
+                border-color: var(--color-theme);
+            }
+        }
+    }
+}

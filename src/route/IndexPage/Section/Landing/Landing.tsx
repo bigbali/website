@@ -34,7 +34,13 @@ const fontsReady = async () => {
     });
 };
 
-const Landing = memo(({ onReady, loadingRef }: { onReady: () => void, loadingRef: RefObject<HTMLDivElement> }) => {
+type LandingProps = {
+    onReady: () => void,
+    loadingRef: RefObject<HTMLDivElement>,
+    refFromParent: RefObject<HTMLElement>
+};
+
+const Landing = memo(({ onReady, loadingRef, refFromParent }: LandingProps) => {
     const [{ theme }] = useSettings();
     const spline = useRef<SplineApplication>();
     const splineCanvas = useRef<HTMLCanvasElement>();
@@ -99,7 +105,7 @@ const Landing = memo(({ onReady, loadingRef }: { onReady: () => void, loadingRef
     }, [theme]);
 
     return (
-        <section id='Landing' block='Landing'>
+        <section id='Landing' block='Landing' ref={refFromParent}>
             <div elem='Content' ref={landingContentRef}>
                 <h1>
                     Hey, my name is

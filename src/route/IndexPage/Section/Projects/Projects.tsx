@@ -1,17 +1,27 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import ProjectCard, { IProjectCard, projects, ProjectStatus, Tag } from 'Component/ProjectCard/ProjectCard';
+import {
+    RefObject,
+    useEffect,
+    useMemo,
+    useRef,
+    useState
+} from 'react';
+import ProjectCard, {
+    IProjectCard,
+    projects,
+    ProjectStatus,
+    Tag
+} from 'Component/ProjectCard/ProjectCard';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import './Projects.style.scss';
 
 const DEFAULT_LIMIT = 3;
 
-const Projects = () => {
+const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTMLElement> }) => {
     const [status, setStatus] = useState<ProjectStatus | 'any'>('any');
     const [title, setTitle] = useState<string>();
     const [tag, setTag] = useState<string>();
     const [limit, setLimit] = useState<number>(DEFAULT_LIMIT);
     const [animationRef] = useAutoAnimate<HTMLDivElement>({ duration: 200 });
-    const projectsRef = useRef<HTMLElement>(null);
     const previousLength = useRef(0);
 
     const filterStatus = (project: IProjectCard) => status === 'any'

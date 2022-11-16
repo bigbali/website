@@ -1,6 +1,7 @@
-import Icon from 'Component/Icon';
-import { NotificationStatus } from 'Component/Notifications';
+import { RefObject } from 'react';
 import { useNotification } from 'Util';
+import { NotificationStatus } from 'Component/Notifications';
+import Icon from 'Component/Icon';
 import './Contact.style';
 
 const EMAIL = 'hello@balazsburjan.com';
@@ -17,7 +18,7 @@ const copyToClipboard = async (text: string) => {
     }
 };
 
-const Contact = () => {
+const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => {
     const [showNotification] = useNotification();
 
     const handleCopy = (text: string) => {
@@ -44,7 +45,7 @@ const Contact = () => {
     };
 
     return (
-        <section id='Contact' block='Contact'>
+        <section id='Contact' block='Contact' ref={refFromParent}>
             <div elem='Header'>
                 <h1>
                     Reach out to me

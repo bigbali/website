@@ -2,14 +2,13 @@ import Icon from 'Component/Icon';
 import Pattern from 'Component/Pattern';
 import { Tag } from 'Component/ProjectCard/ProjectCard';
 import Balazs from 'Media/png/balazs.png';
-import { useEffect, useRef } from 'react';
+import { RefObject, useEffect, useRef } from 'react';
 import { fromEvent, throttleTime } from 'rxjs';
 import './About.style';
 
 const MAX_ROTATION_DEG = 5;
 
-const About = () => {
-    const sectionRef = useRef<HTMLElement>(null);
+const About = ({ refFromParent: sectionRef }: { refFromParent: RefObject<HTMLElement> }) => {
     const imageRef = useRef<HTMLDivElement>(null);
 
     const transformImage = (e: MouseEvent) => {
