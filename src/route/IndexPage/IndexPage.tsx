@@ -27,7 +27,7 @@ export const IndexPage = () => {
             <Section.Landing onReady={onReady} loadingRef={loadingRef} />
             <Section.Projects />
             <Section.About />
-            {/* <Section.Contact /> */}
+            <Section.Contact />
         </div>
     );
 };

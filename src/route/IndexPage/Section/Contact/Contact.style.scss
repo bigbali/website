@@ -1,7 +1,7 @@
 .Contact {
     position: relative;
     padding-inline: var(--content-padding);
-    height: 60vh;
+    height: 100vh;
 
     &-Header {
         >h1 {
@@ -10,13 +10,17 @@
         }
 
         >p {
+            // position: relative;
+            // margin-inline-end: -2rem;
             margin-block-start: 0.5rem;
+            // text-align: end;
             display: flex;
             align-items: center;
             gap: 1.5rem;
 
             &::before {
                 content: '';
+                // position
                 border-block-start: 1px solid var(--color-border);
                 width: 12rem;
             }
@@ -52,115 +56,6 @@
                 margin-block-start: 6rem;
                 margin-inline-start: 4rem;
                 scale: -1 1; // flips horizontally
-            }
-        }
-    }
-
-    &-Content {
-        display: grid;
-        place-items: center;
-        margin-block-start: 15vh;
-
-        input {
-            border: none;
-            padding-inline: 1rem;
-            color: var(--color-content-tertiary);
-            background-color: transparent;
-        }
-
-        >div {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-
-            >div {
-                display: flex;
-
-                >button {
-                    border: none;
-                    background-color: transparent;
-                    padding: 0;
-                    margin-inline-start: auto;
-
-                    >.Icon {
-                        width: 2.5rem;
-                        height: 2.5rem;
-
-                        >svg>path {
-                            fill: var(--color-content-tertiary);
-                        }
-                    }
-                }
-            }
-        }
-
-        &-Email {
-            border: 1px solid var(--color-border-transparent);
-            border-radius: 50vmin;
-
-            >a {
-                border: 1px solid var(--color-theme);
-                border-radius: 50vmin;
-                font-size: 1.5rem;
-                padding-block: 0.5rem;
-                padding-inline: 2rem;
-                background-color: transparent;
-                text-decoration: none;
-                transition: background-color 0.2s, color 0.2s;
-
-                &:hover {
-                    background-color: var(--color-theme);
-                    color: var(--color-white);
-                }
-            }
-
-            >input {
-                font-size: 1.5rem;
-                width: 20rem;
-            }
-        }
-
-        &-LinkedIn,
-        &-GitHub {
-            >input {
-                font-size: 1rem;
-            }
-
-            >a {
-                .Icon {
-                    width: 3.5rem;
-                    height: 3.5rem;
-
-                    >svg>path {
-                        fill: var(--color-content-tertiary);
-                    }
-                }
-            }
-        }
-
-        &-LinkedIn {
-            >input {
-                width: 28rem;
-            }
-        }
-
-        &-GitHub {
-            >input {
-                width: 15rem;
-            }
-
-            >button {
-                width: 3.5rem;
-                margin-inline-start: 1rem !important;
-            }
-        }
-
-        a:has(.Icon),
-        button:has(.Icon) {
-            &:hover {
-                svg>path {
-                    fill: var(--color-theme);
-                }
             }
         }
     }

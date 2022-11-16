@@ -5,11 +5,14 @@ const Footer = () => {
     return (
         <div block='Footer'>
             <span elem='By'>
-                Designed & Built by Balázs Burján
+                React Template by Balázs Burján
             </span>
             <nav elem='Navigation'>
                 <Link to='cookie-policy'>
                     Cookie Policy
+                </Link>
+                <Link to='terms-of-use'>
+                    Terms of Use
                 </Link>
             </nav>
             <span elem='Date'>
