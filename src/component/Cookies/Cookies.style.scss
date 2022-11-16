@@ -5,6 +5,7 @@
     width: 100%;
     background-color: var(--color-background-primary-dark-transparent-less-transparent);
     backdrop-filter: blur(var(--blur-background));
+    border-block-start: 1px solid var(--color-border-dark);
     z-index: 98;
     transition: opacity 0.5s;
 
