@@ -21,9 +21,9 @@ import Notifications, {
     NotificationContextProvider
 } from 'Component/Notifications';
 import Transition from 'Component/Transition';
+import Footer from 'Component/Footer';
 import Page from 'Route';
 import 'Style/main';
-import Footer from 'Component/Footer';
 
 const rootElement = document.getElementById('root')!;
 const body = document.querySelector('body')!;
