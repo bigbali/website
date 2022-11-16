@@ -87,14 +87,11 @@
 }
 
 .theme-dark {
-    // background
     --color-background-primary: var(--color-background-primary-dark);
     --color-background-primary-transparent: var(--color-background-primary-dark-transparent);
     --color-background-secondary: var(--color-background-secondary-dark);
     --color-background-secondary-transparent: var(--color-background-secondary-dark-transparent);
     --color-background-secondary-transparent-2: var(--color-content-secondary-dark-transparent-2);
-
-    // content
     --color-content-primary: var(--color-content-primary-dark);
     --color-content-primary-transparent: var(--color-content-primary-dark-transparent);
     --color-content-secondary: var(--color-content-secondary-dark);
@@ -107,23 +104,16 @@
     --color-background-primary-transparent-less-transparent: var(--color-background-primary-dark-transparent-less-transparent);
 
     --color-header-background: var(--color-background-primary-dark-transparent);
-
-    // border
     --color-border: var(--color-border-dark);
     --color-border-transparent: var(--color-border-dark-transparent);
-    --color-border-inverted: var(--color-border-light);
-    --color-border-inverted-transparent: var(--color-border-light-transparent);
 }
 
 .theme-light {
-    // background
     --color-background-primary: var(--color-background-primary-light);
     --color-background-primary-transparent: var(--color-background-primary-light-transparent);
     --color-background-secondary: var(--color-background-secondary-light);
     --color-background-secondary-transparent: var(--color-background-secondary-light-transparent);
     --color-background-secondary-transparent-2: var(--color-background-secondary-light-transparent-2);
-
-    // content
     --color-content-primary: var(--color-content-primary-light);
     --color-content-primary-transparent: var(--color-content-primary-light-transparent);
     --color-content-secondary: var(--color-content-secondary-light);
@@ -136,12 +126,8 @@
     --color-background-primary-transparent-less-transparent: var(--color-background-primary-light-transparent-less-transparent);
 
     --color-header-background: var(--color-background-primary-light-transparent);
-
-    // border
     --color-border: var(--color-border-light);
     --color-border-transparent: var(--color-border-light-transparent);
-    --color-border-inverted: var(--color-border-dark);
-    --color-border-inverted-transparent: var(--color-border-dark-transparent);
 }
 
 *,

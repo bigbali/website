@@ -5,15 +5,13 @@ import { default as Address } from './Address';
 import { default as Anchor } from './Anchor';
 import { default as Babel } from './Babel';
 import { default as Cat } from './Cat';
-import { default as Chevron } from './Chevron';
 import { default as Close } from './Close';
-import { default as Copy } from './Copy';
+import { default as Chevron } from './Chevron';
 import { default as CSharp } from './CSharp';
 import { default as GitHub } from './GitHub';
 import { default as File } from './File';
 import { default as HamburgerMenu } from './HamburgerMenu';
 import { default as JavaScript } from './JavaScript';
-import { default as LinkedIn } from './LinkedIn';
 import { default as Location } from './Location';
 import { default as Message } from './Message';
 import { default as Moon } from './Moon';
@@ -34,15 +32,13 @@ const Icon = {
     Anchor,
     Babel,
     Cat,
-    Chevron,
     Close,
-    Copy,
+    Chevron,
     CSharp,
     File,
     GitHub,
     HamburgerMenu,
     JavaScript,
-    LinkedIn,
     Location,
     Message,
     Moon,
