@@ -21,7 +21,7 @@ import Notifications, {
     NotificationContextProvider
 } from 'Component/Notifications';
 import Transition from 'Component/Transition';
-import Footer from 'Component/Footer';
+// import Footer from 'Component/Footer';
 import Page from 'Route';
 import 'Style/main';
 
@@ -97,7 +97,7 @@ const Layout = () => {
                     )}
                 </Transition>
             </SwitchTransition>
-            <Footer />
+            {/* <Footer /> */}
         </>
     );
 };
