@@ -7,10 +7,12 @@ import { default as Babel } from './Babel';
 import { default as Cat } from './Cat';
 import { default as Chevron } from './Chevron';
 import { default as Close } from './Close';
+import { default as Cookie } from './Cookie';
 import { default as Copy } from './Copy';
 import { default as CSharp } from './CSharp';
-import { default as GitHub } from './GitHub';
+import { default as Django } from './Django';
 import { default as File } from './File';
+import { default as GitHub } from './GitHub';
 import { default as HamburgerMenu } from './HamburgerMenu';
 import { default as JavaScript } from './JavaScript';
 import { default as LinkedIn } from './LinkedIn';
@@ -36,8 +38,10 @@ const Icon = {
     Cat,
     Chevron,
     Close,
+    Cookie,
     Copy,
     CSharp,
+    Django,
     File,
     GitHub,
     HamburgerMenu,

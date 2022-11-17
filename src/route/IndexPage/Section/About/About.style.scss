@@ -188,12 +188,22 @@
                             width: 6rem;
                             inset-inline-start: -3rem;
                         }
+
+                        &-Django {
+                            width: 8rem;
+                            height: 8rem;
+                            inset-block-start: 0;
+                        }
                     }
 
                     &:nth-of-type(2n) {
                         >.Icon {
                             inset-inline-start: unset;
                             inset-inline-end: -1.5rem;
+
+                            &-Django {
+                                inset-inline-end: -5rem;
+                            }
                         }
                     }
                 }

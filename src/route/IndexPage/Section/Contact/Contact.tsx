@@ -66,7 +66,9 @@ const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) =
                         <a href={`mailto:${EMAIL}`} target='_top' title={`Say Hello at ${EMAIL}`} role='button'>
                             SAY HELLO
                         </a>
-                        <input type="text" readOnly value={EMAIL} />
+                        <span>
+                            {EMAIL}
+                        </span>
                         <button title='Copy email address to clipboard' onClick={() => void handleCopy(EMAIL)}>
                             <Icon.Copy />
                         </button>
@@ -75,7 +77,9 @@ const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) =
                         <a href={LINKEDIN} target='_blank' rel='noopener noreferrer' title='Go to LinkedIn page'>
                             <Icon.LinkedIn />
                         </a>
-                        <input type="text" readOnly value={LINKEDIN} />
+                        <span>
+                            {LINKEDIN}
+                        </span>
                         <button title='Copy LinkedIn address to clipboard' onClick={() => void handleCopy(LINKEDIN)}>
                             <Icon.Copy />
                         </button>
@@ -84,7 +88,9 @@ const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) =
                         <a href={GITHUB} target='_blank' rel='noopener noreferrer' title='Go to GitHub page'>
                             <Icon.GitHub />
                         </a>
-                        <input type="text" readOnly value={GITHUB} />
+                        <span>
+                            {GITHUB}
+                        </span>
                         <button title='Copy GitHub address to clipboard' onClick={() => void handleCopy(GITHUB)}>
                             <Icon.Copy />
                         </button>

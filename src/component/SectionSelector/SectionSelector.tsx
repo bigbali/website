@@ -32,6 +32,8 @@ export const SectionSelector = ({ sections, callback }: SectionSelectorProps) =>
         });
 
         sections.forEach((section) => observer.observe(section.ref.current!));
+
+        return () => observer.disconnect();
     }, []);
 
     return (

@@ -130,6 +130,12 @@ const About = ({ refFromParent: sectionRef }: { refFromParent: RefObject<HTMLEle
                         </li>
                         <li>
                             <span>
+                                {Tag.DJANGO}
+                            </span>
+                            <Icon.Django />
+                        </li>
+                        <li>
+                            <span>
                                 VS Code
                             </span>
                             <Icon.VSCode />

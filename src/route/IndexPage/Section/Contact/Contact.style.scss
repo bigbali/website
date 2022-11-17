@@ -61,11 +61,11 @@
         place-items: center;
         margin-block-start: 15vh;
 
-        input {
-            border: none;
+        span {
             padding-inline: 1rem;
             color: var(--color-content-tertiary);
-            background-color: transparent;
+            display: flex;
+            align-items: center;
         }
 
         >div {
@@ -80,7 +80,7 @@
                     border: none;
                     background-color: transparent;
                     padding: 0;
-                    margin-inline-start: auto;
+                    margin-inline-start: 1.5rem;
 
                     >.Icon {
                         width: 2.5rem;
@@ -114,15 +114,14 @@
                 }
             }
 
-            >input {
+            >span {
                 font-size: 1.5rem;
-                width: 20rem;
             }
         }
 
         &-LinkedIn,
         &-GitHub {
-            >input {
+            >span {
                 font-size: 1rem;
             }
 
@@ -135,23 +134,6 @@
                         fill: var(--color-content-tertiary);
                     }
                 }
-            }
-        }
-
-        &-LinkedIn {
-            >input {
-                width: 28rem;
-            }
-        }
-
-        &-GitHub {
-            >input {
-                width: 15rem;
-            }
-
-            >button {
-                width: 3.5rem;
-                margin-inline-start: 1rem !important;
             }
         }
 
