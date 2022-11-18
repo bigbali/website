@@ -16,11 +16,12 @@ import './Projects.style.scss';
 
 const DEFAULT_LIMIT = 3;
 
-const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTMLElement> }) => {
+const Projects = ({ refFromParent: projectsRef, isFocused }: { refFromParent: RefObject<HTMLElement>, isFocused: boolean }) => {
     const [status, setStatus] = useState<ProjectStatus | 'any'>('any');
     const [title, setTitle] = useState<string>();
     const [tag, setTag] = useState<string>();
     const [limit, setLimit] = useState<number>(DEFAULT_LIMIT);
+    const [isFocusedState, setIsFocusedState] = useState(false);
     const [animationRef] = useAutoAnimate<HTMLDivElement>({ duration: 200 });
     const previousLength = useRef(0);
 
@@ -66,8 +67,19 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
         previousLength.current = projectCards.length;
     }, [projectCards.length]);
 
+    useEffect(() => {
+        isFocused !== isFocusedState && setIsFocusedState(true);
+    }, [isFocused]);
     return (
-        <section id='Projects' block='Projects' ref={projectsRef}>
+        <section
+            id='Projects'
+            block='Projects'
+            mods={{
+                IN_VIEWPORT: isFocusedState,
+                OUTSIDE_VIEWPORT: !isFocusedState
+            }}
+            ref={projectsRef}
+        >
             <h1>
                 Some projects I've worked on
             </h1>

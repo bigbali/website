@@ -1,4 +1,4 @@
-import { RefObject } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 import { useNotification } from 'Util';
 import { NotificationStatus } from 'Component/Notifications';
 import Icon from 'Component/Icon';
@@ -18,8 +18,13 @@ const copyToClipboard = async (text: string) => {
     }
 };
 
-const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => {
+const Contact = ({ refFromParent, isFocused }: { refFromParent: RefObject<HTMLElement>, isFocused: boolean }) => {
     const [showNotification] = useNotification();
+    const [isFocusedState, setIsFocusedState] = useState(false);
+
+    useEffect(() => {
+        isFocused !== isFocusedState && setIsFocusedState(true);
+    }, [isFocused]);
 
     const handleCopy = (text: string) => {
         copyToClipboard(text)
@@ -45,7 +50,15 @@ const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) =
     };
 
     return (
-        <section id='Contact' block='Contact' ref={refFromParent}>
+        <section
+            id='Contact'
+            block='Contact'
+            mods={{
+                IN_VIEWPORT: isFocusedState,
+                OUTSIDE_VIEWPORT: !isFocusedState
+            }}
+            ref={refFromParent}
+        >
             <div elem='Header'>
                 <h1>
                     Reach out to me

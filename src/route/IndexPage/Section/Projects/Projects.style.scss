@@ -108,4 +108,39 @@
         text-align: center;
         font-size: 2rem;
     }
+
+    &_OUTSIDE_VIEWPORT {
+
+        >h1,
+        >.Projects-Filter {
+            translate: 0 -10rem;
+            scale: 0.9;
+            opacity: 0;
+        }
+    }
+
+    &_IN_VIEWPORT {
+
+        >h1,
+        >.Projects-Filter {
+            animation-name: initial-f;
+            animation-timing-function: ease-out;
+            animation-fill-mode: forwards;
+            animation-duration: 0.25s;
+        }
+    }
+}
+
+@keyframes initial-f {
+    from {
+        translate: 0 -10rem;
+        scale: 0.9;
+        opacity: 0;
+    }
+
+    to {
+        translate: 0 0;
+        scale: 1;
+        opacity: 1;
+    }
 }

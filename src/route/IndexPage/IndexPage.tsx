@@ -13,8 +13,8 @@ import Section from './Section';
 import './IndexPage.style';
 
 const scrollIntoView = (section: RefObject<HTMLElement>) => {
-    // 5rem represented as integer
-    const topOffset = Number.parseInt(getComputedStyle(document.body).fontSize.replace('px', '')) * 5;
+    // 10rem represented as integer
+    const topOffset = Number.parseInt(getComputedStyle(document.body).fontSize.replace('px', '')) * 10;
     const sectionOffset = section.current?.offsetTop || 0;
 
     window.scrollTo({
@@ -24,13 +24,26 @@ const scrollIntoView = (section: RefObject<HTMLElement>) => {
 };
 
 export const IndexPage = () => {
-    const [isReady, setIsReady] = useState(false);
+    const [areFontsLoaded, setAreFontsLoaded] = useState(false);
+    const [isSplineLoaded, setIsSplineLoaded] = useState(false);
+    const [currentSectionId, setCurrentSectionId] = useState<string | null>(null);
     const loadingRef = useRef<HTMLDivElement>(null);
     const landingRef = useRef<HTMLElement>(null);
     const projectsRef = useRef<HTMLElement>(null);
     const aboutRef = useRef<HTMLElement>(null);
     const contactRef = useRef<HTMLElement>(null);
-    const onReady = useCallback(() => setIsReady(true), []);
+
+    const onFontsLoaded = useCallback(
+        () => setAreFontsLoaded(true),
+        []
+    );
+    const onSplineLoaded = useCallback(
+        () => setIsSplineLoaded(true),
+        []
+    );
+    const sectionSelectorCallback = useCallback((id: string) => {
+        setCurrentSectionId(id);
+    }, []);
 
     const Sections = useMemo(() => [
         {
@@ -54,22 +67,32 @@ export const IndexPage = () => {
     return (
         <div block='IndexPage'>
             <TransitionGroup component={null}>
-                {!isReady && (
+                {(!areFontsLoaded || !isSplineLoaded) && (
                     <Transition timeout={500} classNames='IndexPage-Loading'>
-                        <div block='IndexPage' elem='Loading' ref={loadingRef}>
-                            <div className='Loader' />
+                        <div block='IndexPage' elem='Loading' mods={{ FONTS_READY: areFontsLoaded }}>
+                            {/* <div className='Loader' />
                             <span>
                                 balázs burján
-                            </span>
+                            </span> */}
                         </div>
                     </Transition>
                 )}
             </TransitionGroup>
-            <Section.Landing onReady={onReady} loadingRef={loadingRef} refFromParent={landingRef} />
-            <Section.Projects refFromParent={projectsRef} />
-            <Section.About refFromParent={aboutRef} />
-            <Section.Contact refFromParent={contactRef} />
-            <SectionSelector sections={Sections} callback={scrollIntoView} />
+            <Section.Landing
+                onFontsLoaded={onFontsLoaded}
+                onSplineLoaded={onSplineLoaded}
+                loadingRef={loadingRef}
+                refFromParent={landingRef}
+                isFocused={landingRef.current?.id === currentSectionId}
+            />
+            <Section.Projects refFromParent={projectsRef} isFocused={projectsRef.current?.id === currentSectionId} />
+            <Section.About refFromParent={aboutRef} isFocused={aboutRef.current?.id === currentSectionId} />
+            <Section.Contact refFromParent={contactRef} isFocused={contactRef.current?.id === currentSectionId} />
+            <SectionSelector
+                sections={Sections}
+                onSelect={scrollIntoView}
+                callback={sectionSelectorCallback}
+            />
         </div>
     );
 };

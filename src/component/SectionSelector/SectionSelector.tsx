@@ -10,16 +10,18 @@ type SectionSelectorProps = {
         label: string,
         ref: RefObject<HTMLElement>
     }[],
-    callback?: (section: RefObject<HTMLElement>) => void
+    onSelect?: (section: RefObject<HTMLElement>) => void
+    callback: (sectionId: string) => void
 };
 
-export const SectionSelector = ({ sections, callback }: SectionSelectorProps) => {
+export const SectionSelector = ({ sections, onSelect, callback }: SectionSelectorProps) => {
     const [activeSection, setActiveSection] = useState<HTMLElement>();
 
     useEffect(() => {
         const observerAction: IntersectionObserverCallback = (observedSections) => {
             observedSections.forEach(section => {
                 if (section.isIntersecting) {
+                    callback(section.target.id);
                     setActiveSection(section.target as HTMLElement);
                 }
             });
@@ -46,7 +48,7 @@ export const SectionSelector = ({ sections, callback }: SectionSelectorProps) =>
                         </div>
                         <button
                             title={`Go to ${section.label}`}
-                            onClick={() => callback && callback(section.ref)}
+                            onClick={() => onSelect && onSelect(section.ref)}
                             className={(() => {
                                 if (section.ref.current && activeSection && section.ref.current.id === activeSection.id)
                                     return 'active';

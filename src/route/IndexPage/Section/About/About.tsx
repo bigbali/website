@@ -2,14 +2,26 @@ import Icon from 'Component/Icon';
 import Pattern from 'Component/Pattern';
 import { Tag } from 'Component/ProjectCard/ProjectCard';
 import Balazs from 'Media/png/balazs.png';
-import { RefObject, useEffect, useRef } from 'react';
+import {
+    RefObject,
+    useEffect,
+    useRef,
+    useState
+} from 'react';
 import { fromEvent, throttleTime } from 'rxjs';
 import './About.style';
 
 const MAX_ROTATION_DEG = 5;
 
-const About = ({ refFromParent: sectionRef }: { refFromParent: RefObject<HTMLElement> }) => {
+const About = ({ refFromParent: sectionRef, isFocused }: { refFromParent: RefObject<HTMLElement>, isFocused: boolean }) => {
     const imageRef = useRef<HTMLDivElement>(null);
+    const [isFocusedState, setIsFocusedState] = useState(false);
+
+    useEffect(() => {
+        isFocused !== isFocusedState && setIsFocusedState(true);
+    }, [isFocused]);
+
+
 
     const transformImage = (e: MouseEvent) => {
         const centerX = window.innerWidth / 2;
@@ -33,7 +45,15 @@ const About = ({ refFromParent: sectionRef }: { refFromParent: RefObject<HTMLEle
     }, []);
 
     return (
-        <section id='About' block='About' ref={sectionRef}>
+        <section
+            id='About'
+            block='About'
+            mods={{
+                IN_VIEWPORT: isFocusedState,
+                OUTSIDE_VIEWPORT: !isFocusedState
+            }}
+            ref={sectionRef}
+        >
             <div elem="Header">
                 <h1>
                     Who I am

@@ -2,13 +2,14 @@ import {
     memo,
     RefObject,
     useEffect,
+    useMemo,
     useRef,
+    useState,
 } from 'react';
 import { Application as SplineApplication } from '@splinetool/runtime';
 import Spline from '@splinetool/react-spline';
 import {
     fromEvent,
-    Subscription,
     throttleTime
 } from 'rxjs';
 import FontFaceObserver from 'fontfaceobserver';
@@ -35,24 +36,33 @@ const fontsReady = async () => {
 };
 
 type LandingProps = {
-    onReady: () => void,
+    onFontsLoaded: () => void,
+    onSplineLoaded: () => void,
     loadingRef: RefObject<HTMLDivElement>,
-    refFromParent: RefObject<HTMLElement>
+    refFromParent: RefObject<HTMLElement>,
+    isFocused: boolean
 };
 
-const Landing = memo(({ onReady, loadingRef, refFromParent }: LandingProps) => {
+const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, isFocused }: LandingProps) => {
     const [{ theme }] = useSettings();
-    const spline = useRef<SplineApplication>();
-    const splineCanvas = useRef<HTMLCanvasElement>();
-    const landingContentRef = useRef<HTMLDivElement>(null);
+    const splineRef = useRef<SplineApplication>();
+    const splineCanvasRef = useRef<HTMLCanvasElement>(null);
+    const [isFocusedState, setIsFocusedState] = useState(false);
 
-    const onLoad = (splineApp: SplineApplication) => {
-        spline.current = splineApp;
-        splineCanvas.current = document.querySelector('.Landing-Spline canvas') as HTMLCanvasElement;
+    useEffect(() => {
+        isFocused !== isFocusedState && setIsFocusedState(true);
+    }, [isFocused]);
+
+    const onSplineLoad = (splineApp: SplineApplication) => {
+        splineRef.current = splineApp;
+
+        onSplineLoaded();
+        triggerAnimation();
+        console.log('spline ready', `${Math.round(performance.now())}ms`);
     };
 
     const triggerAnimation = () => {
-        spline.current?.emitEvent('mouseHover', 'All');
+        splineRef.current?.emitEvent('mouseHover', 'All');
     };
 
     function translateCanvas(e: MouseEvent) {
@@ -60,53 +70,55 @@ const Landing = memo(({ onReady, loadingRef, refFromParent }: LandingProps) => {
         const windowHeight = window.innerHeight;
         const x = (e.clientX - windowWidth / 2) / 100 * -1;
         const y = (e.clientY - windowHeight / 2) / 100 * -1;
-        splineCanvas.current!.style.translate = `${x}px ${y}px`;
+        splineCanvasRef.current!.style.translate = `${x}px ${y}px`;
     }
 
     useEffect(() => {
-        const cleanups: { // let's remember the timeout so we can clean it up like a proper gentleman
-            timeout: NodeJS.Timeout | undefined,
-            listener: Subscription | undefined
-        } = {
-            timeout: undefined,
-            listener: undefined
-        };
-
-        const effect = async () => {
+        void (async () => {
             await fontsReady();
+            onFontsLoaded();
+            console.log('fonts ready', `${Math.round(performance.now())}ms`);
+        })();
+    }, []);
 
-            // Wait till we have the fonts loaded so we don't see the font flicker
-            loadingRef.current && loadingRef.current.classList.add('IndexPage-Loading_FONTS_READY');
+    useEffect(() => {
+        const event = fromEvent(
+            document,
+            'mousemove'
+        )
+            .pipe( // 60 Hz
+                throttleTime(16),
+            )
+            .subscribe((e: Event) => translateCanvas(e as MouseEvent));
 
-            cleanups.timeout = setTimeout(() => {
-                landingContentRef.current && landingContentRef.current.classList.add('Landing-Content_BEGIN_ANIMATION');
-
-                // as this runs after page load, tell TypeScript that the elements are definitely there
-                cleanups.listener = fromEvent(
-                    [landingContentRef.current!.parentElement!, document.querySelector('.Header')!],
-                    'mousemove'
-                )
-                    .pipe(
-                        throttleTime(10),
-                    )
-                    .subscribe((e: Event) => translateCanvas(e as MouseEvent));
-
-                triggerAnimation();
-                onReady();
-            }, 1000);
-        };
-
-        void effect();
-
-        return () => {
-            clearTimeout(cleanups.timeout);
-            cleanups.listener?.unsubscribe();
-        };
+        return () => event.unsubscribe();
     }, [theme]);
 
+    // As this component eats performance for breakfast then spits it out and eats it again,
+    // let's not render it unless absolutely necessary
+    const SplineMemo = useMemo(() => (
+        <Spline
+            ref={splineCanvasRef}
+            onLoad={onSplineLoad}
+            scene={
+                theme === Theme.LIGHT
+                    ? SplineURL.LightV2
+                    : SplineURL.Dark
+            }
+        />
+    ), [theme]);
+
     return (
-        <section id='Landing' block='Landing' ref={refFromParent}>
-            <div elem='Content' ref={landingContentRef}>
+        <section
+            id='Landing'
+            block='Landing'
+            mods={{
+                IN_VIEWPORT: isFocusedState,
+                OUTSIDE_VIEWPORT: !isFocusedState
+            }}
+            ref={refFromParent}
+        >
+            <div elem='Content'>
                 <h1>
                     Hey, my name is
                     <br />
@@ -132,14 +144,7 @@ const Landing = memo(({ onReady, loadingRef, refFromParent }: LandingProps) => {
                 </p>
             </div>
             <div elem='Spline'>
-                <Spline
-                    onLoad={onLoad}
-                    scene={
-                        theme === Theme.LIGHT
-                            ? SplineURL.LightV2
-                            : SplineURL.Dark
-                    }
-                />
+                {SplineMemo}
             </div>
         </section>
     );

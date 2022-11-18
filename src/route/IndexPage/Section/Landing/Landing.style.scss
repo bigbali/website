@@ -10,7 +10,6 @@ $section-home-padding-block-start: 25rem;
     &-Content {
         padding-block-start: $section-home-padding-block-start;
         flex: 0.8;
-        opacity: 0;
 
         @include from-fhd {
             flex: 0.6;
@@ -60,16 +59,7 @@ $section-home-padding-block-start: 25rem;
             font-weight: 400;
             color: var(--color-content-tertiary);
         }
-
-        &_BEGIN_ANIMATION {
-            animation-name: initial-main-animation;
-            animation-duration: 0.75s;
-            animation-delay: 0.25s;
-            animation-timing-function: ease-out;
-            animation-fill-mode: forwards;
-        }
     }
-
 
     &-Spline {
         z-index: -1;
@@ -91,16 +81,55 @@ $section-home-padding-block-start: 25rem;
             pointer-events: none;
         }
     }
+
+    &_OUTSIDE_VIEWPORT {
+        >.Landing {
+            &-Content {
+
+                >h1,
+                >h2 {
+                    translate: 0 -10rem;
+                    scale: 0.8;
+                    opacity: 0;
+                }
+            }
+        }
+    }
+
+    &_IN_VIEWPORT {
+        >.Landing {
+            &-Content {
+
+                >h1,
+                >h2 {
+                    animation-name: initial;
+                    animation-timing-function: ease-out;
+                    animation-fill-mode: forwards;
+                    animation-duration: 0.75s;
+                }
+
+                >h1 {
+                    animation-delay: 4s;
+                }
+
+                >h2 {
+                    animation-delay: 5s;
+                }
+            }
+        }
+    }
 }
 
-@keyframes initial-main-animation {
+@keyframes initial {
     from {
         translate: 0 -10rem;
+        scale: 0.9;
         opacity: 0;
     }
 
     to {
         translate: 0 0;
+        scale: 1;
         opacity: 1;
     }
 }

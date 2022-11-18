@@ -153,6 +153,11 @@
     font-family: $raleway;
 }
 
+::selection {
+    background-color: var(--color-theme);
+    color: var(--color-white);
+}
+
 html {
     scroll-behavior: smooth;
 }
