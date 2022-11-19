@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useState } from 'react';
+import { RefObject } from 'react';
 import { useNotification } from 'Util';
 import { NotificationStatus } from 'Component/Notifications';
 import Icon from 'Component/Icon';
@@ -18,13 +18,8 @@ const copyToClipboard = async (text: string) => {
     }
 };
 
-const Contact = ({ refFromParent, isFocused }: { refFromParent: RefObject<HTMLElement>, isFocused: boolean }) => {
+const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => {
     const [showNotification] = useNotification();
-    const [isFocusedState, setIsFocusedState] = useState(false);
-
-    useEffect(() => {
-        isFocused !== isFocusedState && setIsFocusedState(true);
-    }, [isFocused]);
 
     const handleCopy = (text: string) => {
         copyToClipboard(text)
@@ -53,29 +48,25 @@ const Contact = ({ refFromParent, isFocused }: { refFromParent: RefObject<HTMLEl
         <section
             id='Contact'
             block='Contact'
-            mods={{
-                IN_VIEWPORT: isFocusedState,
-                OUTSIDE_VIEWPORT: !isFocusedState
-            }}
             ref={refFromParent}
         >
             <div elem='Header'>
-                <h1>
+                <h1 className='animate-on-scroll'>
                     Reach out to me
                 </h1>
-                <p>
+                <p className='animate-on-scroll'>
                     <span>
                         feel free to say hello
                     </span>
                 </p>
             </div>
-            <div elem='Icons'>
+            <div elem='Icons' className='animate-on-scroll'>
                 <Icon.Message />
                 <Icon.Message />
             </div>
             <div elem='Content'>
                 <div>
-                    <div elem='Content-Email'>
+                    <div elem='Content-Email' className='animate-on-scroll'>
                         <a href={`mailto:${EMAIL}`} target='_top' title={`Say Hello at ${EMAIL}`} role='button'>
                             SAY HELLO
                         </a>
@@ -86,7 +77,7 @@ const Contact = ({ refFromParent, isFocused }: { refFromParent: RefObject<HTMLEl
                             <Icon.Copy />
                         </button>
                     </div>
-                    <div elem='Content-LinkedIn'>
+                    <div elem='Content-LinkedIn' className='animate-on-scroll'>
                         <a href={LINKEDIN} target='_blank' rel='noopener noreferrer' title='Go to LinkedIn page'>
                             <Icon.LinkedIn />
                         </a>
@@ -97,7 +88,7 @@ const Contact = ({ refFromParent, isFocused }: { refFromParent: RefObject<HTMLEl
                             <Icon.Copy />
                         </button>
                     </div>
-                    <div elem='Content-GitHub'>
+                    <div elem='Content-GitHub' className='animate-on-scroll'>
                         <a href={GITHUB} target='_blank' rel='noopener noreferrer' title='Go to GitHub page'>
                             <Icon.GitHub />
                         </a>

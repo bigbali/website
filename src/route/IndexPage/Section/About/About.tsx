@@ -6,22 +6,14 @@ import {
     RefObject,
     useEffect,
     useRef,
-    useState
 } from 'react';
 import { fromEvent, throttleTime } from 'rxjs';
 import './About.style';
 
 const MAX_ROTATION_DEG = 5;
 
-const About = ({ refFromParent: sectionRef, isFocused }: { refFromParent: RefObject<HTMLElement>, isFocused: boolean }) => {
+const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => {
     const imageRef = useRef<HTMLDivElement>(null);
-    const [isFocusedState, setIsFocusedState] = useState(false);
-
-    useEffect(() => {
-        isFocused !== isFocusedState && setIsFocusedState(true);
-    }, [isFocused]);
-
-
 
     const transformImage = (e: MouseEvent) => {
         const centerX = window.innerWidth / 2;
@@ -35,7 +27,7 @@ const About = ({ refFromParent: sectionRef, isFocused }: { refFromParent: RefObj
     };
 
     useEffect(() => {
-        const event = fromEvent(sectionRef.current!, 'mousemove')
+        const event = fromEvent(document, 'mousemove')
             .pipe(
                 throttleTime(10),
             )
@@ -48,25 +40,21 @@ const About = ({ refFromParent: sectionRef, isFocused }: { refFromParent: RefObj
         <section
             id='About'
             block='About'
-            mods={{
-                IN_VIEWPORT: isFocusedState,
-                OUTSIDE_VIEWPORT: !isFocusedState
-            }}
-            ref={sectionRef}
+            ref={refFromParent}
         >
-            <div elem="Header">
+            <div elem="Header" className='animate-on-scroll'>
                 <h1>
                     Who I am
                 </h1>
                 <Icon.Address />
             </div>
             <div elem="Content">
-                <p>
+                <p className='animate-on-scroll'>
                     {/*eslint-disable-next-line max-len*/}
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto saepe et, ut, rem autem velit eligendi laborum similique quos in corporis quisquam inventore libero odio. Quas nostrum consequuntur blanditiis unde rem voluptates nobis non nemo ut sunt, magni temporibus itaque quam odio et exercitationem ab! Delectus, enim consequuntur, est vitae, aut nisi dolore quos dolor corrupti quidem laborum necessitatibus quo nemo ipsa asperiores tempore. Inventore perspiciatis repellendus doloribus quam fugiat, perferendis numquam sed quo aperiam sequi magnam. Vel dignissimos iure placeat tempora, deleniti minima dolor quidem aut, facere distinctio sequi rerum maxime voluptate cupiditate. Repudiandae mollitia saepe expedita cum exercitationem!
                 </p>
                 <figure>
-                    <div ref={imageRef}>
+                    <div ref={imageRef} className='animate-on-scroll'>
                         <Icon.Cat />
                         <img src={Balazs} alt="Portrait of Balázs" />
                         <div className='location'>
@@ -83,11 +71,11 @@ const About = ({ refFromParent: sectionRef, isFocused }: { refFromParent: RefObj
                             </a>
                         </div>
                     </div>
-                    <Pattern.Dots />
-                    <Pattern.Dots />
+                    <Pattern.Dots className='animate-on-scroll' />
+                    <Pattern.Dots className='animate-on-scroll' />
                 </figure>
             </div>
-            <div elem='Technologies'>
+            <div elem='Technologies' className='animate-on-scroll'>
                 <ul>
                     <div>
                         <li>

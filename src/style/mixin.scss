@@ -78,6 +78,18 @@
     }
 }
 
+@mixin prefers-reduced-motion {
+    @media (prefers-reduced-motion) {
+        @content;
+    }
+}
+
+@mixin not-prefers-reduced-motion {
+    @media (prefers-reduced-motion: no-preference) {
+        @content;
+    }
+}
+
 @mixin separator {
     position: relative;
 

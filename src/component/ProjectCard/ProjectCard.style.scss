@@ -190,6 +190,14 @@
             }
         }
     }
+
+    &_PREVENT_SCROLL_ANIMATION {
+        opacity: 1 !important;
+        translate: 0 0 !important;
+        scale: 1 !important;
+        filter: none !important;
+        transition: none !important;
+    }
 }
 
 @keyframes canvas-exit {

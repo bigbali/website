@@ -49,6 +49,9 @@
         >figure {
             position: relative;
 
+            // override scroll transition blur
+            filter: none !important;
+
             >div:nth-of-type(1) {
                 position: relative;
                 width: 15rem;

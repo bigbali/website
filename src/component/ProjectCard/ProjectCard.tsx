@@ -301,10 +301,13 @@ const ProjectCard = ({ title, description, thumbnail, github, slug, link, tags, 
     const [isReady, setIsReady] = useState(false);
 
     return (
-        <div block='ProjectCard' mods={{
-            REVERSE: isReverse,
-            LOADED: isReady
-        }}>
+        <div
+            block='ProjectCard'
+            mods={{
+                REVERSE: isReverse,
+                LOADED: isReady
+            }}
+        >
             <div elem='Details'>
                 <h3>
                     {title}

@@ -55,6 +55,24 @@ const Layout = () => {
         (route) => route.path === location.pathname
     ) ?? {};
 
+    useEffect(() => { // scroll animations
+        const observerAction: IntersectionObserverCallback = (elements) => {
+            elements.forEach(element => {
+                !element.target.getAnimations().length && element.target.classList.toggle('begin-animation', element.isIntersecting);
+            });
+        };
+
+        const observer = new IntersectionObserver(observerAction, {
+            root: null,
+            rootMargin: '-80px 0px -80px 0px',
+            threshold: [0.01, 0.99]
+        });
+
+        const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+        elementsToAnimate.forEach((element) => observer.observe(element));
+
+        return () => observer.disconnect();
+    }, []);
 
     useEffect(() => {
         if (theme === Theme.LIGHT) {

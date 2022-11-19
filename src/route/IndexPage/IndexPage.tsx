@@ -26,7 +26,6 @@ const scrollIntoView = (section: RefObject<HTMLElement>) => {
 export const IndexPage = () => {
     const [areFontsLoaded, setAreFontsLoaded] = useState(false);
     const [isSplineLoaded, setIsSplineLoaded] = useState(false);
-    const [currentSectionId, setCurrentSectionId] = useState<string | null>(null);
     const loadingRef = useRef<HTMLDivElement>(null);
     const landingRef = useRef<HTMLElement>(null);
     const projectsRef = useRef<HTMLElement>(null);
@@ -41,9 +40,6 @@ export const IndexPage = () => {
         () => setIsSplineLoaded(true),
         []
     );
-    const sectionSelectorCallback = useCallback((id: string) => {
-        setCurrentSectionId(id);
-    }, []);
 
     const Sections = useMemo(() => [
         {
@@ -83,15 +79,13 @@ export const IndexPage = () => {
                 onSplineLoaded={onSplineLoaded}
                 loadingRef={loadingRef}
                 refFromParent={landingRef}
-                isFocused={landingRef.current?.id === currentSectionId}
             />
-            <Section.Projects refFromParent={projectsRef} isFocused={projectsRef.current?.id === currentSectionId} />
-            <Section.About refFromParent={aboutRef} isFocused={aboutRef.current?.id === currentSectionId} />
-            <Section.Contact refFromParent={contactRef} isFocused={contactRef.current?.id === currentSectionId} />
+            <Section.Projects refFromParent={projectsRef} />
+            <Section.About refFromParent={aboutRef} />
+            <Section.Contact refFromParent={contactRef} />
             <SectionSelector
                 sections={Sections}
                 onSelect={scrollIntoView}
-                callback={sectionSelectorCallback}
             />
         </div>
     );

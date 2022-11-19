@@ -11,17 +11,15 @@ type SectionSelectorProps = {
         ref: RefObject<HTMLElement>
     }[],
     onSelect?: (section: RefObject<HTMLElement>) => void
-    callback: (sectionId: string) => void
 };
 
-export const SectionSelector = ({ sections, onSelect, callback }: SectionSelectorProps) => {
+export const SectionSelector = ({ sections, onSelect }: SectionSelectorProps) => {
     const [activeSection, setActiveSection] = useState<HTMLElement>();
 
     useEffect(() => {
         const observerAction: IntersectionObserverCallback = (observedSections) => {
             observedSections.forEach(section => {
                 if (section.isIntersecting) {
-                    callback(section.target.id);
                     setActiveSection(section.target as HTMLElement);
                 }
             });

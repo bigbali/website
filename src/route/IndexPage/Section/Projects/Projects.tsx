@@ -16,12 +16,11 @@ import './Projects.style.scss';
 
 const DEFAULT_LIMIT = 3;
 
-const Projects = ({ refFromParent: projectsRef, isFocused }: { refFromParent: RefObject<HTMLElement>, isFocused: boolean }) => {
+const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTMLElement> }) => {
     const [status, setStatus] = useState<ProjectStatus | 'any'>('any');
     const [title, setTitle] = useState<string>();
     const [tag, setTag] = useState<string>();
     const [limit, setLimit] = useState<number>(DEFAULT_LIMIT);
-    const [isFocusedState, setIsFocusedState] = useState(false);
     const [animationRef] = useAutoAnimate<HTMLDivElement>({ duration: 200 });
     const previousLength = useRef(0);
 
@@ -67,23 +66,16 @@ const Projects = ({ refFromParent: projectsRef, isFocused }: { refFromParent: Re
         previousLength.current = projectCards.length;
     }, [projectCards.length]);
 
-    useEffect(() => {
-        isFocused !== isFocusedState && setIsFocusedState(true);
-    }, [isFocused]);
     return (
         <section
             id='Projects'
             block='Projects'
-            mods={{
-                IN_VIEWPORT: isFocusedState,
-                OUTSIDE_VIEWPORT: !isFocusedState
-            }}
             ref={projectsRef}
         >
-            <h1>
+            <h1 className='animate-on-scroll'>
                 Some projects I've worked on
             </h1>
-            <div elem='Filter'>
+            <div elem='Filter' className='animate-on-scroll'>
                 <div>
                     <p>
                         Filter
@@ -142,11 +134,11 @@ const Projects = ({ refFromParent: projectsRef, isFocused }: { refFromParent: Re
                     </div>
                 </div>
             </div>
-            <div elem='ProjectCards' ref={animationRef}>
+            <div elem='ProjectCards' ref={animationRef} className='animate-on-scroll'>
                 {projectCards}
             </div>
             {projectsFiltered.length !== 0 && projectsFiltered.length !== projectCards.length && (
-                <div block='Projects' elem='ShowMore'>
+                <div block='Projects' elem='ShowMore' className='animate-on-scroll'>
                     <button
                         title='Show More Projects'
                         onClick={() => {

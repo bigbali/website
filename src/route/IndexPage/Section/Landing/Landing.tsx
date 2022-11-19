@@ -4,7 +4,6 @@ import {
     useEffect,
     useMemo,
     useRef,
-    useState,
 } from 'react';
 import { Application as SplineApplication } from '@splinetool/runtime';
 import Spline from '@splinetool/react-spline';
@@ -40,18 +39,12 @@ type LandingProps = {
     onSplineLoaded: () => void,
     loadingRef: RefObject<HTMLDivElement>,
     refFromParent: RefObject<HTMLElement>,
-    isFocused: boolean
 };
 
-const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, isFocused }: LandingProps) => {
+const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent }: LandingProps) => {
     const [{ theme }] = useSettings();
     const splineRef = useRef<SplineApplication>();
     const splineCanvasRef = useRef<HTMLCanvasElement>(null);
-    const [isFocusedState, setIsFocusedState] = useState(false);
-
-    useEffect(() => {
-        isFocused !== isFocusedState && setIsFocusedState(true);
-    }, [isFocused]);
 
     const onSplineLoad = (splineApp: SplineApplication) => {
         splineRef.current = splineApp;
@@ -112,10 +105,6 @@ const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, isFocused 
         <section
             id='Landing'
             block='Landing'
-            mods={{
-                IN_VIEWPORT: isFocusedState,
-                OUTSIDE_VIEWPORT: !isFocusedState
-            }}
             ref={refFromParent}
         >
             <div elem='Content'>
