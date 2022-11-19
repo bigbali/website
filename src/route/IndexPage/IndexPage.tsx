@@ -77,6 +77,7 @@ export const IndexPage = () => {
             <Section.Landing
                 onFontsLoaded={onFontsLoaded}
                 onSplineLoaded={onSplineLoaded}
+                shouldTriggerAnimation={areFontsLoaded && isSplineLoaded}
                 loadingRef={loadingRef}
                 refFromParent={landingRef}
             />

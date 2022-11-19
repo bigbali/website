@@ -29,6 +29,30 @@ const rootElement = document.getElementById('root')!;
 const body = document.querySelector('body')!;
 const html = document.querySelector('html')!;
 
+const observerAction: IntersectionObserverCallback = (elements) => {
+    elements.forEach(element => {
+        !element.target.getAnimations().length && element.target.classList.toggle('begin-animation', element.isIntersecting);
+    });
+};
+
+const observer = new IntersectionObserver(observerAction, {
+    root: null,
+    rootMargin: '-80px 0px -80px 0px',
+    threshold: [0.01, 0.99]
+});
+
+const elementsToObserve = new Set();
+export const updateElementsToObserve = (item: HTMLElement, remove = false) => {
+    if (remove) {
+        elementsToObserve.delete(item);
+        observer.unobserve(item);
+        return;
+    }
+
+    elementsToObserve.add(item);
+    observer.observe(item);
+};
+
 const routes = [
     {
         path: '/',
@@ -56,20 +80,9 @@ const Layout = () => {
     ) ?? {};
 
     useEffect(() => { // scroll animations
-        const observerAction: IntersectionObserverCallback = (elements) => {
-            elements.forEach(element => {
-                !element.target.getAnimations().length && element.target.classList.toggle('begin-animation', element.isIntersecting);
-            });
-        };
-
-        const observer = new IntersectionObserver(observerAction, {
-            root: null,
-            rootMargin: '-80px 0px -80px 0px',
-            threshold: [0.01, 0.99]
-        });
-
+        elementsToObserve.clear();
         const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
-        elementsToAnimate.forEach((element) => observer.observe(element));
+        elementsToAnimate.forEach((element) => updateElementsToObserve(element as HTMLElement));
 
         return () => observer.disconnect();
     }, []);
