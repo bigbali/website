@@ -65,6 +65,11 @@ const routes = [
         nodeRef: createRef<any>(),
     },
     {
+        path: 'project/:slug',
+        element: <Page.Project />,
+        nodeRef: createRef<any>(),
+    },
+    {
         path: '*',
         element: <Page.NotFound />,
         nodeRef: createRef<any>(),
