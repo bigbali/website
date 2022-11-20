@@ -1,8 +1,43 @@
 .Page-Project {
     padding-inline: var(--content-padding);
     padding-block-start: 12rem;
+    min-height: auto !important;
+    height: calc(100vh - var(--footer-height));
+
+    &-Back {
+        width: fit-content;
+
+        >a {
+            font-size: 1rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s;
+
+            >.Icon {
+                width: 2rem;
+                height: 2rem;
+                rotate: -90deg;
+            }
+
+            &:hover {
+                color: var(--color-theme);
+
+                >.Icon {
+                    svg>path {
+                        fill: var(--color-theme);
+                    }
+                }
+            }
+        }
+    }
 
     >h1 {
         font-size: 3rem;
     }
+
+    &-Markdown {
+        height: 100px;
+    }
+
 }
