@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { BlurhashCanvas } from 'react-blurhash';
 import Icon from 'Component/Icon';
 import './ProjectCard.style';
@@ -330,9 +331,9 @@ const ProjectCard = ({ title, description, thumbnail, github, slug, link, tags, 
                             </a>
                         )}
                         {!!slug && (
-                            <a href={`project/${slug}`} title='Go to project details'>
+                            <Link to={`project/${slug}`} title='Go to project details'>
                                 <Icon.File />
-                            </a>
+                            </Link>
                         )}
                         {!!link && (
                             <a href={link} target='_blank' rel="noopener noreferrer" title='Go to external page'>
@@ -347,10 +348,12 @@ const ProjectCard = ({ title, description, thumbnail, github, slug, link, tags, 
             </div>
             <div elem='Thumbnail'>
                 <div>
-                    <img src={thumbnail.path} onLoad={() => {
-                        console.log(title, 'loaded');
-                        setIsReady(true);
-                    }} loading='lazy' alt={title} />
+                    <img
+                        src={thumbnail.path}
+                        onLoad={() => setIsReady(true)}
+                        loading='lazy'
+                        alt={title}
+                    />
                     <BlurhashCanvas
                         hash={thumbnail.hash}
                         width={146}

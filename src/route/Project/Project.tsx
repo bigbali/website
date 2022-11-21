@@ -3,7 +3,6 @@ import { projects } from 'Component/ProjectCard/ProjectCard';
 import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
 // @ts-ignore
 import md__balazs_burjan from './markdown/balazs-burjan.md';
 // @ts-ignore
@@ -32,10 +31,15 @@ export const Project = () => {
     return (
         <div block='Page-Project'>
             <div elem='Back'>
-                <Link to='/' title='Back to Home Page'>
+                {/*
+                    Not using react-router.Link because that causes a bug upon returning to home page:
+                    document.querySelector(All) does not initially select anything, even though called after the component
+                    has been mounted. I couldn't get myself to understand it, so let's not get bogged down on it.
+                */}
+                <a href='/' title='Back to Home Page'>
                     <Icon.Chevron />
                     BACK TO HOME
-                </Link>
+                </a>
             </div>
             <h1>
                 {project?.title || 'Looks like I don\'t remember the name of this project. That\'s funny.'}

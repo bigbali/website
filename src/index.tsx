@@ -85,12 +85,9 @@ const Layout = () => {
     ) ?? {};
 
     useEffect(() => { // scroll animations
-        elementsToObserve.clear();
         const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
         elementsToAnimate.forEach((element) => updateElementsToObserve(element as HTMLElement));
-
-        return () => observer.disconnect();
-    }, []);
+    }, [location]);
 
     useEffect(() => {
         if (theme === Theme.LIGHT) {

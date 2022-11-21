@@ -40,7 +40,7 @@ export const SectionSelector = ({ sections, onSelect }: SectionSelectorProps) =>
         <aside block='SectionSelector'>
             {sections.map((section) => {
                 return (
-                    <div>
+                    <div key={section.label}>
                         <div>
                             {section.label}
                         </div>
