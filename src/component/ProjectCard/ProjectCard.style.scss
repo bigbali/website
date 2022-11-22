@@ -65,6 +65,8 @@
     &-Details {
         flex: 1.4;
         position: relative;
+        display: flex;
+        flex-direction: column;
         z-index: 1;
 
         >h3 {
@@ -123,9 +125,9 @@
     }
 
     &-Status {
-        position: absolute;
-        inset-inline-end: 0.5rem;
-        inset-block-end: 0.5rem;
+        margin-block-start: auto;
+        padding-inline: 0.5rem;
+        padding-block-end: 0.5rem;
         font-size: 1.15rem;
         font-weight: 500;
         color: var(--color-content-tertiary);

@@ -24,6 +24,10 @@
         @include mobile {
             flex: 2;
         }
+
+        >span {
+            margin-inline-start: 0.5rem;
+        }
     }
 
     &-Date {
