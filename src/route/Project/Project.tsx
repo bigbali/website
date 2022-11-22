@@ -1,6 +1,6 @@
 import Icon from 'Component/Icon';
 import { projects } from 'Component/ProjectCard/ProjectCard';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { BlurhashCanvas } from 'react-blurhash';
 import ReactMarkdown from 'react-markdown';
 import { useParams } from 'react-router';
@@ -83,11 +83,22 @@ export const Project = () => {
                     <h1>
                         {title}
                     </h1>
-                    {markdown && (
-                        <section block='Page-Project' elem='Markdown'>
-                            <ReactMarkdown children={markdown} />
-                        </section>
-                    )}
+                    <section block='Page-Project' elem='Markdown'>
+                        {markdown
+                            ? <ReactMarkdown children={markdown} />
+                            : (
+                                <>
+                                    <p className='suspense' />
+                                    <p className='suspense' />
+                                    <p className='suspense' />
+                                    <p className='suspense' />
+                                    <p className='suspense' />
+                                    <p className='suspense' />
+                                    <p className='suspense' />
+                                    <p className='suspense' />
+                                </>
+                            )}
+                    </section>
                 </div>
                 <div>
                     <div elem='Thumbnail' mods={{ IS_LOADED: isImageLoaded }}>

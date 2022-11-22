@@ -203,4 +203,32 @@
             border-radius: 0.25rem;
         }
     }
+
+    .suspense {
+        width: 100%;
+        height: 2rem;
+        margin-block: 2rem;
+        background-image: linear-gradient(90deg,
+                var(--color-background-primary),
+                var(--color-background-secondary),
+                var(--color-background-primary));
+
+        @include not-prefers-reduced-motion {
+            background-size: 100%;
+            background-repeat: no-repeat;
+            animation-name: suspense;
+            animation-iteration-count: infinite;
+            animation-duration: 3s;
+        }
+    }
+}
+
+@keyframes suspense {
+    from {
+        background-position: -40vw 0;
+    }
+
+    to {
+        background-position: 40vw 0;
+    }
 }
