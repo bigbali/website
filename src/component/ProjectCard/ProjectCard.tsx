@@ -302,7 +302,7 @@ const ProjectCard = ({ title, description, thumbnail, github, slug, link, tags, 
     const [isReady, setIsReady] = useState(false);
 
     return (
-        <div
+        <article
             block='ProjectCard'
             mods={{
                 REVERSE: isReverse,
@@ -310,9 +310,9 @@ const ProjectCard = ({ title, description, thumbnail, github, slug, link, tags, 
             }}
         >
             <div elem='Details'>
-                <h3>
+                <h1>
                     {title}
-                </h3>
+                </h1>
                 <p>
                     {description}
                 </p>
@@ -331,7 +331,7 @@ const ProjectCard = ({ title, description, thumbnail, github, slug, link, tags, 
                             </a>
                         )}
                         {!!slug && (
-                            <Link to={`project/${slug}`} title='Go to project details'>
+                            <Link to={`project/${slug}`} rel='bookmark' title='Go to project details'>
                                 <Icon.File />
                             </Link>
                         )}
@@ -362,7 +362,7 @@ const ProjectCard = ({ title, description, thumbnail, github, slug, link, tags, 
                     />
                 </div>
             </div>
-        </div>
+        </article>
     );
 };
 

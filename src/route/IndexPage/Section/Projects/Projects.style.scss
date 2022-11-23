@@ -129,6 +129,11 @@
             color: var(--color-content-primary-dark);
             border: none;
             border-radius: 50vmin;
+            transition: background-color 0.2s;
+
+            &:hover {
+                background-color: var(--color-theme);
+            }
         }
     }
 
