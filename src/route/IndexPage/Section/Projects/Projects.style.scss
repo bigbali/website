@@ -49,6 +49,35 @@
             font-size: 1rem;
         }
 
+        &-Status {
+            >div {
+                display: flex;
+                justify-content: space-between;
+
+                >.Help {
+                    ul {
+                        margin-block-start: 0.25rem;
+                        margin-block-end: 0;
+                        padding-inline-start: 1rem;
+                        width: fit-content;
+
+                        >li {
+                            width: max-content;
+                            margin-block: 0.25rem;
+                            list-style: none;
+
+                            >span {
+                                background-color: var(--color-background-primary);
+                                color: var(--color-content-primary);
+                                padding-inline: 0.5rem;
+                                border-radius: 0.25rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         &-Status,
         &-Title,
         &-Tag {

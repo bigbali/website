@@ -14,6 +14,7 @@ import { default as Django } from './Django';
 import { default as File } from './File';
 import { default as GitHub } from './GitHub';
 import { default as HamburgerMenu } from './HamburgerMenu';
+import { default as Help } from './Help';
 import { default as JavaScript } from './JavaScript';
 import { default as LinkedIn } from './LinkedIn';
 import { default as Location } from './Location';
@@ -45,6 +46,7 @@ const Icon = {
     File,
     GitHub,
     HamburgerMenu,
+    Help,
     JavaScript,
     LinkedIn,
     Location,

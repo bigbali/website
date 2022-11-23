@@ -11,6 +11,7 @@ import ProjectCard, {
     ProjectStatus,
     Tag
 } from 'Component/ProjectCard/ProjectCard';
+import Help from 'Component/Help';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import './Projects.style.scss';
 
@@ -86,9 +87,30 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
                 </div>
                 <div elem='Controls'>
                     <div elem='Controls-Status'>
-                        <label htmlFor="status">
-                            Status
-                        </label>
+                        <div>
+                            <label htmlFor="status">
+                                Status
+                            </label>
+                            <Help
+                                content={`
+                                Explanation:<ul>
+                                    <li>
+                                        ${'' /* eslint-disable-next-line max-len */}
+                                        <span>Finished:</span> has reached MVP (Minimally Viable Product) status, but I will likely still work on it;
+                                    </li>
+                                    <li>
+                                        <span>In Progress:</span> I am currently working on it;
+                                    </li>
+                                    <li>
+                                        <span>Paused:</span> I have paused work on the project, but will continue at a later date;
+                                    </li>
+                                    <li>
+                                        <span>Unfinished:</span> I did not finish, nor do intend to finish the project.
+                                    </li>
+                                </ul>
+                            `}
+                            />
+                        </div>
                         <select
                             name='status'
                             id='status'
