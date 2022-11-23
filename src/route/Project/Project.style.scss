@@ -154,6 +154,18 @@
         padding-inline-end: 3rem;
         padding-block: 0;
 
+        >div {
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+
+        &_IS_LOADED {
+            >div {
+                opacity: 1;
+            }
+        }
+
         p,
         a {
             font-size: 1rem;
@@ -218,7 +230,7 @@
             background-repeat: no-repeat;
             animation-name: suspense;
             animation-iteration-count: infinite;
-            animation-duration: 3s;
+            animation-duration: 2s;
         }
     }
 }
