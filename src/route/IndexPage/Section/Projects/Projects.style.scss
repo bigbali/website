@@ -28,7 +28,8 @@
             display: flex;
             justify-content: space-between;
 
-            >p {
+            >p,
+            >legend {
                 font-size: 1.25rem;
                 color: var(--color-content-secondary);
                 margin-block-start: 0;

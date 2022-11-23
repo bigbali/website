@@ -76,11 +76,11 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
             <h1 className='animate-on-scroll'>
                 Some projects I've worked on
             </h1>
-            <div elem='Filter' className='animate-on-scroll'>
+            <fieldset elem='Filter' className='animate-on-scroll'>
                 <div>
-                    <p>
+                    <legend>
                         Filter
-                    </p>
+                    </legend>
                     <p>
                         {`Showing ${projectCards.length} ${projectCards.length === 1 ? 'element' : 'elements'}.`}
                     </p>
@@ -155,7 +155,7 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
                         </datalist>
                     </div>
                 </div>
-            </div>
+            </fieldset>
             <div elem='ProjectCards' ref={animationRef} className='animate-on-scroll'>
                 {projectCards}
             </div>
