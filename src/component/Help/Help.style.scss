@@ -11,7 +11,7 @@
         min-width: 5rem;
         min-height: 3rem;
         padding: 1rem;
-        background-color: var(--color-content-primary);
+        background-color: var(--color-content-primary-light);
         color: var(--color-content-primary-dark);
         border: 1px solid var(--color-border-dark);
         font-size: 1rem;
@@ -30,11 +30,10 @@
         }
 
         @include theme-dark(&) {
-            border: 1px solid var(--color-border-light);
-            color: var(--color-content-primary-light);
+            color: var(--color-content-primary-dark);
 
             * {
-                color: var(--color-content-primary-light);
+                color: var(--color-content-primary-dark);
             }
         }
 

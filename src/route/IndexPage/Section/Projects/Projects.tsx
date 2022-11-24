@@ -12,9 +12,9 @@ import ProjectCard, {
     Tag
 } from 'Component/ProjectCard/ProjectCard';
 import Help from 'Component/Help';
+import { Orientation } from 'Component/Help/Help';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import './Projects.style.scss';
-import { Orientation } from 'Component/Help/Help';
 
 const DEFAULT_LIMIT = 3;
 

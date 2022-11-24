@@ -18,9 +18,8 @@ import { useSettings } from 'Util';
 import './Landing.style.scss';
 
 const SplineURL = {
-    Light: 'https://prod.spline.design/QtRgBHPKynDO4AfI/scene.splinecode',
-    Dark: 'https://prod.spline.design/XmIopwGYaPfZKReY/scene.splinecode',
-    LightV2: 'https://prod.spline.design/oE1PXrOYS773cHVg/scene.splinecode'
+    Dark: 'https://prod.spline.design/Orv626vNo2ELSt25/scene.splinecode',
+    Light: 'https://prod.spline.design/oE1PXrOYS773cHVg/scene.splinecode'
 };
 
 const fontsReady = async () => {
@@ -130,7 +129,7 @@ const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTrig
             onLoad={onSplineLoad}
             scene={
                 theme === Theme.LIGHT
-                    ? SplineURL.LightV2
+                    ? SplineURL.Light
                     : SplineURL.Dark
             }
         />

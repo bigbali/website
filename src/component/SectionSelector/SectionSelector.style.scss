@@ -23,6 +23,7 @@
             padding-block: 0.5rem;
             padding-inline: 0.75rem;
             border-radius: 0.5rem;
+            pointer-events: none;
             opacity: 0;
             translate: -2rem 0;
             scale: 1.1;
@@ -30,6 +31,11 @@
                 translate 0.2s,
                 scale 0.2s,
                 background-color 0.2s;
+
+            @include theme-dark(&) {
+                background-color: var(--color-background-primary-light);
+                color: var(--color-content-primary-light);
+            }
         }
 
         &::before {
