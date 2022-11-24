@@ -14,6 +14,7 @@ import ProjectCard, {
 import Help from 'Component/Help';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import './Projects.style.scss';
+import { Orientation } from 'Component/Help/Help';
 
 const DEFAULT_LIMIT = 3;
 
@@ -92,6 +93,7 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
                                 Status
                             </label>
                             <Help
+                                orientation={Orientation.BELOW}
                                 content={`
                                 Explanation:<ul>
                                     <li>

@@ -37,6 +37,22 @@
                 color: var(--color-content-primary-light);
             }
         }
+
+        &_ABOVE {
+            inset-block-end: 2rem;
+        }
+
+        &_BELOW {
+            inset-block-start: 2rem;
+        }
+
+        &_LEFT {
+            // TODO
+        }
+
+        &_RIGHT {
+            // TODO
+        }
     }
 
     >.Icon {

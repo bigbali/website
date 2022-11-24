@@ -75,9 +75,9 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                     <Pattern.Dots className='animate-on-scroll' />
                 </figure>
             </div>
-            <div elem='Technologies' className='animate-on-scroll'>
-                <ul>
-                    <div>
+            <div elem='Technologies' className='animate-on-scroll' title={'Some technologies I\'ve worked with, to fill the space.'}>
+                <div>
+                    <ul>
                         <li>
                             <span>
                                 {Tag.TS}
@@ -102,8 +102,8 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                             </span>
                             <Icon.Python />
                         </li>
-                    </div>
-                    <div>
+                    </ul>
+                    <ul>
                         <li>
                             <span>
                                 {Tag.BABEL}
@@ -128,8 +128,8 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                             </span>
                             <Icon.NodeJS />
                         </li>
-                    </div>
-                    <div>
+                    </ul>
+                    <ul>
                         <li>
                             <span>
                                 {Tag.REACT}
@@ -154,10 +154,10 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                             </span>
                             <Icon.VS />
                         </li>
-                    </div>
-                </ul>
+                    </ul>
+                </div>
             </div>
-        </section>
+        </section >
     );
 };
 

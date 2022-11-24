@@ -5,54 +5,47 @@ import Icon from 'Component/Icon';
 import './ProjectCard.style';
 
 /* ========= Images ========= */
-import image__this from 'Media/jpg/none.jpg';
-import image__sdl from 'Media/png/sdl.png';
-import image__react_template from 'Media/png/template.png';
-import image__babel_plugin from 'Media/jpg/none.jpg';
-import image__stardust_dark from 'Media/png/stardust_dark.png';
-import image__family_photos from 'Media/jpg/none.jpg';
-import image__eshop from 'Media/png/eshop.png';
-import image__tankstats from 'Media/png/tankstats.png';
-import image__none from 'Media/jpg/none.jpg';
-
-const DefaultHash = 'L34CI;o~IARP?wWVMxaeM{tRofae';
+import image__this from 'Media/webp/balazs-burjan.webp';
+import image__sdl from 'Media/webp/sdl.webp';
+import image__react_template from 'Media/webp/react-template.webp';
+import image__babel_plugin from 'Media/webp/babel-plugin.webp';
+import image__stardust_dark from 'Media/webp/stardust-dark.webp';
+import image__family_photos from 'Media/webp/family-photos.webp';
+import image__eshop from 'Media/webp/eshop.webp';
+import image__tankstats from 'Media/webp/tankstats.webp';
 
 const Image = {
     This: {
         PATH: image__this,
-        HASH: DefaultHash
+        HASH: 'WYQcn}_3M_M{%MRPNGxuaxRks:WB~pD%ozxtRPoz%2M{a}t7R*oM'
     },
     ReactTemplate: {
         PATH: image__react_template,
-        HASH: DefaultHash
+        HASH: 'W25OQqWB00jZx]WB-;WBM{jZofay00R*~qjZM{of4nR*?vjZRjof'
     },
     BabelPLugin: {
         PATH: image__babel_plugin,
-        HASH: DefaultHash
+        HASH: 'C26[2IIUMx_200-pxaD%'
     },
     SDL: {
         PATH: image__sdl,
-        HASH: DefaultHash
+        HASH: 'E87UF=oct6s:oJoL~qjZj[j@f6js'
     },
     StardustDark: {
         PATH: image__stardust_dark,
-        HASH: DefaultHash
+        HASH: 'W13l2M^lVaITI-NF$x%1ahR+WEaMt7slxbX9aenOW9bcR:SNbWoI'
     },
     FamilyPhotos: {
         PATH: image__family_photos,
-        HASH: DefaultHash
+        HASH: 'WAFYrv5W==Z}.T~WS8xtM}f,RiM{x]w[o}tSemIUJD%1IVRjadS5'
     },
     EShop: {
         PATH: image__eshop,
-        HASH: DefaultHash
+        HASH: 'WKQ0R4oH-;D%R*WAE4jERjWCt8oe?^ofM|s:aej]-otRozodM_WC'
     },
     Tankstats: {
         PATH: image__tankstats,
-        HASH: DefaultHash
-    },
-    Shoutout: {
-        PATH: image__none,
-        HASH: DefaultHash
+        HASH: 'NQQ0da~Wx]D%V?W=_3E1Mxt7ozoy~p9GRi%MWrf5'
     }
 };
 
@@ -280,19 +273,6 @@ export const projects: IProjectCard[] = [
         },
         github: 'https://github.com/bigbali/tankstats-frontend',
         slug: 'tankstats'
-    },
-    {
-        title: 'A shoutout to all the projects I never finished!',
-        description: `I 've got dozens of projects I've abandoned halfway through,
-                      and even though I don't even remember half of them, they still helped me
-                      get to where I am today.`,
-        status: ProjectStatus.UNFINISHED,
-        weight: Weight.LOW,
-        tags: [],
-        thumbnail: {
-            path: Image.Shoutout.PATH,
-            hash: Image.Shoutout.HASH
-        },
     }
 ];
 

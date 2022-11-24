@@ -13,9 +13,9 @@
     --color-background-primary-light-transparent-less-transparent: rgba(250, 250, 250, 0.9);
     --color-background-primary-dark-transparent-less-transparent: rgba(30, 30, 35, 0.9);
 
-    --color-background-secondary-light: rgb(211, 217, 228);
-    --color-background-secondary-light-transparent: rgba(211, 217, 228, 0.9);
-    --color-background-secondary-light-transparent-2: rgba(211, 217, 228, 0.75);
+    --color-background-secondary-light: rgb(229, 232, 238);
+    --color-background-secondary-light-transparent: rgba(229, 232, 238, 0.9);
+    --color-background-secondary-light-transparent-2: rgba(229, 232, 238, 0.75);
     --color-background-secondary-dark: rgb(35, 35, 40);
     --color-background-secondary-dark-transparent: rgba(35, 35, 40, 0.9);
     --color-background-secondary-dark-transparent-2: rgba(35, 35, 40, 0.75);
@@ -168,6 +168,7 @@ body,
     margin: 0;
     background-color: var(--color-background-primary);
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 body {

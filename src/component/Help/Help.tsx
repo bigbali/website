@@ -1,14 +1,26 @@
 import Icon from 'Component/Icon';
 import './Help.style';
 
+export enum Orientation {
+    LEFT = 'LEFT',
+    RIGHT = 'RIGHT',
+    ABOVE = 'ABOVE',
+    BELOW = 'BELOW',
+}
+
 type HelpProps = {
-    content: string
+    content: string,
+    orientation?: Orientation
 };
 
-export const Help = ({ content }: HelpProps) => {
+export const Help = ({ content, orientation }: HelpProps) => {
     return (
         <div block='Help'>
-            <div elem='Content' dangerouslySetInnerHTML={{ __html: content }} />
+            <div
+                elem='Content'
+                mods={(prefix: string) => `${prefix}${orientation || Orientation.ABOVE}`}
+                dangerouslySetInnerHTML={{ __html: content }}
+            />
             <Icon.Help />
         </div>
     );
