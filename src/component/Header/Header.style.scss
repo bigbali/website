@@ -47,9 +47,14 @@
         font-weight: 400;
         font-family: 'Caveat';
         text-decoration: none;
+        transition: color 0.2s;
 
         @include mobile {
             font-size: 1.5rem;
+        }
+
+        &:hover {
+            color: var(--color-theme);
         }
     }
 }
