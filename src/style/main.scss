@@ -72,6 +72,7 @@
     @include mobile {
         --content-padding: 1.5rem;
         --header-height: 2.5rem;
+        --footer-height: 10rem;
     }
 
     @include uhd {
@@ -167,7 +168,6 @@ body,
 .root {
     margin: 0;
     background-color: var(--color-background-primary);
-    min-height: 100vh;
     overflow-x: hidden;
 }
 
@@ -193,11 +193,8 @@ p {
 
 main {
     &.Page {
-        &>div {
-            min-height: 100vh;
-        }
-
         &>div::before {
+            // page transition overlay
             content: "";
             display: block;
             position: fixed;

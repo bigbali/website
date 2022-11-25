@@ -20,3 +20,5 @@ export default store;
 
 export type DISPATCH = typeof store.dispatch;
 export type ROOTSTATE = ReturnType<typeof store.getState>;
+
+export { useSection } from './section';

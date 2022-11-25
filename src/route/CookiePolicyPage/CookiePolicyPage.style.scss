@@ -2,13 +2,21 @@
     padding-inline: var(--content-padding);
     padding-block-start: 12rem;
 
-    &-Content {
+    @include mobile {
+        padding-block-start: 7rem;
+    }
+
+    &-Heading {
         position: relative;
 
         >h1 {
             font-size: 3rem;
             margin-block-end: 7rem;
             width: fit-content;
+
+            @include mobile {
+                margin-block-end: 3rem;
+            }
 
             @include separator {
                 width: 60%;
@@ -24,9 +32,23 @@
             height: 15rem;
             z-index: -1;
 
+            @include mobile {
+                width: 8rem;
+                height: 8rem;
+
+                inset-block-start: -6em;
+                inset-inline-start: 13rem;
+            }
+
             >svg>path {
                 fill: var(--color-icon);
             }
+        }
+    }
+
+    &-Content {
+        >p {
+            margin-block-end: 0.5rem;
         }
     }
 
@@ -34,6 +56,10 @@
     ul,
     li {
         font-size: 1.25rem;
+
+        @include mobile {
+            font-size: 1.15rem;
+        }
     }
 
     ul {
@@ -52,9 +78,18 @@
         padding-inline: 25%;
         margin-block-start: 10rem;
 
+        @include mobile {
+            margin-block-start: 2rem;
+            padding-inline: var(--content-padding);
+        }
+
         >p {
             font-size: 1.5rem;
             text-align: center;
+
+            @include mobile {
+                font-size: 1.15rem;
+            }
 
             &:nth-of-type(2) {
                 font-size: 1rem;

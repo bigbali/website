@@ -1,26 +1,25 @@
 
 import {
-    RefObject,
     useCallback,
     useMemo,
     useRef,
     useState
 } from 'react';
 import { TransitionGroup } from 'react-transition-group';
+import { scrollIntoView } from 'Util';
 import Transition from 'Component/Transition';
 import SectionSelector from 'Component/SectionSelector';
 import Section from './Section';
 import './IndexPage.style';
 
-const scrollIntoView = (section: RefObject<HTMLElement>) => {
-    // 10rem represented as integer
-    const topOffset = Number.parseInt(getComputedStyle(document.body).fontSize.replace('px', '')) * 10;
-    const sectionOffset = section.current?.offsetTop || 0;
-
-    window.scrollTo({
-        top: sectionOffset - topOffset,
-        behavior: 'smooth'
-    });
+/**
+ * Use this to refer to sections from other components
+ */
+export enum SectionID {
+    LANDING = 'Landing',
+    PROJECTS = 'Projects',
+    ABOUT = 'About',
+    CONTACT = 'Contact'
 };
 
 export const IndexPage = () => {
@@ -31,6 +30,8 @@ export const IndexPage = () => {
     const projectsRef = useRef<HTMLElement>(null);
     const aboutRef = useRef<HTMLElement>(null);
     const contactRef = useRef<HTMLElement>(null);
+
+    // onSplineUnloaded when changing theme?
 
     const onFontsLoaded = useCallback(
         () => setAreFontsLoaded(true),
@@ -43,19 +44,19 @@ export const IndexPage = () => {
 
     const Sections = useMemo(() => [
         {
-            label: 'Landing',
+            label: SectionID.LANDING,
             ref: landingRef
         },
         {
-            label: 'Projects',
+            label: SectionID.PROJECTS,
             ref: projectsRef
         },
         {
-            label: 'About',
+            label: SectionID.ABOUT,
             ref: aboutRef
         },
         {
-            label: 'Contact',
+            label: SectionID.CONTACT,
             ref: contactRef
         },
     ], []);
@@ -64,12 +65,13 @@ export const IndexPage = () => {
         <div block='IndexPage'>
             <TransitionGroup component={null}>
                 {(!areFontsLoaded || !isSplineLoaded) && (
-                    <Transition timeout={500} classNames='IndexPage-Loading'>
+                    <Transition timeout={500} classNames='IndexPage-Loading' unmountOnExit>
                         <div block='IndexPage' elem='Loading' mods={{ FONTS_READY: areFontsLoaded }}>
                             {/* <div className='Loader' />
                             <span>
                                 balázs burján
                             </span> */}
+                            {/* {(() => { throw Error(); })()} */}
                         </div>
                     </Transition>
                 )}

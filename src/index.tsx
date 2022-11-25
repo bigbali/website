@@ -12,9 +12,10 @@ import {
 import { Provider } from 'react-redux';
 import { SwitchTransition } from 'react-transition-group';
 import {
+    scrollIntoView,
     useSettings
 } from 'Util';
-import store, { Theme } from 'Store';
+import store, { Theme, useSection } from 'Store';
 import Header from 'Component/Header';
 import Cookies from 'Component/Cookies';
 import Notifications, {
@@ -41,7 +42,11 @@ const observer = new IntersectionObserver(observerAction, {
     threshold: [0.01, 0.99]
 });
 
+/**
+ * This keeps track of observed elements so they can be accessed from other components
+ */
 const elementsToObserve = new Set();
+
 export const updateElementsToObserve = (item: HTMLElement, remove = false) => {
     if (remove) {
         elementsToObserve.delete(item);
@@ -53,6 +58,20 @@ export const updateElementsToObserve = (item: HTMLElement, remove = false) => {
     observer.observe(item);
 };
 
+const beginObservation = () => {
+    const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+    elementsToAnimate.forEach((element) => updateElementsToObserve(element as HTMLElement));
+};
+
+const afterTransitionCallback = (sectionId: string | null) => {
+    if (!sectionId) return;
+
+    beginObservation();
+
+    const section = document.querySelector(sectionId) as HTMLElement;
+    section && scrollIntoView({ current: section });
+};
+
 const routes = [
     {
         path: '/',
@@ -62,31 +81,31 @@ const routes = [
     {
         path: 'cookie-policy',
         element: <Page.CookiePolicy />,
-        nodeRef: createRef<any>(),
+        nodeRef: createRef<any>()
     },
     {
         path: 'project/:slug',
         element: <Page.Project />,
-        nodeRef: createRef<any>(),
+        nodeRef: createRef<any>()
     },
     {
         path: '*',
         element: <Page.NotFound />,
-        nodeRef: createRef<any>(),
+        nodeRef: createRef<any>()
     }
 ];
 
 const Layout = () => {
     const location = useLocation();
     const [{ theme, accentColor, fontSize, contrast }] = useSettings();
+    const { scrollToSectionId } = useSection();
     const currentOutlet = useOutlet();
     const { nodeRef } = routes.find(
         (route) => route.path === location.pathname
     ) ?? {};
 
-    useEffect(() => { // scroll animations
-        const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
-        elementsToAnimate.forEach((element) => updateElementsToObserve(element as HTMLElement));
+    useEffect(() => {
+        beginObservation();
     }, [location]);
 
     useEffect(() => {
@@ -114,6 +133,7 @@ const Layout = () => {
             <Header />
             <Notifications />
             <Cookies />
+            {/* THIS BREAKS document.querySelector WHILE TRANSITIONING! */}
             <SwitchTransition>
                 <Transition
                     key={location.key}
@@ -122,7 +142,9 @@ const Layout = () => {
                     timeout={{
                         enter: 300,
                         exit: 100
-                    }}>
+                    }} // when transition is done, scroll to section if given
+                    onEntered={() => afterTransitionCallback(scrollToSectionId)}
+                >
                     {() => (
                         <main ref={nodeRef} block='Page'>
                             {currentOutlet}
@@ -137,9 +159,11 @@ const Layout = () => {
 
 const router = createBrowserRouter([
     {
+        // if an error occurs in the layout, this will catch that...
+        errorElement: <Page.Error />,
         element: <Layout />,
         children: [
-            { // this is our error boundary
+            { // ... and if it happens lower in the tree, this will catch that while keeping the layout
                 errorElement: <Page.Error />,
                 children: routes.map(
                     route => ({

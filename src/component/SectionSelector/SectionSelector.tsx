@@ -1,8 +1,9 @@
 import {
     RefObject,
     useEffect,
-    useState
 } from 'react';
+import { useNavigation } from 'react-router';
+import { useSection } from 'Store';
 import './SectionSelector.style';
 
 type SectionSelectorProps = {
@@ -14,13 +15,19 @@ type SectionSelectorProps = {
 };
 
 export const SectionSelector = ({ sections, onSelect }: SectionSelectorProps) => {
-    const [activeSection, setActiveSection] = useState<HTMLElement>();
+    const { currentSection, setCurrentSection } = useSection();
+    const navigation = useNavigation();
 
     useEffect(() => {
         const observerAction: IntersectionObserverCallback = (observedSections) => {
             observedSections.forEach(section => {
                 if (section.isIntersecting) {
-                    setActiveSection(section.target as HTMLElement);
+                    if (navigation.location) {
+                        navigation.location.state = {
+                            currentSection: section.target.id
+                        };
+                    }
+                    setCurrentSection(section.target as HTMLElement);
                 }
             });
         };
@@ -48,7 +55,7 @@ export const SectionSelector = ({ sections, onSelect }: SectionSelectorProps) =>
                             title={`Go to ${section.label}`}
                             onClick={() => onSelect && onSelect(section.ref)}
                             className={(() => {
-                                if (section.ref.current && activeSection && section.ref.current.id === activeSection.id)
+                                if (section.ref.current && currentSection && section.ref.current.id === currentSection.id)
                                     return 'active';
                             })()}
                         />

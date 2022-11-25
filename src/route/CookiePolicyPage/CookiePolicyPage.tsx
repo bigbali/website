@@ -18,14 +18,16 @@ export const CookiePolicyPage = () => {
 
     return (
         <div block='CookiePolicyPage'>
-            <div elem='Content'>
+            <div elem='Heading'>
                 <h1>
                     Cookie Policy
                 </h1>
                 <Icon.Cookie />
             </div>
-            <p>
-                I utilize your browser’s built-in storage system to store the following data:
+            <div elem='Content'>
+                <p>
+                    I utilize your browser’s built-in storage system to store the following data:
+                </p>
                 <ul>
                     <li>
                         whether or not you have accepted my cookie policy
@@ -45,7 +47,7 @@ export const CookiePolicyPage = () => {
                         </ul>
                     </li>
                 </ul>
-            </p>
+            </div>
             <div elem='Clear'>
                 <p>
                     If you no longer wish this data to be stored on your device, please click on the following button:

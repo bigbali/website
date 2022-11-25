@@ -74,7 +74,7 @@ const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTrig
         splineRef.current = splineApp;
 
         onSplineLoaded();
-        console.log('spline ready', `${Math.round(performance.now())}ms`);
+        console.log('Spline is ready.', `${Math.round(performance.now())}ms`);
     };
 
     const triggerSplineAnimation = () => { // 'All' is the name of the object group we want to target
@@ -93,7 +93,7 @@ const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTrig
         void (async () => {
             await fontsReady();
             onFontsLoaded();
-            console.log('fonts ready', `${Math.round(performance.now())}ms`);
+            console.log('Fonts are ready.', `${Math.round(performance.now())}ms`);
         })();
     }, []);
 
