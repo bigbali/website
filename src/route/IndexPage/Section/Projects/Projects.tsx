@@ -3,8 +3,11 @@ import {
     useEffect,
     useMemo,
     useRef,
-    useState
+    useState,
+    type MouseEvent as GenericMouseEvent
 } from 'react';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { useDevice } from 'Util';
 import ProjectCard, {
     IProjectCard,
     projects,
@@ -13,7 +16,7 @@ import ProjectCard, {
 } from 'Component/ProjectCard/ProjectCard';
 import Help from 'Component/Help';
 import { Orientation } from 'Component/Help/Help';
-import { useAutoAnimate } from '@formkit/auto-animate/react';
+import Icon from 'Component/Icon';
 import './Projects.style.scss';
 
 const DEFAULT_LIMIT = 3;
@@ -23,8 +26,11 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
     const [title, setTitle] = useState<string>();
     const [tag, setTag] = useState<string>();
     const [limit, setLimit] = useState<number>(DEFAULT_LIMIT);
+    const { isDesktop } = useDevice();
+    const [isFilterExpanded, setIsFilterExpanded] = useState(isDesktop);
     const [animationRef] = useAutoAnimate<HTMLDivElement>({ duration: 200 });
     const previousLength = useRef(0);
+    const filterRef = useRef<HTMLFieldSetElement | null>(null);
 
     const filterStatus = (project: IProjectCard) => status === 'any'
         ? true
@@ -52,6 +58,16 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
             : DEFAULT_LIMIT;
     };
 
+    /**
+     * For some reason, using 'mods' caused the 'begin-animation' class to disappear, causing the element to be hidden.
+     * This way, it works.
+     */
+    const expandFilter = () => {
+        setIsFilterExpanded((state) => !state);
+        console.log(isFilterExpanded);
+        filterRef.current!.classList.toggle('IS_EXPANDED', isFilterExpanded);
+    };
+
     const projectCards = useMemo(() => {
         return projectsFiltered
             .slice(0, limit)
@@ -77,14 +93,22 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
             <h1 className='animate-on-scroll'>
                 Some projects I've worked on
             </h1>
-            <fieldset elem='Filter' className='animate-on-scroll'>
+            <fieldset
+                elem='Filter'
+                className='animate-on-scroll'
+                ref={filterRef}
+            >
                 <div>
                     <legend>
                         Filter
                     </legend>
                     <p>
-                        {`Showing ${projectCards.length} ${projectCards.length === 1 ? 'element' : 'elements'}.`}
+                        {isDesktop && `Showing ${projectCards.length} ${projectCards.length === 1 ? 'element' : 'elements'}.`}
+                        {!isDesktop && `${projectCards.length} ${projectCards.length === 1 ? 'element' : 'elements'}.`}
                     </p>
+                    <button title='Expand Filters' onClick={expandFilter}>
+                        <Icon.Chevron />
+                    </button>
                 </div>
                 <div elem='Controls'>
                     <div elem='Controls-Status'>

@@ -7,9 +7,17 @@ $section-home-padding-block-start: 25rem;
     height: 100vh;
     display: flex;
 
+    @include mobile {
+        flex-direction: column;
+    }
+
     &-Content {
         padding-block-start: $section-home-padding-block-start;
         flex: 0.8;
+
+        @include mobile {
+            padding-block-start: 5rem;
+        }
 
         @include from-fhd {
             flex: 0.6;
@@ -20,11 +28,22 @@ $section-home-padding-block-start: 25rem;
             font-weight: 600;
             margin-block: 0;
 
+            @include mobile {
+                font-size: 2.5rem;
+            }
+
             >span {
                 position: relative;
                 font-size: 5rem;
                 font-weight: 700;
-                letter-spacing: 0.4rem;
+
+                @include desktop {
+                    letter-spacing: 0.4rem;
+                }
+
+                @include mobile {
+                    font-size: 3.5rem;
+                }
 
                 &::after {
                     content: '';
@@ -47,6 +66,10 @@ $section-home-padding-block-start: 25rem;
             font-weight: 400;
             font-size: 3rem;
 
+            @include mobile {
+                font-size: 2.25rem;
+            }
+
             >span {
                 font-weight: 600;
                 color: inherit;
@@ -58,6 +81,10 @@ $section-home-padding-block-start: 25rem;
             font-size: 1.75rem;
             font-weight: 400;
             color: var(--color-content-tertiary);
+
+            @include mobile {
+                font-size: 1.25rem;
+            }
         }
     }
 
@@ -77,8 +104,17 @@ $section-home-padding-block-start: 25rem;
             padding-inline-end: 5rem;
         }
 
+        @include mobile {
+            margin-inline: calc(-1 * var(--content-padding));
+        }
+
         >canvas {
             pointer-events: none;
+
+            @include mobile {
+                width: 95% !important;
+                height: auto !important;
+            }
         }
     }
 }
