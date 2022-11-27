@@ -82,7 +82,10 @@ const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) =
                             <Icon.LinkedIn />
                         </a>
                         <span>
-                            {LINKEDIN}
+                            {LINKEDIN.slice(0, 27)}
+                            <wbr /> {/* We really do need to break the line on mobile, it appears */}
+                            {LINKEDIN.slice(27)}
+
                         </span>
                         <button title='Copy LinkedIn address to clipboard' onClick={() => void handleCopy(LINKEDIN)}>
                             <Icon.Copy />

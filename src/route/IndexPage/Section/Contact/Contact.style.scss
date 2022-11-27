@@ -7,6 +7,10 @@
         >h1 {
             margin-block: 0;
             font-size: 3rem;
+
+            @include mobile {
+                font-size: 2rem;
+            }
         }
 
         >p {
@@ -66,6 +70,10 @@
             color: var(--color-content-tertiary);
             display: flex;
             align-items: center;
+
+            @include mobile {
+                padding: 0.5rem;
+            }
         }
 
         >div {
@@ -75,12 +83,16 @@
 
             >div {
                 display: flex;
+                align-items: center;
 
                 >button {
                     border: none;
                     background-color: transparent;
                     padding: 0;
-                    margin-inline-start: 1.5rem;
+
+                    @include desktop {
+                        margin-inline-start: 1.5rem;
+                    }
 
                     >.Icon {
                         width: 2.5rem;
@@ -99,6 +111,11 @@
             border-radius: 50vmin;
 
             >a {
+                display: flex;
+                align-items: center;
+                align-self: stretch;
+                justify-content: center;
+                text-align: center;
                 border: 1px solid var(--color-theme);
                 border-radius: 50vmin;
                 font-size: 1.5rem;
@@ -108,6 +125,12 @@
                 text-decoration: none;
                 transition: background-color 0.2s, color 0.2s;
 
+                @include mobile {
+                    font-size: 1rem;
+                    padding-inline: 0.5rem;
+                    padding-block: 0.25rem;
+                }
+
                 &:hover {
                     background-color: var(--color-theme);
                     color: var(--color-white);
@@ -116,6 +139,11 @@
 
             >span {
                 font-size: 1.5rem;
+
+                @include mobile {
+                    font-size: 1rem;
+                    padding-block: 0;
+                }
             }
         }
 
@@ -123,12 +151,21 @@
         &-GitHub {
             >span {
                 font-size: 1rem;
+
+                @include mobile {
+                    padding-inline-start: 0;
+                }
             }
 
             >a {
                 .Icon {
                     width: 3.5rem;
                     height: 3.5rem;
+
+                    @include mobile {
+                        width: 2.5rem;
+                        height: 2.5rem;
+                    }
 
                     >svg>path {
                         fill: var(--color-content-tertiary);

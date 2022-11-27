@@ -17,6 +17,10 @@
                 width: 63%;
                 inset-block-end: -1rem;
             }
+
+            @include mobile {
+                font-size: 2rem;
+            }
         }
 
         >.Icon {

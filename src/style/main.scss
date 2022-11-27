@@ -292,3 +292,20 @@ button {
     scale: 0.9;
     filter: blur(16px);
 }
+
+// DEBUG **
+
+section {
+    outline: 1px solid green !important;
+}
+
+div {
+    outline: 1px solid yellow !important;
+}
+
+h1,
+h2,
+h3,
+p {
+    outline: 1px solid blue !important;
+}
