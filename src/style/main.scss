@@ -293,19 +293,19 @@ button {
     filter: blur(16px);
 }
 
-// DEBUG **
+.debug {
+    section {
+        outline: 1px solid green !important;
+    }
 
-section {
-    outline: 1px solid green !important;
-}
+    div {
+        outline: 1px solid yellow !important;
+    }
 
-div {
-    outline: 1px solid yellow !important;
-}
-
-h1,
-h2,
-h3,
-p {
-    outline: 1px solid blue !important;
+    h1,
+    h2,
+    h3,
+    p {
+        outline: 1px solid blue !important;
+    }
 }

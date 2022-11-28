@@ -9,6 +9,7 @@ $section-home-padding-block-start: 25rem;
 
     @include mobile {
         flex-direction: column;
+        padding-inline: var(--content-padding);
     }
 
     &-Content {
@@ -105,7 +106,7 @@ $section-home-padding-block-start: 25rem;
         }
 
         @include mobile {
-            margin-inline: calc(-1 * var(--content-padding));
+            // margin-inline: calc(-1 * var(--content-padding));
         }
 
         >canvas {

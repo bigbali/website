@@ -4,6 +4,10 @@
     height: 100vh;
     overflow-x: hidden;
 
+    @include mobile {
+        height: fit-content;
+    }
+
     &-Header {
         position: relative;
         width: fit-content;
@@ -31,6 +35,9 @@
             height: auto;
             z-index: -1;
 
+            @include mobile {
+                width: 7rem;
+            }
 
             >svg>path {
                 fill: var(--color-icon);
@@ -43,11 +50,23 @@
         justify-content: space-between;
         margin-block-start: 2.5rem;
 
+        @include mobile {
+            flex-direction: column;
+            align-items: center;
+        }
+
         p {
             margin-block-start: 0;
             margin-block-end: 0;
             font-size: 1.5rem;
-            width: 65%;
+
+            @include desktop {
+                width: 65%;
+            }
+
+            @include mobile {
+                font-size: 1.15rem;
+            }
         }
 
         >figure {
@@ -56,6 +75,10 @@
             // override scroll transition blur because it bothers backdrop-filter
             filter: none !important;
 
+            @include mobile {
+                margin-block-start: 10rem;
+            }
+
             >div:nth-of-type(1) {
                 position: relative;
                 width: 15rem;
@@ -63,6 +86,11 @@
                 border: 1px solid var(--color-border);
                 backdrop-filter: blur(1rem);
                 border-radius: 1.5rem;
+
+                @include mobile {
+                    width: 12rem;
+                    height: 12rem;
+                }
 
                 >img {
                     width: 100%;
@@ -137,16 +165,33 @@
                     width: 20rem;
                     height: 10rem;
                     z-index: -1;
+
+                    @include mobile {
+                        width: 10rem;
+                        height: 5rem;
+                    }
                 }
 
                 &:nth-of-type(2) {
                     inset-block-start: -3rem;
                     inset-inline-start: -14rem;
+
+                    @include mobile {
+                        inset-block-start: 1.5rem;
+                        inset-inline-start: -5rem;
+                    }
                 }
 
                 &:nth-of-type(3) {
                     inset-block-start: 3rem;
                     inset-inline-start: 5.2rem;
+
+                    @include mobile {
+                        inset-inline-start: auto;
+                        inset-block-start: auto;
+                        inset-block-end: 1.5rem;
+                        inset-inline-end: -5rem;
+                    }
                 }
             }
 
@@ -160,22 +205,46 @@
         padding-inline: 3rem;
         opacity: 0.3;
 
+        @include mobile {
+            padding-inline: 1.5rem;
+        }
+
         >div {
             display: flex;
             justify-content: space-between;
             margin-block-start: 8rem;
 
+            @include mobile {
+                flex-direction: column;
+            }
+
             >ul {
+
+                @include mobile {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1rem;
+                }
+
                 >li {
                     position: relative;
                     padding: 2rem;
                     width: fit-content;
                     list-style: none;
 
+                    @include mobile {
+                        padding-block: 0.5rem;
+                        padding-inline: 0;
+                    }
+
                     >span {
                         font-size: 1.5rem;
                         font-weight: 700;
                         color: var(--color-background-secondary);
+
+                        @include mobile {
+                            font-size: 1rem;
+                        }
                     }
 
                     >.Icon {
@@ -186,6 +255,11 @@
                         inset-block-start: 2rem;
                         z-index: -1;
 
+                        @include mobile {
+                            width: 2.5rem;
+                            height: 2.5rem;
+                        }
+
                         >svg>path {
                             fill: var(--color-icon);
                         }
@@ -194,12 +268,21 @@
                             height: fit-content;
                             width: 6rem;
                             inset-inline-start: -3rem;
+
+                            @include mobile {
+                                width: 3rem;
+                            }
                         }
 
                         &-Django {
                             width: 8rem;
                             height: 8rem;
                             inset-block-start: 0;
+
+                            @include mobile {
+                                width: 4rem;
+                                height: 4rem;
+                            }
                         }
                     }
 

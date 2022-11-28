@@ -1,12 +1,14 @@
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TransitionGroup } from 'react-transition-group';
+import { useDevice } from 'Util';
 import Transition from 'Component/Transition';
 import './Cookies.style';
 
 export const Cookies = () => {
     const isCookiesNoticeClosed = localStorage.getItem('is_cookies_notice_closed');
     const [isClosed, setIsClosed] = useState(false);
+    const { isMobile } = useDevice();
     const ref = useRef(null);
 
     const close = () => {
@@ -35,11 +37,13 @@ export const Cookies = () => {
                                     to improve your experience while browsing this site.
                                     <span>
                                         You can read more about my&nbsp;
+                                        {isMobile && <br />}
                                         <Link
                                             elem='CookiePolicy'
                                             to='cookie-policy'
                                             target='_blank'
                                         >
+                                            <wbr />
                                             cookie policy here.
                                         </Link>
                                     </span>
