@@ -1,18 +1,20 @@
-import Icon from 'Component/Icon';
-import Pattern from 'Component/Pattern';
-import { Tag } from 'Component/ProjectCard/ProjectCard';
-import Balazs from 'Media/png/balazs.png';
 import {
     RefObject,
     useEffect,
     useRef,
 } from 'react';
 import { fromEvent, throttleTime } from 'rxjs';
+import { useDevice } from 'Util';
+import Icon from 'Component/Icon';
+import Pattern from 'Component/Pattern';
+import { Tag } from 'Component/ProjectCard/ProjectCard';
+import Balazs from 'Media/webp/balazs.webp';
 import './About.style';
 
 const MAX_ROTATION_DEG = 5;
 
 const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => {
+    const { isDesktop } = useDevice();
     const imageRef = useRef<HTMLDivElement>(null);
 
     const transformImage = (e: MouseEvent) => {
@@ -27,6 +29,8 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
     };
 
     useEffect(() => {
+        if (!isDesktop) return; // On mobile, it's pointless to add a mouse event listener
+
         const event = fromEvent(document, 'mousemove')
             .pipe(
                 throttleTime(10),
@@ -75,88 +79,95 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                     <Pattern.Dots className='animate-on-scroll' />
                 </figure>
             </div>
-            <div elem='Technologies' className='animate-on-scroll' title={'Some technologies I\'ve worked with, to fill the space.'}>
-                <div>
-                    <ul>
-                        <li>
-                            <span>
-                                {Tag.TS}
-                            </span>
-                            <Icon.TypeScript />
-                        </li>
-                        <li>
-                            <span>
-                                {Tag.JS}
-                            </span>
-                            <Icon.JavaScript />
-                        </li>
-                        <li>
-                            <span>
-                                {Tag.CSHARP}
-                            </span>
-                            <Icon.CSharp />
-                        </li>
-                        <li>
-                            <span>
-                                {Tag.PYTHON}
-                            </span>
-                            <Icon.Python />
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <span>
-                                {Tag.BABEL}
-                            </span>
-                            <Icon.Babel />
-                        </li>
-                        <li>
-                            <span>
-                                {Tag.SASS}
-                            </span>
-                            <Icon.SASS />
-                        </li>
-                        <li>
-                            <span>
-                                {Tag.WPF}
-                            </span>
-                            <Icon.WPF />
-                        </li>
-                        <li>
-                            <span>
-                                {Tag.NODE}
-                            </span>
-                            <Icon.NodeJS />
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <span>
-                                {Tag.REACT}
-                            </span>
-                            <Icon.React />
-                        </li>
-                        <li>
-                            <span>
-                                {Tag.DJANGO}
-                            </span>
-                            <Icon.Django />
-                        </li>
-                        <li>
-                            <span>
-                                VS Code
-                            </span>
-                            <Icon.VSCode />
-                        </li>
-                        <li>
-                            <span>
-                                Visual Studio
-                            </span>
-                            <Icon.VS />
-                        </li>
-                    </ul>
+            {isDesktop && (
+                <div
+                    block='About'
+                    elem='Technologies'
+                    className='animate-on-scroll'
+                    title={'Some technologies I\'ve worked with, to fill the space.'}
+                >
+                    <div>
+                        <ul>
+                            <li>
+                                <span>
+                                    {Tag.TS}
+                                </span>
+                                <Icon.TypeScript />
+                            </li>
+                            <li>
+                                <span>
+                                    {Tag.JS}
+                                </span>
+                                <Icon.JavaScript />
+                            </li>
+                            <li>
+                                <span>
+                                    {Tag.CSHARP}
+                                </span>
+                                <Icon.CSharp />
+                            </li>
+                            <li>
+                                <span>
+                                    {Tag.PYTHON}
+                                </span>
+                                <Icon.Python />
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <span>
+                                    {Tag.BABEL}
+                                </span>
+                                <Icon.Babel />
+                            </li>
+                            <li>
+                                <span>
+                                    {Tag.SASS}
+                                </span>
+                                <Icon.SASS />
+                            </li>
+                            <li>
+                                <span>
+                                    {Tag.WPF}
+                                </span>
+                                <Icon.WPF />
+                            </li>
+                            <li>
+                                <span>
+                                    {Tag.NODE}
+                                </span>
+                                <Icon.NodeJS />
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <span>
+                                    {Tag.REACT}
+                                </span>
+                                <Icon.React />
+                            </li>
+                            <li>
+                                <span>
+                                    {Tag.DJANGO}
+                                </span>
+                                <Icon.Django />
+                            </li>
+                            <li>
+                                <span>
+                                    VS Code
+                                </span>
+                                <Icon.VSCode />
+                            </li>
+                            <li>
+                                <span>
+                                    Visual Studio
+                                </span>
+                                <Icon.VS />
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            )}
         </section >
     );
 };

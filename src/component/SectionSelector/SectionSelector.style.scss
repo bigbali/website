@@ -8,6 +8,10 @@
     inset-block: 0;
     z-index: 96;
 
+    @include mobile {
+        inset-inline-end: 1rem;
+    }
+
     >div {
         position: relative;
         display: flex;
