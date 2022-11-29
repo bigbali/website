@@ -1,15 +1,8 @@
 .About {
     padding-inline: var(--content-padding);
-    padding-block-start: 10rem;
-    height: 100vh;
-
-    @include desktop {
-        overflow-x: hidden;
-    }
 
     @include mobile {
         height: max-content;
-        padding-block-start: 5rem;
     }
 
     &-Header {
@@ -59,17 +52,13 @@
             align-items: center;
         }
 
-        p {
+        div {
             margin-block-start: 0;
             margin-block-end: 0;
-            font-size: 1.5rem;
+            font-size: 1.15rem;
 
             @include desktop {
                 width: 65%;
-            }
-
-            @include mobile {
-                font-size: 1.15rem;
             }
         }
 
@@ -223,6 +212,9 @@
 
     &-Technologies {
         padding-inline: 3rem;
+        padding-block-start: 0;
+        height: max-content;
+        margin-block-start: 8rem;
         opacity: 0.3;
 
         @include mobile {
@@ -232,7 +224,6 @@
         >div {
             display: flex;
             justify-content: space-between;
-            margin-block-start: 8rem;
 
             @include mobile {
                 flex-direction: column;

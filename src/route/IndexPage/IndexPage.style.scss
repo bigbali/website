@@ -72,16 +72,10 @@
         }
     }
 
-    .SectionAbout {
-        >h1 {
-            font-size: 3rem;
-        }
-    }
-
-    .SectionContact {
-        >h1 {
-            font-size: 3rem;
-        }
+    >.Landing,
+    >.Projects,
+    >.About {
+        margin-block-end: 5em;
     }
 }
 

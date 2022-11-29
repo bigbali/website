@@ -53,10 +53,79 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                 <Icon.Address />
             </div>
             <div elem="Content">
-                <p className='animate-on-scroll'>
-                    {/*eslint-disable-next-line max-len*/}
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Iusto saepe et, ut, rem autem velit eligendi laborum similique quos in corporis quisquam inventore libero odio. Quas nostrum consequuntur blanditiis unde rem voluptates nobis non nemo ut sunt, magni temporibus itaque quam odio et exercitationem ab! Delectus, enim consequuntur, est vitae, aut nisi dolore quos dolor corrupti quidem laborum necessitatibus quo nemo ipsa asperiores tempore. Inventore perspiciatis repellendus doloribus quam fugiat, perferendis numquam sed quo aperiam sequi magnam. Vel dignissimos iure placeat tempora, deleniti minima dolor quidem aut, facere distinctio sequi rerum maxime voluptate cupiditate. Repudiandae mollitia saepe expedita cum exercitationem!
-                </p>
+                <div>
+                    <p className='animate-on-scroll'>
+                        I am a software developer who is always eager to learn something new and finds joy in creating stuff.
+                    </p>
+                    <section elem='Content-Beginning' className='animate-on-scroll'>
+                        <h1>
+                            The Beginning
+                        </h1>
+                        <p>
+                            My introduction to the art of computer science was in 2016,
+                            when I started writing a desktop networking tool using C# and the .NET Framework, and not long after
+                            I built a simple web application with ASP.NET which I hosted on my own computer.
+
+                        </p>
+                    </section>
+                    <section elem='Content-Studies' className='animate-on-scroll'>
+                        <h1>
+                            Studies
+                        </h1>
+                        <p>
+                            As a self-taught developer, it was my dream to study computer science at university,
+                            but alas, that did not happen.
+                            However, I have taken Harvard University's CS50 and CS50's Web Programming courses,
+                            which have taught me many things.
+                            The rest of my knowledge is the accumulation of constant tinkering with projects since 2016.
+                        </p>
+                    </section>
+                    <section elem='Content-Technologies' className='animate-on-scroll'>
+                        <h1>
+                            Technologies
+                        </h1>
+                        <p>
+                            {`${(new Date().getUTCFullYear() - 2016)} `}
+                            years' worth of tinkering has introduced me to many various technologies,
+                            so here's a few I used recently:
+                        </p>
+                        <ul>
+                            <li>
+                                TypeScript & JavaScript
+                            </li>
+                            <li>
+                                React
+                            </li>
+                            <li>
+                                Babel (the JavaScript transpiler)
+                            </li>
+                            <li>
+                                Node.js
+                            </li>
+                            <li>
+                                SASS
+                            </li>
+                            <li>
+                                Python
+                            </li>
+                            <li>
+                                C#
+                            </li>
+                            <li>
+                                WPF
+                            </li>
+                        </ul>
+                    </section>
+                    <section elem='Content-Hobbies' className='animate-on-scroll'>
+                        <h1>
+                            Hobbies
+                        </h1>
+                        <p>
+                            When not programming, I tend to take photos, care for my plants and animals,
+                            read books or play video games till I get bored and go back to programming.
+                        </p>
+                    </section>
+                </div>
                 <figure>
                     <div ref={imageRef} className='animate-on-scroll'>
                         <Icon.Cat />
@@ -79,95 +148,6 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                     <Pattern.Dots className='animate-on-scroll' />
                 </figure>
             </div>
-            {isDesktop && (
-                <div
-                    block='About'
-                    elem='Technologies'
-                    className='animate-on-scroll'
-                    title={'Some technologies I\'ve worked with, to fill the space.'}
-                >
-                    <div>
-                        <ul>
-                            <li>
-                                <span>
-                                    {Tag.TS}
-                                </span>
-                                <Icon.TypeScript />
-                            </li>
-                            <li>
-                                <span>
-                                    {Tag.JS}
-                                </span>
-                                <Icon.JavaScript />
-                            </li>
-                            <li>
-                                <span>
-                                    {Tag.CSHARP}
-                                </span>
-                                <Icon.CSharp />
-                            </li>
-                            <li>
-                                <span>
-                                    {Tag.PYTHON}
-                                </span>
-                                <Icon.Python />
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <span>
-                                    {Tag.BABEL}
-                                </span>
-                                <Icon.Babel />
-                            </li>
-                            <li>
-                                <span>
-                                    {Tag.SASS}
-                                </span>
-                                <Icon.SASS />
-                            </li>
-                            <li>
-                                <span>
-                                    {Tag.WPF}
-                                </span>
-                                <Icon.WPF />
-                            </li>
-                            <li>
-                                <span>
-                                    {Tag.NODE}
-                                </span>
-                                <Icon.NodeJS />
-                            </li>
-                        </ul>
-                        <ul>
-                            <li>
-                                <span>
-                                    {Tag.REACT}
-                                </span>
-                                <Icon.React />
-                            </li>
-                            <li>
-                                <span>
-                                    {Tag.DJANGO}
-                                </span>
-                                <Icon.Django />
-                            </li>
-                            <li>
-                                <span>
-                                    VS Code
-                                </span>
-                                <Icon.VSCode />
-                            </li>
-                            <li>
-                                <span>
-                                    Visual Studio
-                                </span>
-                                <Icon.VS />
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            )}
         </section >
     );
 };

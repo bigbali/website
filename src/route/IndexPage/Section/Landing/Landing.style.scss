@@ -99,14 +99,10 @@ $section-home-padding-block-start: 25rem;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        overflow: hidden;
+        overflow: visible;
 
         @include from-fhd {
             padding-inline-end: 5rem;
-        }
-
-        @include mobile {
-            // margin-inline: calc(-1 * var(--content-padding));
         }
 
         >canvas {
