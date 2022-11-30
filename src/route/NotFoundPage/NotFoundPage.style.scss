@@ -1,7 +1,7 @@
 .NotFoundPage {
     display: grid;
     place-items: center;
-    min-height: 100vh;
+    height: calc(100vh - var(--footer-height));
 
     &-MainContent {
         margin-top: calc(-3 * var(--header-height));

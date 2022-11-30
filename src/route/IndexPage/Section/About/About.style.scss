@@ -45,6 +45,7 @@
     &-Content {
         display: flex;
         justify-content: space-between;
+        gap: 3em;
         margin-block-start: 2.5rem;
 
         @include mobile {
@@ -52,127 +53,156 @@
             align-items: center;
         }
 
-        div {
+        >div {
             margin-block-start: 0;
             margin-block-end: 0;
             font-size: 1.15rem;
 
             @include desktop {
-                width: 65%;
+                flex: 1.2;
+            }
+
+            @include from-qhd {
+                flex: 1.5;
+            }
+
+            >section {
+                >h1 {
+                    width: fit-content;
+                    font-weight: 500;
+                    font-size: 1.25rem;
+
+                    @include separator {
+                        width: 63%;
+                        inset-block-end: -0.25em;
+                    }
+                }
+
+                >p,
+                >div {
+                    margin-inline-start: 1em;
+                }
             }
         }
 
         >figure {
             position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
 
-            // override scroll transition blur because it bothers backdrop-filter
+            // override scroll transition blur because it clashes with backdrop-filter
             filter: none !important;
 
-            @include mobile {
-                margin-block-start: 3rem;
-            }
-
-            >div:nth-of-type(1) {
-                position: relative;
-                width: 15rem;
-                height: 15rem;
-                border: 1px solid var(--color-border);
-                backdrop-filter: blur(1rem);
-                border-radius: 1.5rem;
-
-                @include mobile {
-                    width: 12rem;
-                    height: 12rem;
-                }
-
-                >img {
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 1.5rem;
-                }
-
-                >.Icon {
-                    width: 2.5rem;
-                    height: 2.5rem;
-                    position: absolute;
-                    inset-block-start: -2rem;
-                    inset-inline-end: 2rem;
-
-                    >svg>path {
-                        fill: var(--color-content-quaternary);
-                    }
-                }
-
-                .location {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-
-                    >div {
-                        width: 1px;
-                        height: 3rem;
-                        background-color: var(--color-border);
-
-                        @include mobile {
-                            height: 2rem;
-                        }
-                    }
-
-                    >a {
-                        position: relative;
-                        display: flex;
-                        align-items: center;
-                        text-decoration: none;
-
-                        &:hover {
-                            >span {
-                                color: var(--color-theme);
-                            }
-
-                            >.Icon>svg>path {
-                                fill: var(--color-theme);
-                            }
-                        }
-
-                        >span {
-                            position: absolute;
-                            inset-inline-start: 3rem;
-                            width: max-content;
-                            font-size: 1.5rem;
-                            color: var(--color-content-quaternary);
-                            text-decoration: none;
-
-                            @include mobile {
-                                position: static;
-                                inset-inline-start: 0;
-                                font-size: 1.15rem;
-                            }
-                        }
-
-                        >.Icon {
-                            width: 2.8rem;
-                            height: 2.8rem;
-
-                            @include mobile {
-                                width: 2rem;
-                                height: 2rem;
-                            }
-
-                            >svg>path {
-                                fill: var(--color-content-quaternary);
-                            }
-                        }
-                    }
-                }
+            @include desktop {
+                height: fit-content;
+                flex: 1;
             }
 
             >div {
+                &:nth-of-type(1) {
+                    position: relative;
+                    width: 15rem;
+                    height: 15rem;
+                    border: 1px solid var(--color-border);
+                    backdrop-filter: blur(1rem);
+                    border-radius: 1.5rem;
+
+                    @include mobile {
+                        width: 12rem;
+                        height: 12rem;
+                    }
+
+                    >img {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 1.5rem;
+                    }
+
+                    >.Icon {
+                        width: 2.5rem;
+                        height: 2.5rem;
+                        position: absolute;
+                        inset-block-start: -2rem;
+                        inset-inline-end: 2rem;
+
+                        >svg>path {
+                            fill: var(--color-content-quaternary);
+                        }
+                    }
+
+                    .location {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+
+                        >div {
+                            width: 1px;
+                            height: 3rem;
+                            background-color: var(--color-border);
+
+                            @include mobile {
+                                height: 2rem;
+                            }
+                        }
+
+                        >a {
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                            text-decoration: none;
+
+                            &:hover {
+                                >span {
+                                    color: var(--color-theme);
+                                }
+
+                                >.Icon>svg>path {
+                                    fill: var(--color-theme);
+                                }
+                            }
+
+                            >span {
+                                width: max-content;
+                                font-size: 1.5rem;
+                                color: var(--color-content-quaternary);
+                                text-decoration: none;
+
+                                @include from-qhd {
+                                    position: absolute;
+                                    inset-inline-start: 3rem;
+                                }
+
+                                @include mobile {
+                                    position: static;
+                                    inset-inline-start: 0;
+                                    font-size: 1.15rem;
+                                }
+                            }
+
+                            >.Icon {
+                                width: 2.8rem;
+                                height: 2.8rem;
+
+                                @include mobile {
+                                    width: 2rem;
+                                    height: 2rem;
+                                }
+
+                                >svg>path {
+                                    fill: var(--color-content-quaternary);
+                                }
+                            }
+                        }
+                    }
+                }
 
                 &:nth-of-type(2),
                 &:nth-of-type(3) {
                     position: absolute;
-                    width: 20rem;
-                    height: 10rem;
+                    width: 15rem;
+                    height: 7.5rem;
                     z-index: -1;
 
                     @include mobile {
@@ -182,25 +212,13 @@
                 }
 
                 &:nth-of-type(2) {
-                    inset-block-start: -3rem;
-                    inset-inline-start: -14rem;
-
-                    @include mobile {
-                        inset-block-start: 1.5rem;
-                        inset-inline-start: -5rem;
-                    }
+                    inset-block-start: 1rem;
+                    inset-inline-end: 50%;
                 }
 
                 &:nth-of-type(3) {
-                    inset-block-start: 3rem;
-                    inset-inline-start: 5.2rem;
-
-                    @include mobile {
-                        inset-inline-start: auto;
-                        inset-block-start: auto;
-                        inset-block-end: 1.5rem;
-                        inset-inline-end: -5rem;
-                    }
+                    inset-block-end: 1rem;
+                    inset-inline-start: 50%;
                 }
             }
 
@@ -208,107 +226,60 @@
                 fill: var(--color-content-secondary);
             }
         }
-    }
 
-    &-Technologies {
-        padding-inline: 3rem;
-        padding-block-start: 0;
-        height: max-content;
-        margin-block-start: 8rem;
-        opacity: 0.3;
+        &-Experience {
+            >div {
+                width: fit-content;
 
-        @include mobile {
-            padding-inline: 1.5rem;
-        }
-
-        >div {
-            display: flex;
-            justify-content: space-between;
-
-            @include mobile {
-                flex-direction: column;
-            }
-
-            >ul {
-
-                @include mobile {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    column-gap: 1rem;
-                    margin-block: 0;
+                @include separator {
+                    inset-block-end: -0.25em;
                 }
 
-                >li {
-                    position: relative;
-                    padding: 2rem;
-                    width: fit-content;
-                    list-style: none;
+                >a {
+                    font-size: 1.25rem;
+                    font-weight: 500;
+                    color: var(--color-content-secondary);
+                    transition: color 0.2s;
 
-                    @include mobile {
-                        padding: 0;
+                    &:hover {
+                        color: var(--color-theme);
                     }
+                }
+
+                >div {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 0.5em;
+                    margin-block-start: 0.25em;
+                    width: fit-content;
 
                     >span {
-                        font-size: 1.5rem;
-                        font-weight: 700;
-                        color: var(--color-background-secondary);
+                        font-weight: 500;
+                        line-height: 1em;
+                        color: var(--color-content-secondary);
 
-                        @include mobile {
-                            font-size: 1rem;
+                        &:nth-of-type(2) {
+                            width: 1em;
+                            border-block-end: 1px solid var(--color-content-primary);
+                            translate: 0 2px; // it feels a bit higher than it should, so let's push it down
                         }
                     }
+                }
+            }
+        }
 
-                    >.Icon {
-                        position: absolute;
-                        width: 5rem;
-                        height: 5rem;
-                        inset-inline-start: -1.5rem;
-                        inset-block-start: 2rem;
-                        z-index: -1;
+        &-Technologies {
+            >ul {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                column-gap: 3em;
+                font-size: 1rem;
+                width: fit-content;
 
-                        @include mobile {
-                            width: 2.5rem;
-                            height: 2.5rem;
-                            inset-inline-start: -1.5rem;
-                            inset-block-start: 1rem;
-                        }
-
-                        >svg>path {
-                            fill: var(--color-icon);
-                        }
-
-                        &-WPF {
-                            height: fit-content;
-                            width: 6rem;
-                            inset-inline-start: -3rem;
-
-                            @include mobile {
-                                width: 3rem;
-                            }
-                        }
-
-                        &-Django {
-                            width: 8rem;
-                            height: 8rem;
-                            inset-block-start: 0;
-
-                            @include mobile {
-                                width: 4rem;
-                                height: 4rem;
-                            }
-                        }
-                    }
-
-                    &:nth-of-type(2n) {
-                        >.Icon {
-                            inset-inline-start: unset;
-                            inset-inline-end: -1.5rem;
-
-                            &-Django {
-                                inset-inline-end: -5rem;
-                            }
-                        }
-                    }
+                >li {
+                    color: var(--color-content-secondary);
+                    margin-block-end: 0.25em;
                 }
             }
         }

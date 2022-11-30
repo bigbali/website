@@ -68,16 +68,30 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
 
                         </p>
                     </section>
-                    <section elem='Content-Studies' className='animate-on-scroll'>
+                    <section elem='Content-Experience' className='animate-on-scroll'>
                         <h1>
-                            Studies
+                            Experience
                         </h1>
+                        <div>
+                            <a
+                                href="https://scandiweb.com/"
+                                rel='noopener noreferrer'
+                                title='Go to Scandiweb'
+                                target='_blank'
+                            >
+                                scandiweb
+                            </a>
+                            <div>
+                                <span>2022-01</span>
+                                <span />
+                                <span>2022-03</span>
+                            </div>
+                        </div>
                         <p>
-                            As a self-taught developer, it was my dream to study computer science at university,
-                            but alas, that did not happen.
-                            However, I have taken Harvard University's CS50 and CS50's Web Programming courses,
+                            As a self-taught software developer, a lot of my knowledge has accumulated from
+                            constant tinkering with projects since 2016.
+                            On the other hand, I have taken Harvard University's CS50 and CS50's Web Programming courses,
                             which have taught me many things.
-                            The rest of my knowledge is the accumulation of constant tinkering with projects since 2016.
                         </p>
                     </section>
                     <section elem='Content-Technologies' className='animate-on-scroll'>
@@ -85,9 +99,9 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                             Technologies
                         </h1>
                         <p>
-                            {`${(new Date().getUTCFullYear() - 2016)} `}
+                            {`${new Date().getUTCFullYear() - 2016} `}
                             years' worth of tinkering has introduced me to many various technologies,
-                            so here's a few I used recently:
+                            so here's a few I've used recently:
                         </p>
                         <ul>
                             <li>
@@ -97,7 +111,7 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                                 React
                             </li>
                             <li>
-                                Babel (the JavaScript transpiler)
+                                Babel
                             </li>
                             <li>
                                 Node.js

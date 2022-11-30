@@ -52,8 +52,7 @@ const Image = {
 export enum ProjectStatus {
     FINISHED = 'Finished',
     IN_PROGRESS = 'In Progress',
-    PAUSED = 'Paused',
-    UNFINISHED = 'Unfinished'
+    PAUSED = 'Paused'
 }
 
 export enum Tag {
@@ -67,7 +66,6 @@ export enum Tag {
     DJANGO = 'Django',
     MYSQL = 'MySQL',
     SQLITE = 'SQLite',
-    C = 'C',
     SASS = 'SASS',
     REACT = 'React',
     HEROKU = 'Heroku',

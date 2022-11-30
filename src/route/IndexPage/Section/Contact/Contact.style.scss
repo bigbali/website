@@ -122,6 +122,7 @@
         &-Email {
             border: 1px solid var(--color-border-transparent);
             border-radius: 50vmin;
+            width: fit-content;
 
             >a {
                 display: flex;

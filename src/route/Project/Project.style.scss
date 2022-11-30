@@ -4,6 +4,38 @@
     min-height: auto !important;
     height: calc(100vh - var(--footer-height));
 
+    @include mobile {
+        height: fit-content;
+    }
+
+    // ======================= wtf
+    &:nth-of-type(2) {
+        // this is the thumbnail, but alas we had to redeclare block on it
+        padding-inline: unset !important;
+        padding-block-start: unset !important;
+        min-height: unset !important;
+        height: unset !important;
+
+        @include mobile {
+            padding: 0 !important;
+        }
+    }
+
+    .Page-Project {
+        // this is the thumbnail, but alas we had to redeclare block on it
+        padding-inline: unset !important;
+        padding-block-start: unset !important;
+        min-height: unset !important;
+        height: unset !important;
+
+        @include mobile {
+            padding: 0 !important;
+            margin-block-end: 5em;
+        }
+    }
+
+    // =============================
+
     &-Project {
         text-align: center;
         color: var(--color-icon);
@@ -139,6 +171,10 @@
             border-radius: 0.5rem;
             background-color: var(--color-content-primary-light);
             color: var(--color-content-primary-dark);
+
+            @include theme-dark(&) {
+                background-color: var(--color-content-secondary-light);
+            }
         }
     }
 

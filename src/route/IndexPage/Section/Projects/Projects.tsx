@@ -128,10 +128,7 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
                                         <span>In Progress:</span> I am currently working on it;
                                     </li>
                                     <li>
-                                        <span>Paused:</span> I have paused work on the project, but will continue at a later date;
-                                    </li>
-                                    <li>
-                                        <span>Unfinished:</span> I did not finish, nor do intend to finish the project.
+                                        <span>Paused:</span> I have paused work on the project, but will continue at a later date.
                                     </li>
                                 </ul>
                             `}
