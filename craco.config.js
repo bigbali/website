@@ -6,8 +6,8 @@ module.exports = {
         sass: {
             loaderOptions: { // Make sure we can use mixins without needing to import
                 additionalData: '@import "src/style/mixin.scss";'
-            },
-        },
+            }
+        }
     },
     webpack: {
         alias: {
@@ -28,8 +28,8 @@ module.exports = {
         loaderOptions: (options) => {
             return {
                 ...options,
-                babelrc: true,
+                babelrc: true
             };
-        },
+        }
     }
 };

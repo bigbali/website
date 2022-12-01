@@ -4,10 +4,9 @@ import {
     useRef,
 } from 'react';
 import { fromEvent, throttleTime } from 'rxjs';
-import { useDevice } from 'Util';
+import { useDevice } from 'Store';
 import Icon from 'Component/Icon';
 import Pattern from 'Component/Pattern';
-import { Tag } from 'Component/ProjectCard/ProjectCard';
 import Balazs from 'Media/webp/balazs.webp';
 import './About.style';
 

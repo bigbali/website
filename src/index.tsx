@@ -9,13 +9,15 @@ import {
     RouterProvider,
     useOutlet,
 } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import { SwitchTransition } from 'react-transition-group';
 import {
-    scrollIntoView,
-    useSettings
+    scrollIntoView
 } from 'Util';
-import store, { Theme, useSection } from 'Store';
+import {
+    Theme,
+    useSection,
+    useSettings
+} from 'Store';
 import Header from 'Component/Header';
 import Cookies from 'Component/Cookies';
 import Notifications, {
@@ -97,7 +99,7 @@ const routes = [
 
 const Layout = () => {
     const location = useLocation();
-    const [{ theme, accentColor, fontSize, contrast }] = useSettings();
+    const { theme, accentColor, fontSize, contrast } = useSettings();
     const { scrollToSectionId } = useSection();
     const currentOutlet = useOutlet();
     const { nodeRef } = routes.find(
@@ -179,10 +181,8 @@ const router = createBrowserRouter([
 
 const root = createRoot(rootElement);
 root.render(
-    <Provider store={store}>
-        <NotificationContextProvider>
-            <RouterProvider router={router} />
-        </NotificationContextProvider>
-    </Provider>
+    <NotificationContextProvider>
+        <RouterProvider router={router} />
+    </NotificationContextProvider>
 );
 

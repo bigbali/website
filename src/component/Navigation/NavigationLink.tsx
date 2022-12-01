@@ -2,7 +2,7 @@
 import { forwardRef, useEffect, useRef } from 'react';
 import { useLocation, useResolvedPath } from 'react-router';
 import { Link, NavLinkProps } from 'react-router-dom';
-import { useDevice } from 'Util';
+import { useDevice } from 'Store';
 
 type NavigationProps = {
     onActive?: (currentlyActive: string) => void,

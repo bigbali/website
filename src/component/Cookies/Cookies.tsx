@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TransitionGroup } from 'react-transition-group';
-import { useDevice } from 'Util';
+import { useDevice } from 'Store';
 import Transition from 'Component/Transition';
 import './Cookies.style';
 

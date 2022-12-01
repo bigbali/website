@@ -14,7 +14,7 @@ import {
 import FontFaceObserver from 'fontfaceobserver';
 import { updateElementsToObserve } from '../../../../index';
 import { Theme } from 'Store';
-import { useSettings } from 'Util';
+import { useSettings } from 'Store';
 import './Landing.style.scss';
 
 const SplineURL = {
@@ -66,7 +66,7 @@ type LandingProps = {
 };
 
 const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTriggerAnimation }: LandingProps) => {
-    const [{ theme }] = useSettings();
+    const { theme } = useSettings();
     const splineRef = useRef<SplineApplication>();
     const splineCanvasRef = useRef<HTMLCanvasElement>(null);
 

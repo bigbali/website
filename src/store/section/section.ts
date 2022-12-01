@@ -2,12 +2,15 @@ import create from 'zustand';
 
 interface Section {
     currentSection: HTMLElement | null,
-    scrollToSectionId: string | null,
-    setCurrentSection: (section: HTMLElement | null) => void,
-    setScrollToSectionId: (section: string | null) => void,
+    scrollToSectionId: string | null
 };
 
-export const useSection = create<Section>((set) => ({
+interface SectionStore extends Section {
+    setCurrentSection: (section: HTMLElement | null) => void,
+    setScrollToSectionId: (section: string | null) => void
+};
+
+export const useSection = create<SectionStore>((set) => ({
     currentSection: null,
     scrollToSectionId: null,
     setCurrentSection: (currentSection) => {

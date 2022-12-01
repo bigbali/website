@@ -1,4 +1,4 @@
-import { useDevice } from 'Util';
+import { useDevice } from 'Store';
 import Navigation from 'Component/Navigation/';
 import Settings from 'Component/Settings';
 import './Header.style';

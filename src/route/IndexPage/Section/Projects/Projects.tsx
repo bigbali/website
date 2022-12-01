@@ -7,7 +7,7 @@ import {
     type MouseEvent as GenericMouseEvent
 } from 'react';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { useDevice } from 'Util';
+import { useDevice } from 'Store';
 import ProjectCard, {
     IProjectCard,
     projects,

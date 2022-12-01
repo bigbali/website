@@ -8,7 +8,8 @@ import './Project.style';
 
 import md__balazs_burjan from './markdown/balazs-burjan.md';
 import md__react_template from './markdown/react-template.md';
-import { useDevice } from 'Util';
+import { useDevice } from 'Store';
+// import { useDevice } from 'Store';
 
 const Markdown: Record<string, string> = {
     md__balazs_burjan,
