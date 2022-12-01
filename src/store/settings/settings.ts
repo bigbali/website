@@ -65,9 +65,19 @@ const storedStateJSON = localStorage.getItem('settings');
 const storedSettings: Settings | null = (storedStateJSON && JSON.parse(storedStateJSON)) || null;
 const initialState: Settings = storedSettings || defaultSettings;
 
-const updateStoredState = ({ theme, accentColor, fontSize, contrast }: SettingsStore) => {
+const updateStoredState = (partialState: Partial<SettingsStore>) => {
+    const {
+        theme,
+        accentColor,
+        fontSize,
+        contrast
+    } = useSettings.getState();
     localStorage.setItem('settings', JSON.stringify({
-        theme, accentColor, fontSize, contrast
+        theme,
+        accentColor,
+        fontSize,
+        contrast,
+        ...partialState
     }));
 };
 const resetStoredState = () => {
@@ -77,32 +87,32 @@ const resetStoredState = () => {
 export const useSettings = create<SettingsStore>((set) => ({
     ...initialState,
     setTheme: (theme) => {
-        set((state) => {
-            updateStoredState(state);
+        set(() => {
+            updateStoredState({ theme });
             return {
                 theme
             };
         });
     },
     setAccentColor: (accentColor) => {
-        set((state) => {
-            updateStoredState(state);
+        set(() => {
+            updateStoredState({ accentColor });
             return {
                 accentColor
             };
         });
     },
     setFontSize: (fontSize) => {
-        set((state) => {
-            updateStoredState(state);
+        set(() => {
+            updateStoredState({ fontSize });
             return {
                 fontSize
             };
         });
     },
     setContrast: (contrast) => {
-        set((state) => {
-            updateStoredState(state);
+        set(() => {
+            updateStoredState({ contrast });
             return {
                 contrast
             };
