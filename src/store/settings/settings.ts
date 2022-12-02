@@ -84,39 +84,24 @@ const resetStoredState = () => {
     localStorage.removeItem('settings');
 };
 
+const setFunction = (value: Partial<Settings>) => {
+    updateStoredState(value);
+    return value;
+};
+
 export const useSettings = create<SettingsStore>((set) => ({
     ...initialState,
     setTheme: (theme) => {
-        set(() => {
-            updateStoredState({ theme });
-            return {
-                theme
-            };
-        });
+        set(() => setFunction({ theme }));
     },
     setAccentColor: (accentColor) => {
-        set(() => {
-            updateStoredState({ accentColor });
-            return {
-                accentColor
-            };
-        });
+        set(() => setFunction({ accentColor }));
     },
     setFontSize: (fontSize) => {
-        set(() => {
-            updateStoredState({ fontSize });
-            return {
-                fontSize
-            };
-        });
+        set(() => setFunction({ fontSize }));
     },
     setContrast: (contrast) => {
-        set(() => {
-            updateStoredState({ contrast });
-            return {
-                contrast
-            };
-        });
+        set(() => setFunction({ contrast }));
     },
     reset: () => {
         set(() => {
