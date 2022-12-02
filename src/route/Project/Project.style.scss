@@ -228,6 +228,10 @@
         a,
         ul {
             font-size: 1rem;
+
+            >li {
+                margin-block: 0.25em;
+            }
         }
 
         p {
@@ -235,7 +239,6 @@
         }
 
         a {
-            text-decoration: none;
             color: var(--color-content-tertiary);
             transition: color 0.2s;
 

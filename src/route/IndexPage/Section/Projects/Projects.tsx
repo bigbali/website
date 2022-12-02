@@ -4,7 +4,6 @@ import {
     useMemo,
     useRef,
     useState,
-    type MouseEvent as GenericMouseEvent
 } from 'react';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { useDevice } from 'Store';

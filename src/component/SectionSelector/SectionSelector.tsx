@@ -2,7 +2,6 @@ import {
     RefObject,
     useEffect,
 } from 'react';
-import { useNavigation } from 'react-router';
 import { useSection } from 'Store';
 import './SectionSelector.style';
 
@@ -16,17 +15,11 @@ type SectionSelectorProps = {
 
 export const SectionSelector = ({ sections, onSelect }: SectionSelectorProps) => {
     const { currentSection, setCurrentSection } = useSection();
-    const navigation = useNavigation();
 
     useEffect(() => {
         const observerAction: IntersectionObserverCallback = (observedSections) => {
             observedSections.forEach(section => {
                 if (section.isIntersecting) {
-                    if (navigation.location) {
-                        navigation.location.state = {
-                            currentSection: section.target.id
-                        };
-                    }
                     setCurrentSection(section.target as HTMLElement);
                 }
             });
