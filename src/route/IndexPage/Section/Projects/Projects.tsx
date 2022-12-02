@@ -25,8 +25,9 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
     const [status, setStatus] = useState<ProjectStatus | 'any'>('any');
     const [title, setTitle] = useState<string>();
     const [tag, setTag] = useState<string>();
-    const [limit, setLimit] = useState<number>(DEFAULT_LIMIT);
-    const { isDesktop } = useDevice();
+
+    const { isDesktop } = useDevice(); // on mobile, override default to 1
+    const [limit, setLimit] = useState<number>(isDesktop ? DEFAULT_LIMIT : 1);
     const [isFilterExpanded, setIsFilterExpanded] = useState(isDesktop);
     const [animationRef] = useAutoAnimate<HTMLDivElement>({ duration: 200 });
     const previousLength = useRef(0);
@@ -64,7 +65,6 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
      */
     const expandFilter = () => {
         setIsFilterExpanded((state) => !state);
-        console.log(isFilterExpanded);
         filterRef.current!.classList.toggle('IS_EXPANDED', isFilterExpanded);
     };
 
@@ -83,6 +83,8 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
         }
         previousLength.current = projectCards.length;
     }, [projectCards.length]);
+
+    const SHOW_MORE_COUNT = getShowMoreCount();
 
     return (
         <section
@@ -182,22 +184,25 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
             <div elem='ProjectCards' ref={animationRef} className='animate-on-scroll'>
                 {projectCards}
             </div>
-            {projectsFiltered.length !== 0 && projectsFiltered.length !== projectCards.length && (
-                <div block='Projects' elem='ShowMore' className='animate-on-scroll'>
-                    <button
-                        title='Show More Projects'
-                        onClick={() => {
-                            if (limit > projectCards.length) {
-                                return;
-                            }
+            <div block='Projects' elem='ShowMore' className='animate-on-scroll'>
+                <button
+                    title='Show More Projects'
+                    onClick={() => {
+                        if (SHOW_MORE_COUNT === 0) {
+                            setLimit(isDesktop ? 3 : 1);
+                            return;
+                        }
 
-                            setLimit((currentLimit) => currentLimit + 3);
-                        }}
-                    >
-                        Show {getShowMoreCount()} More
-                    </button>
-                </div>
-            )}
+                        setLimit((currentLimit) => currentLimit + 3);
+                    }}
+                >
+                    {
+                        SHOW_MORE_COUNT === 0
+                            ? 'Reset'
+                            : `Show ${SHOW_MORE_COUNT} More`
+                    }
+                </button>
+            </div>
             {projectCards.length === 0 && (
                 <p block='Projects' elem='NotFound'>
                     It looks like there's no such project yet.

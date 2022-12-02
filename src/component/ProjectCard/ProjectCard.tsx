@@ -13,6 +13,7 @@ import image__stardust_dark from 'Media/webp/stardust-dark.webp';
 import image__family_photos from 'Media/webp/family-photos.webp';
 import image__eshop from 'Media/webp/eshop.webp';
 import image__tankstats from 'Media/webp/tankstats.webp';
+import { useDevice } from 'Store';
 
 const Image = {
     This: {
@@ -278,12 +279,13 @@ const ProjectCard = ({ title, description, thumbnail, github, slug, link, tags, 
     & { index: number }) => {
     const isReverse = index % 2 !== 0;
     const [isReady, setIsReady] = useState(false);
+    const { isDesktop } = useDevice();
 
     return (
         <article
             block='ProjectCard'
-            mods={{
-                REVERSE: isReverse,
+            mods={{ // we don't want to reverse on mobile, as all cards are uniform
+                REVERSE: isDesktop && isReverse,
                 LOADED: isReady
             }}
         >
