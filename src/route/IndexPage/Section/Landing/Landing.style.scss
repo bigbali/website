@@ -14,14 +14,14 @@ $section-home-padding-block-start: 25rem;
 
     &-Content {
         padding-block-start: $section-home-padding-block-start;
-        flex: 0.8;
+
+        @include desktop {
+            width: 40%;
+            min-width: 20rem;
+        }
 
         @include mobile {
             padding-block-start: 5rem;
-        }
-
-        @include from-fhd {
-            flex: 0.6;
         }
 
         >h1 {
@@ -90,16 +90,19 @@ $section-home-padding-block-start: 25rem;
     }
 
     &-Spline {
-        z-index: -1;
-        inset-inline-end: 0;
-        inset-block-start: 0;
         height: 100vh;
-        flex: 1;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        inset-inline-end: 0;
+        inset-block-start: 0;
         overflow: visible;
+        z-index: -1;
+
+        @include desktop {
+            width: 60%;
+        }
 
         @include from-fhd {
             padding-inline-end: 5rem;
@@ -112,6 +115,12 @@ $section-home-padding-block-start: 25rem;
                 width: 95% !important;
                 height: auto !important;
             }
+        }
+
+        >img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
         }
     }
 }

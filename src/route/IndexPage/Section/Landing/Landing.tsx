@@ -1,25 +1,37 @@
 import {
+    lazy,
     memo,
-    RefObject,
+    Suspense,
     useEffect,
     useMemo,
     useRef,
+    type RefObject
 } from 'react';
-import { Application as SplineApplication } from '@splinetool/runtime';
-import Spline from '@splinetool/react-spline';
+import {
+    type SPEObject,
+    type Application as SplineApplication
+} from '@splinetool/runtime';
 import {
     fromEvent,
     throttleTime
 } from 'rxjs';
 import FontFaceObserver from 'fontfaceobserver';
 import { updateElementsToObserve } from '../../../../index';
-import { Theme } from 'Store';
-import { useSettings } from 'Store';
+import {
+    Theme,
+    useDevice,
+    useSettings
+} from 'Store';
+import SplineLight from 'Media/webp/spline-light.webp';
+import SplineDark from 'Media/webp/spline-dark.webp';
 import './Landing.style.scss';
+
+const Spline = lazy(() => import('@splinetool/react-spline'));
 
 const SplineURL = {
     Dark: 'https://prod.spline.design/Orv626vNo2ELSt25/scene.splinecode',
-    Light: 'https://prod.spline.design/oE1PXrOYS773cHVg/scene.splinecode'
+    Light: 'https://prod.spline.design/oE1PXrOYS773cHVg/scene.splinecode',
+    Switchable: 'https://prod.spline.design/2oNTUNbzmdhEMPUo/scene.splinecode'
 };
 
 const fontsReady = async () => {
@@ -67,11 +79,14 @@ type LandingProps = {
 
 const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTriggerAnimation }: LandingProps) => {
     const { theme } = useSettings();
+    const { isDesktop } = useDevice();
     const splineRef = useRef<SplineApplication>();
+    const splineAllRef = useRef<SPEObject>();
     const splineCanvasRef = useRef<HTMLCanvasElement>(null);
 
     const onSplineLoad = (splineApp: SplineApplication) => {
         splineRef.current = splineApp;
+        splineAllRef.current = splineApp.findObjectByName('All');
 
         onSplineLoaded();
         console.log('Spline is ready.', `${Math.round(performance.now())}ms`);
@@ -81,13 +96,20 @@ const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTrig
         splineRef.current?.emitEvent('mouseHover', 'All');
     };
 
-    function translateSplineCanvas(e: MouseEvent) {
+    const translateSplineCanvas = (e: MouseEvent) => {
+        if (!splineCanvasRef.current) return;
         const windowWidth = window.innerWidth;
         const windowHeight = window.innerHeight;
+
         const x = (e.clientX - windowWidth / 2) / 100 * -1;
         const y = (e.clientY - windowHeight / 2) / 100 * -1;
-        splineCanvasRef.current!.style.translate = `${x}px ${y}px`;
-    }
+        splineCanvasRef.current.style.translate = `${x}px ${y}px`;
+
+        if (splineRef.current && splineAllRef.current) { // Rotate main group in 3D space
+            splineAllRef.current.rotation.y = (x * 0.005);
+            splineAllRef.current.rotation.x = (y * 0.005);
+        }
+    };
 
     useEffect(() => {
         void (async () => {
@@ -102,38 +124,62 @@ const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTrig
             document,
             'mousemove'
         )
-            .pipe( // 60 Hz
-                throttleTime(16),
+            .pipe( // 60 Hz => 16ms [30 Hz => 32ms]
+                throttleTime(32),
             )
             .subscribe((e: Event) => translateSplineCanvas(e as MouseEvent));
 
         return () => event.unsubscribe();
+    }, []);
+
+    useEffect(() => { // background color switch
+        // console.log('effect');
+        // splineRef.current?.emitEvent('mouseUp', 'Background');
+
+        // for (const key in splineRef.current?.findObjectByName('Background')) {
+        //     console.log(key);
+        // }
+
+        // splineRef.current?.emitEventReverse('mouseDown', 'Background');
+
     }, [theme]);
 
     useEffect(() => {
-        timeouts = [];
-
         if (shouldTriggerAnimation) {
             refFromParent.current && recursivelyApplyClassNameTransformation(refFromParent.current);
             triggerSplineAnimation();
         }
 
-        return () => timeouts.forEach((id) => clearTimeout(id));
+        return () => {
+            timeouts.forEach((id) => clearTimeout(id));
+            timeouts = []; // reset timeouts array
+        };
     }, [shouldTriggerAnimation]);
 
     // As this component eats performance for breakfast then spits it out and eats it again,
     // let's not render it unless necessary
-    const SplineMemo = useMemo(() => (
-        <Spline
-            ref={splineCanvasRef}
-            onLoad={onSplineLoad}
-            scene={
-                theme === Theme.LIGHT
-                    ? SplineURL.Light
-                    : SplineURL.Dark
-            }
-        />
-    ), [theme]);
+    const SplineMemo = useMemo(() => {
+        if (isDesktop) {
+            return (
+                <Spline
+                    ref={splineCanvasRef}
+                    onLoad={onSplineLoad}
+                    scene={SplineURL.Switchable}
+                />
+            );
+        }
+
+        return (
+            <img
+                src={theme === Theme.LIGHT ? SplineLight : SplineDark}
+                onLoad={onSplineLoaded}
+                alt={`
+                    An image of the 3D animation you would see on a desktop device,
+                    but alas, mobile devices aren't powerful enough for that.
+                `}
+            />
+        );
+    }, [theme, isDesktop]);
 
     return (
         <section
@@ -167,7 +213,9 @@ const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTrig
                 </p>
             </div>
             <div elem='Spline'>
-                {SplineMemo}
+                <Suspense fallback={null}>
+                    {SplineMemo}
+                </Suspense>
             </div>
         </section>
     );
