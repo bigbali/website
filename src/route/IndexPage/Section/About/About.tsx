@@ -72,6 +72,9 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                             Experience
                         </h1>
                         <div>
+                            <div>
+                                React Developer
+                            </div>
                             <a
                                 href="https://scandiweb.com/"
                                 rel='noopener noreferrer'

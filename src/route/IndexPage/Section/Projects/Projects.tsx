@@ -123,7 +123,7 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
                                 Explanation:<ul>
                                     <li>
                                         ${'' /* eslint-disable-next-line max-len */}
-                                        <span>Finished:</span> has reached MVP (Minimally Viable Product) status, but I will likely still work on it;
+                                        <span>Finished:</span> has reached MVP (Minimally Viable Product) status, but I will possibly still work on it;
                                     </li>
                                     <li>
                                         <span>In Progress:</span> I am currently working on it;

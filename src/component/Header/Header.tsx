@@ -11,7 +11,12 @@ export const Header = () => {
             <a href='/' elem='Branding'>
                 balázs burján
             </a>
-            {isDesktop && <Settings.Desktop />}
+            {isDesktop && (
+                <>
+                    <Navigation.Desktop />
+                    <Settings.Desktop />
+                </>
+            )}
             {!isDesktop && <Navigation.Mobile />}
         </div>
     );

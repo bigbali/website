@@ -1,4 +1,3 @@
-// bem-attr-skip-file
 import { forwardRef, useEffect, useRef } from 'react';
 import { useLocation, useResolvedPath } from 'react-router';
 import { Link, NavLinkProps } from 'react-router-dom';

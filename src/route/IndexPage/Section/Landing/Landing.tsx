@@ -182,7 +182,7 @@ const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTrig
     }, [theme, isDesktop]);
 
     return (
-        <section
+        <section onClick={() => splineRef.current?.emitEvent('mouseUp', 'Background')}
             id='Landing'
             block='Landing'
             ref={refFromParent}
