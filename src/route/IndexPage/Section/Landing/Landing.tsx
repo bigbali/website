@@ -13,6 +13,7 @@ import {
 } from '@splinetool/runtime';
 import {
     fromEvent,
+    Subscription,
     throttleTime
 } from 'rxjs';
 import FontFaceObserver from 'fontfaceobserver';
@@ -119,19 +120,6 @@ const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTrig
         })();
     }, []);
 
-    useEffect(() => {
-        const event = fromEvent(
-            document,
-            'mousemove'
-        )
-            .pipe( // 60 Hz => 16ms [30 Hz => 32ms]
-                throttleTime(32),
-            )
-            .subscribe((e: Event) => translateSplineCanvas(e as MouseEvent));
-
-        return () => event.unsubscribe();
-    }, []);
-
     useEffect(() => { // background color switch
         // console.log('effect');
         // splineRef.current?.emitEvent('mouseUp', 'Background');
@@ -145,14 +133,29 @@ const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTrig
     }, [theme]);
 
     useEffect(() => {
+        let event: Subscription;
+
         if (shouldTriggerAnimation) {
             refFromParent.current && recursivelyApplyClassNameTransformation(refFromParent.current);
             triggerSplineAnimation();
+
+            setTimeout(() => {
+                event = fromEvent(
+                    document,
+                    'mousemove'
+                )
+                    .pipe( // 60 Hz => 16ms [30 Hz => 32ms]
+                        throttleTime(32),
+                    )
+                    .subscribe((e: Event) => translateSplineCanvas(e as MouseEvent));
+            }, 1000); // wait till the initial animation is finished, so the cursor-based animation doesn't bother it
         }
 
         return () => {
             timeouts.forEach((id) => clearTimeout(id));
             timeouts = []; // reset timeouts array
+
+            event && event.unsubscribe();
         };
     }, [shouldTriggerAnimation]);
 

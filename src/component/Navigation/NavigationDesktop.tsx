@@ -29,7 +29,7 @@ const NavigationDesktop = () => {
     };
 
     useEffect(() => {
-        previousRef.current = currentSection?.id.replace('#', '') as SectionID || SectionID.LANDING;
+        previousRef.current = currentSection?.id as SectionID || SectionID.LANDING;
     }, [currentSection?.id]);
 
     return (

@@ -2,6 +2,7 @@ import {
     RefObject,
     useEffect,
 } from 'react';
+import { range } from 'lodash';
 import { useSection } from 'Store';
 import './SectionSelector.style';
 
@@ -19,7 +20,14 @@ export const SectionSelector = ({ sections, onSelect }: SectionSelectorProps) =>
     useEffect(() => {
         const observerAction: IntersectionObserverCallback = (observedSections) => {
             observedSections.forEach(section => {
-                if (section.isIntersecting) {
+                // if the observed element covers more than half of the screen, set it as active,
+                // but if it's smaller than that, check if 50% of that element is in view and if so, set it anyway
+                if ((section.intersectionRect.height > window.innerHeight / 2)
+                    || (section.boundingClientRect.height < window.innerHeight / 2 && section.intersectionRatio > 0.5)) {
+                    if (currentSection && currentSection.id === section.target.id) {
+                        return;
+                    }
+
                     setCurrentSection(section.target as HTMLElement);
                 }
             });
@@ -28,7 +36,11 @@ export const SectionSelector = ({ sections, onSelect }: SectionSelectorProps) =>
         const observer = new IntersectionObserver(observerAction, {
             root: null,
             rootMargin: '0px',
-            threshold: 0.51
+            threshold: range(0.01, 1, 0.01)
+            // because on mobile, the content height could be taller than the viewport
+            // it would be skipped by the observer.
+            // to counter that, we observe every little movement and instead of using .isIntersecting,
+            // we check if the observed element's intersecting part takes at least half og viewport's
         });
 
         sections.forEach((section) => observer.observe(section.ref.current!));
