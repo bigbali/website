@@ -38,6 +38,7 @@ const NavigationDesktop = () => {
                 {Object.values(SectionID).map((section) => (
                     <li block='Navigation-ListItem' key={section}>
                         <a
+                            role='button'
                             title={`Scroll to ${section} section`}
                             onClick={(e) => onNavigationItemClick(e, section)}
                             className={

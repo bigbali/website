@@ -64,6 +64,7 @@ const NavigationMobile = memo(() => { // memo prevents unnecessary render which 
                                 {Object.values(SectionID).map((section) => (
                                     <li block='Navigation-ListItem' key={section}>
                                         <a
+                                            role='button'
                                             onClick={(e) => onNavigationItemClick(e, section)}
                                             className={
                                                 location.pathname === '/' && currentSection?.id.replace('#', '') === section

@@ -1,6 +1,7 @@
 import {
     RefObject,
     useEffect,
+    useRef,
 } from 'react';
 import { range } from 'lodash';
 import { useSection } from 'Store';
@@ -16,6 +17,8 @@ type SectionSelectorProps = {
 
 export const SectionSelector = ({ sections, onSelect }: SectionSelectorProps) => {
     const { currentSection, setCurrentSection } = useSection();
+    const currentSectionRef = useRef<HTMLElement | null>();
+    currentSectionRef.current = currentSection; // avoid stale closure in observer callback
 
     useEffect(() => {
         const observerAction: IntersectionObserverCallback = (observedSections) => {
@@ -24,7 +27,9 @@ export const SectionSelector = ({ sections, onSelect }: SectionSelectorProps) =>
                 // but if it's smaller than that, check if 50% of that element is in view and if so, set it anyway
                 if ((section.intersectionRect.height > window.innerHeight / 2)
                     || (section.boundingClientRect.height < window.innerHeight / 2 && section.intersectionRatio > 0.5)) {
-                    if (currentSection && currentSection.id === section.target.id) {
+
+                    const _currentSection = currentSectionRef.current;
+                    if (_currentSection && _currentSection.id === section.target.id) {
                         return;
                     }
 

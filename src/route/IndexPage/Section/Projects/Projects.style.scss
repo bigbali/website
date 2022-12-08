@@ -106,7 +106,7 @@
 
     &:has(&-Filter:not(.IS_EXPANDED)) {
         .Projects-Controls {
-            display: none;
+            display: none !important;
         }
     }
 

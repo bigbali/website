@@ -78,16 +78,25 @@ type LandingProps = {
     shouldTriggerAnimation: boolean
 };
 
+// we use scale of background's X axis to determine color of background as such data isn't exposed
+// (scale is switched withing Spline)
+enum SplineBackgroundScaleX {
+    DARK = 1,
+    LIGHT = 2
+};
+
 const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTriggerAnimation }: LandingProps) => {
     const { theme } = useSettings();
     const { isDesktop } = useDevice();
     const splineRef = useRef<SplineApplication>();
     const splineAllRef = useRef<SPEObject>();
+    const splineBackgroundRef = useRef<SPEObject>();
     const splineCanvasRef = useRef<HTMLCanvasElement>(null);
 
     const onSplineLoad = (splineApp: SplineApplication) => {
         splineRef.current = splineApp;
         splineAllRef.current = splineApp.findObjectByName('All');
+        splineBackgroundRef.current = splineApp.findObjectByName('Background');
 
         onSplineLoaded();
         console.log('Spline is ready.', `${Math.round(performance.now())}ms`);
@@ -121,16 +130,19 @@ const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTrig
     }, []);
 
     useEffect(() => { // background color switch
-        // console.log('effect');
-        // splineRef.current?.emitEvent('mouseUp', 'Background');
+        if (!splineBackgroundRef.current) return;
 
-        // for (const key in splineRef.current?.findObjectByName('Background')) {
-        //     console.log(key);
-        // }
+        if (splineBackgroundRef.current.scale.x === SplineBackgroundScaleX.DARK && theme === Theme.LIGHT) {
+            console.log('setting to light');
+            splineRef.current?.emitEvent('mouseUp', 'Background');
+        }
+        if (splineBackgroundRef.current.scale.x === SplineBackgroundScaleX.LIGHT && theme === Theme.DARK) {
+            console.log('setting to dark');
 
-        // splineRef.current?.emitEventReverse('mouseDown', 'Background');
+            splineRef.current?.emitEventReverse('mouseUp', 'Background');
+        }
 
-    }, [theme]);
+    }, [theme, splineBackgroundRef.current]);
 
     useEffect(() => {
         let event: Subscription;
@@ -185,7 +197,7 @@ const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTrig
     }, [theme, isDesktop]);
 
     return (
-        <section onClick={() => splineRef.current?.emitEvent('mouseUp', 'Background')}
+        <section
             id='Landing'
             block='Landing'
             ref={refFromParent}

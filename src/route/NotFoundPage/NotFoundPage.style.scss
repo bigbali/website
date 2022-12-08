@@ -26,10 +26,10 @@
         margin-block-start: 0.5rem;
         margin-block-end: 0;
         font-size: 2rem;
+        font-weight: 500;
 
         @include mobile {
             font-size: 1.25rem;
-            font-weight: 500;
         }
     }
 }
