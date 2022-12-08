@@ -27,8 +27,6 @@ import SplineLight from 'Media/webp/spline-light.webp';
 import SplineDark from 'Media/webp/spline-dark.webp';
 import './Landing.style.scss';
 
-const Spline = lazy(() => import('@splinetool/react-spline'));
-
 const SplineURL = {
     Dark: 'https://prod.spline.design/Orv626vNo2ELSt25/scene.splinecode',
     Light: 'https://prod.spline.design/oE1PXrOYS773cHVg/scene.splinecode',
@@ -92,6 +90,7 @@ const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTrig
     const splineAllRef = useRef<SPEObject>();
     const splineBackgroundRef = useRef<SPEObject>();
     const splineCanvasRef = useRef<HTMLCanvasElement>(null);
+    const Spline = isDesktop && lazy(() => import('@splinetool/react-spline'));
 
     const onSplineLoad = (splineApp: SplineApplication) => {
         splineRef.current = splineApp;
@@ -174,7 +173,7 @@ const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTrig
     // As this component eats performance for breakfast then spits it out and eats it again,
     // let's not render it unless necessary
     const SplineMemo = useMemo(() => {
-        if (isDesktop) {
+        if (isDesktop && Spline) {
             return (
                 <Spline
                     ref={splineCanvasRef}
@@ -188,6 +187,7 @@ const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTrig
             <img
                 src={theme === Theme.LIGHT ? SplineLight : SplineDark}
                 onLoad={onSplineLoaded}
+                className='landing-initial-state'
                 alt={`
                     An image of the 3D animation you would see on a desktop device,
                     but alas, mobile devices aren't powerful enough for that.
