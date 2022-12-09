@@ -144,7 +144,7 @@ export const Project = () => {
                     {isMobile && thumbnail}
                     <section block='Page-Project' elem='Markdown' mods={{ IS_LOADED: !!markdown }}>
                         <div>
-                            {!!markdown && <ReactMarkdown children={markdown} />}
+                            {!!markdown && <ReactMarkdown children={markdown} linkTarget="_blank" />}
                         </div>
                         {!markdown && (
                             <>

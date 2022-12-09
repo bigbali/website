@@ -42,7 +42,7 @@ const NavigationDesktop = () => {
                             title={`Scroll to ${section} section`}
                             onClick={(e) => onNavigationItemClick(e, section)}
                             className={
-                                location.pathname === '/' && currentSection?.id.replace('#', '') === section
+                                location.pathname === '/' && currentSection?.id === section
                                     ? 'active'
                                     : ''.concat(previousRef.current === section ? 'previouslyactive' : '')
                             }

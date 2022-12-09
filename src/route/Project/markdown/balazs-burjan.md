@@ -8,11 +8,12 @@ I built this project based on my very own
 
 ## What did I learn from it?
 Well, there are a few new tricks I learned from this project:
-- [Spline](https://spline.design/ "Go to Spline home page"), where I made the 3D landing animation.\
-It definitely made it easier than having written it from scratch using `WebGL`, and easier even than using `Three.js`.\
-However, it has one huge drawback: bundle size and general performance impact, even after optimizing every part that does not take away from the user experience.
+- [Spline](https://spline.design/ "Go to Spline home page"), which I used to make the 3D landing animation (if you're on mobile, it's omitted to reduce package size and improve performance!).\
+It definitely made it easier than having written it from scratch using plain `WebGL`or `Three.js`, however
+it has one huge drawback: bundle size and general performance impact, even after optimizing every part I could.
 - Scroll animations.
 - Embedding `Markdown` in `React`. In fact, this was written in `Markdown`.
 
-### I noticed an error / have a suggestion
-In this case, please open an issue on GitHub. I'll appreciate it!
+## What's next?
+I intend to migrate the entire project from `CRA` to `Next.js` in parallel to my [React Template](/project/react-template "Go to React Template project details").\
+This definitely is not the final form of this project, so feel free to open an issue on GitHub or send a message in case you've got a suggestion!
