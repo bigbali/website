@@ -1,5 +1,6 @@
 import {
     RefObject,
+    useCallback,
     useEffect,
     useMemo,
     useRef,
@@ -18,15 +19,15 @@ import { Orientation } from 'Component/Help/Help';
 import Icon from 'Component/Icon';
 import './Projects.style.scss';
 
-const DEFAULT_LIMIT = 3;
-
 const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTMLElement> }) => {
     const [status, setStatus] = useState<ProjectStatus | 'any'>('any');
     const [title, setTitle] = useState<string>();
     const [tag, setTag] = useState<string>();
 
     const { isDesktop } = useDevice(); // on mobile, override default to 1
-    const [limit, setLimit] = useState<number>(isDesktop ? DEFAULT_LIMIT : 1);
+    const DEFAULT_LIMIT = isDesktop ? 3 : 1;
+
+    const [limit, setLimit] = useState<number>(DEFAULT_LIMIT);
     const [isFilterExpanded, setIsFilterExpanded] = useState(isDesktop);
     const [animationRef] = useAutoAnimate<HTMLDivElement>({ duration: 200 });
     const previousLength = useRef(0);
@@ -62,10 +63,9 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
      * For some reason, using 'mods' caused the 'begin-animation' class to disappear, causing the element to be hidden.
      * This way, it works.
      */
-    const expandFilter = () => {
+    const expandFilter = useCallback(() => {
         setIsFilterExpanded((state) => !state);
-        filterRef.current!.classList.toggle('IS_EXPANDED', isFilterExpanded);
-    };
+    }, [isFilterExpanded]);
 
     const projectCards = useMemo(() => {
         return projectsFiltered
@@ -82,6 +82,10 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
         }
         previousLength.current = projectCards.length;
     }, [projectCards.length]);
+
+    useEffect(() => {
+        filterRef.current?.classList.toggle('IS_EXPANDED', isFilterExpanded);
+    }, [isDesktop, isFilterExpanded]);
 
     const SHOW_MORE_COUNT = getShowMoreCount();
 
@@ -120,19 +124,19 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
                             <Help
                                 orientation={Orientation.BELOW}
                                 content={`
-                                Explanation:<ul>
-                                    <li>
-                                        ${'' /* eslint-disable-next-line max-len */}
-                                        <span>Finished:</span> has reached MVP (Minimally Viable Product) status, but I will possibly still work on it;
-                                    </li>
-                                    <li>
-                                        <span>In Progress:</span> I am currently working on it;
-                                    </li>
-                                    <li>
-                                        <span>Paused:</span> I have paused work on the project, but will continue at a later date.
-                                    </li>
-                                </ul>
-                            `}
+                                    Explanation:<ul>
+                                        <li>
+                                            ${'' /* eslint-disable-next-line max-len */}
+                                            <span>Finished:</span> has reached MVP (Minimally Viable Product) status, but I will possibly still work on it;
+                                        </li>
+                                        <li>
+                                            <span>In Progress:</span> I am currently working on it;
+                                        </li>
+                                        <li>
+                                            <span>Paused:</span> I have paused work on the project, but will continue at a later date.
+                                        </li>
+                                    </ul>
+                                `}
                             />
                         </div>
                         <select
@@ -188,7 +192,7 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
                     title='Show More Projects'
                     onClick={() => {
                         if (SHOW_MORE_COUNT === 0) {
-                            setLimit(isDesktop ? 3 : 1);
+                            setLimit(DEFAULT_LIMIT);
                             return;
                         }
 
