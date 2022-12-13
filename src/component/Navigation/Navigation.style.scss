@@ -49,6 +49,9 @@
             color: var(--color-content-primary);
             border-radius: 2rem;
             position: relative;
+            font-size: 1rem;
+            user-select: none;
+            cursor: pointer;
 
             &::before {
                 @include mobile {
@@ -128,6 +131,8 @@
             }
 
             &.previouslyactive {
+
+                // use this to gracefully transition from selected to deselected
                 &:not(.active) {
 
                     // Prevent animation when reselecting item

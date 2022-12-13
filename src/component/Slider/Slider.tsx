@@ -13,9 +13,10 @@ export interface SliderProps {
     label?: string,
     name?: string,
     externalValue?: number,
+    title?: string
 }
 
-const Slider = ({ min, max, step, label, name, externalValue, onChange }: SliderProps) => {
+const Slider = ({ min, max, step, label, name, title, externalValue, onChange }: SliderProps) => {
     const [value, setValue] = useState(externalValue);
 
     const internalOnChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -41,6 +42,7 @@ const Slider = ({ min, max, step, label, name, externalValue, onChange }: Slider
                 id={name}
                 value={value}
                 onChange={internalOnChange}
+                title={title || value?.toString()}
             />
             <label
                 elem='Label'

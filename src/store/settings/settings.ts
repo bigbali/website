@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import create from 'zustand';
 
 export enum Theme {
     DARK = 'dark',
@@ -43,8 +43,15 @@ export interface Settings {
     accentColor: Color | null,
     fontSize: number,
     contrast: number
-}
+};
 
+interface SettingsStore extends Settings {
+    setTheme: (theme: Theme) => void,
+    setAccentColor: (accentColor: Color) => void,
+    setFontSize: (fontSize: number) => void,
+    setContrast: (contrast: number) => void,
+    reset: () => void
+};
 
 const isOsThemeDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 export const defaultSettings: Settings = {
@@ -58,42 +65,57 @@ const storedStateJSON = localStorage.getItem('settings');
 const storedSettings: Settings | null = (storedStateJSON && JSON.parse(storedStateJSON)) || null;
 const initialState: Settings = storedSettings || defaultSettings;
 
-const updateStoredState = (state: Settings) => {
-    localStorage.setItem('settings', JSON.stringify(state));
+const updateStoredState = (partialState: Partial<SettingsStore>) => {
+    const {
+        theme,
+        accentColor,
+        fontSize,
+        contrast
+    } = useSettings.getState();
+    localStorage.setItem('settings', JSON.stringify({
+        theme,
+        accentColor,
+        fontSize,
+        contrast,
+        ...partialState
+    }));
 };
 const resetStoredState = () => {
     localStorage.removeItem('settings');
 };
 
-export const settingsSlice = createSlice({
-    name: 'settings',
-    initialState,
-    reducers: {
-        setTheme: (state, { payload }: PayloadAction<Theme>) => {
-            state.theme = payload;
-            updateStoredState(state);
-        },
-        setAccentColor: (state, { payload }: PayloadAction<Color>) => {
-            state.accentColor = payload;
-            updateStoredState(state);
-        },
-        setFontSize: (state, { payload }: PayloadAction<number>) => {
-            state.fontSize = payload;
-            updateStoredState(state);
-        },
-        setContrast: (state, { payload }: PayloadAction<number>) => {
-            state.contrast = payload;
-            updateStoredState(state);
-        },
-        reset: (state) => {
-            state.theme = defaultSettings.theme;
-            state.accentColor = defaultSettings.accentColor;
-            state.fontSize = defaultSettings.fontSize;
-            state.contrast = defaultSettings.contrast;
+const setFunction = (value: Partial<Settings>) => {
+    updateStoredState(value);
+    return value;
+};
 
+export const useSettings = create<SettingsStore>((set) => ({
+    ...initialState,
+    setTheme: (theme) => {
+        set(() => setFunction({ theme }));
+    },
+    setAccentColor: (accentColor) => {
+        set(() => setFunction({ accentColor }));
+    },
+    setFontSize: (fontSize) => {
+        set(() => setFunction({ fontSize }));
+    },
+    setContrast: (contrast) => {
+        set(() => setFunction({ contrast }));
+    },
+    reset: () => {
+        set(() => {
             resetStoredState();
-        }
-    }
-});
 
-export default settingsSlice;
+            return {
+                theme: defaultSettings.theme,
+                accentColor: defaultSettings.accentColor,
+                fontSize: defaultSettings.fontSize,
+                contrast: defaultSettings.contrast,
+            };
+        });
+    }
+}));
+
+export default useSettings;
+

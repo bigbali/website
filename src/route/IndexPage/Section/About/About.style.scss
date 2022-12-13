@@ -1,0 +1,310 @@
+.About {
+    padding-inline: var(--content-padding);
+
+    @include mobile {
+        height: max-content;
+    }
+
+    &-Header {
+        position: relative;
+        width: fit-content;
+
+        >h1 {
+            margin-block: 0;
+            font-size: 3rem;
+            width: fit-content;
+
+            @include separator {
+                width: 63%;
+                inset-block-end: -1rem;
+            }
+
+            @include mobile {
+                font-size: 2rem;
+            }
+        }
+
+        >.Icon {
+            position: absolute;
+            inset-block-end: -0.75rem;
+            inset-inline-start: 7.5rem;
+            width: 10rem;
+            height: auto;
+            z-index: -1;
+
+            @include mobile {
+                width: 7rem;
+            }
+
+            >svg>path {
+                fill: var(--color-icon);
+            }
+        }
+    }
+
+    &-Content {
+        display: flex;
+        justify-content: space-between;
+        gap: 3em;
+        margin-block-start: 2.5rem;
+
+        @include mobile {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        >div {
+            margin-block-start: 0;
+            margin-block-end: 0;
+            font-size: 1.15rem;
+
+            @include desktop {
+                flex: 1.2;
+            }
+
+            @include from-qhd {
+                flex: 1.5;
+            }
+
+            >section {
+                >h1 {
+                    width: fit-content;
+                    font-weight: 500;
+                    font-size: 1.25rem;
+
+                    @include separator {
+                        width: 63%;
+                        inset-block-end: -0.25em;
+                    }
+                }
+
+                >p,
+                >div {
+                    margin-inline-start: 1em;
+                }
+            }
+        }
+
+        &-Figure_REDUCE_WIDTH {
+
+            >div {
+
+                &:nth-of-type(2),
+                &:nth-of-type(3) {
+                    width: 60% !important;
+                    height: auto !important;
+                    aspect-ratio: 2/1;
+                }
+            }
+        }
+
+        >figure {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+
+            // override scroll transition blur because it clashes with backdrop-filter
+            filter: none !important;
+
+            @include desktop {
+                height: fit-content;
+                flex: 1;
+            }
+
+            >div {
+                &:nth-of-type(1) {
+                    position: relative;
+                    width: 15rem;
+                    height: 15rem;
+                    border: 1px solid var(--color-border);
+                    backdrop-filter: blur(1rem);
+                    border-radius: 1.5rem;
+
+                    @include mobile {
+                        width: 12rem;
+                        height: 12rem;
+                    }
+
+                    >img {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 1.5rem;
+                    }
+
+                    >.Icon {
+                        width: 2.5rem;
+                        height: 2.5rem;
+                        position: absolute;
+                        inset-block-start: -2rem;
+                        inset-inline-end: 2rem;
+
+                        >svg>path {
+                            fill: var(--color-content-quaternary);
+                        }
+                    }
+
+                    .location {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+
+                        >div {
+                            width: 1px;
+                            height: 3rem;
+                            background-color: var(--color-border);
+
+                            @include mobile {
+                                height: 2rem;
+                            }
+                        }
+
+                        >a {
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+                            text-decoration: none;
+
+                            &:hover {
+                                >span {
+                                    color: var(--color-theme);
+                                }
+
+                                >.Icon>svg>path {
+                                    fill: var(--color-theme);
+                                }
+                            }
+
+                            >span {
+                                width: max-content;
+                                font-size: 1.5rem;
+                                color: var(--color-content-quaternary);
+                                text-decoration: none;
+
+                                @include from-qhd {
+                                    position: absolute;
+                                    inset-inline-start: 3rem;
+                                }
+
+                                @include mobile {
+                                    position: static;
+                                    inset-inline-start: 0;
+                                    font-size: 1.15rem;
+                                }
+                            }
+
+                            >.Icon {
+                                width: 2.8rem;
+                                height: 2.8rem;
+
+                                @include mobile {
+                                    width: 2rem;
+                                    height: 2rem;
+                                }
+
+                                >svg>path {
+                                    fill: var(--color-content-quaternary);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &:nth-of-type(2),
+                &:nth-of-type(3) {
+                    position: absolute;
+                    width: 15rem;
+                    height: 7.5rem;
+                    z-index: -1;
+
+                    @include mobile {
+                        width: 10rem;
+                        height: 5rem;
+                    }
+                }
+
+                &:nth-of-type(2) {
+                    inset-block-start: 1rem;
+                    inset-inline-end: 50%;
+                }
+
+                &:nth-of-type(3) {
+                    inset-block-end: 1rem;
+                    inset-inline-start: 50%;
+                }
+            }
+
+            circle {
+                fill: var(--color-content-secondary);
+            }
+        }
+
+        &-Experience {
+            >div {
+                width: fit-content;
+
+                @include separator {
+                    inset-block-end: -0.25em;
+                }
+
+                >a {
+                    font-size: 1.25rem;
+                    font-weight: 500;
+                    color: var(--color-content-secondary);
+                    transition: color 0.2s;
+
+                    &:hover {
+                        color: var(--color-theme);
+                    }
+                }
+
+                >div {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: 0.5em;
+                    margin-block-start: 0.25em;
+                    width: fit-content;
+
+                    &:nth-of-type(1) {
+                        font-weight: 500;
+                        margin-block-end: 0.2em;
+                    }
+
+                    >span {
+                        font-weight: 500;
+                        line-height: 1em;
+                        color: var(--color-content-secondary);
+
+                        &:nth-of-type(2) {
+                            width: 1em;
+                            border-block-end: 1px solid var(--color-content-primary);
+                            translate: 0 2px; // it feels a bit higher than it should, so let's push it down
+                        }
+                    }
+                }
+            }
+        }
+
+        &-Technologies {
+            >ul {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                column-gap: 3em;
+                font-size: 1rem;
+                width: fit-content;
+
+                >li {
+                    color: var(--color-content-secondary);
+                    margin-block-end: 0.25em;
+                }
+            }
+        }
+    }
+
+    .Link_REDUCE_WIDTH {
+        flex-direction: column;
+        align-items: center;
+    }
+}

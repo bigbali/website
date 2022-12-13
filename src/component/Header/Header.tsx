@@ -1,4 +1,4 @@
-import { useDevice } from 'Util';
+import { useDevice } from 'Store';
 import Navigation from 'Component/Navigation/';
 import Settings from 'Component/Settings';
 import './Header.style';
@@ -8,13 +8,16 @@ export const Header = () => {
 
     return (
         <div block='Header'>
-            <h1 elem='Branding'>
-                Template
-            </h1>
-            {isDesktop
-                ? <Navigation.Desktop />
-                : <Navigation.Mobile />}
-            {isDesktop && <Settings.Desktop />}
+            <a href='/' elem='Branding'>
+                balázs burján
+            </a>
+            {isDesktop && (
+                <>
+                    <Navigation.Desktop />
+                    <Settings.Desktop />
+                </>
+            )}
+            {!isDesktop && <Navigation.Mobile />}
         </div>
     );
 };

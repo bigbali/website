@@ -3,9 +3,9 @@
     inset-block-end: 0;
     inset-inline: 0;
     width: 100%;
-    padding-bottom: 32px;
     background-color: var(--color-background-primary-dark-transparent-less-transparent);
     backdrop-filter: blur(var(--blur-background));
+    border-block-start: 1px solid var(--color-border-dark);
     z-index: 98;
     transition: opacity 0.5s;
 
@@ -37,7 +37,7 @@
     &-Header {
         display: flex;
         align-items: center;
-        padding-block: 4px;
+        padding-block: 0.125rem;
         padding-inline: var(--content-padding);
         font-size: 1.25rem;
         background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
@@ -46,52 +46,72 @@
         border-block-end: 1px solid rgba(255, 255, 255, 0.15);
     }
 
-    &-Close {
-        display: flex;
-        align-items: center;
-        margin-inline-start: auto;
-    }
-
-    &-CloseButton {
-        width: fit-content;
-        height: fit-content;
-        margin-inline-end: -0.5rem;
-        padding: 0;
+    &-Accept {
+        background-color: var(--color-theme);
+        color: var(--color-white);
         border: none;
-        background-color: transparent;
+        font-size: 1.25rem;
+        font-weight: 500;
+        padding-inline: 3rem;
+        padding-block: 0.5rem;
+        border-radius: 50vmin;
 
-        >.Icon {
-            width: 2rem;
-            height: 2rem;
-
-            >svg>path {
-                fill: var(--color-content-primary-dark);
-            }
-        }
-
-        &:hover {
-            >.Icon>svg>path {
-                fill: var(--color-theme);
-            }
+        @include mobile {
+            font-size: 1.15rem;
+            padding-inline: 1rem;
         }
     }
 
     &-Body {
-        font-size: 1rem;
-        padding-block: 8px;
+        display: flex;
+        justify-content: space-between;
         padding-inline: var(--content-padding);
-        color: var(--color-content-primary-dark);
-        line-height: 1.5rem;
+        padding-block: 0.6rem;
+
+        @include mobile {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        &-Left {
+            >p {
+                margin-block: 0;
+                padding-block: 0.5rem;
+                font-size: 1.1rem;
+                line-height: 1.5rem;
+                color: var(--color-content-primary-dark);
+
+                @include mobile {
+                    text-align: center;
+                }
+
+                >span {
+                    margin-block-start: 0.25rem;
+                    display: block;
+                    color: var(--color-content-primary-dark);
+                    font-size: 1.1rem;
+                }
+            }
+
+        }
+
+        &-Right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+
+            @include mobile {
+                justify-content: center;
+            }
+        }
     }
 
     &-CookiePolicy {
-        display: block;
         width: fit-content;
         padding-inline: 0.5rem;
-        margin-block-start: 1rem;
         border-radius: 50vmin;
         text-decoration: none;
-        background-color: var(--color-theme);
+        background-color: var(--color-content-tertiary-light);
         color: var(--color-white); // since background is colored, content-primary might not provide enough contrast
         font-weight: 500;
         letter-spacing: 0.2px;

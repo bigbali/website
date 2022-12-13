@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import lodash from 'lodash';
-import { useSettings } from 'Util';
+import { useSettings } from 'Store';
 import {
     Color,
     DefaultColors,
@@ -17,35 +17,45 @@ const ColorMap = [
 ];
 
 export const SettingsMobile = () => {
-    const [settings, actions] = useSettings();
+    const {
+        theme,
+        accentColor,
+        fontSize,
+        contrast,
+        setTheme,
+        setAccentColor,
+        setFontSize,
+        setContrast,
+        reset
+    } = useSettings();
 
     const handleThemeSwitch = (theme: Theme) => {
-        actions.setTheme(theme);
+        setTheme(theme);
     };
 
     const handleChangeAccentColor = (color: Color) => {
-        actions.setAccentColor(color);
+        setAccentColor(color);
     };
 
     const handleChangeFontSize = useMemo(() => {
-        return lodash.debounce((modifier: number) => actions.setFontSize(modifier), 300);
+        return lodash.debounce((modifier: number) => setFontSize(modifier), 300);
     }, []);
 
     const handleChangeContrast = (modifier: number) => {
-        actions.setContrast(modifier);
+        setContrast(modifier);
     };
 
     const getOutlineStyle = useCallback((color: Color) => { // when we have the default selected, null === null,
-        if (settings.accentColor === color                  // but when we select another color, that is an object,
-            || (color && settings.accentColor               // therefore between page reloads their reference will change
-                && (color.value === settings.accentColor.value))) { // -> so we compare their values, not their references
+        if (accentColor === color                  // but when we select another color, that is an object,
+            || (color && accentColor               // therefore between page reloads their reference will change
+                && (color.value === accentColor.value))) { // -> so we compare their values, not their references
             return `4px solid ${getComputedStyle(document.body)
-                .getPropertyValue(`--color-border-${settings.theme === Theme.LIGHT
+                .getPropertyValue(`--color-border-${theme === Theme.LIGHT
                     ? 'dark'
                     : 'light'}`
                 )}`;
         }
-    }, [settings, actions]);
+    }, [theme, accentColor]);
 
     const colorMapper = (color: Color) => {
         if (color === null) {
@@ -84,7 +94,7 @@ export const SettingsMobile = () => {
                 textLeft='Light'
                 textRight='Dark'
                 label='Color Scheme'
-                externalValue={settings.theme}
+                externalValue={theme}
             />
             <Slider
                 onChange={(e) => handleChangeFontSize(Number.parseFloat(e.currentTarget.value))}
@@ -93,7 +103,7 @@ export const SettingsMobile = () => {
                 step={0.01}
                 name='fontsize'
                 label='Font Size'
-                externalValue={settings.fontSize}
+                externalValue={fontSize}
             />
             <Slider
                 onChange={(e) => handleChangeContrast(Number.parseFloat(e.currentTarget.value))}
@@ -102,7 +112,7 @@ export const SettingsMobile = () => {
                 step={0.01}
                 name='contrast'
                 label='Contrast'
-                externalValue={settings.contrast}
+                externalValue={contrast}
             />
             <div elem='ColorPicker'>
                 <div elem='ColorPicker-ColorsContainer'>
@@ -114,7 +124,7 @@ export const SettingsMobile = () => {
             </div>
             <button
                 elem='Reset'
-                onClick={() => actions.reset()}
+                onClick={() => reset()}
             >
                 Reset
             </button>

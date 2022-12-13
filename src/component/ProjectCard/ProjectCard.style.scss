@@ -1,0 +1,264 @@
+.ProjectCard {
+    position: relative;
+    display: flex;
+    margin-block-end: 3rem;
+    background: var(--color-background-primary);
+    box-shadow: 8px 8px 32px #dddddd,
+        -8px -8px 32px #ffffff;
+    border: 1px solid var(--color-border-transparent);
+    border-radius: 0.5rem;
+    transition: scale 0.5s;
+
+    @include theme-dark(&) {
+        box-shadow: 8px 8px 32px black,
+            -8px -8px 32px #1f1f1f;
+    }
+
+    @include mobile {
+        flex-direction: column;
+    }
+
+    &:hover {
+        scale: 1.01;
+    }
+
+    &_REVERSE {
+        flex-direction: row-reverse;
+        border-radius: 0.5rem;
+
+        .ProjectCard {
+            &-Details {
+                >h3 {
+                    text-align: end;
+                }
+
+                >p {
+                    margin-inline-start: -5rem;
+                    margin-inline-end: 0;
+                    text-align: end;
+                    border-radius: 0.5rem 0 0 0.5rem;
+                }
+            }
+
+            &-TagsAndAnchors {
+                flex-direction: row-reverse;
+            }
+
+            &-Status {
+                inset-inline-start: 0.5rem;
+                inset-inline-end: unset;
+            }
+
+            &-Thumbnail {
+                border-inline-start: unset;
+                border-inline-end: 1px solid var(--color-border-transparent);
+
+                >div {
+                    >img {
+                        border-radius: 0.5rem 0 0 0.5rem;
+                    }
+                }
+
+                &:hover {
+                    >div {
+                        >img {
+                            scale: 1.2;
+                            translate: -15% 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &-Details {
+        flex: 1.4;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        z-index: 3;
+
+        >h1 {
+            margin-block: 0;
+            padding: 1em;
+            font-size: 2rem;
+            font-weight: 500;
+
+            @include mobile {
+                font-size: 1.25rem;
+                padding: 0.5em;
+            }
+        }
+
+        >p {
+            font-size: 1.25rem;
+            margin-inline-end: -5rem;
+            margin-block: 0;
+            padding: 1em;
+            min-height: 10rem;
+            background-color: var(--color-background-secondary-dark-transparent-2);
+            color: var(--color-white);
+            backdrop-filter: blur(var(--blur-background));
+            border-radius: 0 0.5rem 0.5rem 0;
+
+            @include mobile {
+                font-size: 1rem;
+                min-height: auto;
+                padding: 0.5em;
+                margin-inline-end: 0;
+                border-radius: 0;
+            }
+        }
+    }
+
+    &-TagsAndAnchors {
+        display: flex;
+        justify-content: space-between;
+        gap: 2rem;
+    }
+
+    &-Tags {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        column-gap: 1em;
+        row-gap: 0.5em;
+        padding-block-start: 0.5rem;
+        padding-inline: 0.5rem;
+
+        @include mobile {
+            column-gap: 0.5em;
+        }
+
+        >span {
+            display: flex;
+            align-items: center;
+            padding-inline: 0.5rem;
+            font-size: 1.15rem;
+            border-radius: 0.25rem;
+            background-color: var(--color-content-secondary-light);
+            color: var(--color-content-primary-dark);
+
+            @include mobile {
+                font-size: 1rem;
+            }
+        }
+    }
+
+    &-Anchors {
+        display: flex;
+
+        .Icon {
+            width: 3rem;
+            height: 3rem;
+        }
+    }
+
+    &-Status {
+        margin-block-start: auto;
+        padding-inline: 0.5em;
+        padding-block-end: 0.5rem;
+        font-size: 1.15rem;
+        font-weight: 500;
+        color: var(--color-content-tertiary);
+
+        @include mobile {
+            font-size: 1rem;
+            margin-block-start: 0.5em;
+        }
+    }
+
+    &-Thumbnail {
+        position: relative;
+        flex: 1;
+        aspect-ratio: 1.46 / 1;
+        background-color: var(--color-background-secondary);
+        background-blend-mode: overlay;
+        background-size: cover;
+        background-position: 50%;
+        border-inline-start: 1px solid var(--color-border-transparent);
+
+        @include mobile {
+            border-block-start: 1px solid var(--color-border);
+        }
+
+        >div {
+            position: absolute;
+            inset: 0;
+
+            >img {
+                position: relative;
+                z-index: 2;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                opacity: 0;
+                border-radius: 0 0.5em 0.5em 0;
+                transition: scale 0.2s, translate 0.2s, opacity 0.2s;
+
+                @include mobile {
+                    border-radius: 0 0 0.5em 0.5em;
+                }
+            }
+
+            >canvas {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+            }
+        }
+
+        &:hover {
+            >div {
+                >img {
+                    scale: 1.2;
+                    translate: 15% 0;
+
+                    @include mobile {
+                        scale: 1.15;
+                        translate: 0 10%;
+                    }
+                }
+            }
+        }
+    }
+
+    &_LOADED {
+        .ProjectCard {
+            &-Thumbnail {
+                >div {
+                    >img {
+                        opacity: 1;
+                    }
+
+                    >canvas {
+                        animation-name: canvas-exit;
+                        animation-duration: 0.1s;
+                        animation-delay: 0.2s;
+                        animation-fill-mode: forwards;
+                    }
+                }
+            }
+        }
+    }
+
+    &_PREVENT_SCROLL_ANIMATION {
+        opacity: 1 !important;
+        translate: 0 0 !important;
+        scale: 1 !important;
+        filter: none !important;
+        transition: none !important;
+    }
+}
+
+@keyframes canvas-exit {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}

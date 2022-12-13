@@ -1,0 +1,69 @@
+.Help {
+    position: relative;
+
+    &-Content {
+        position: absolute;
+        inset-block-end: 2rem;
+        inset-inline: 0;
+        margin-inline-start: 50%;
+        width: fit-content;
+        height: fit-content;
+        min-width: 5rem;
+        min-height: 3rem;
+        padding: 1rem;
+        background-color: var(--color-content-primary-light);
+        color: var(--color-content-primary-dark);
+        border: 1px solid var(--color-border-dark);
+        font-size: 1rem;
+        border-radius: 0.5rem;
+        pointer-events: none;
+        z-index: 90;
+        opacity: 0;
+        scale: 0.9;
+        translate: -50% -1rem;
+        transition: opacity 0.2s,
+            scale 0.2s,
+            translate 0.2s;
+
+        * {
+            color: var(--color-content-primary-dark);
+        }
+
+        @include theme-dark(&) {
+            color: var(--color-content-primary-dark);
+
+            * {
+                color: var(--color-content-primary-dark);
+            }
+        }
+
+        &_ABOVE {
+            inset-block-end: 2rem;
+        }
+
+        &_BELOW {
+            inset-block-start: 2rem;
+        }
+
+        &_LEFT {
+            // TODO
+        }
+
+        &_RIGHT {
+            // TODO
+        }
+    }
+
+    >.Icon {
+        padding: 0;
+    }
+
+    &:hover {
+        >.Help-Content {
+            opacity: 1;
+            scale: 1;
+            translate: -50% 0;
+            pointer-events: all;
+        }
+    }
+}

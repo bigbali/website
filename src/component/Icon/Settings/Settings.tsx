@@ -3,7 +3,7 @@ import './Settings.style';
 
 const Settings = ({ isExpanded = false }: SVGProps<SVGSVGElement> & { isExpanded?: boolean }) => {
     return (
-        <div block='Icon' elem='Settings' mods={{ isExpanded }}>
+        <div block='Icon' elem='Settings' mods={{ isExpanded: isExpanded }}>
             <svg
                 xmlns='http://www.w3.org/2000/svg'
                 viewBox='0 0 512 512'>

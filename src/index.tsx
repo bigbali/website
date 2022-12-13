@@ -1,7 +1,6 @@
 import {
-    StrictMode,
     useEffect,
-    createRef
+    createRef,
 } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
@@ -10,19 +9,19 @@ import {
     RouterProvider,
     useOutlet,
 } from 'react-router-dom';
-import { Provider } from 'react-redux';
 import { SwitchTransition } from 'react-transition-group';
 import {
-    useDevice,
-    useNotification,
-    useSettings
+    scrollIntoView
 } from 'Util';
-import store, { Theme } from 'Store';
+import {
+    Theme,
+    useSection,
+    useSettings
+} from 'Store';
 import Header from 'Component/Header';
 import Cookies from 'Component/Cookies';
 import Notifications, {
-    NotificationContextProvider,
-    NotificationStatus
+    NotificationContextProvider
 } from 'Component/Notifications';
 import Transition from 'Component/Transition';
 import Footer from 'Component/Footer';
@@ -33,6 +32,48 @@ const rootElement = document.getElementById('root')!;
 const body = document.querySelector('body')!;
 const html = document.querySelector('html')!;
 
+const observerAction: IntersectionObserverCallback = (elements) => {
+    elements.forEach(element => {
+        !element.target.getAnimations().length && element.target.classList.toggle('begin-animation', element.isIntersecting);
+    });
+};
+
+const observer = new IntersectionObserver(observerAction, {
+    root: null,
+    rootMargin: '-80px 0px -80px 0px',
+    threshold: [0.01, 0.99]
+});
+
+/**
+ * This keeps track of observed elements so they can be accessed from other components
+ */
+const elementsToObserve = new Set();
+
+export const updateElementsToObserve = (item: HTMLElement, remove = false) => {
+    if (remove) {
+        elementsToObserve.delete(item);
+        observer.unobserve(item);
+        return;
+    }
+
+    elementsToObserve.add(item);
+    observer.observe(item);
+};
+
+const beginObservation = () => {
+    const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+    elementsToAnimate.forEach((element) => updateElementsToObserve(element as HTMLElement));
+};
+
+const afterTransitionCallback = (sectionId: string | null) => {
+    if (!sectionId) return;
+
+    beginObservation();
+
+    const section = document.querySelector(sectionId) as HTMLElement;
+    section && scrollIntoView({ current: section });
+};
+
 const routes = [
     {
         path: '/',
@@ -40,55 +81,34 @@ const routes = [
         nodeRef: createRef<any>()
     },
     {
-        path: 'about',
-        element: <Page.About />,
+        path: 'cookie-policy',
+        element: <Page.CookiePolicy />,
         nodeRef: createRef<any>()
     },
     {
-        path: 'cookie-policy',
-        element: <Page.CookiePolicy />,
-        nodeRef: createRef<any>(),
-    },
-    {
-        path: 'contact',
-        element: <Page.Contact />,
-        nodeRef: createRef<any>(),
-    },
-    {
-        path: 'terms-of-use',
-        element: <Page.TermsOfUse />,
-        nodeRef: createRef<any>(),
-    },
-    {
-        path: 'example/:id',
-        element: <Page.Example />,
-        nodeRef: createRef<any>(),
+        path: 'project/:slug',
+        element: <Page.Project />,
+        nodeRef: createRef<any>()
     },
     {
         path: '*',
         element: <Page.NotFound />,
-        nodeRef: createRef<any>(),
+        nodeRef: createRef<any>()
     }
 ];
 
 const Layout = () => {
     const location = useLocation();
-    const [showNotification] = useNotification();
-    const { isMobile } = useDevice();
-    const [{ theme, accentColor, fontSize, contrast }] = useSettings();
+    const { theme, accentColor, fontSize, contrast } = useSettings();
+    const { scrollToSectionId } = useSection();
     const currentOutlet = useOutlet();
     const { nodeRef } = routes.find(
         (route) => route.path === location.pathname
     ) ?? {};
 
     useEffect(() => {
-        showNotification({
-            timeout: 5000,
-            title: 'Hey',
-            message: `We believe you are browsing this page from a ${isMobile ? 'mobile' : 'desktop'} device. That is very cool!`,
-            status: NotificationStatus.INFO
-        });
-    }, [isMobile]);
+        beginObservation();
+    }, [location]);
 
     useEffect(() => {
         if (theme === Theme.LIGHT) {
@@ -105,7 +125,7 @@ const Layout = () => {
             body.style.removeProperty('--color-theme');
         }
 
-        html.style.fontSize = `${16 * (fontSize || 1)}px`;
+        html.style.fontSize = `${(fontSize || 1)}em`;
         html.style.filter = `contrast(${contrast || 1})`;
 
     }, [theme, accentColor, fontSize, contrast]);
@@ -115,21 +135,18 @@ const Layout = () => {
             <Header />
             <Notifications />
             <Cookies />
+            {/* THIS BREAKS document.querySelector WHILE TRANSITIONING! */}
             <SwitchTransition>
                 <Transition
-                    onEntered={() => { // when transitioning, prevent scrollbars
-                        document.querySelector('body')!.classList.remove('disable-scrolling');
-                    }}
-                    onExit={() => {
-                        document.querySelector('body')!.classList.add('disable-scrolling');
-                    }}
                     key={location.key}
                     nodeRef={nodeRef}
                     classNames="cross-page"
                     timeout={{
                         enter: 300,
                         exit: 100
-                    }}>
+                    }} // when transition is done, scroll to section if given
+                    onEntered={() => afterTransitionCallback(scrollToSectionId)}
+                >
                     {() => (
                         <main ref={nodeRef} block='Page'>
                             {currentOutlet}
@@ -144,9 +161,11 @@ const Layout = () => {
 
 const router = createBrowserRouter([
     {
+        // if an error occurs in the layout, this will catch that...
+        errorElement: <Page.Error />,
         element: <Layout />,
         children: [
-            { // this is our error boundary
+            { // ... and if it happens lower in the tree, this will catch that while keeping the layout
                 errorElement: <Page.Error />,
                 children: routes.map(
                     route => ({
@@ -162,12 +181,8 @@ const router = createBrowserRouter([
 
 const root = createRoot(rootElement);
 root.render(
-    <StrictMode>
-        <Provider store={store}>
-            <NotificationContextProvider>
-                <RouterProvider router={router} />
-            </NotificationContextProvider>
-        </Provider>
-    </StrictMode>
+    <NotificationContextProvider>
+        <RouterProvider router={router} />
+    </NotificationContextProvider>
 );
 

@@ -18,7 +18,7 @@
         "sourceType": "module",
         "ecmaVersion": 2022,
         "project": [
-            "eslint.tsconfig.json"
+            "./eslint.tsconfig.json"
         ]
     },
     "rules": {

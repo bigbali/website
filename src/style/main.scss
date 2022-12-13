@@ -10,22 +10,32 @@
     --color-background-primary-dark: rgb(30, 30, 35);
     --color-background-primary-dark-transparent: rgba(30, 30, 35, 0.75);
 
+    --color-background-primary-light-transparent-less-transparent: rgba(250, 250, 250, 0.9);
     --color-background-primary-dark-transparent-less-transparent: rgba(30, 30, 35, 0.9);
 
-    --color-background-secondary-light: rgb(238, 241, 247);
-    --color-background-secondary-light-transparent: rgba(238, 241, 247, 0.75);
-    --color-background-secondary-dark: rgb(35, 35, 40);
-    --color-background-secondary-dark-transparent: rgba(35, 35, 40, 0.75);
+    --color-background-secondary-light: rgb(229, 232, 238);
+    --color-background-secondary-light-transparent: rgba(229, 232, 238, 0.9);
+    --color-background-secondary-light-transparent-2: rgba(229, 232, 238, 0.75);
+    --color-background-secondary-dark: rgb(40, 42, 48);
+    --color-background-secondary-dark-transparent: rgba(40, 42, 48, 0.9);
+    --color-background-secondary-dark-transparent-2: rgba(40, 42, 48, 0.75);
 
-    --color-content-primary-light: rgb(25, 30, 30);
-    --color-content-primary-light-transparent: rgba(25, 30, 30, 0.75);
+    --color-content-primary-light: rgb(35, 35, 40);
+    --color-content-primary-light-transparent: rgba(25, 30, 30, 0.9);
+    --color-content-primary-light-transparent-2: rgba(25, 30, 30, 0.75);
     --color-content-primary-dark: rgb(240, 240, 240);
-    --color-content-primary-dark-transparent: rgba(240, 240, 240, 0.75);
+    --color-content-primary-dark-transparent: rgba(240, 240, 240, 0.9);
+    --color-content-primary-dark-transparent-2: rgba(240, 240, 240, 0.75);
 
-    --color-content-secondary-light: rgb(43, 49, 56);
-    --color-content-secondary-light-transparent: rgba(43, 49, 56, 0.75);
-    --color-content-secondary-dark: rgb(220, 225, 230);
-    --color-content-secondary-dark-transparent: rgba(220, 225, 230, 0.75);
+    --color-content-secondary-light: rgb(60, 65, 70);
+    --color-content-secondary-light-transparent: rgba(60, 65, 70, 0.9);
+    --color-content-secondary-dark: rgb(205, 210, 220);
+    --color-content-secondary-dark-transparent: rgba(205, 210, 220, 0.9);
+
+    --color-content-tertiary-light: rgb(102, 114, 129);
+    --color-content-tertiary-dark: rgb(160, 166, 179);
+    --color-content-quaternary-light: rgb(135, 149, 166);
+    --color-content-quaternary-dark: rgb(135, 149, 166);
 
     --color-theme-initial: rgb(204, 18, 18);
     --color-theme: var(--color-theme-initial);
@@ -41,6 +51,9 @@
     --color-secondary-background: rgb(238, 241, 247);
     --color-primary-background-transparent: rgba(255, 255, 255, 0.75);
 
+    --color-icon-light: #EEF1F7;
+    --color-icon-dark: rgb(33, 34, 39);
+
     --color-neutral-background: rgb(27, 152, 168);
     --color-neutral-foreground: var(--color-white);
     --color-success-background: rgb(23, 185, 85);
@@ -50,44 +63,87 @@
     --color-error-background: rgb(212, 46, 46);
     --color-error-foreground: var(--color-white);
 
-    --content-padding: 2rem;
-    --header-height: 3.75rem;
+    --content-padding: 5rem;
+    --content-padding-inner: calc(var(--content-padding) * 1.5);
+    --header-height: 3rem;
+    --footer-height: 3rem;
     --blur-background: 16px;
 
     @include mobile {
         --content-padding: 1.5rem;
         --header-height: 2.5rem;
+        --footer-height: 10rem;
+    }
+
+    @include uhd {
+        --content-padding: 35rem;
+    }
+
+    @include qhd {
+        --content-padding: 25rem;
+    }
+
+    @include fhd {
+        --content-padding: 17.5rem;
     }
 }
 
 .theme-dark {
+    // background
     --color-background-primary: var(--color-background-primary-dark);
     --color-background-primary-transparent: var(--color-background-primary-dark-transparent);
     --color-background-secondary: var(--color-background-secondary-dark);
     --color-background-secondary-transparent: var(--color-background-secondary-dark-transparent);
+    --color-background-secondary-transparent-2: var(--color-background-secondary-dark-transparent-2);
+
+    // content
     --color-content-primary: var(--color-content-primary-dark);
     --color-content-primary-transparent: var(--color-content-primary-dark-transparent);
     --color-content-secondary: var(--color-content-secondary-dark);
     --color-content-secondary-transparent: var(--color-content-secondary-dark-transparent);
+    --color-content-tertiary: var(--color-content-tertiary-dark);
+    --color-content-quaternary: var(--color-content-quaternary-dark);
+
+    --color-icon: var(--color-icon-dark);
+
+    --color-background-primary-transparent-less-transparent: var(--color-background-primary-dark-transparent-less-transparent);
 
     --color-header-background: var(--color-background-primary-dark-transparent);
+
+    // border
     --color-border: var(--color-border-dark);
     --color-border-transparent: var(--color-border-dark-transparent);
+    --color-border-inverted: var(--color-border-light);
+    --color-border-inverted-transparent: var(--color-border-light-transparent);
 }
 
 .theme-light {
+    // background
     --color-background-primary: var(--color-background-primary-light);
     --color-background-primary-transparent: var(--color-background-primary-light-transparent);
-    --color-background-secondary: var(--color-background-primary);
+    --color-background-secondary: var(--color-background-secondary-light);
     --color-background-secondary-transparent: var(--color-background-secondary-light-transparent);
+    --color-background-secondary-transparent-2: var(--color-background-secondary-light-transparent-2);
+
+    // content
     --color-content-primary: var(--color-content-primary-light);
     --color-content-primary-transparent: var(--color-content-primary-light-transparent);
     --color-content-secondary: var(--color-content-secondary-light);
     --color-content-secondary-transparent: var(--color-content-secondary-light-transparent);
+    --color-content-tertiary: var(--color-content-tertiary-light);
+    --color-content-quaternary: var(--color-content-quaternary-light);
+
+    --color-icon: var(--color-icon-light);
+
+    --color-background-primary-transparent-less-transparent: var(--color-background-primary-light-transparent-less-transparent);
 
     --color-header-background: var(--color-background-primary-light-transparent);
+
+    // border
     --color-border: var(--color-border-light);
     --color-border-transparent: var(--color-border-light-transparent);
+    --color-border-inverted: var(--color-border-dark);
+    --color-border-inverted-transparent: var(--color-border-dark-transparent);
 }
 
 *,
@@ -99,11 +155,20 @@
     font-family: $raleway;
 }
 
+::selection {
+    background-color: var(--color-theme);
+    color: var(--color-white);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 body,
 .root {
     margin: 0;
     background-color: var(--color-background-primary);
-    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 body {
@@ -128,14 +193,8 @@ p {
 
 main {
     &.Page {
-        &>div {
-            padding-block-start: var(--header-height);
-            background-repeat: no-repeat;
-            background-size: cover;
-            min-height: 100vh;
-        }
-
         &>div::before {
+            // page transition overlay
             content: "";
             display: block;
             position: fixed;
@@ -148,34 +207,18 @@ main {
 
         &.cross-page {
             &_enter {
-                >div {
-                    @include desktop {
-                        scale: 1.1;
-                    }
-
-                }
-
                 &>div::before {
                     opacity: 1;
                 }
             }
 
             &_exit {
-                scale: 1;
-
                 &>div::before {
                     opacity: 0;
                 }
             }
 
             &_enter-active {
-                >div {
-                    scale: 1;
-                    transition: scale 0.2s;
-                    transition-timing-function: ease-out;
-
-                }
-
                 &>div::before {
                     opacity: 0;
                     transition: opacity 0.3s;
@@ -188,15 +231,6 @@ main {
             }
 
             &_exit-active {
-                >div {
-                    @include desktop {
-                        scale: 1.1;
-                        transition: scale 0.1s;
-                        transition-timing-function: ease-out;
-                    }
-
-                }
-
                 &>div::before {
                     opacity: 1;
                     transition: opacity 0.1s;
@@ -214,5 +248,64 @@ button {
         >.Icon>svg>path {
             fill: var(--color-theme);
         }
+    }
+}
+
+.animate-on-scroll {
+    @include not-prefers-reduced-motion {
+        opacity: 0;
+        translate: -5rem 0;
+        scale: 0.9;
+        filter: blur(16px);
+        transition: opacity 0.15s,
+            translate 0.15s,
+            scale 0.15s,
+            filter 0.15s;
+
+        &.landing-animation {
+            @for $i from 1 through 3 {
+                &:nth-child(#{$i}) {
+                    transition-delay: 600 + ($i *80ms) !important;
+                    transition-duration: 0.3s;
+                }
+            }
+        }
+
+        &.begin-animation {
+            opacity: 1;
+            translate: 0 0;
+            scale: 1;
+            filter: blur(0);
+        }
+
+        @for $i from 1 through 10 {
+            &:nth-child(#{$i}) {
+                transition-delay: $i * 80ms;
+            }
+        }
+    }
+}
+
+.landing-initial-state {
+    opacity: 0;
+    translate: 0 -10rem;
+    scale: 0.9;
+    filter: blur(16px);
+}
+
+.debug {
+    section {
+        outline: 1px solid green !important;
+    }
+
+    div {
+        outline: 1px solid yellow !important;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+        outline: 1px solid blue !important;
     }
 }

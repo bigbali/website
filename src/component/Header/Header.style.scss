@@ -1,6 +1,7 @@
 .Header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     position: fixed;
     inset-block-start: 0;
     inset-inline: 0;
@@ -42,11 +43,18 @@
 
     &-Branding {
         margin-block: auto;
-        font-size: 1.5rem;
+        font-size: 2rem;
         font-weight: 400;
+        font-family: 'Caveat';
+        text-decoration: none;
+        transition: color 0.2s;
 
         @include mobile {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+        }
+
+        &:hover {
+            color: var(--color-theme);
         }
     }
 }

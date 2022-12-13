@@ -1,8 +1,7 @@
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TransitionGroup } from 'react-transition-group';
-import { useDevice } from 'Util';
-import Icon from 'Component/Icon';
+import { useDevice } from 'Store';
 import Transition from 'Component/Transition';
 import './Cookies.style';
 
@@ -12,7 +11,10 @@ export const Cookies = () => {
     const { isMobile } = useDevice();
     const ref = useRef(null);
 
-    const tapOrClick = isMobile ? 'Tap' : 'Click';
+    const close = () => {
+        localStorage.setItem('is_cookies_notice_closed', 'true');
+        setIsClosed(true);
+    };
 
     return (
         <TransitionGroup component={null}>
@@ -28,32 +30,30 @@ export const Cookies = () => {
                     appear
                 >
                     <div block='Cookies' ref={ref}>
-                        <div elem='Header'>
-                            Cookies notice
-                            <div elem='Close'>
-                                <button
-                                    elem='CloseButton'
-                                    onClick={() => {
-                                        localStorage.setItem('is_cookies_notice_closed', 'true');
-                                        setIsClosed(true);
-                                    }}>
-                                    <Icon.Close />
+                        <div elem='Body'>
+                            <div elem='Body-Left'>
+                                <p>
+                                    I utilize your browser’s built-in storage system to store some data in order
+                                    to improve your experience while browsing this site.
+                                    <span>
+                                        You can read more about my&nbsp;
+                                        {isMobile && <br />}
+                                        <Link
+                                            elem='CookiePolicy'
+                                            to='cookie-policy'
+                                            target='_blank'
+                                        >
+                                            <wbr />
+                                            cookie policy here.
+                                        </Link>
+                                    </span>
+                                </p>
+                            </div>
+                            <div elem='Body-Right'>
+                                <button elem='Accept' onClick={close}>
+                                    Accept
                                 </button>
                             </div>
-                        </div>
-                        <div elem='Body'>
-                            We must inform you that we are using cookies to
-                            ensure your experience browsing this page is nothing less than amazing.
-                            <br />
-                            By continuing to browse this page, you automatically agree to our cookie policy.
-                            <br />
-                            <Link
-                                elem='CookiePolicy'
-                                to='cookie-policy'
-                                target='_blank'
-                            >
-                                {tapOrClick} here to read about our Cookie Policy.
-                            </Link>
                         </div>
                     </div>
                 </Transition>

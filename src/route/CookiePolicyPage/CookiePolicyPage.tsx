@@ -1,18 +1,62 @@
+import Icon from 'Component/Icon';
+import { NotificationStatus } from 'Component/Notifications';
+import { useNotification } from 'Util';
 import './CookiePolicyPage.style';
 
 export const CookiePolicyPage = () => {
+    const [showNotification] = useNotification();
+
+    const clearStorage = () => {
+        localStorage.clear();
+        showNotification({
+            timeout: 5000,
+            status: NotificationStatus.INFO,
+            title: 'Browser Storage Cleared',
+            message: 'The data I stored on your device has been deleted.'
+        });
+    };
+
     return (
-        <div block='CookiePolicyPage' >
-            <div elem='MainContent'>
-                <h1 elem='Header'>
-                    Our Cookie Policy
+        <div block='CookiePolicyPage'>
+            <div elem='Heading'>
+                <h1>
+                    Cookie Policy
                 </h1>
-                <p elem='TextContent'>
-                    We use your browser's built-in storage to remember your settings and whether you have closed the Cookies notice,
-                    therefore, we are by law obliged to notify our users.
-                    These functionalities are implemented to enhance your browsing experience while using this page.
-                    This storage is automatically used when you load the page, and if you wish to opt out, you can do so
-                    by clearing your Cookies in your browser and leaving the page.
+                <Icon.Cookie />
+            </div>
+            <div elem='Content'>
+                <p>
+                    I utilize your browser’s built-in storage system to store the following data:
+                </p>
+                <ul>
+                    <li>
+                        whether or not you have accepted my cookie policy
+                    </li>
+                    <li>
+                        settings, which are:
+                        <ul>
+                            <li>
+                                font size preference
+                            </li>
+                            <li>
+                                contrast preference
+                            </li>
+                            <li>
+                                accent color preference
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div elem='Clear'>
+                <p>
+                    If you no longer wish this data to be stored on your device, please click on the following button:
+                </p>
+                <button title='Clear Cookies' onClick={clearStorage}>
+                    Clear Storage
+                </button>
+                <p>
+                    When this page is loaded again, this data will be automatically repopulated.
                 </p>
             </div>
         </div>
