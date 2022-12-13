@@ -78,6 +78,42 @@
         place-items: center;
         margin-block-start: 15vh;
 
+        &_REDUCE_WIDTH {
+            margin-block-end: 1rem;
+
+            >div {
+                >div {
+                    flex-direction: column;
+
+                    &:not(:last-child) {
+                        @include separator {
+                            inset-block-end: -1rem;
+                        }
+                    }
+
+                    >span {
+                        text-align: center;
+                    }
+                }
+            }
+
+            .Contact-Content-Email {
+                border: none;
+                width: 80%;
+                margin-inline: auto;
+
+                >a {
+                    width: 100%;
+                }
+
+                >span {
+                    padding-block: 0.5rem;
+                }
+            }
+
+
+        }
+
         span {
             padding-inline: 1rem;
             color: var(--color-content-tertiary);

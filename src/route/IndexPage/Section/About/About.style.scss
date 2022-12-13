@@ -85,6 +85,19 @@
             }
         }
 
+        &-Figure_REDUCE_WIDTH {
+
+            >div {
+
+                &:nth-of-type(2),
+                &:nth-of-type(3) {
+                    width: 60% !important;
+                    height: auto !important;
+                    aspect-ratio: 2/1;
+                }
+            }
+        }
+
         >figure {
             position: relative;
             display: flex;
@@ -288,5 +301,10 @@
                 }
             }
         }
+    }
+
+    .Link_REDUCE_WIDTH {
+        flex-direction: column;
+        align-items: center;
     }
 }

@@ -1,5 +1,6 @@
 import { RefObject } from 'react';
 import { useNotification } from 'Util';
+import { useDevice, useSettings } from 'Store';
 import { NotificationStatus } from 'Component/Notifications';
 import Icon from 'Component/Icon';
 import './Contact.style';
@@ -19,7 +20,10 @@ const copyToClipboard = async (text: string) => {
 };
 
 const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => {
+    const { fontSize } = useSettings();
+    const { isMobile } = useDevice();
     const [showNotification] = useNotification();
+    const preventOverflow = isMobile && fontSize > 1.2;
 
     const handleCopy = (text: string) => {
         copyToClipboard(text)
@@ -64,7 +68,7 @@ const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) =
                 <Icon.Message />
                 <Icon.Message />
             </div>
-            <div elem='Content'>
+            <div elem='Content' mods={{ REDUCE_WIDTH: preventOverflow }}>
                 <div>
                     <div elem='Content-Email' className='animate-on-scroll'>
                         <a href={`mailto:${EMAIL}`} target='_top' title={`Say Hello at ${EMAIL}`} role='button'>
@@ -73,7 +77,7 @@ const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) =
                         <span>
                             {EMAIL}
                         </span>
-                        <button title='Copy email address to clipboard' onClick={() => void handleCopy(EMAIL)}>
+                        <button title='Copy email address to clipboard' onClick={() => handleCopy(EMAIL)}>
                             <Icon.Copy />
                         </button>
                     </div>
@@ -87,7 +91,7 @@ const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) =
                             {LINKEDIN.slice(27)}
 
                         </span>
-                        <button title='Copy LinkedIn address to clipboard' onClick={() => void handleCopy(LINKEDIN)}>
+                        <button title='Copy LinkedIn address to clipboard' onClick={() => handleCopy(LINKEDIN)}>
                             <Icon.Copy />
                         </button>
                     </div>
@@ -98,7 +102,7 @@ const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) =
                         <span>
                             {GITHUB}
                         </span>
-                        <button title='Copy GitHub address to clipboard' onClick={() => void handleCopy(GITHUB)}>
+                        <button title='Copy GitHub address to clipboard' onClick={() => handleCopy(GITHUB)}>
                             <Icon.Copy />
                         </button>
                     </div>

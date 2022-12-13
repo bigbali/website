@@ -4,7 +4,7 @@ import {
     useRef,
 } from 'react';
 import { fromEvent, throttleTime } from 'rxjs';
-import { useDevice } from 'Store';
+import { useDevice, useSettings } from 'Store';
 import Icon from 'Component/Icon';
 import Pattern from 'Component/Pattern';
 import Balazs from 'Media/webp/balazs.webp';
@@ -13,8 +13,10 @@ import './About.style';
 const MAX_ROTATION_DEG = 5;
 
 const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => {
-    const { isDesktop } = useDevice();
+    const { isMobile } = useDevice();
+    const { fontSize } = useSettings();
     const imageRef = useRef<HTMLDivElement>(null);
+    const preventOverflow = isMobile && fontSize > 1.2;
 
     const transformImage = (e: MouseEvent) => {
         const centerX = window.innerWidth / 2;
@@ -28,11 +30,11 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
     };
 
     useEffect(() => {
-        if (!isDesktop) return; // On mobile, it's pointless to add a mouse event listener
+        if (isMobile) return; // On mobile, it's pointless to add a mouse event listener
 
         const event = fromEvent(document, 'mousemove')
             .pipe(
-                throttleTime(10),
+                throttleTime(16),
             )
             .subscribe((e: Event) => transformImage(e as MouseEvent));
 
@@ -142,7 +144,7 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                         </p>
                     </section>
                 </div>
-                <figure>
+                <figure elem='Content-Figure' mods={{ REDUCE_WIDTH: preventOverflow }}>
                     <div ref={imageRef} className='animate-on-scroll'>
                         <Icon.Cat />
                         <img src={Balazs} alt="Portrait of Balázs" />
@@ -152,6 +154,8 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                                 //eslint-disable-next-line max-len
                                 href='https://www.google.com/maps/place/Gheorgheni/@46.7210014,25.5814932,8552m/data=!3m2!1e3!4b1!4m5!3m4!1s0x474aeb61846fa94f:0x861cdca52511bf7a!8m2!3d46.7212112!4d25.5855275'
                                 target='_blank'
+                                block='Link'
+                                mods={{ REDUCE_WIDTH: preventOverflow }}
                             >
                                 <Icon.Location />
                                 <span>
