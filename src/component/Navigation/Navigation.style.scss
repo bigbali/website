@@ -1,8 +1,11 @@
 .Navigation {
     display: flex;
     align-items: center;
-    margin-inline-start: auto;
     height: 100%;
+
+    @include desktop {
+        margin-inline-start: auto;
+    }
 
     &-List {
         display: flex;

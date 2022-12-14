@@ -1,10 +1,8 @@
-$section-home-padding-block-start: 25rem;
-
 .Landing {
     z-index: 1;
     position: relative;
     padding-inline-start: var(--content-padding);
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
 
     @include mobile {
@@ -13,7 +11,7 @@ $section-home-padding-block-start: 25rem;
     }
 
     &-Content {
-        padding-block-start: $section-home-padding-block-start;
+        padding-block-start: 25vh;
 
         @include desktop {
             width: 40%;
@@ -90,7 +88,6 @@ $section-home-padding-block-start: 25rem;
     }
 
     &-Spline {
-        height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -102,6 +99,7 @@ $section-home-padding-block-start: 25rem;
 
         @include desktop {
             width: 60%;
+            height: 100vh;
         }
 
         @include from-fhd {

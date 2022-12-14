@@ -76,15 +76,15 @@
     }
 
     @include uhd {
-        --content-padding: 35rem;
+        --content-padding: min(35rem, 15vw);
     }
 
     @include qhd {
-        --content-padding: 25rem;
+        --content-padding: min(25rem, 15vw);
     }
 
     @include fhd {
-        --content-padding: 17.5rem;
+        --content-padding: min(17.5rem, 10vw);
     }
 }
 
