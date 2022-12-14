@@ -36,6 +36,9 @@ export const CookiePolicyPage = () => {
                         settings, which are:
                         <ul>
                             <li>
+                                color scheme preference
+                            </li>
+                            <li>
                                 font size preference
                             </li>
                             <li>
