@@ -24,7 +24,7 @@
     &-Filter {
         position: sticky;
         inset-block-start: 5rem;
-        margin-inline: 0;
+        margin-inline: auto 0;
         margin-block-start: 3rem;
         padding: 1rem;
         width: fit-content;
@@ -35,7 +35,8 @@
         z-index: 96;
 
         @include mobile {
-            float: none;
+            width: auto;
+            margin-inline: 0;
             margin-block-start: 3rem;
             inset-block-start: 4rem;
         }
@@ -83,7 +84,6 @@
         }
 
         &:not(.IS_EXPANDED) {
-            // height: 3.75rem;
             overflow: hidden;
 
             @include mobile {

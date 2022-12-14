@@ -58,18 +58,24 @@
 
         &:hover {
             &::before {
-                opacity: 1;
-                scale: 1;
+                @include desktop {
+                    opacity: 1;
+                    scale: 1;
+                }
             }
 
             >div {
-                opacity: 1;
-                translate: 0 0;
-                scale: 1;
+                @include desktop {
+                    opacity: 1;
+                    translate: 0 0;
+                    scale: 1;
+                }
             }
 
             >button {
-                border-color: var(--color-content-primary);
+                @include desktop {
+                    border-color: var(--color-content-primary);
+                }
             }
         }
 
