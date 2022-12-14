@@ -54,9 +54,9 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
     );
 
     const getShowMoreCount = () => {
-        return projectsFiltered.length - projectCards.length <= DEFAULT_LIMIT
+        return projectsFiltered.length - projectCards.length <= 3
             ? projectsFiltered.length - projectCards.length
-            : DEFAULT_LIMIT;
+            : 3;
     };
 
     /**
@@ -201,7 +201,7 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
                 >
                     {
                         SHOW_MORE_COUNT === 0
-                            ? 'Reset'
+                            ? `Show Only ${DEFAULT_LIMIT}`
                             : `Show ${SHOW_MORE_COUNT} More`
                     }
                 </button>

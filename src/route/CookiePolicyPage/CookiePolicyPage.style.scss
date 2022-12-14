@@ -1,7 +1,7 @@
 .CookiePolicyPage {
     padding-inline: var(--content-padding);
     padding-block-start: 12rem;
-    height: calc(100vh - var(--footer-height));
+    min-height: calc(100vh - var(--footer-height));
 
     @include mobile {
         padding-block-start: 7rem;
