@@ -3,9 +3,9 @@ import { useParams } from 'react-router';
 import { BlurhashCanvas } from 'react-blurhash';
 import ReactMarkdown from 'react-markdown';
 import { useDevice } from 'Store';
-import Icon from 'Component/Icon';
 import { projects } from 'Component/ProjectCard/ProjectCard';
-import './Project.style';
+import Icon from 'Component/Icon';
+import './ProjectPage.style';
 
 import md__balazs_burjan from './markdown/balazs-burjan.md';
 import md__react_template from './markdown/react-template.md';
@@ -29,7 +29,7 @@ const Markdown: Record<string, string> = {
 
 const ProjectNotFound = () => {
     return (
-        <div block='Page-Project'>
+        <div block='ProjectPage'>
             <div elem='Back'>
                 <a href='/' title='Back to Home Page'>
                     <Icon.Chevron />
@@ -44,7 +44,7 @@ const ProjectNotFound = () => {
     );
 };
 
-export const Project = () => {
+export const ProjectPage = () => {
     const { slug } = useParams();
     const [markdown, setMarkdown] = useState<string | null>(null);
     const [isImageLoaded, setIsImageLoaded] = useState(false);
@@ -68,7 +68,7 @@ export const Project = () => {
     } = project;
 
     const thumbnail = (
-        <div block='Page-Project'>
+        <div block='ProjectPage'>
             <div elem='Thumbnail' mods={{ IS_LOADED: isImageLoaded }}>
                 <div>
                     <img
@@ -118,7 +118,7 @@ export const Project = () => {
     }, []);
 
     return (
-        <div block='Page-Project'>
+        <div block='ProjectPage'>
             <p elem='Project'>
                 Project
             </p>
@@ -166,4 +166,4 @@ export const Project = () => {
     );
 };
 
-export default Project;
+export default ProjectPage;

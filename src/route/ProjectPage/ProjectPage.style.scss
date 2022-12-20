@@ -1,12 +1,13 @@
-.Page-Project {
-    &:has(.Page-Project) {
+.ProjectPage {
+    &:has(.ProjectPage) {
         padding-inline: var(--content-padding);
         padding-block-start: calc(var(--header-height) + 2rem);
         min-height: calc(100vh - var(--footer-height));
     }
 
-    .Page-Project {
+    .ProjectPage {
         // this is the thumbnail, but alas we had to redeclare block on it
+        // because the transformation plugin doesn't yet support short circuiting
 
         @include mobile {
             padding: 0 !important;

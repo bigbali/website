@@ -5,6 +5,7 @@ import {
     useEffect,
     useMemo,
     useRef,
+    useState,
     type RefObject
 } from 'react';
 import {
@@ -16,16 +17,29 @@ import {
     Subscription,
     throttleTime
 } from 'rxjs';
-import FontFaceObserver from 'fontfaceobserver';
 import { updateElementsToObserve } from '../../../../index';
 import {
     Theme,
     useDevice,
     useSettings
 } from 'Store';
-import SplineLight from 'Media/webp/spline-light.webp';
-import SplineDark from 'Media/webp/spline-dark.webp';
 import './Landing.style.scss';
+
+import img__spline_light_mobile from 'Media/webp/spline-light-mobile.webp';
+import img__spline_dark_mobile from 'Media/webp/spline-dark-mobile.webp';
+import img__spline_light_desktop from 'Media/webp/spline-light-desktop.webp';
+import img__spline_dark_desktop from 'Media/webp/spline-dark-desktop.webp';
+
+const SplineWEBP = {
+    Mobile: {
+        Dark: img__spline_dark_mobile,
+        Light: img__spline_light_mobile
+    },
+    Desktop: {
+        Dark: img__spline_dark_desktop,
+        Light: img__spline_light_desktop
+    }
+};
 
 const SplineURL = {
     Dark: 'https://prod.spline.design/Orv626vNo2ELSt25/scene.splinecode',
@@ -33,27 +47,15 @@ const SplineURL = {
     Switchable: 'https://prod.spline.design/2oNTUNbzmdhEMPUo/scene.splinecode'
 };
 
-const fontsReady = async () => {
-    const raleway = new FontFaceObserver('Raleway');
-    const caveat = new FontFaceObserver('Caveat');
-
-    await raleway.load().catch(() => {
-        console.warn('Font load timed out: Raleway.');
-    });
-    await caveat.load().catch(() => {
-        console.warn('Font load timed out: Caveat.');
-    });
-};
-
 // Remember the timeouts we'll use to temporarily halt the scroll animation when the page loads
 let timeouts: NodeJS.Timeout[] = [];
 
+// we need a way to animate initial load while keeping scroll animations, so at first we have the landing-animation class,
+// then after 3 seconds we replace it, so we can have scroll animations
 const recursivelyApplyClassNameTransformation = (element: HTMLElement) => {
     if (element?.classList?.replace('landing-initial-state', 'animate-on-scroll')) {
         updateElementsToObserve(element);
         element.classList.add('landing-animation');
-
-        // this one's for scroll animation
         element.classList.toggle('begin-animation');
 
         timeouts.push(setTimeout(() => {
@@ -69,7 +71,6 @@ const recursivelyApplyClassNameTransformation = (element: HTMLElement) => {
 };
 
 type LandingProps = {
-    onFontsLoaded: () => void,
     onSplineLoaded: () => void,
     loadingRef: RefObject<HTMLDivElement>,
     refFromParent: RefObject<HTMLElement>,
@@ -83,13 +84,14 @@ enum SplineBackgroundScaleX {
     LIGHT = 2
 };
 
-const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTriggerAnimation }: LandingProps) => {
+const Landing = memo(({ onSplineLoaded, refFromParent, shouldTriggerAnimation }: LandingProps) => {
     const { theme } = useSettings();
     const { isDesktop } = useDevice();
     const splineRef = useRef<SplineApplication>();
     const splineAllRef = useRef<SPEObject>();
     const splineBackgroundRef = useRef<SPEObject>();
-    const splineCanvasRef = useRef<HTMLCanvasElement>(null);
+    const splineCanvasRef = useRef<HTMLCanvasElement | HTMLImageElement>(null);
+    const [useBackup, setUseBackup] = useState(false);
     const Spline = isDesktop && lazy(() => import('@splinetool/react-spline'));
 
     const onSplineLoad = (splineApp: SplineApplication) => {
@@ -120,13 +122,17 @@ const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTrig
         }
     };
 
-    useEffect(() => {
-        void (async () => {
-            await fontsReady();
-            onFontsLoaded();
-            console.log('Fonts are ready.', `${Math.round(performance.now())}ms`);
-        })();
-    }, []);
+    useEffect(() => { // Spline backup plan
+        let timeout: NodeJS.Timeout;
+        if (isDesktop && !shouldTriggerAnimation) {
+            timeout = setTimeout(() => {
+                console.log('backup');
+                setUseBackup(true);
+            }, 5000);
+        }
+
+        return () => clearTimeout(timeout);
+    }, [isDesktop, shouldTriggerAnimation]);
 
     useEffect(() => { // background color switch
         if (!splineBackgroundRef.current) return;
@@ -171,11 +177,12 @@ const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTrig
     }, [shouldTriggerAnimation]);
 
     // As this component eats performance for breakfast then spits it out and eats it again,
-    // let's not render it unless necessary
+    // let's not re-render it unless necessary
     const SplineMemo = useMemo(() => {
-        if (isDesktop && Spline) {
+        if (isDesktop && Spline && !useBackup) {
             return (
                 <Spline
+                    // @ts-ignore --- ignored because we need to set this ref to the image if Spline component times out
                     ref={splineCanvasRef}
                     onLoad={onSplineLoad}
                     scene={SplineURL.Switchable}
@@ -183,10 +190,14 @@ const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTrig
             );
         }
 
+        const src = SplineWEBP[isDesktop ? 'Desktop' : 'Mobile'][theme === Theme.LIGHT ? 'Light' : 'Dark'];
+
         return (
             <img
-                src={theme === Theme.LIGHT ? SplineLight : SplineDark}
+                src={src}
                 onLoad={onSplineLoaded}
+                // @ts-ignore --- ignored because we need to set this ref to the image if Spline component times out
+                ref={splineCanvasRef}
                 className='landing-initial-state'
                 alt={`
                     An image of the 3D animation you would see on a desktop device,
@@ -194,7 +205,7 @@ const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTrig
                 `}
             />
         );
-    }, [theme, isDesktop]);
+    }, [theme, isDesktop, useBackup]);
 
     return (
         <section
@@ -227,7 +238,7 @@ const Landing = memo(({ onFontsLoaded, onSplineLoaded, refFromParent, shouldTrig
                     for the web and desktop.
                 </p>
             </div>
-            <div elem='Spline'>
+            <div elem='Spline' mods={{ IS_BACKUP: useBackup }}>
                 <Suspense fallback={null}>
                     {SplineMemo}
                 </Suspense>

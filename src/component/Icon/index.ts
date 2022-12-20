@@ -4,6 +4,7 @@ import { default as Base } from './Base';
 import { default as Address } from './Address';
 import { default as Anchor } from './Anchor';
 import { default as Babel } from './Babel';
+import { default as BB } from './BB';
 import { default as Cat } from './Cat';
 import { default as Chevron } from './Chevron';
 import { default as Close } from './Close';
@@ -17,6 +18,7 @@ import { default as HamburgerMenu } from './HamburgerMenu';
 import { default as Help } from './Help';
 import { default as JavaScript } from './JavaScript';
 import { default as LinkedIn } from './LinkedIn';
+import { default as Loader } from './Loader';
 import { default as Location } from './Location';
 import { default as Message } from './Message';
 import { default as Moon } from './Moon';
@@ -36,6 +38,7 @@ const Icon = {
     Address,
     Anchor,
     Babel,
+    BB,
     Cat,
     Chevron,
     Close,
@@ -49,6 +52,7 @@ const Icon = {
     Help,
     JavaScript,
     LinkedIn,
+    Loader,
     Location,
     Message,
     Moon,

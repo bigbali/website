@@ -94,6 +94,7 @@
         align-items: center;
         inset-inline-end: 0;
         inset-block-start: 0;
+        margin-block: auto; // center vertically
         overflow: visible;
         z-index: -1;
 
@@ -119,6 +120,14 @@
             height: 100%;
             width: 100%;
             object-fit: contain;
+
+            @include desktop {
+                transition: none;
+            }
+        }
+
+        &_IS_BACKUP {
+            padding: 10%;
         }
     }
 }

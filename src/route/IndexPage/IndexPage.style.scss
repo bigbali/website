@@ -25,48 +25,32 @@
             animation-timing-function: ease-in-out;
         }
 
-        >span {
-            opacity: 0;
-            color: var(--color-white);
-            font-size: 5rem;
-            font-weight: 100;
-            transition: opacity 0.2s;
-            font-family: 'Caveat';
-        }
-
-        .Loader {
-            position: relative;
-            width: 15rem;
-            height: 15rem;
-            border: 1rem solid var(--color-border-dark);
-            border-radius: 50%;
-            opacity: 0;
-            transition: opacity 0.2s;
-
-            &::after {
-                content: '';
-                position: absolute;
-                inset: -1rem;
-                border-width: 0;
-                border-color: var(--color-theme);
-                border-style: solid;
-                border-radius: 50%;
-                z-index: 2;
-                transition: border-width 0.5s;
-                will-change: border-width;
+        &-Logo {
+            >.Icon {
+                width: 8rem;
+                height: 8rem;
             }
         }
 
-        &_FONTS_READY {
+        .loader {
             >span {
-                opacity: 1;
-            }
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+                color: var(--color-content-primary-dark);
 
-            .Loader {
-                opacity: 1;
+                >.Icon {
+                    width: 2.5rem;
+                    height: 2.5rem;
+                    animation-name: loader;
+                    animation-duration: 1s;
+                    animation-iteration-count: infinite;
+                    animation-timing-function: linear;
 
-                &::after {
-                    border-width: 1rem;
+                    >svg>path {
+                        fill: var(--color-content-primary-dark);
+                    }
                 }
             }
         }
@@ -87,4 +71,15 @@
     to {
         clip-path: inset(100% 0 0 0);
     }
+}
+
+@keyframes loader {
+    0% {
+        rotate: 0deg;
+    }
+
+    100% {
+        rotate: 360deg;
+    }
+
 }

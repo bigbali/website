@@ -1,14 +1,14 @@
-import CookiePolicyPage from './CookiePolicyPage';
-import ErrorPage from './ErrorPage';
-import IndexPage from './IndexPage';
-import NotFoundPage from './NotFoundPage';
-import Project from './Project';
+import CookiePolicy from './CookiePolicyPage';
+import Error from './ErrorPage';
+import Index from './IndexPage';
+import NotFound from './NotFoundPage';
+import Project from './ProjectPage';
 
 const Page = {
-    Index: IndexPage,
-    CookiePolicy: CookiePolicyPage,
-    Error: ErrorPage,
-    NotFound: NotFoundPage,
+    CookiePolicy,
+    Error,
+    Index,
+    NotFound,
     Project
 };
 
