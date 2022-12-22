@@ -5,10 +5,10 @@ export const NotFoundPage = () => {
         <div block='NotFoundPage'>
             <div elem='MainContent'>
                 <h1 elem='Header'>
-                    I couldn't find the page you are looking for.
+                    I couldn't find this page.
                 </h1>
                 <h2 elem='Subheader'>
-                    Please make sure you got the right address.
+                    Please make sure you're at the right place.
                 </h2>
             </div>
         </div>

@@ -127,6 +127,8 @@ export const ProjectPage = () => {
                     Not using react-router.Link because that causes a bug upon returning to home page:
                     document.querySelector(All) does not initially select anything, even though called after the component
                     has been mounted. I couldn't get myself to understand it, so let's not get bogged down on it.
+                    PS: bug is caused by the react-transition-group page transition, but it's more efficient
+                    to just simply go around it.
                 */}
                 <a href='/' title='Back to Home Page'>
                     <Icon.Chevron />
@@ -142,7 +144,7 @@ export const ProjectPage = () => {
                         {`Status: ${status}`}
                     </div>
                     {isMobile && thumbnail}
-                    <section block='Page-Project' elem='Markdown' mods={{ IS_LOADED: !!markdown }}>
+                    <section block='ProjectPage' elem='Markdown' mods={{ IS_LOADED: !!markdown }}>
                         <div>
                             {!!markdown && <ReactMarkdown children={markdown} linkTarget="_blank" />}
                         </div>

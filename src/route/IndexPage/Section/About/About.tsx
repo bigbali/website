@@ -63,10 +63,9 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                             The Beginning
                         </h1>
                         <p>
-                            My introduction to the art of computer science was in 2016,
+                            I introduced myself to the art of computer science in 2016,
                             when I started writing a desktop networking tool using C# and the .NET Framework, and not long after
                             I built a simple web application with ASP.NET which I hosted on my own computer.
-
                         </p>
                     </section>
                     <section elem='Content-Experience' className='animate-on-scroll'>
@@ -92,8 +91,8 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                             </div>
                         </div>
                         <p>
-                            As a self-taught software developer, a lot of my knowledge has accumulated from
-                            constant tinkering with projects since 2016.
+                            As a self-taught software developer, I've accumulated most of my knowledge by relentlessly
+                            tinkering with projects since 2016.
                             On the other hand, I have taken Harvard University's CS50 and CS50's Web Programming courses,
                             which have taught me many things.
                         </p>
@@ -139,8 +138,8 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                             Hobbies
                         </h1>
                         <p>
-                            When not programming, I tend to take photos, care for my plants and animals,
-                            read books or play video games till I get bored and go back to programming.
+                            When not programming, I take photos, care for my plants and cats,
+                            read books or play video games.
                         </p>
                     </section>
                 </div>
