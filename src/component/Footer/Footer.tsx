@@ -1,16 +1,16 @@
 import Link from 'next/link';
 import './Footer.style.scss';
 
+// process.env.REACT_APP_VERSION => change to nextjs env var
+
 const Footer = () => {
     return (
         <div block='Footer'>
             <span elem='By'>
                 Designed & Built by Balázs Burján,
-                {process.env.REACT_APP_VERSION && (
-                    <span>
-                        version {process.env.REACT_APP_VERSION}
-                    </span>
-                )}
+                <span>
+                    version (placeholder 1.1.0)
+                </span>
             </span>
             <nav elem='Navigation'>
                 <Link href='cookie-policy'>

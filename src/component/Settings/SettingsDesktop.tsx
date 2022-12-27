@@ -76,7 +76,7 @@ export const SettingsDesktop = () => {
                     className='DefaultColor'
                     onClick={() => handleChangeAccentColor(null)}
                     title='Default (Red)'
-                    style={{ outline: getOutlineStyle(null) }}
+                // style={{ outline: getOutlineStyle(null) }}
                 />
             );
         }
@@ -84,7 +84,7 @@ export const SettingsDesktop = () => {
         return (
             <button
                 key={color.name}
-                style={{ backgroundColor: color.value, outline: getOutlineStyle(color) }}
+                // style={{ backgroundColor: color.value, outline: getOutlineStyle(color) }}
                 onClick={() => handleChangeAccentColor(color)}
                 title={color.name}
             />
