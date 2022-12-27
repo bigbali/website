@@ -6,7 +6,7 @@ import {
 import Icon, {
     Direction
 } from 'Component/Icon';
-import './Switch.style';
+import './Switch.module';
 
 interface SwitchProps {
     onSwitch: (value: any) => void,

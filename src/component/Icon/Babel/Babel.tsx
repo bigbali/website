@@ -1,5 +1,5 @@
 import { SVGProps } from 'react';
-import './Babel.style';
+import './Babel.module';
 
 
 const Babel = (props: SVGProps<SVGSVGElement>) => {

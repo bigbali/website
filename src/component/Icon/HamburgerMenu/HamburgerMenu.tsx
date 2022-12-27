@@ -1,5 +1,5 @@
 import type { IconProps } from '../index';
-import './HamburgerMenu.style';
+import './HamburgerMenu.module';
 
 const HamburgerMenu = ({ color, isExpanded = false }: IconProps & { isExpanded?: boolean }) => {
     return (

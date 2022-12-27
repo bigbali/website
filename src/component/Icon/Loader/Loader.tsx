@@ -1,5 +1,5 @@
 import { SVGProps } from 'react';
-import './Loader.style';
+import './Loader.module';
 
 
 const Loader = (props: SVGProps<SVGSVGElement>) => {

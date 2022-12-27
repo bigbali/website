@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BlurhashCanvas } from 'react-blurhash';
 import Icon from 'Component/Icon';
-import './ProjectCard.style';
+import './ProjectCard.module';
 
 /* ========= Images ========= */
 import image__this from 'Media/webp/balazs-burjan.webp';

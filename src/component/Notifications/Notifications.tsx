@@ -9,7 +9,7 @@ import {
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { useNotification } from 'Util';
 import Icon from 'Component/Icon';
-import './Notifications.style';
+import './Notifications.module';
 
 export enum NotificationStatus {
     INFO = 'INFO',

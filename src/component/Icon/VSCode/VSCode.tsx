@@ -1,5 +1,5 @@
 import { SVGProps } from 'react';
-import './VSCode.style';
+import './VSCode.module';
 
 
 const VSCode = (props: SVGProps<SVGSVGElement>) => {

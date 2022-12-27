@@ -1,5 +1,5 @@
 import { SVGProps } from 'react';
-import './JavaScript.style';
+import './JavaScript.module';
 
 
 const JavaScript = (props: SVGProps<SVGSVGElement>) => {

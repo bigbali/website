@@ -1,5 +1,5 @@
 import { SVGProps } from 'react';
-import './Anchor.style';
+import './Anchor.module';
 
 
 const Anchor = (props: SVGProps<SVGSVGElement>) => {

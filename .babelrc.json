@@ -1,9 +1,11 @@
 {
+    "presets": [
+        "next/babel"
+    ],
     "plugins": [
         [
             "transform-jsx-bem-attributes",
             {}
         ]
     ]
-    // "retainLines": true
 }

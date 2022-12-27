@@ -9,7 +9,7 @@ import {
 import Switch from 'Component/Switch';
 import Slider from 'Component/Slider';
 import Icon from 'Component/Icon';
-import './Settings.style';
+import './Settings.module';
 
 const ColorMap = [
     null,

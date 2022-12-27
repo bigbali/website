@@ -1,5 +1,5 @@
 import Icon from 'Component/Icon';
-import './Help.style';
+import './Help.module';
 
 export enum Orientation {
     LEFT = 'LEFT',

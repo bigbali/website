@@ -1,5 +1,5 @@
 import { SVGProps } from 'react';
-import './Sun.style';
+import './Sun.module';
 
 
 const Sun = (props: SVGProps<SVGSVGElement>) => {

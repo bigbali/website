@@ -1,5 +1,5 @@
 import { SVGProps } from 'react';
-import './Copy.style';
+import './Copy.module';
 
 
 const Copy = (props: SVGProps<SVGSVGElement>) => {

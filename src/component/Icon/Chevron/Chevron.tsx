@@ -1,5 +1,5 @@
 import { SVGProps } from 'react';
-import './Chevron.style';
+import './Chevron.module';
 
 export enum Direction {
     LEFT = 'left',

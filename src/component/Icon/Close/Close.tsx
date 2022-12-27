@@ -1,5 +1,5 @@
 import type { IconProps } from '../index';
-import './Close.style';
+import './Close.module';
 
 const Close = ({ color }: IconProps) => {
     return (

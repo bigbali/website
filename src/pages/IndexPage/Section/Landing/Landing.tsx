@@ -23,7 +23,7 @@ import {
     useDevice,
     useSettings
 } from 'Store';
-import './Landing.style.scss';
+import './Landing.module';
 
 import img__spline_light_mobile from 'Media/webp/spline-light-mobile.webp';
 import img__spline_dark_mobile from 'Media/webp/spline-dark-mobile.webp';
@@ -114,7 +114,7 @@ const Landing = memo(({ onSplineLoaded, refFromParent, shouldTriggerAnimation }:
 
         const x = (e.clientX - windowWidth / 2) / 100 * -1;
         const y = (e.clientY - windowHeight / 2) / 100 * -1;
-        splineCanvasRef.current.style.translate = `${x}px ${y}px`;
+        splineCanvasRef.current.module.translate = `${x}px ${y}px`;
 
         if (splineRef.current && splineAllRef.current) { // Rotate main group in 3D space
             splineAllRef.current.rotation.y = (x * 0.005);

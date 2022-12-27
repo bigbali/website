@@ -5,7 +5,7 @@ import {
 } from 'react';
 import { range } from 'lodash';
 import { useSection } from 'Store';
-import './SectionSelector.style';
+import './SectionSelector.module';
 
 type SectionSelectorProps = {
     sections: {

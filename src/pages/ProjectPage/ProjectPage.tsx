@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import { useDevice } from 'Store';
 import { projects } from 'Component/ProjectCard/ProjectCard';
 import Icon from 'Component/Icon';
-import './ProjectPage.style';
+import './ProjectPage.module';
 
 import md__balazs_burjan from './markdown/balazs-burjan.md';
 import md__react_template from './markdown/react-template.md';

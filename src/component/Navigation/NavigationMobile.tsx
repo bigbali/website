@@ -13,7 +13,7 @@ import { SectionID } from 'Route/IndexPage/IndexPage';
 import Icon from 'Component/Icon';
 import Transition from 'Component/Transition';
 import Settings from 'Component/Settings';
-import './Navigation.style';
+import './Navigation.module';
 
 const NavigationMobile = memo(() => { // memo prevents unnecessary render which triggers animation
     const [isExpanded, setIsExpanded] = useState(false);

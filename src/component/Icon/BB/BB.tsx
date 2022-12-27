@@ -1,5 +1,5 @@
 import { SVGProps } from 'react';
-import './BB.style';
+import './BB.module';
 
 
 const BB = (props: SVGProps<SVGSVGElement>) => {

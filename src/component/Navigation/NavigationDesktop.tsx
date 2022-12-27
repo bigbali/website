@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { useSection } from 'Store';
 import { scrollIntoView } from 'Util';
 import { SectionID } from 'Route/IndexPage/IndexPage';
-import './Navigation.style';
+import './Navigation.module';
 
 const NavigationDesktop = () => {
     const { currentSection, setScrollToSectionId } = useSection();

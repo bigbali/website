@@ -1,4 +1,4 @@
-import './ErrorPage.style';
+import './ErrorPage.module';
 
 export const ErrorPage = () => {
     return (

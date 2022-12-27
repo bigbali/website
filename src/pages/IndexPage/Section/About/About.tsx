@@ -8,7 +8,7 @@ import { useDevice, useSettings } from 'Store';
 import Icon from 'Component/Icon';
 import Pattern from 'Component/Pattern';
 import Balazs from 'Media/webp/balazs.webp';
-import './About.style';
+import './About.module';
 
 const MAX_ROTATION_DEG = 5;
 
@@ -22,7 +22,7 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
         const centerX = window.innerWidth / 2;
         const centerY = window.innerHeight / 2;
 
-        imageRef.current!.style.transform = `
+        imageRef.current!.module.transform = `
             perspective(15rem)
             rotateX(${((e.clientY - centerY) / centerY) * -MAX_ROTATION_DEG}deg)
             rotateY(${((e.clientX - centerX) / centerX) * MAX_ROTATION_DEG}deg)

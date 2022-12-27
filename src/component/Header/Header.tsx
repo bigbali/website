@@ -1,7 +1,7 @@
 import { useDevice } from 'Store';
 import Navigation from 'Component/Navigation/';
 import Settings from 'Component/Settings';
-import './Header.style';
+import './Header.module';
 
 export const Header = () => {
     const { isDesktop } = useDevice();

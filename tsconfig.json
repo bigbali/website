@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "target": "es6",
-        "module": "commonjs",
+        "module": "ESNext",
         "allowUmdGlobalAccess": true,
         "moduleResolution": "node",
         "resolveJsonModule": true, // Enable importing .json files
@@ -16,8 +16,14 @@
             "Style": [
                 "src/style"
             ],
+            "Style/Global": [
+                "src/style/main"
+            ],
             "Component": [
                 "src/component"
+            ],
+            "Component/*": [
+                "src/component/*"
             ],
             "Route": [
                 "src/route"
@@ -33,33 +39,25 @@
             ],
             "Media": [
                 "src/media"
-            ],
-            "Style/*": [
-                "src/style/*"
-            ],
-            "Component/*": [
-                "src/component/*"
-            ],
-            "Route/*": [
-                "src/route/*"
-            ],
-            "Store/*": [
-                "src/store/*"
-            ],
-            "Util/*": [
-                "src/util/*"
-            ],
-            "Type/*": [
-                "src/type/*"
-            ],
-            "Media/*": [
-                "src/media/*"
             ]
-        }
+        },
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "skipLibCheck": true,
+        "noEmit": true,
+        "incremental": true,
+        "isolatedModules": true
     },
     "exclude": [
-        "*.config.js",
         "build",
         "node_modules"
+    ],
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx"
     ]
 }
