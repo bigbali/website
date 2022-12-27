@@ -1,5 +1,5 @@
 import { SVGProps } from 'react';
-import './LinkedIn.module';
+import './LinkedIn.style';
 
 
 const LinkedIn = (props: SVGProps<SVGSVGElement>) => {

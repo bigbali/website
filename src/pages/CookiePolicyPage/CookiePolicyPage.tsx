@@ -1,7 +1,7 @@
 import Icon from 'Component/Icon';
 import { NotificationStatus } from 'Component/Notifications';
 import { useNotification } from 'Util';
-import './CookiePolicyPage.module';
+import './CookiePolicyPage.style';
 
 export const CookiePolicyPage = () => {
     const [showNotification] = useNotification();

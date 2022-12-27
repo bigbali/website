@@ -1,5 +1,5 @@
 import { SVGProps } from 'react';
-import './Location.module';
+import './Location.style';
 
 
 const Location = (props: SVGProps<SVGSVGElement>) => {

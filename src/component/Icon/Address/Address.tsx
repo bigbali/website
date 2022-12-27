@@ -1,5 +1,5 @@
 import { SVGProps } from 'react';
-import './Address.module';
+import './Address.style';
 
 
 const Address = (props: SVGProps<SVGSVGElement>) => {

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { TransitionGroup } from 'react-transition-group';
 import { useDevice } from 'Store';
 import Transition from 'Component/Transition';
-import './Cookies.module';
+import './Cookies.style';
 
 export const Cookies = () => {
     const isCookiesNoticeClosed = localStorage.getItem('is_cookies_notice_closed');

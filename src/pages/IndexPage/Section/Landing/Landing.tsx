@@ -17,13 +17,13 @@ import {
     Subscription,
     throttleTime
 } from 'rxjs';
-import { updateElementsToObserve } from '../../../../index';
+// import { updateElementsToObserve } from '../../../../index';
 import {
     Theme,
     useDevice,
     useSettings
 } from 'Store';
-import './Landing.module';
+import './Landing.style';
 
 import img__spline_light_mobile from 'Media/webp/spline-light-mobile.webp';
 import img__spline_dark_mobile from 'Media/webp/spline-dark-mobile.webp';
@@ -54,7 +54,7 @@ let timeouts: NodeJS.Timeout[] = [];
 // then after 3 seconds we replace it, so we can have scroll animations
 const recursivelyApplyClassNameTransformation = (element: HTMLElement) => {
     if (element?.classList?.replace('landing-initial-state', 'animate-on-scroll')) {
-        updateElementsToObserve(element);
+        // updateElementsToObserve(element);
         element.classList.add('landing-animation');
         element.classList.toggle('begin-animation');
 
@@ -114,7 +114,7 @@ const Landing = memo(({ onSplineLoaded, refFromParent, shouldTriggerAnimation }:
 
         const x = (e.clientX - windowWidth / 2) / 100 * -1;
         const y = (e.clientY - windowHeight / 2) / 100 * -1;
-        splineCanvasRef.current.module.translate = `${x}px ${y}px`;
+        splineCanvasRef.current.style.translate = `${x}px ${y}px`;
 
         if (splineRef.current && splineAllRef.current) { // Rotate main group in 3D space
             splineAllRef.current.rotation.y = (x * 0.005);
@@ -192,19 +192,21 @@ const Landing = memo(({ onSplineLoaded, refFromParent, shouldTriggerAnimation }:
 
         const src = SplineWEBP[isDesktop ? 'Desktop' : 'Mobile'][theme === Theme.LIGHT ? 'Light' : 'Dark'];
 
-        return (
-            <img
-                src={src}
-                onLoad={onSplineLoaded}
-                // @ts-ignore --- ignored because we need to set this ref to the image if Spline component times out
-                ref={splineCanvasRef}
-                className='landing-initial-state'
-                alt={`
-                    An image of the 3D animation you would see on a desktop device,
-                    but alas, mobile devices aren't powerful enough for that.
-                `}
-            />
-        );
+        return null;
+
+        // return (
+        //     <img
+        //         src={src}
+        //         onLoad={onSplineLoaded}
+        //         // @ts-ignore --- ignored because we need to set this ref to the image if Spline component times out
+        //         ref={splineCanvasRef}
+        //         className='landing-initial-state'
+        //         alt={`
+        //             An image of the 3D animation you would see on a desktop device,
+        //             but alas, mobile devices aren't powerful enough for that.
+        //         `}
+        //     />
+        // );
     }, [theme, isDesktop, useBackup]);
 
     return (

@@ -3,7 +3,7 @@ import { useNotification } from 'Util';
 import { useDevice, useSettings } from 'Store';
 import { NotificationStatus } from 'Component/Notifications';
 import Icon from 'Component/Icon';
-import './Contact.module';
+import './Contact.style';
 
 const EMAIL = 'hello@balazsburjan.com';
 const LINKEDIN = 'https://www.linkedin.com/in/balázs-burján-35456194/';

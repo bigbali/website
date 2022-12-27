@@ -5,7 +5,7 @@ import {
     useState
 } from 'react';
 import lodash from 'lodash';
-import { useClickOutside } from 'Util';
+import { isServer, useClickOutside } from 'Util';
 import {
     Color,
     DefaultColors,
@@ -15,7 +15,7 @@ import {
 import Switch from 'Component/Switch';
 import Slider from 'Component/Slider';
 import Icon from 'Component/Icon';
-import './Settings.module';
+import './Settings.style';
 
 const ColorMap = [
     null,
@@ -59,6 +59,7 @@ export const SettingsDesktop = () => {
         if (accentColor === color           // but when we select another color, that is an object,
             || (color && accentColor        // therefore between page reloads their reference will change
                 && (color.value === accentColor.value))) { // -> so we compare their values, not their references
+            if (isServer) return;
             return `4px solid ${getComputedStyle(document.body)
                 .getPropertyValue(`--color-border-${theme === Theme.LIGHT
                     ? 'dark'

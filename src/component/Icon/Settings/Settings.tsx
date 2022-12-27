@@ -1,5 +1,5 @@
 import { SVGProps } from 'react';
-import './Settings.module';
+import './Settings.style';
 
 const Settings = ({ isExpanded = false }: SVGProps<SVGSVGElement> & { isExpanded?: boolean }) => {
     return (

@@ -1,6 +1,6 @@
 import { forwardRef, useEffect, useRef } from 'react';
-import { useLocation, useResolvedPath } from 'react-router';
-import { Link, NavLinkProps } from 'react-router-dom';
+// import { useLocation, useResolvedPath } from 'react-router';
+import Link from 'next/link';
 import { useDevice } from 'Store';
 
 type NavigationProps = {
@@ -13,7 +13,7 @@ type NavigationProps = {
 /**
  * A customised version of react-router's NavLink.
  */
-export const NavigationLink = forwardRef<HTMLAnchorElement, NavLinkProps & NavigationProps>(function NavigationLink({
+export const NavigationLink = forwardRef<HTMLAnchorElement, any & NavigationProps>(function NavigationLink({
     'aria-current': ariaCurrentProp = 'page',
     caseSensitive = false,
     className: classNameProp = '',
@@ -27,69 +27,70 @@ export const NavigationLink = forwardRef<HTMLAnchorElement, NavLinkProps & Navig
     onActiveReselected,
     ...rest
 }, ref) {
-    const location = useLocation();
-    const path = useResolvedPath(to);
+    // const location = useLocation();
+    // const path = useResolvedPath(to);
     const previouslyActive = useRef(false);
     const { isMobile } = useDevice();
 
     const locationPathname = caseSensitive
         ? location.pathname
         : location.pathname.toLowerCase();
-    const toPathname = caseSensitive
-        ? path.pathname
-        : path.pathname.toLowerCase();
+    // const toPathname = caseSensitive
+    //     ? path.pathname
+    //     : path.pathname.toLowerCase();
 
-    const isActive = locationPathname === toPathname
-        || (!end
-            && locationPathname.startsWith(toPathname)
-            && locationPathname.charAt(toPathname.length) === '/');
+    // const isActive = locationPathname === toPathname
+    //     || (!end
+    //         && locationPathname.startsWith(toPathname)
+    //         && locationPathname.charAt(toPathname.length) === '/');
 
-    const ariaCurrent = isActive
-        ? ariaCurrentProp
-        : undefined;
+    // const ariaCurrent = isActive
+    //     ? ariaCurrentProp
+    //     : undefined;
 
-    const className = (typeof classNameProp === 'function')
-        ? classNameProp({ isActive, isPending: false })
-        : [classNameProp, isActive ? 'active' : null]
-            .filter(Boolean)
-            .join(' ');
+    // const className = (typeof classNameProp === 'function')
+    //     ? classNameProp({ isActive, isPending: false })
+    //     : [classNameProp, isActive ? 'active' : null]
+    //         .filter(Boolean)
+    //         .join(' ');
 
-    const style = typeof styleProp === 'function'
-        ? styleProp({ isActive, isPending: false })
-        : styleProp;
+    // const style = typeof styleProp === 'function'
+    //     ? styleProp({ isActive, isPending: false })
+    //     : styleProp;
 
-    if (onActive && isActive && previouslyActive.current === false) {
-        onActive(location.pathname.substring(1) || 'index');
-    }
+    // if (onActive && isActive && previouslyActive.current === false) {
+    //     onActive(location.pathname.substring(1) || 'index');
+    // }
 
-    if (onInactive && !isActive && previouslyActive.current === true) {
-        onInactive();
-    }
+    // if (onInactive && !isActive && previouslyActive.current === true) {
+    //     onInactive();
+    // }
 
-    if (onActiveReselected && name && isActive && previouslyActive.current === true) {
-        onActiveReselected(name, isMobile);
-    }
+    // if (onActiveReselected && name && isActive && previouslyActive.current === true) {
+    //     onActiveReselected(name, isMobile);
+    // }
 
-    useEffect(() => {
-        if (previouslyActive.current !== isActive) {
-            previouslyActive.current = isActive;
-        }
-    }, [isActive]);
+    // useEffect(() => {
+    //     if (previouslyActive.current !== isActive) {
+    //         previouslyActive.current = isActive;
+    //     }
+    // }, [isActive]);
 
     return (
         <Link
             {...rest}
-            aria-current={ariaCurrent}
-            className={previouslyActive.current ? className?.concat(' previouslyactive').trim() : className}
+            // aria-current={ariaCurrent}
+            // className={previouslyActive.current ? className?.concat(' previouslyactive').trim() : className}
             ref={ref}
-            style={style}
+            // style={style}
             to={to}
             id={name}
         >
             {
-                typeof children === 'function'
-                    ? children({ isActive, isPending: false })
-                    : children
+                // typeof children === 'function'
+                //     ? children({ isActive, isPending: false })
+                //     : children
+                typeof children !== 'function' && children
             }
         </Link>
     );

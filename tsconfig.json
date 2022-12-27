@@ -26,7 +26,10 @@
                 "src/component/*"
             ],
             "Route": [
-                "src/route"
+                "src/pages"
+            ],
+            "Route/*": [
+                "src/pages/*"
             ],
             "Store": [
                 "src/store"
@@ -34,11 +37,17 @@
             "Util": [
                 "src/util/index"
             ],
+            "Util/*": [
+                "src/util/*"
+            ],
             "Type": [
                 "src/type"
             ],
             "Media": [
                 "src/media"
+            ],
+            "Media/*": [
+                "src/media/*"
             ]
         },
         "lib": [

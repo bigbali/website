@@ -1,7 +1,5 @@
-import { Link } from 'react-router-dom';
-import style from './Footer.module.scss';
-
-console.log(style)
+import Link from 'next/link';
+import './Footer.style.scss';
 
 const Footer = () => {
     return (
@@ -15,7 +13,7 @@ const Footer = () => {
                 )}
             </span>
             <nav elem='Navigation'>
-                <Link to='cookie-policy'>
+                <Link href='cookie-policy'>
                     Cookie Policy
                 </Link>
             </nav>

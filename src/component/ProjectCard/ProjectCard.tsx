@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { BlurhashCanvas } from 'react-blurhash';
 import Icon from 'Component/Icon';
-import './ProjectCard.module';
+import './ProjectCard.style';
 
 /* ========= Images ========= */
 import image__this from 'Media/webp/balazs-burjan.webp';
@@ -124,7 +124,7 @@ export const projects: IProjectCard[] = [
             Tag.SASS
         ],
         thumbnail: {
-            path: Image.This.PATH,
+            path: 'Image.This.PATH',
             hash: Image.This.HASH
         },
         github: 'https://github.com/bigbali/website',
@@ -144,7 +144,7 @@ export const projects: IProjectCard[] = [
             Tag.SASS
         ],
         thumbnail: {
-            path: Image.ReactTemplate.PATH,
+            path: 'Image.ReactTemplate.PATH',
             hash: Image.ReactTemplate.HASH
         },
         github: 'https://github.com/bigbali/react-template',
@@ -164,7 +164,7 @@ export const projects: IProjectCard[] = [
             Tag.NODE
         ],
         thumbnail: {
-            path: Image.BabelPLugin.PATH,
+            path: 'Image.BabelPLugin.PATH',
             hash: Image.BabelPLugin.HASH
         },
         github: 'https://github.com/bigbali/babel-plugin-transform-jsx-bem-attributes',
@@ -185,7 +185,7 @@ export const projects: IProjectCard[] = [
             Tag.DOTNET
         ],
         thumbnail: {
-            path: Image.SDL.PATH,
+            path: 'Image.SDL.PATH',
             hash: Image.SDL.HASH
         },
         github: 'https://github.com/bigbali/sdl-csharp',
@@ -202,7 +202,7 @@ export const projects: IProjectCard[] = [
             Tag.JS
         ],
         thumbnail: {
-            path: Image.StardustDark.PATH,
+            path: 'Image.StardustDark.PATH',
             hash: Image.StardustDark.HASH
         },
         github: 'https://github.com/bigbali/stardust-dark-vscode',
@@ -223,7 +223,7 @@ export const projects: IProjectCard[] = [
             Tag.HEROKU
         ],
         thumbnail: {
-            path: Image.FamilyPhotos.PATH,
+            path: 'Image.FamilyPhotos.PATH',
             hash: Image.FamilyPhotos.HASH
         },
         slug: 'family-photos'
@@ -242,7 +242,7 @@ export const projects: IProjectCard[] = [
             Tag.SASS
         ],
         thumbnail: {
-            path: Image.EShop.PATH,
+            path: 'Image.EShop.PATH',
             hash: Image.EShop.HASH
         },
         github: 'https://github.com/bigbali/eshop',
@@ -267,7 +267,7 @@ export const projects: IProjectCard[] = [
             Tag.AWS_RDS
         ],
         thumbnail: {
-            path: Image.Tankstats.PATH,
+            path: 'Image.Tankstats.PATH',
             hash: Image.Tankstats.HASH
         },
         github: 'https://github.com/bigbali/tankstats-frontend',
@@ -311,7 +311,7 @@ const ProjectCard = ({ title, description, thumbnail, github, slug, link, tags, 
                             </a>
                         )}
                         {!!slug && (
-                            <Link to={`project/${slug}`} rel='bookmark' title='Go to project details'>
+                            <Link href={`project/${slug}`} rel='bookmark' title='Go to project details'>
                                 <Icon.File />
                             </Link>
                         )}

@@ -5,7 +5,7 @@ import {
     memo,
     type MouseEvent as GenericMouseEvent
 } from 'react';
-import { useLocation, useNavigate } from 'react-router';
+// import { useLocation, useNavigate } from 'react-router';
 import { TransitionGroup } from 'react-transition-group';
 import { scrollIntoView } from 'Util';
 import { useSection } from 'Store';
@@ -13,13 +13,13 @@ import { SectionID } from 'Route/IndexPage/IndexPage';
 import Icon from 'Component/Icon';
 import Transition from 'Component/Transition';
 import Settings from 'Component/Settings';
-import './Navigation.module';
+import './Navigation.style';
 
 const NavigationMobile = memo(() => { // memo prevents unnecessary render which triggers animation
     const [isExpanded, setIsExpanded] = useState(false);
     const { currentSection, setScrollToSectionId } = useSection();
-    const location = useLocation();
-    const navigate = useNavigate();
+    // const location = useLocation();
+    // const navigate = useNavigate();
     const transitionRef = useRef(null);
 
     const onNavigationItemClick = (e: GenericMouseEvent<HTMLAnchorElement, MouseEvent>, section: SectionID) => {
@@ -28,14 +28,14 @@ const NavigationMobile = memo(() => { // memo prevents unnecessary render which 
 
         if (!section) return;
 
-        if (location.pathname === '/') {
-            const _section = document.querySelector(`#${section}`) as HTMLElement;
-            _section && scrollIntoView({ current: _section });
-        }
-        else {
-            setScrollToSectionId(`#${section}`);
-            navigate('/'); // Go back to index page, then after transition a callback will take care of scrolling
-        }
+        // if (location.pathname === '/') {
+        //     const _section = document.querySelector(`#${section}`) as HTMLElement;
+        //     _section && scrollIntoView({ current: _section });
+        // }
+        // else {
+        //     setScrollToSectionId(`#${section}`);
+        //     navigate('/'); // Go back to index page, then after transition a callback will take care of scrolling
+        // }
     };
 
     useEffect(() => {
@@ -63,7 +63,7 @@ const NavigationMobile = memo(() => { // memo prevents unnecessary render which 
                             <ul elem='List'>
                                 {Object.values(SectionID).map((section) => (
                                     <li block='Navigation-ListItem' key={section}>
-                                        <a
+                                        {/* <a
                                             role='button'
                                             onClick={(e) => onNavigationItemClick(e, section)}
                                             className={
@@ -73,7 +73,7 @@ const NavigationMobile = memo(() => { // memo prevents unnecessary render which 
                                             }
                                         >
                                             {section}
-                                        </a>
+                                        </a> */}
                                     </li>
                                 ))}
                             </ul>

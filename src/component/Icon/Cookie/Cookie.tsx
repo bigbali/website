@@ -1,5 +1,5 @@
 import { SVGProps } from 'react';
-import './Cookie.module';
+import './Cookie.style';
 
 
 const Cookie = (props: SVGProps<SVGSVGElement>) => {

@@ -1,5 +1,5 @@
 import { SVGProps } from 'react';
-import './WPF.module';
+import './WPF.style';
 
 
 const WPF = (props: SVGProps<SVGSVGElement>) => {

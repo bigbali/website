@@ -5,7 +5,7 @@ import create from 'zustand';
 // that says we're trying to access undefined.getIsMobile.
 // When the entire module is logged to console (import * as Module from 'Util'), it's all fine looking.
 // import { getIsMobile } from 'Util'; // so, this is not working (as a matter of fact, nothing of 'Util' does)
-import { getIsMobile } from 'Util/getIsMobile';
+import { getIsMobile, isClient } from 'Util';
 
 export interface Device {
     isMobile: boolean,
@@ -33,12 +33,14 @@ export const useDevice = create<DeviceStore>((set) => ({
 
 const WINDOW_SIZE_UPDATE_DELAY_MS = 100;
 
-fromEvent(window, 'resize')
-    .pipe(
-        debounceTime(WINDOW_SIZE_UPDATE_DELAY_MS),
-    )
-    .subscribe(() => {
-        useDevice.getState().update();
-    });
+if (isClient) {
+    fromEvent(window, 'resize')
+        .pipe(
+            debounceTime(WINDOW_SIZE_UPDATE_DELAY_MS),
+        )
+        .subscribe(() => {
+            useDevice.getState().update();
+        });
+}
 
 export default useDevice;

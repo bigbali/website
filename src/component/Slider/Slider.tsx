@@ -3,7 +3,7 @@ import {
     useEffect,
     useState
 } from 'react';
-import './Slider.module';
+import './Slider.style';
 
 export interface SliderProps {
     onChange: (e: ChangeEvent<HTMLInputElement>) => void,

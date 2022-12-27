@@ -3,29 +3,29 @@ import {
     useRef,
     type MouseEvent as GenericMouseEvent
 } from 'react';
-import { useLocation, useNavigate } from 'react-router';
+// import { useLocation, useNavigate } from 'react-router';
 import { useSection } from 'Store';
 import { scrollIntoView } from 'Util';
 import { SectionID } from 'Route/IndexPage/IndexPage';
-import './Navigation.module';
+import './Navigation.style';
 
 const NavigationDesktop = () => {
     const { currentSection, setScrollToSectionId } = useSection();
     const previousRef = useRef<SectionID>();
-    const location = useLocation();
-    const navigate = useNavigate();
+    // const location = useLocation();
+    // const navigate = useNavigate();
 
     const onNavigationItemClick = (e: GenericMouseEvent<HTMLAnchorElement, MouseEvent>, section: SectionID) => {
         if (!section) return;
 
-        if (location.pathname === '/') {
-            const _section = document.querySelector(`#${section}`) as HTMLElement;
-            _section && scrollIntoView({ current: _section });
-        }
-        else {
-            setScrollToSectionId(`#${section}`);
-            navigate('/'); // Go back to index page, then after transition a callback will take care of scrolling
-        }
+        // if (location.pathname === '/') {
+        //     const _section = document.querySelector(`#${section}`) as HTMLElement;
+        //     _section && scrollIntoView({ current: _section });
+        // }
+        // else {
+        //     setScrollToSectionId(`#${section}`);
+        //     // navigate('/'); // Go back to index page, then after transition a callback will take care of scrolling
+        // }
     };
 
     useEffect(() => {
@@ -41,11 +41,11 @@ const NavigationDesktop = () => {
                             role='button'
                             title={`Scroll to ${section} section`}
                             onClick={(e) => onNavigationItemClick(e, section)}
-                            className={
-                                location.pathname === '/' && currentSection?.id === section
-                                    ? 'active'
-                                    : ''.concat(previousRef.current === section ? 'previouslyactive' : '')
-                            }
+                        // className={
+                        //     location.pathname === '/' && currentSection?.id === section
+                        //         ? 'active'
+                        //         : ''.concat(previousRef.current === section ? 'previouslyactive' : '')
+                        // }
                         >
                             {section}
                         </a>

@@ -1,5 +1,5 @@
 import { SVGProps } from 'react';
-import './CSharp.module';
+import './CSharp.style';
 
 const CSharp = (props: SVGProps<SVGSVGElement>) => {
     return (
