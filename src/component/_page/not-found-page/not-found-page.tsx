@@ -1,4 +1,4 @@
-import './NotFoundPage.style';
+import './not-found-page.style';
 
 export const NotFoundPage = () => {
     return (

@@ -47,7 +47,7 @@ const Switch = ({
         <button
             block='Switch'
             onClick={onClick}
-            mods={{ isSwitched: value === valueRight }}>
+            /* mods={{ isSwitched: value === valueRight }} */>
             <div elem='Value'>
                 <div elem='Value-Left'>
                     {iconLeft && ( // bem transform doesnt work here
@@ -74,11 +74,11 @@ const Switch = ({
                     )}
                 </div>
                 <Icon.Chevron
-                    direction={
-                        value === valueRight
-                            ? Direction.LEFT
-                            : Direction.RIGHT
-                    }
+                // direction={
+                //     value === valueRight
+                //         ? Direction.LEFT
+                //         : Direction.RIGHT
+                // }
                 />
             </div>
             <p elem='Label'>

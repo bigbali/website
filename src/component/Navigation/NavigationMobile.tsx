@@ -9,7 +9,7 @@ import {
 import { TransitionGroup } from 'react-transition-group';
 import { scrollIntoView } from 'Util';
 import { useSection } from 'Store';
-import { SectionID } from 'Route/IndexPage/IndexPage';
+import { SectionID } from 'Component/_page/index-page/index-page';
 import Icon from 'Component/Icon';
 import Transition from 'Component/Transition';
 import Settings from 'Component/Settings';

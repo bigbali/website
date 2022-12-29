@@ -17,7 +17,7 @@ import ProjectCard, {
 import Help from 'Component/Help';
 import { Orientation } from 'Component/Help/Help';
 import Icon from 'Component/Icon';
-import './Projects.style';
+import './projects-section.style';
 
 const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTMLElement> }) => {
     const [status, setStatus] = useState<ProjectStatus | 'any'>('any');

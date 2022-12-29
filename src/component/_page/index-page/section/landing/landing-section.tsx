@@ -23,7 +23,7 @@ import {
     useDevice,
     useSettings
 } from 'Store';
-import './Landing.style';
+import './landing-section.style';
 
 import img__spline_light_mobile from 'Media/webp/spline-light-mobile.webp';
 import img__spline_dark_mobile from 'Media/webp/spline-dark-mobile.webp';

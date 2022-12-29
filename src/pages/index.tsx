@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Page from "Page";
 
 const Index = () => {
     return (
@@ -9,9 +10,7 @@ const Index = () => {
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <h1>
-                Pair of fookin socks
-            </h1>
+            <Page.Index />
         </>
     )
 };

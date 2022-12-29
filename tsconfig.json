@@ -1,72 +1,73 @@
 {
-    "compilerOptions": {
-        "target": "es6",
-        "module": "ESNext",
-        "allowUmdGlobalAccess": true,
-        "moduleResolution": "node",
-        "resolveJsonModule": true, // Enable importing .json files
-        "allowJs": true, // Allow JavaScript files to be a part of your program.
-        "checkJs": false, // Enable error reporting in type-checked JavaScript files.
-        "esModuleInterop": true, // Emit additional JavaScript to ease support for importing CommonJS modules.
-        "forceConsistentCasingInFileNames": true,
-        "strict": true,
-        "baseUrl": "./",
-        "jsx": "preserve",
-        "paths": {
-            "Style": [
-                "src/style"
-            ],
-            "Style/Global": [
-                "src/style/main"
-            ],
-            "Component": [
-                "src/component"
-            ],
-            "Component/*": [
-                "src/component/*"
-            ],
-            "Route": [
-                "src/pages"
-            ],
-            "Route/*": [
-                "src/pages/*"
-            ],
-            "Store": [
-                "src/store"
-            ],
-            "Util": [
-                "src/util/index"
-            ],
-            "Util/*": [
-                "src/util/*"
-            ],
-            "Type": [
-                "src/type"
-            ],
-            "Media": [
-                "src/media"
-            ],
-            "Media/*": [
-                "src/media/*"
-            ]
-        },
-        "lib": [
-            "dom",
-            "dom.iterable",
-            "esnext"
-        ],
-        "skipLibCheck": true,
-        "noEmit": true,
-        "incremental": true,
-        "isolatedModules": true
+  "compilerOptions": {
+    "target": "es6",
+    "module": "ESNext",
+    "allowUmdGlobalAccess": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true, // Enable importing .json files
+    "allowJs": true, // Allow JavaScript files to be a part of your program.
+    "checkJs": false, // Enable error reporting in type-checked JavaScript files.
+    "esModuleInterop": true, // Emit additional JavaScript to ease support for importing CommonJS modules.
+    // "forceConsistentCasingInFileNames": true, // disabled because it causes a weird bug, https://stackoverflow.com/questions/51197940/file-name-differs-from-already-included-file-name-only-in-casing-on-relative-p
+    "strict": true,
+    "baseUrl": "./",
+    "jsx": "preserve",
+    "paths": {
+      "Style": [
+        "src/style"
+      ],
+      "Style/Global": [
+        "src/style/main"
+      ],
+      "Component": [
+        "src/component"
+      ],
+      "Component/*": [
+        "src/component/*"
+      ],
+      "Page": [
+        "src/component/_page"
+      ],
+      "Page/*": [
+        "src/component/_page/*"
+      ],
+      "Store": [
+        "src/store"
+      ],
+      "Util": [
+        "src/util/index"
+      ],
+      "Util/*": [
+        "src/util/*"
+      ],
+      "Type": [
+        "src/type"
+      ],
+      "Media": [
+        "src/media"
+      ],
+      "Media/*": [
+        "src/media/*"
+      ]
     },
-    "exclude": [
-        "build",
-        "node_modules"
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
     ],
-    "include": [
-        "next-env.d.ts",
-        "**/*.ts",
-        "**/*.tsx"
-    ]
+    "skipLibCheck": true,
+    "noEmit": true,
+    "incremental": true,
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "exclude": [
+    "build",
+    "node_modules"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }

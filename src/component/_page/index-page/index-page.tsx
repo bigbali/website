@@ -14,7 +14,7 @@ import Transition from 'Component/Transition';
 import SectionSelector from 'Component/SectionSelector';
 import Icon from 'Component/Icon';
 import Section from './Section';
-import './IndexPage.style';
+import './index-page.style';
 
 /**
  * Use this to refer to sections from other components

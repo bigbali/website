@@ -8,7 +8,7 @@ import { useDevice, useSettings } from 'Store';
 import Icon from 'Component/Icon';
 import Pattern from 'Component/Pattern';
 import Balazs from 'Media/webp/balazs.webp';
-import './About.style';
+import './about-section.style';
 
 const MAX_ROTATION_DEG = 5;
 
