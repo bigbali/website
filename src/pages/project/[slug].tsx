@@ -1,29 +1,38 @@
-import { promises } from 'fs';
 import { readFile } from 'fs/promises';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticPropsContext, PreviewData } from 'next';
 import Page from 'Page';
 import path from 'path';
+import projects, {
+    type ProjectProps
+} from 'data/projects';
 
-export const getStaticPaths: GetStaticPaths = async () => {
-    const markdownDirectory = path.join(process.cwd(), 'src/component/_page/project-page/markdown');
-    const markdownFiles = await promises.readdir(markdownDirectory);
-
+export const getStaticPaths = async () => {
     return {
-        paths: markdownFiles.map(fileName => ({ params: { slug: fileName.replace('.md', '') } })),
+        paths: projects.map(project => ({ params: { slug: project.slug } })),
         fallback: false
     };
 };
 
-export const getStaticProps: GetStaticProps<{ markdown: string }> = async ({ params }) => {
-    const slug = params?.slug as string;
-    const markdownDirectory = path.join(process.cwd(), 'src/component/_page/project-page/markdown');
+type Context = GetStaticPropsContext<{ slug: string }, PreviewData>;
+
+export const getStaticProps = async ({ params }: Context) => {
+    if (!params) return;
+
+    const { slug } = params;
+
+    const project = projects.find(({ slug: projectSlug }) => slug === projectSlug);
+
+    const markdownDirectory = path.join(process.cwd(), 'data/projects/markdown');
     const file = await readFile(path.join(markdownDirectory, `${slug}.md`));
 
     return {
-        props: { markdown: file.toString() }
+        props: {
+            project,
+            markdown: file.toString()
+        }
     };
 };
 
 
-const Project = ({ markdown }: { markdown: string }) => <Page.Project markdown={markdown} />;
+const Project = ({ project, markdown }: ProjectProps) => <Page.Project project={project} markdown={markdown} />;
 export default Project;

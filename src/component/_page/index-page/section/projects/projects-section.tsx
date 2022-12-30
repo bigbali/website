@@ -8,19 +8,19 @@ import {
 } from 'react';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { useDevice } from 'Store';
-import ProjectCard, {
-    IProjectCard,
-    projects,
-    ProjectStatus,
+import ProjectCard from 'Component/ProjectCard';
+import projects, {
+    type Project,
+    Status,
     Tag
-} from 'Component/ProjectCard/ProjectCard';
+} from 'data/projects';
 import Help from 'Component/Help';
 import { Orientation } from 'Component/Help/Help';
 import Icon from 'Component/Icon';
 import './projects-section.style';
 
 const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTMLElement> }) => {
-    const [status, setStatus] = useState<ProjectStatus | 'any'>('any');
+    const [status, setStatus] = useState<Status | 'any'>('any');
     const [title, setTitle] = useState<string>();
     const [tag, setTag] = useState<string>();
 
@@ -33,20 +33,20 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
     const previousLength = useRef(0);
     const filterRef = useRef<HTMLFieldSetElement | null>(null);
 
-    const filterStatus = (project: IProjectCard) => status === 'any'
+    const filterStatus = (project: Project) => status === 'any'
         ? true
         : project.status === status;
 
-    const filterTitle = (project: IProjectCard) => !title
+    const filterTitle = (project: Project) => !title
         ? true
         : project.title.toLowerCase().includes(title.toLowerCase());
 
-    const filterTag = (project: IProjectCard) => !tag
+    const filterTag = (project: Project) => !tag
         ? true
         : project.tags.some((projectTag) => projectTag.toLowerCase().includes(tag.toLowerCase()));
 
     const projectsFiltered = useMemo(
-        () => projects
+        () => (projects as unknown as Project[])
             .filter(filterStatus)
             .filter(filterTitle)
             .filter(filterTag),
@@ -144,14 +144,14 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
                             id='status'
                             defaultValue='any'
                             onChange={(e) => {
-                                setStatus(e.currentTarget.value as ProjectStatus & 'any');
+                                setStatus(e.currentTarget.value as Status & 'any');
                                 setLimit(DEFAULT_LIMIT);
                             }}
                         >
                             <option value='any'>
                                 Any
                             </option>
-                            {Object.values(ProjectStatus).map((status) => (
+                            {Object.values(Status).map((status) => (
                                 <option key={status} value={status}>
                                     {status}
                                 </option>
