@@ -1,5 +1,5 @@
-import { type AppProps } from 'next/app'
-import Head from 'next/head'
+import { type AppProps } from 'next/app';
+import Head from 'next/head';
 import Layout from 'Component/Layout';
 import 'Style/Global';
 
@@ -11,5 +11,5 @@ export default function App({ Component, pageProps }: AppProps) {
             </Head>
             <Component {...pageProps} />
         </Layout>
-    )
+    );
 }

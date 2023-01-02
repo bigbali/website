@@ -1,5 +1,5 @@
 .ProjectPage {
-    &:has(.ProjectPage) {
+    &:not(:has(.ProjectPage-Thumbnail)) {
         padding-inline: var(--content-padding);
         padding-block-start: calc(var(--header-height) + 2rem);
         min-height: calc(100vh - var(--footer-height));

@@ -4,6 +4,7 @@ import {
     useRef,
 } from 'react';
 import { fromEvent, throttleTime } from 'rxjs';
+import Image from 'next/image';
 import { useDevice, useSettings } from 'Store';
 import Icon from 'Component/Icon';
 import Pattern from 'Component/Pattern';
@@ -146,7 +147,7 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                 <figure elem='Content-Figure' mods={{ REDUCE_WIDTH: preventOverflow }}>
                     <div ref={imageRef} className='animate-on-scroll'>
                         <Icon.Cat />
-                        <img src={Balazs} alt="Portrait of Balázs" />
+                        <Image src={Balazs} alt="Portrait of Balázs" />
                         <div className='location'>
                             <div />
                             <a

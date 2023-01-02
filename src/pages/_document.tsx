@@ -3,7 +3,7 @@ import {
     Head,
     Main,
     NextScript
-} from 'next/document'
+} from 'next/document';
 
 const URL = 'https://www.balazsburjan.com';
 
@@ -32,5 +32,5 @@ export default function Document() {
                 <NextScript />
             </body>
         </Html>
-    )
+    );
 }

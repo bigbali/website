@@ -60,7 +60,8 @@ export type Project = {
 
 export type ProjectProps = {
     project: Project,
-    markdown: string
+    markdown: string,
+    slug: string
 };
 
 const projects = [

@@ -1,5 +1,5 @@
-import Head from "next/head";
-import Page from "Page";
+import Head from 'next/head';
+import Page from 'Page';
 
 const Index = () => {
     return (
@@ -12,7 +12,7 @@ const Index = () => {
             </Head>
             <Page.Index />
         </>
-    )
+    );
 };
 
 export default Index;
