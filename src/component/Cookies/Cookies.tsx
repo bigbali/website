@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { TransitionGroup } from 'react-transition-group';
 import { useDevice } from 'Store';
 import Transition from 'Component/Transition';
@@ -40,7 +40,7 @@ export const Cookies = () => {
                                         {isMobile && <br />}
                                         <Link
                                             elem='CookiePolicy'
-                                            to='cookie-policy'
+                                            href='/cookie-policy'
                                             target='_blank'
                                         >
                                             <wbr />

@@ -1,12 +1,13 @@
-import {
-    NavigationItemType,
-} from './';
+import Link from 'next/link';
 import NavigationLink from './NavigationLink';
+import {
+    type NavigationItemType,
+} from './';
 
 export const NavigationItem = ({ label, name, to }: NavigationItemType) => {
     return (
         <li block='Navigation-ListItem' key={name}>
-            <NavigationLink
+            {/* <NavigationLink
                 to={to}
                 className={({ isActive }) => isActive ? 'active' : ''}
                 name={name}
@@ -21,7 +22,10 @@ export const NavigationItem = ({ label, name, to }: NavigationItemType) => {
                 }}
             >
                 {label}
-            </NavigationLink>
+            </NavigationLink> */}
+            <Link href={to} title={name}>
+                {label}
+            </Link>
         </li >
     );
 };

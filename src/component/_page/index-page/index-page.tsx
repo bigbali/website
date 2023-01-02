@@ -13,7 +13,7 @@ import { useDevice } from 'Store';
 import Transition from 'Component/Transition';
 import SectionSelector from 'Component/SectionSelector';
 import Icon from 'Component/Icon';
-import Section from './Section';
+import Section from './section';
 import './index-page.style';
 
 /**
