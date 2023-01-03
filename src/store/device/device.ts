@@ -1,10 +1,5 @@
 import { debounceTime, fromEvent } from 'rxjs';
 import create from 'zustand';
-
-// BUG?: apparently, this module resolves correctly, but at runtime we get the error message
-// that says we're trying to access undefined.getIsMobile.
-// When the entire module is logged to console (import * as Module from 'Util'), it's all fine looking.
-// import { getIsMobile } from 'Util'; // so, this is not working (as a matter of fact, nothing of 'Util' does)
 import { getIsMobile, isClient } from 'Util';
 
 export interface Device {

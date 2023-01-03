@@ -1,7 +1,9 @@
 import { RefObject } from 'react';
-import { useNotification } from 'Util';
+import {
+    NotificationStatus,
+    useNotifications
+} from 'Store';
 import { useDevice, useSettings } from 'Store';
-import { NotificationStatus } from 'Component/Notifications';
 import Icon from 'Component/Icon';
 import './contact-section.style';
 
@@ -22,14 +24,14 @@ const copyToClipboard = async (text: string) => {
 const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => {
     const { fontSize } = useSettings();
     const { isMobile } = useDevice();
-    const [showNotification] = useNotification();
+    const show = useNotifications(state => state.show);
     const preventOverflow = isMobile && fontSize > 1.2;
 
     const handleCopy = (text: string) => {
         copyToClipboard(text)
             .then((didCopy) => {
                 if (didCopy) {
-                    showNotification({
+                    show({
                         timeout: 5000,
                         status: NotificationStatus.SUCCESS,
                         title: 'Copied to clipboard',
@@ -37,7 +39,7 @@ const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) =
                     });
                 }
                 else {
-                    showNotification({
+                    show({
                         timeout: 5000,
                         status: NotificationStatus.ERROR,
                         title: 'Couldn\'t copy to clipboard',

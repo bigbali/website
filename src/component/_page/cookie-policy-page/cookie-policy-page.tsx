@@ -1,18 +1,21 @@
 import Icon from 'Component/Icon';
-import { NotificationStatus } from 'Component/Notifications';
-import { useNotification } from 'Util';
+import {
+    NotificationStatus,
+    useNotifications
+} from 'Store';
 import './cookie-policy-page.style';
 
 export const CookiePolicyPage = () => {
-    const [showNotification] = useNotification();
+    const show = useNotifications(state => state.show);
 
     const clearStorage = () => {
         localStorage.clear();
-        showNotification({
+        show({
             timeout: 5000,
             status: NotificationStatus.INFO,
             title: 'Browser Storage Cleared',
-            message: 'The data I stored on your device has been deleted.'
+            message: 'I deleted the data from your device. \
+                      Please note that it will be automatically repopulated upon loading the page again.'
         });
     };
 

@@ -1,54 +1,18 @@
-import {
-    createContext,
-    Dispatch,
-    PropsWithChildren,
-    SetStateAction,
-    useContext,
-    useState
-} from 'react';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { useNotification } from 'Util';
+import {
+    NotificationStatus,
+    useNotifications
+} from 'Store';
 import Icon from 'Component/Icon';
 import './Notifications.style';
 
-export enum NotificationStatus {
-    INFO = 'INFO',
-    SUCCESS = 'SUCCESS',
-    WARNING = 'WARNING',
-    ERROR = 'ERROR'
-};
-
-export interface INotification {
-    status: NotificationStatus,
-    title: string,
-    message: string,
-    id: string,
-    timeout: {
-        id: NodeJS.Timeout,
-        duration: number
-    }
-};
-
-export const NotificationContext =
-    createContext<[INotification[], Dispatch<SetStateAction<INotification[]>>]>([[], () => { }]);
-export const NotificationContextProvider = ({ children }: PropsWithChildren) => {
-    return (
-        <NotificationContext.Provider value={useState<INotification[]>([])}>
-            {children}
-        </NotificationContext.Provider>
-    );
-};
-
 export const Notifications = () => {
-    const [notificationContext] = useContext(NotificationContext);
-    const [, hideNotification] = useNotification();
+    const { notifications, hide } = useNotifications();
     const [containerRef] = useAutoAnimate<HTMLDivElement>({
         duration: 200
     });
 
-    // Instead of creating a notification component and mapping that, we map directly
-    // because this way the animations work better
-    const notifications = notificationContext.map(({ title, message, status, id }) => {
+    const notificationElements = notifications.map(({ title, message, status, id }) => {
         return (
             <div
                 key={id}
@@ -71,7 +35,7 @@ export const Notifications = () => {
                 <button
                     elem='Close'
                     onClick={() => {
-                        hideNotification(id);
+                        hide(id);
                     }}>
                     <Icon.Close />
                 </button>
@@ -83,9 +47,9 @@ export const Notifications = () => {
         <div
             block='NotificationContainer'
             ref={containerRef}
-            mods={{ NO_CONTENT: notificationContext.length === 0 }}
+            mods={{ NO_CONTENT: notifications.length === 0 }}
         >
-            {notifications}
+            {notificationElements}
         </div>
     );
 };
