@@ -1,10 +1,16 @@
 import { type ReactNode } from 'react';
+import dynamic from 'next/dynamic';
 import Header from 'Component/Header';
 import Footer from 'Component/Footer';
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-return
+const Cookies = dynamic(() => import('Component/Cookies') as any, {
+    ssr: false
+});
+
 type LayoutProps = {
     children: ReactNode
-}
+};
 
 const Layout = ({ children }: LayoutProps) => {
     return (
@@ -14,6 +20,7 @@ const Layout = ({ children }: LayoutProps) => {
                 {children}
             </main>
             <Footer />
+            <Cookies />
         </>
     );
 };

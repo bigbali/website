@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { BlurhashCanvas } from 'react-blurhash';
 import { Project } from 'data/projects';
 import { useDevice } from 'Store';
 import Icon from 'Component/Icon';
@@ -59,7 +58,7 @@ const ProjectCard = ({ title, description, thumbnail, github, slug, page, tags, 
                 </div>
             </div>
             <div elem='Thumbnail'>
-                <Image src={thumbnail.image} alt={title} />
+                <Image src={thumbnail.image} alt={title} placeholder='blur' />
             </div>
         </article>
     );

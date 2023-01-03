@@ -4,6 +4,7 @@ import Layout from 'Component/Layout';
 import 'Style/Global';
 import { isClient, scrollIntoView } from 'Util';
 import { useEffect } from 'react';
+import { Theme, useSettings } from 'Store';
 
 const observerAction: IntersectionObserverCallback = (elements) => {
     elements.forEach(element => {
@@ -46,7 +47,32 @@ const afterTransitionCallback = (sectionId: string | null) => {
 
 
 export default function App({ Component, pageProps }: AppProps) {
+    const { theme, accentColor, fontSize, contrast } = useSettings();
+
     useEffect(() => beginObservation());
+
+    useEffect(() => {
+        const body = document.querySelector('body')!;
+        const html = document.querySelector('html')!;
+
+        if (theme === Theme.LIGHT) {
+            body.classList.replace('theme-dark', 'theme-light') || body.classList.add('theme-light');
+        }
+        else {
+            body.classList.replace('theme-light', 'theme-dark') || body.classList.add('theme-dark');
+        }
+
+        if (accentColor) {
+            body.style.setProperty('--color-theme', accentColor.value);
+        }
+        else {
+            body.style.removeProperty('--color-theme');
+        }
+
+        html.style.fontSize = `${(fontSize || 1)}em`;
+        html.style.filter = `contrast(${contrast || 1})`;
+
+    }, [theme, accentColor, fontSize, contrast]);
 
     return (
         <Layout>
