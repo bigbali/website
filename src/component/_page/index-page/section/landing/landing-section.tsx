@@ -29,6 +29,7 @@ import img__spline_light_mobile from 'Media/webp/spline-light-mobile.webp';
 import img__spline_dark_mobile from 'Media/webp/spline-dark-mobile.webp';
 import img__spline_light_desktop from 'Media/webp/spline-light-desktop.webp';
 import img__spline_dark_desktop from 'Media/webp/spline-dark-desktop.webp';
+import Image from 'next/image';
 
 const SplineWEBP = {
     Mobile: {
@@ -192,21 +193,19 @@ const Landing = memo(({ onSplineLoaded, refFromParent, shouldTriggerAnimation }:
 
         const src = SplineWEBP[isDesktop ? 'Desktop' : 'Mobile'][theme === Theme.LIGHT ? 'Light' : 'Dark'];
 
-        return null;
-
-        // return (
-        //     <img
-        //         src={src}
-        //         onLoad={onSplineLoaded}
-        //         // @ts-ignore --- ignored because we need to set this ref to the image if Spline component times out
-        //         ref={splineCanvasRef}
-        //         className='landing-initial-state'
-        //         alt={`
-        //             An image of the 3D animation you would see on a desktop device,
-        //             but alas, mobile devices aren't powerful enough for that.
-        //         `}
-        //     />
-        // );
+        return (
+            <Image
+                src={src}
+                onLoad={onSplineLoaded}
+                // @ts-ignore --- ignored because we need to set this ref to the image if Spline component times out
+                ref={splineCanvasRef}
+                className='landing-initial-state'
+                alt={`
+                    An image of the 3D animation you would see on a desktop device,
+                    but alas, mobile devices aren't powerful enough for that.
+                `}
+            />
+        );
     }, [theme, isDesktop, useBackup]);
 
     return (

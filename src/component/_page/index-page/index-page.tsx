@@ -9,7 +9,7 @@ import {
 import { TransitionGroup } from 'react-transition-group';
 import FontFaceObserver from 'fontfaceobserver';
 import { scrollIntoView } from 'Util';
-import { useDevice } from 'Store';
+import { useDevice, useSection } from 'Store';
 import Transition from 'Component/Transition';
 import SectionSelector from 'Component/SectionSelector';
 import Icon from 'Component/Icon';
@@ -38,6 +38,12 @@ const fontsReady = async () => {
     });
 };
 
+const scrollToSection = (id: string | null) => {
+    if (!id) return;
+    const section = document.querySelector(id);
+    section && scrollIntoView({ current: section as HTMLElement });
+};
+
 export const IndexPage = () => {
     const [areFontsLoaded, setAreFontsLoaded] = useState(false);
     const [isSplineLoaded, setIsSplineLoaded] = useState(false);
@@ -47,6 +53,7 @@ export const IndexPage = () => {
     const projectsRef = useRef<HTMLElement>(null);
     const aboutRef = useRef<HTMLElement>(null);
     const contactRef = useRef<HTMLElement>(null);
+    const scrollToSectionId = useSection((state) => state.scrollToSectionId);
 
     const { isDesktop } = useDevice();
 
@@ -98,7 +105,12 @@ export const IndexPage = () => {
         <div block='IndexPage'>
             <TransitionGroup component={null}>
                 {(!areFontsLoaded || !isSplineLoaded) && (
-                    <Transition timeout={500} classNames='IndexPage-Loading' unmountOnExit>
+                    <Transition
+                        timeout={500}
+                        unmountOnExit
+                        onExited={() => scrollToSection(scrollToSectionId)}
+                        classNames='IndexPage-Loading'
+                    >
                         <div block='IndexPage' elem='Loading'>
                             <div elem='Loading-Logo'>
                                 <Icon.BB />
