@@ -11,9 +11,11 @@
     }
 
     &-Content {
-        padding-block-start: 25vh;
-
         @include desktop {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-block-end: var(--header-height);
             width: 40%;
             min-width: 20rem;
         }

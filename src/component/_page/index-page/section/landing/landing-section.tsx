@@ -30,6 +30,7 @@ import img__spline_dark_mobile from 'Media/webp/spline-dark-mobile.webp';
 import img__spline_light_desktop from 'Media/webp/spline-light-desktop.webp';
 import img__spline_dark_desktop from 'Media/webp/spline-dark-desktop.webp';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 
 const SplineWEBP = {
     Mobile: {
@@ -93,7 +94,6 @@ const Landing = memo(({ onSplineLoaded, refFromParent, shouldTriggerAnimation }:
     const splineBackgroundRef = useRef<SPEObject>();
     const splineCanvasRef = useRef<HTMLCanvasElement | HTMLImageElement>(null);
     const [useBackup, setUseBackup] = useState(false);
-    const Spline = isDesktop && lazy(() => import('@splinetool/react-spline'));
 
     const onSplineLoad = (splineApp: SplineApplication) => {
         splineRef.current = splineApp;
@@ -180,7 +180,9 @@ const Landing = memo(({ onSplineLoaded, refFromParent, shouldTriggerAnimation }:
     // As this component eats performance for breakfast then spits it out and eats it again,
     // let's not re-render it unless necessary
     const SplineMemo = useMemo(() => {
-        if (isDesktop && Spline && !useBackup) {
+        if (isDesktop && !useBackup) {
+            const Spline = dynamic(() => import('@splinetool/react-spline'));
+
             return (
                 <Spline
                     // @ts-ignore --- ignored because we need to set this ref to the image if Spline component times out

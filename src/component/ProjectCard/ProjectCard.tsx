@@ -58,7 +58,7 @@ const ProjectCard = ({ title, description, thumbnail, github, slug, page, tags, 
                 </div>
             </div>
             <div elem='Thumbnail'>
-                <Image src={thumbnail.image} alt={title} placeholder='blur' />
+                <Image src={thumbnail.image} alt={title} placeholder='blur' onLoad={() => setIsReady(true)} />
             </div>
         </article>
     );

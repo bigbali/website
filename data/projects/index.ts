@@ -11,7 +11,8 @@ import { StaticImageData } from 'next/image';
 export enum Status {
     FINISHED = 'Finished',
     IN_PROGRESS = 'In Progress',
-    PAUSED = 'Paused'
+    PAUSED = 'Paused',
+    ANY = 'Any'
 };
 
 export enum Tag {
