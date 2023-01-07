@@ -29,6 +29,13 @@
             >.Icon {
                 width: 8rem;
                 height: 8rem;
+
+                &:hover {
+                    svg>path {
+                        // remove color on hover
+                        fill: var(--color-content-primary-dark);
+                    }
+                }
             }
         }
 

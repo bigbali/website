@@ -1,6 +1,6 @@
 .Projects {
     padding-inline: var(--content-padding);
-    margin-block-end: 10rem;
+    margin-block-end: 10rem !important;
 
     @include mobile {
         margin-block-end: 3rem;

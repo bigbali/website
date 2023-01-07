@@ -212,6 +212,7 @@ const projects = [
         status: Status.PAUSED,
         weight: Weight.MEDIUM,
         tags: [
+            Tag.REACT,
             Tag.NODE,
             Tag.EXPRESS,
             Tag.JS,

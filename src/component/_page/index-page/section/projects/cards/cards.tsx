@@ -1,7 +1,16 @@
+import {
+    type Dispatch,
+    type SetStateAction,
+    useEffect,
+    useMemo,
+    useRef
+} from 'react';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+import projects, {
+    type Project,
+    Status
+} from 'data/projects';
 import ProjectCard from 'Component/ProjectCard';
-import projects, { Project, Status } from 'data/projects';
-import { Dispatch, MutableRefObject, SetStateAction, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 
 const filterStatus = (project: Project, status: Status) => status === Status.ANY
     ? true
@@ -47,12 +56,6 @@ const Cards = ({
         [status, title, tag]
     );
 
-    const getShowMoreCount = () => {
-        return projectsFiltered.length - projectCards.length <= 3
-            ? projectsFiltered.length - projectCards.length
-            : 3;
-    };
-
     const projectCards = useMemo(() => {
         return projectsFiltered
             .slice(0, limit)
@@ -75,36 +78,47 @@ const Cards = ({
         elementsShownCountPrevious.current = elementsShownCount;
     }, [elementsShownCount]);
 
-    const SHOW_MORE_COUNT = getShowMoreCount();
+    const getShowMoreCount = () => {
+        return projectsFiltered.length - projectCards.length <= 3
+            ? projectsFiltered.length - projectCards.length
+            : 3;
+    };
+
+    const shouldRenderButton = projectCards.length !== defaultLimit
+        ? projectsFiltered.length !== 0 && projectCards.length >= defaultLimit
+        : projectsFiltered.length !== projectCards.length;
+    const shouldButtonReset = projectCards.length === projectsFiltered.length;
 
     return (
         <>
             <div block='ProjectCards' ref={cardsContainerRef} className='animate-on-scroll'>
                 {projectCards}
             </div>
-            {
-                elementsShownCount !== 0 && (
-                    <div block='Projects' elem='ShowMore' className='animate-on-scroll'>
-                        <button
-                            title='Show More Projects'
-                            onClick={() => {
-                                if (SHOW_MORE_COUNT === 0) {
-                                    setLimit(defaultLimit);
-                                    return;
-                                }
+            <div
+                block='Projects'
+                elem='ShowMore'
+                className='animate-on-scroll'
+                // FIX
+                // removing the element from DOM breaks intersection observer because new instance is created and observer doesnt know
+                style={{ display: shouldRenderButton ? 'flex' : 'none' }}>
+                <button
+                    title='Show More Projects'
+                    onClick={() => {
+                        if (shouldButtonReset) {
+                            setLimit(defaultLimit);
+                            return;
+                        }
 
-                                setLimit((currentLimit) => currentLimit + 3);
-                            }}
-                        >
-                            {
-                                SHOW_MORE_COUNT === 0
-                                    ? `Show Only ${defaultLimit}`
-                                    : `Show ${SHOW_MORE_COUNT} More`
-                            }
-                        </button>
-                    </div>
-                )
-            }
+                        setLimit((currentLimit) => currentLimit + 3);
+                    }}
+                >
+                    {
+                        shouldButtonReset
+                            ? `Show Only ${defaultLimit}`
+                            : `Show ${getShowMoreCount()} More`
+                    }
+                </button>
+            </div>
             {
                 projectCards.length === 0 && (
                     <p block='Projects' elem='NotFound'>

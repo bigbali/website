@@ -5,6 +5,7 @@ import 'Style/Global';
 import { isClient, scrollIntoView } from 'Util';
 import { useEffect } from 'react';
 import { Theme, useSettings } from 'Store';
+import { range } from 'lodash';
 
 const observerAction: IntersectionObserverCallback = (elements) => {
     elements.forEach(element => {
@@ -15,7 +16,7 @@ const observerAction: IntersectionObserverCallback = (elements) => {
 const observer = isClient ? new IntersectionObserver(observerAction, {
     root: null,
     rootMargin: '-80px 0px -80px 0px',
-    threshold: [0.01, 0.99]
+    threshold: range(0.01, 1, 0.05)
 }) : null;
 
 const elementsToObserve = new Set();
