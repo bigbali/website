@@ -55,11 +55,12 @@ export const SettingsDesktop = () => {
         setContrast(modifier);
     };
 
-    const getOutlineStyle = useCallback((color: Color) => { // when we have the default selected, null === null,
-        if (accentColor === color           // but when we select another color, that is an object,
-            || (color && accentColor        // therefore between page reloads their reference will change
-                && (color.value === accentColor.value))) { // -> so we compare their values, not their references
+    const getOutlineStyle = useCallback((color: Color) => {
+        if (accentColor === color
+            || (color && accentColor && color.value === accentColor.value)) {
+
             if (isServer) return;
+
             return `4px solid ${getComputedStyle(document.body)
                 .getPropertyValue(`--color-border-${theme === Theme.LIGHT
                     ? 'dark'
@@ -76,7 +77,7 @@ export const SettingsDesktop = () => {
                     className='DefaultColor'
                     onClick={() => handleChangeAccentColor(null)}
                     title='Default (Red)'
-                // style={{ outline: getOutlineStyle(null) }}
+                    style={{ outline: getOutlineStyle(null) }}
                 />
             );
         }
@@ -84,7 +85,7 @@ export const SettingsDesktop = () => {
         return (
             <button
                 key={color.name}
-                // style={{ backgroundColor: color.value, outline: getOutlineStyle(color) }}
+                style={{ backgroundColor: color.value, outline: getOutlineStyle(color) }}
                 onClick={() => handleChangeAccentColor(color)}
                 title={color.name}
             />

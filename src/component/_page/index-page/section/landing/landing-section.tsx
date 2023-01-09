@@ -86,7 +86,7 @@ enum SplineBackgroundScaleX {
     LIGHT = 2
 };
 
-const Landing = memo(({ onSplineLoaded, refFromParent, shouldTriggerAnimation }: LandingProps) => {
+const Landing = ({ onSplineLoaded, refFromParent, shouldTriggerAnimation }: LandingProps) => {
     const { theme } = useSettings();
     const { isDesktop } = useDevice();
     const splineRef = useRef<SplineApplication>();
@@ -181,7 +181,9 @@ const Landing = memo(({ onSplineLoaded, refFromParent, shouldTriggerAnimation }:
     // let's not re-render it unless necessary
     const SplineMemo = useMemo(() => {
         if (isDesktop && !useBackup) {
-            const Spline = dynamic(() => import('@splinetool/react-spline'));
+            const Spline = dynamic(() => import('@splinetool/react-spline'), {
+                ssr: false
+            });
 
             return (
                 <Spline
@@ -208,7 +210,7 @@ const Landing = memo(({ onSplineLoaded, refFromParent, shouldTriggerAnimation }:
                 `}
             />
         );
-    }, [theme, isDesktop, useBackup]);
+    }, [isDesktop, useBackup]);
 
     return (
         <section
@@ -248,6 +250,6 @@ const Landing = memo(({ onSplineLoaded, refFromParent, shouldTriggerAnimation }:
             </div>
         </section>
     );
-});
+};
 
-export default Landing;
+export default memo(Landing);

@@ -1,4 +1,4 @@
-import { RefObject } from 'react';
+import { memo, RefObject } from 'react';
 import {
     NotificationStatus,
     useNotifications
@@ -114,4 +114,4 @@ const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) =
     );
 };
 
-export default Contact;
+export default memo(Contact);

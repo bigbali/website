@@ -15,7 +15,7 @@ import Transition from 'Component/Transition';
 import Settings from 'Component/Settings';
 import './Navigation.style';
 
-const NavigationMobile = memo(() => { // memo prevents unnecessary render which triggers animation
+const NavigationMobile = () => {
     const [isExpanded, setIsExpanded] = useState(false);
     const { currentSection, setScrollToSectionId } = useSection();
     // const location = useLocation();
@@ -102,6 +102,6 @@ const NavigationMobile = memo(() => { // memo prevents unnecessary render which 
             {Menu}
         </TransitionGroup>
     );
-});
+};
 
-export default NavigationMobile;
+export default memo(NavigationMobile);

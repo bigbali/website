@@ -47,7 +47,7 @@ const Switch = ({
         <button
             block='Switch'
             onClick={onClick}
-            /* mods={{ isSwitched: value === valueRight }} */>
+            mods={{ isSwitched: value === valueRight }}>
             <div elem='Value'>
                 <div elem='Value-Left'>
                     {iconLeft && ( // bem transform doesnt work here

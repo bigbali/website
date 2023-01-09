@@ -1,4 +1,5 @@
 import {
+    memo,
     RefObject,
     useEffect,
     useRef,
@@ -172,4 +173,4 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
     );
 };
 
-export default About;
+export default memo(About);

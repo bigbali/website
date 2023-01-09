@@ -1,4 +1,5 @@
 import {
+    memo,
     RefObject,
     useState,
 } from 'react';
@@ -9,6 +10,7 @@ import {
 import { useDevice } from 'Store';
 import './projects-section.style';
 
+// can't disable SSR because then they won't be in the DOM when we query for .scroll-animation
 const Filter = dynamic(() => import('./filter'));
 const Cards = dynamic(() => import('./cards'));
 
@@ -56,4 +58,4 @@ const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTM
     );
 };
 
-export default Projects;
+export default memo(Projects);

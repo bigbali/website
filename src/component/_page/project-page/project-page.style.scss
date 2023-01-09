@@ -1,12 +1,14 @@
 .ProjectPage {
-    &:not(:has(.ProjectPage-Thumbnail)) {
+
+    // fix this :)
+    &:not(:has(>.ProjectPage-Thumbnail)):not(.ProjectPage-Markdown) {
         padding-inline: var(--content-padding);
         padding-block-start: calc(var(--header-height) + 2rem);
         min-height: calc(100vh - var(--footer-height));
     }
 
     .ProjectPage {
-        // this is the thumbnail, but alas we had to redeclare block on it
+        // this is selecting the thumbnail, but alas we had to redeclare block on it
         // because the transformation plugin doesn't yet support short circuiting
 
         @include mobile {
