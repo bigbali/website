@@ -1,23 +1,24 @@
 import { useDevice } from 'Store';
 import Navigation from 'Component/Navigation/';
 import Settings from 'Component/Settings';
+import Link from 'next/link';
 import './Header.style';
 
 export const Header = () => {
-    const { isDesktop } = useDevice();
+    const { isDesktop, isMobile } = useDevice();
 
     return (
         <div block='Header'>
-            <a href='/' elem='Branding'>
+            <Link href='/' elem='Branding'>
                 balázs burján
-            </a>
+            </Link>
             {isDesktop && (
                 <>
-                    <Navigation.Desktop />
-                    <Settings.Desktop />
+                    <Navigation />
+                    <Settings />
                 </>
             )}
-            {!isDesktop && <Navigation.Mobile />}
+            {isMobile && <Navigation isMobile />}
         </div>
     );
 };

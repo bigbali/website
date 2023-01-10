@@ -1,9 +1,10 @@
 import type { IconProps } from '../index';
+import Base from '../Base';
 import './Close.style';
 
 const Close = ({ color }: IconProps) => {
     return (
-        <div block='Icon' elem='Close'>
+        <Base icon='Close'>
             <svg
                 viewBox='0 0 56 56'
                 fill='none'
@@ -14,7 +15,7 @@ const Close = ({ color }: IconProps) => {
                     fill={color}
                 />
             </svg>
-        </div>
+        </Base>
     );
 };
 

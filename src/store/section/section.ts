@@ -1,5 +1,15 @@
 import create from 'zustand';
 
+/**
+ * Use this to refer to sections from other components
+ */
+export enum SectionID {
+    LANDING = 'Landing',
+    PROJECTS = 'Projects',
+    ABOUT = 'About',
+    CONTACT = 'Contact'
+};
+
 interface Section {
     currentSection: HTMLElement | null,
     scrollToSectionId: string | null

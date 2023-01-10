@@ -9,22 +9,12 @@ import {
 import { TransitionGroup } from 'react-transition-group';
 import FontFaceObserver from 'fontfaceobserver';
 import { scrollIntoView } from 'Util';
-import { useDevice, useSection } from 'Store';
+import { SectionID, useDevice, useSection } from 'Store';
 import Transition from 'Component/Transition';
 import SectionSelector from 'Component/SectionSelector';
 import Icon from 'Component/Icon';
 import Section from './section';
 import './index-page.style';
-
-/**
- * Use this to refer to sections from other components
- */
-export enum SectionID {
-    LANDING = 'Landing',
-    PROJECTS = 'Projects',
-    ABOUT = 'About',
-    CONTACT = 'Contact'
-};
 
 const fontsReady = async () => {
     const raleway = new FontFaceObserver('Raleway');

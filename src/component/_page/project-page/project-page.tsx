@@ -44,9 +44,8 @@ export const ProjectPage = ({ project, markdown, slug }: ProjectProps) => {
         }
     } = project;
 
-
     const thumbnail = (
-        <div block='ProjectPage'>
+        <div block='ProjectPage' elem="Zokni">
             <div elem='Thumbnail'>
                 <Image
                     src={image}
