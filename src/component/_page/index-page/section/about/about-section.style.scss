@@ -5,6 +5,10 @@
         height: max-content;
     }
 
+    p {
+        font-size: 1.15rem;
+    }
+
     &-Header {
         position: relative;
         width: fit-content;
@@ -298,6 +302,22 @@
                 >li {
                     color: var(--color-content-secondary);
                     margin-block-end: 0.25em;
+                }
+            }
+        }
+
+        &-Hobbies {
+            >p {
+                margin-block-end: 0.5rem;
+            }
+
+            >ul {
+                margin-block-start: 0;
+                font-size: 1rem;
+
+                >li {
+                    margin-block-end: 0.25rem;
+                    color: var(--color-content-secondary);
                 }
             }
         }

@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import { isClient } from 'Util';
 
 export enum Theme {

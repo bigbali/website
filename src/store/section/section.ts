@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 
 /**
  * Use this to refer to sections from other components

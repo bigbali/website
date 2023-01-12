@@ -1,15 +1,17 @@
+import { useEffect } from 'react';
+import { range } from 'lodash';
 import { type AppProps } from 'next/app';
 import Head from 'next/head';
+import { isClient } from 'Util';
+import { Theme, useSettings } from 'Store';
 import Layout from 'Component/Layout';
 import 'Style/Global';
-import { isClient, scrollIntoView } from 'Util';
-import { useEffect } from 'react';
-import { Theme, useSettings } from 'Store';
-import { range } from 'lodash';
 
 const observerAction: IntersectionObserverCallback = (elements) => {
     elements.forEach(element => {
-        !element.target.getAnimations().length && element.target.classList.toggle('begin-animation', element.isIntersecting);
+        if (element.target.getAnimations().length === 0 && element.isIntersecting) {
+            element.target.classList.add('begin-animation');
+        }
     });
 };
 
@@ -37,16 +39,6 @@ const beginObservation = () => {
     elementsToAnimate.forEach((element) => updateElementsToObserve(element as HTMLElement));
 };
 
-const afterTransitionCallback = (sectionId: string | null) => {
-    if (!sectionId) return;
-
-    beginObservation();
-
-    const section = document.querySelector(sectionId) as HTMLElement;
-    section && scrollIntoView({ current: section });
-};
-
-
 export default function App({ Component, pageProps }: AppProps) {
     const { theme, accentColor, fontSize, contrast } = useSettings();
 
@@ -56,12 +48,8 @@ export default function App({ Component, pageProps }: AppProps) {
         const body = document.querySelector('body')!;
         const html = document.querySelector('html')!;
 
-        if (theme === Theme.LIGHT) {
-            body.classList.replace('theme-dark', 'theme-light') || body.classList.add('theme-light');
-        }
-        else {
-            body.classList.replace('theme-light', 'theme-dark') || body.classList.add('theme-dark');
-        }
+        body.classList.toggle('theme-light', theme === Theme.LIGHT);
+        body.classList.toggle('theme-dark', theme === Theme.DARK);
 
         if (accentColor) {
             body.style.setProperty('--color-theme', accentColor.value);

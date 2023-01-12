@@ -8,7 +8,6 @@
         "allowJs": true, // Allow JavaScript files to be a part of your program.
         "checkJs": false, // Enable error reporting in type-checked JavaScript files.
         "esModuleInterop": true, // Emit additional JavaScript to ease support for importing CommonJS modules.
-        // "forceConsistentCasingInFileNames": true, // disabled because it causes a weird bug, https://stackoverflow.com/questions/51197940/file-name-differs-from-already-included-file-name-only-in-casing-on-relative-p
         "strict": true,
         "baseUrl": "./",
         "jsx": "preserve",

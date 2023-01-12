@@ -65,9 +65,11 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                             The Beginning
                         </h1>
                         <p>
-                            I introduced myself to the art of computer science in 2016,
-                            when I started writing a desktop networking tool using C# and the .NET Framework, and not long after
-                            I built a simple web application with ASP.NET which I hosted on my own computer.
+                            I introduced myself to the art of computer science in 2016
+                            when I took interest in making games with Unity,
+                            and not long after I started writing a desktop
+                            networking tool using C# and the .NET Framework.
+                            Soon after, I built a simple web application with ASP.NET which I hosted on my own computer.
                         </p>
                     </section>
                     <section elem='Content-Experience' className='animate-on-scroll'>
@@ -140,9 +142,25 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                             Hobbies
                         </h1>
                         <p>
-                            When not programming, I take photos, care for my plants and cats,
-                            read books or play video games.
+                            I spend my spare time on:
                         </p>
+                        <ul>
+                            <li>
+                                programming
+                            </li>
+                            <li>
+                                photography
+                            </li>
+                            <li>
+                                video games
+                            </li>
+                            <li>
+                                gardening
+                            </li>
+                            <li>
+                                animals
+                            </li>
+                        </ul>
                     </section>
                 </div>
                 <figure elem='Content-Figure' mods={{ REDUCE_WIDTH: preventOverflow }}>

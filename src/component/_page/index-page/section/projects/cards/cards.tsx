@@ -3,14 +3,17 @@ import {
     type SetStateAction,
     useEffect,
     useMemo,
-    useRef
+    useRef,
+    memo,
 } from 'react';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import projects, {
     type Project,
     Status
 } from 'data/projects';
+import { scrollIntoView } from 'Util';
 import ProjectCard from 'Component/ProjectCard';
+import { updateElementsToObserve } from 'src/pages/_app';
 
 const filterStatus = (project: Project, status: Status) => status === Status.ANY
     ? true
@@ -48,58 +51,71 @@ const Cards = ({
     const [cardsContainerRef] = useAutoAnimate<HTMLDivElement>({ duration: 200 });
     const elementsShownCountPrevious = useRef(0);
 
+    // this will let us know if the default filter has been changed
+    const filterChangedCount = useRef(0);
+
     const projectsFiltered = useMemo(
-        () => (projects as unknown as Project[])
+        () => (projects)
             .filter((project) => filterStatus(project, status))
             .filter((project) => filterTitle(project, title))
             .filter((project) => filterTag(project, tag)),
         [status, title, tag]
     );
 
-    const projectCards = useMemo(() => {
+    const ProjectCards = useMemo(() => {
+        filterChangedCount.current++;
+
         return projectsFiltered
             .slice(0, limit)
             .sort((p1, p2) => p1.weight - p2.weight)
-            .map((project, index) => <ProjectCard {...project} key={project.title} index={index} />);
+            .map(project => <ProjectCard {...project} key={project.title} />);
     }, [status, title, tag, limit]);
 
+    // TODO this clearly doesnt work
+    // observer does, class doesn't
+    console.log('render');
     useEffect(() => {
-        setElementsShownCount(projectCards.length);
-    }, [projectCards.length]);
+        console.log('effect');
+        if (filterChangedCount.current < 2) {
+            document.querySelectorAll('.ProjectCard').forEach((element) => {
+                element.classList.add('animate-on-scroll');
+                updateElementsToObserve(element as HTMLElement);
+            });
+        }
+    }, [filterChangedCount.current, cardsContainerRef.current]);
 
+    useEffect(() => {
+        setElementsShownCount(ProjectCards.length);
+    }, [ProjectCards.length]);
 
     useEffect(() => {
         if (elementsShownCount < elementsShownCountPrevious.current) {
-            window.scrollTo({
-                top: cardsContainerRef.current!.offsetTop - 100
-            });
+            scrollIntoView(cardsContainerRef);
         }
 
         elementsShownCountPrevious.current = elementsShownCount;
     }, [elementsShownCount]);
 
     const getShowMoreCount = () => {
-        return projectsFiltered.length - projectCards.length <= 3
-            ? projectsFiltered.length - projectCards.length
+        return projectsFiltered.length - ProjectCards.length <= 3
+            ? projectsFiltered.length - ProjectCards.length
             : 3;
     };
 
-    const shouldRenderButton = projectCards.length !== defaultLimit
-        ? projectsFiltered.length !== 0 && projectCards.length >= defaultLimit
-        : projectsFiltered.length !== projectCards.length;
-    const shouldButtonReset = projectCards.length === projectsFiltered.length;
+    const shouldRenderButton = ProjectCards.length !== defaultLimit
+        ? projectsFiltered.length !== 0 && ProjectCards.length >= defaultLimit
+        : projectsFiltered.length !== ProjectCards.length;
+    const shouldButtonReset = ProjectCards.length === projectsFiltered.length;
 
     return (
         <>
-            <div block='ProjectCards' ref={cardsContainerRef} className='animate-on-scroll'>
-                {projectCards}
+            <div block='ProjectCards' ref={cardsContainerRef}>
+                {ProjectCards}
             </div>
             <div
                 block='Projects'
                 elem='ShowMore'
                 className='animate-on-scroll'
-                // FIX
-                // removing the element from DOM breaks intersection observer because new instance is created and observer doesnt know
                 style={{ display: shouldRenderButton ? 'flex' : 'none' }}>
                 <button
                     title='Show More Projects'
@@ -120,7 +136,7 @@ const Cards = ({
                 </button>
             </div>
             {
-                projectCards.length === 0 && (
+                ProjectCards.length === 0 && (
                     <p block='Projects' elem='NotFound'>
                         It looks like there's no such project yet.
                     </p>
@@ -130,4 +146,4 @@ const Cards = ({
     );
 };
 
-export default Cards;
+export default memo(Cards);

@@ -95,6 +95,12 @@
                 border: none;
             }
 
+            >.color-swatch {
+                &:hover:not(.selected) {
+                    outline: 1px solid var(--color-border-inverted);
+                }
+            }
+
             >.default-color {
                 background-color: var(--color-theme-initial);
             }

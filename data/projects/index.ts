@@ -50,7 +50,7 @@ export type Project = {
     status: Status,
     weight: number,
     tags: Tag[],
-    page: string,
+    page?: string,
     github?: string,
     slug: string,
     thumbnail: {
@@ -229,6 +229,6 @@ const projects = [
         github: 'https://github.com/bigbali/tankstats-frontend',
         slug: 'tankstats'
     }
-] as const;
+];
 
 export default projects;

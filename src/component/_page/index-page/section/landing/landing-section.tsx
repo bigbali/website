@@ -8,6 +8,7 @@ import {
     useState,
     type RefObject
 } from 'react';
+import Image from 'next/image';
 import {
     type SPEObject,
     type Application as SplineApplication
@@ -17,7 +18,6 @@ import {
     Subscription,
     throttleTime
 } from 'rxjs';
-// import { updateElementsToObserve } from '../../../../index';
 import {
     Theme,
     useDevice,
@@ -29,8 +29,6 @@ import img__spline_light_mobile from 'Media/webp/spline-light-mobile.webp';
 import img__spline_dark_mobile from 'Media/webp/spline-dark-mobile.webp';
 import img__spline_light_desktop from 'Media/webp/spline-light-desktop.webp';
 import img__spline_dark_desktop from 'Media/webp/spline-dark-desktop.webp';
-import Image from 'next/image';
-import dynamic from 'next/dynamic';
 
 const SplineWEBP = {
     Mobile: {
@@ -49,26 +47,9 @@ const SplineURL = {
     Switchable: 'https://prod.spline.design/2oNTUNbzmdhEMPUo/scene.splinecode'
 };
 
-// Remember the timeouts we'll use to temporarily halt the scroll animation when the page loads
-let timeouts: NodeJS.Timeout[] = [];
-
-// we need a way to animate initial load while keeping scroll animations, so at first we have the landing-animation class,
-// then after 3 seconds we replace it, so we can have scroll animations
-const recursivelyApplyClassNameTransformation = (element: HTMLElement) => {
-    if (element?.classList?.replace('landing-initial-state', 'animate-on-scroll')) {
-        // updateElementsToObserve(element);
-        element.classList.add('landing-animation');
-        element.classList.toggle('begin-animation');
-
-        timeouts.push(setTimeout(() => {
-            (element).classList.remove('landing-animation');
-        }, 3000));
-    }
-
-    if (element.childNodes.length === 0) return;
-
-    element.childNodes.forEach((childNode) => {
-        recursivelyApplyClassNameTransformation(childNode as HTMLElement);
+const triggerLandingAnimation = () => {
+    document.querySelectorAll('.landing-initial-state').forEach((element) => {
+        element.classList.replace('landing-initial-state', 'landing-animation');
     });
 };
 
@@ -79,7 +60,7 @@ type LandingProps = {
     shouldTriggerAnimation: boolean
 };
 
-// we use scale of background's X axis to determine color of background as such data isn't exposed
+// we use scale of background plane's X axis to determine color of background as such data isn't exposed
 // (scale is switched withing Spline)
 enum SplineBackgroundScaleX {
     DARK = 1,
@@ -127,7 +108,6 @@ const Landing = ({ onSplineLoaded, refFromParent, shouldTriggerAnimation }: Land
         let timeout: NodeJS.Timeout;
         if (isDesktop && !shouldTriggerAnimation) {
             timeout = setTimeout(() => {
-                console.log('backup');
                 setUseBackup(true);
             }, 5000);
         }
@@ -139,12 +119,9 @@ const Landing = ({ onSplineLoaded, refFromParent, shouldTriggerAnimation }: Land
         if (!splineBackgroundRef.current) return;
 
         if (splineBackgroundRef.current.scale.x === SplineBackgroundScaleX.DARK && theme === Theme.LIGHT) {
-            console.log('setting to light');
             splineRef.current?.emitEvent('mouseUp', 'Background');
         }
         if (splineBackgroundRef.current.scale.x === SplineBackgroundScaleX.LIGHT && theme === Theme.DARK) {
-            console.log('setting to dark');
-
             splineRef.current?.emitEventReverse('mouseUp', 'Background');
         }
 
@@ -154,8 +131,8 @@ const Landing = ({ onSplineLoaded, refFromParent, shouldTriggerAnimation }: Land
         let event: Subscription;
 
         if (shouldTriggerAnimation) {
-            refFromParent.current && recursivelyApplyClassNameTransformation(refFromParent.current);
             triggerSplineAnimation();
+            triggerLandingAnimation();
 
             setTimeout(() => {
                 event = fromEvent(
@@ -170,10 +147,9 @@ const Landing = ({ onSplineLoaded, refFromParent, shouldTriggerAnimation }: Land
         }
 
         return () => {
-            timeouts.forEach((id) => clearTimeout(id));
-            timeouts = []; // reset timeouts array
-
-            event && event.unsubscribe();
+            if (event) {
+                event.unsubscribe();
+            }
         };
     }, [shouldTriggerAnimation]);
 
@@ -181,9 +157,7 @@ const Landing = ({ onSplineLoaded, refFromParent, shouldTriggerAnimation }: Land
     // let's not re-render it unless necessary
     const SplineMemo = useMemo(() => {
         if (isDesktop && !useBackup) {
-            const Spline = dynamic(() => import('@splinetool/react-spline'), {
-                ssr: false
-            });
+            const Spline = lazy(() => import('@splinetool/react-spline'));
 
             return (
                 <Spline
@@ -206,7 +180,7 @@ const Landing = ({ onSplineLoaded, refFromParent, shouldTriggerAnimation }: Land
                 className='landing-initial-state'
                 alt={`
                     An image of the 3D animation you would see on a desktop device,
-                    but alas, mobile devices aren't powerful enough for that.
+                    but alas, most mobile devices aren't powerful enough for that.
                 `}
             />
         );
@@ -239,8 +213,9 @@ const Landing = ({ onSplineLoaded, refFromParent, shouldTriggerAnimation }: Land
                     </span>
                 </h2>
                 <p className='landing-initial-state'>
-                    I craft applications with beautiful user interfaces and user experience in mind
-                    for the web and desktop.
+                    I bring your imagination to life
+                    by crafting applications with beautiful user interfaces
+                    and intuitive user experiences in mind.
                 </p>
             </div>
             <div elem='Spline' mods={{ IS_BACKUP: useBackup }}>

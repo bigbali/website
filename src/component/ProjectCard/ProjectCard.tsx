@@ -2,21 +2,16 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Project } from 'data/projects';
-import { useDevice } from 'Store';
 import Icon from 'Component/Icon';
 import './ProjectCard.style';
 
-const ProjectCard = ({ title, description, thumbnail, github, slug, page, tags, status, index }: Project
-    & { index: number }) => {
-    const isReverse = index % 2 !== 0;
+const ProjectCard = ({ title, description, thumbnail, github, slug, page, tags, status }: Project) => {
     const [isReady, setIsReady] = useState(false);
-    const { isDesktop } = useDevice();
 
     return (
         <article
             block='ProjectCard'
-            mods={{ // we don't want to reverse on mobile, as all cards are uniform
-                REVERSE: isDesktop && isReverse,
+            mods={{
                 LOADED: isReady
             }}
         >

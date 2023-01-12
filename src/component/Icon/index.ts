@@ -1,6 +1,6 @@
 export * from './Chevron';
 
-import { default as Base } from './Base';
+import { default as Base } from './_Base';
 import { default as Address } from './Address';
 import { default as Anchor } from './Anchor';
 import { default as Babel } from './Babel';

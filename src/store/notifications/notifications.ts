@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import { v4 as UUIDV4 } from 'uuid';
 
 export enum NotificationStatus {
