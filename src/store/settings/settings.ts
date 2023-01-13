@@ -39,7 +39,7 @@ export type ColorType = {
 
 export type Color = ColorType | null;
 
-export interface Settings {
+export type Settings = {
     theme: Theme,
     accentColor: Color | null,
     fontSize: number,

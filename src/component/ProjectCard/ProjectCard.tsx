@@ -1,16 +1,45 @@
-import { useState } from 'react';
+import {
+    useEffect,
+    useRef,
+    useState
+} from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Project } from 'data/projects';
 import Icon from 'Component/Icon';
 import './ProjectCard.style';
+import { ScrollAnimationObserver } from 'Util';
 
-const ProjectCard = ({ title, description, thumbnail, github, slug, page, tags, status }: Project) => {
+type ProjectCardProps = Project & {
+    applyScrollAnimation?: boolean
+};
+
+const ProjectCard = ({
+    title,
+    description,
+    thumbnail,
+    github,
+    slug,
+    page,
+    tags,
+    status,
+    applyScrollAnimation
+}: ProjectCardProps) => {
     const [isReady, setIsReady] = useState(false);
+    const ref = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        if (ref.current && applyScrollAnimation) {
+            ScrollAnimationObserver?.add(ref.current);
+        }
+    }, [applyScrollAnimation]);
+
 
     return (
         <article
             block='ProjectCard'
+            className={applyScrollAnimation ? ' animate-on-scroll' : ''}
+            ref={ref}
             mods={{
                 LOADED: isReady
             }}

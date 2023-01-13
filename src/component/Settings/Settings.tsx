@@ -1,6 +1,7 @@
 import {
     memo,
     useCallback,
+    useEffect,
     useRef,
     useState
 } from 'react';
@@ -16,6 +17,7 @@ import Switch from 'Component/Switch';
 import Slider from 'Component/Slider';
 import Icon from 'Component/Icon';
 import './Settings.style';
+import { applySettings } from 'Util/settings';
 
 const ColorMap = [
     null,
@@ -85,6 +87,16 @@ export const Settings = ({ isMobile }: SettingsProps) => {
             />
         );
     };
+
+    useEffect(() => {
+        applySettings({
+            theme,
+            accentColor,
+            fontSize,
+            contrast
+        });
+    }, [theme, accentColor, fontSize, contrast]);
+
 
     const SettingsMenu = (
         <div block='Settings' elem='Menu'>

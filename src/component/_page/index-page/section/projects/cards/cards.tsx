@@ -13,7 +13,6 @@ import projects, {
 } from 'data/projects';
 import { scrollIntoView } from 'Util';
 import ProjectCard from 'Component/ProjectCard';
-import { updateElementsToObserve } from 'src/pages/_app';
 
 const filterStatus = (project: Project, status: Status) => status === Status.ANY
     ? true
@@ -51,8 +50,9 @@ const Cards = ({
     const [cardsContainerRef] = useAutoAnimate<HTMLDivElement>({ duration: 200 });
     const elementsShownCountPrevious = useRef(0);
 
-    // this will let us know if the default filter has been changed
-    const filterChangedCount = useRef(0);
+    // this will let us know if the cards have been re-rendered
+    // note: the useAutoAnimate hook causes an initial rerender, therefore we'll consider the 2nd render instead of the 1st
+    const cardsChangedCount = useRef(0);
 
     const projectsFiltered = useMemo(
         () => (projects)
@@ -63,26 +63,22 @@ const Cards = ({
     );
 
     const ProjectCards = useMemo(() => {
-        filterChangedCount.current++;
-
-        return projectsFiltered
+        const cards = projectsFiltered
             .slice(0, limit)
             .sort((p1, p2) => p1.weight - p2.weight)
-            .map(project => <ProjectCard {...project} key={project.title} />);
-    }, [status, title, tag, limit]);
-
-    // TODO this clearly doesnt work
-    // observer does, class doesn't
-    console.log('render');
-    useEffect(() => {
-        console.log('effect');
-        if (filterChangedCount.current < 2) {
-            document.querySelectorAll('.ProjectCard').forEach((element) => {
-                element.classList.add('animate-on-scroll');
-                updateElementsToObserve(element as HTMLElement);
+            .map(project => {
+                return (
+                    <ProjectCard
+                        {...project}
+                        key={project.title}
+                        applyScrollAnimation={cardsChangedCount.current === 1}
+                    />
+                );
             });
-        }
-    }, [filterChangedCount.current, cardsContainerRef.current]);
+
+        cardsChangedCount.current++;
+        return cards;
+    }, [status, title, tag, limit, cardsChangedCount.current]);
 
     useEffect(() => {
         setElementsShownCount(ProjectCards.length);
