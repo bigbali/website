@@ -15,13 +15,13 @@ export const scrollIntoView = (section: RefObject<HTMLElement>) => {
     });
 };
 
-type ScrollObserverCallback = (elements: IntersectionObserverEntry[], observer: Observer) => void
+type ScrollObserverCallback = (elements: IntersectionObserverEntry[], observer: Observer) => void;
 interface Observer {
     add: (element: HTMLElement) => void,
     delete: (element: HTMLElement) => void,
     observe: (query: string) => void,
     disconnect: () => void
-}
+};
 
 export class ScrollObserver implements Observer {
     #observer: IntersectionObserver;
@@ -56,6 +56,10 @@ const scrollAnimationCallback: ScrollObserverCallback = (elements, observer) => 
         if (element.target.getAnimations().length === 0 && element.isIntersecting) {
             element.target.classList.add('begin-animation');
 
+            setTimeout(() => {
+                element.target.classList.add('animation-finished');
+            }, 350);
+
             // after an element has been animated in, we don't need to watch it any more
             observer.delete(element.target as HTMLElement);
         }
@@ -71,6 +75,6 @@ export const ScrollAnimationObserver = (() => {
             root: null,
             rootMargin: '-80px 0px -80px 0px',
             threshold: range(0.01, 1, 0.05)
-        })
+        });
     }
 })();

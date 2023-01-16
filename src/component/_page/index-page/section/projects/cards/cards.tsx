@@ -11,8 +11,9 @@ import projects, {
     type Project,
     Status
 } from 'data/projects';
-import { scrollIntoView } from 'Util';
+import { ScrollAnimationObserver, scrollIntoView } from 'Util';
 import ProjectCard from 'Component/ProjectCard';
+import './cards.style';
 
 const filterStatus = (project: Project, status: Status) => status === Status.ANY
     ? true
@@ -49,6 +50,7 @@ const Cards = ({
 }: CardsProps) => {
     const [cardsContainerRef] = useAutoAnimate<HTMLDivElement>({ duration: 200 });
     const elementsShownCountPrevious = useRef(0);
+    const showMoreRef = useRef<HTMLDivElement>(null);
 
     // this will let us know if the cards have been re-rendered
     // note: the useAutoAnimate hook causes an initial rerender, therefore we'll consider the 2nd render instead of the 1st
@@ -81,6 +83,12 @@ const Cards = ({
     }, [status, title, tag, limit, cardsChangedCount.current]);
 
     useEffect(() => {
+        if (showMoreRef.current) {
+            ScrollAnimationObserver?.add(showMoreRef.current);
+        }
+    }, [showMoreRef.current]);
+
+    useEffect(() => {
         setElementsShownCount(ProjectCards.length);
     }, [ProjectCards.length]);
 
@@ -105,12 +113,13 @@ const Cards = ({
 
     return (
         <>
-            <div block='ProjectCards' ref={cardsContainerRef}>
+            <div block='Cards' ref={cardsContainerRef}>
                 {ProjectCards}
             </div>
             <div
-                block='Projects'
+                block='Cards'
                 elem='ShowMore'
+                ref={showMoreRef}
                 className='animate-on-scroll'
                 style={{ display: shouldRenderButton ? 'flex' : 'none' }}>
                 <button
@@ -133,7 +142,7 @@ const Cards = ({
             </div>
             {
                 ProjectCards.length === 0 && (
-                    <p block='Projects' elem='NotFound'>
+                    <p block='Cards' elem='NotFound'>
                         It looks like there's no such project yet.
                     </p>
                 )

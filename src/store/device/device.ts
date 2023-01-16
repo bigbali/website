@@ -3,8 +3,8 @@ import { create } from 'zustand';
 import { getIsMobile, isClient } from 'Util';
 
 export interface Device {
-    isMobile: boolean,
-    isDesktop: boolean
+    isMobile: boolean | undefined,
+    isDesktop: boolean | undefined
 };
 
 interface DeviceStore extends Device {
@@ -14,7 +14,7 @@ interface DeviceStore extends Device {
 const isMobile = getIsMobile();
 export const useDevice = create<DeviceStore>((set) => ({
     isMobile: isMobile,
-    isDesktop: !isMobile,
+    isDesktop: isClient ? !isMobile : undefined,
     update: () => {
         set(() => {
             const isMobile = getIsMobile();

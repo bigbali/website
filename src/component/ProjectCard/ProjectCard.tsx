@@ -34,7 +34,6 @@ const ProjectCard = ({
         }
     }, [applyScrollAnimation]);
 
-
     return (
         <article
             block='ProjectCard'

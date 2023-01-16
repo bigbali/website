@@ -193,51 +193,24 @@ p {
 
 main {
     &.Page {
-        &>div::before {
-            // page transition overlay
-            content: "";
-            display: block;
-            position: fixed;
-            inset: 0;
-            background-color: var(--color-background-primary-transparent);
-            backdrop-filter: blur(1rem);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        &.cross-page {
-            &_enter {
-                &>div::before {
-                    opacity: 1;
-                }
-            }
-
-            &_exit {
-                &>div::before {
-                    opacity: 0;
-                }
-            }
-
-            &_enter-active {
-                &>div::before {
-                    opacity: 0;
-                    transition: opacity 0.3s;
-                    transition-timing-function: ease-out;
-                }
-            }
-
-            &_enter-done>div::before {
-                display: none;
-            }
-
-            &_exit-active {
-                &>div::before {
-                    opacity: 1;
-                    transition: opacity 0.1s;
-                    transition-timing-function: ease-out;
-                }
+        &.cross-page_enter-active>div {
+            @include not-prefers-reduced-motion {
+                animation-name: in;
+                animation-duration: 0.3s;
+                animation-fill-mode: forwards;
+                animation-iteration-count: 1;
             }
         }
+    }
+}
+
+@keyframes in {
+    from {
+        translate: 100% 0;
+    }
+
+    to {
+        translate: 0 0;
     }
 }
 

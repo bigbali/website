@@ -11,7 +11,7 @@ const Footer = () => {
                 </span>
             </span>
             <nav elem='Navigation'>
-                <Link href='/cookie-policy'>
+                <Link href='/cookie-policy' scroll={false}>
                     Cookie Policy
                 </Link>
             </nav>

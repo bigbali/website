@@ -9,6 +9,13 @@
     border-radius: 0.5rem;
     transition: scale 0.5s;
 
+    &.begin-animation:not(.animation-finished) {
+        transition: opacity 0.3s,
+            translate 0.3s,
+            scale 0.3s,
+            filter 0.3s;
+    }
+
     @include theme-dark(&) {
         box-shadow: 8px 8px 32px black,
             -8px -8px 32px #1f1f1f;

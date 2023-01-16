@@ -1,4 +1,3 @@
-
 import {
     useCallback,
     useEffect,
@@ -44,14 +43,23 @@ export const IndexPage = () => {
     const aboutRef = useRef<HTMLElement>(null);
     const contactRef = useRef<HTMLElement>(null);
     const scrollToSectionId = useSection((state) => state.scrollToSectionId);
+    const setScrollToSectionId = useSection((state) => state.setScrollToSectionId);
 
     const { isDesktop } = useDevice();
 
+    // Without useCallback, we get a hydration error, believe it or not
     const onFontsLoaded = useCallback(() => {
         areFontsLoadedRef.current = true;
         setAreFontsLoaded(true);
     }, []);
     const onSplineLoaded = useCallback(() => setIsSplineLoaded(true), []);
+    const onTransitionExited = () => {
+        scrollToSection(scrollToSectionId);
+
+        // We need to forget the section id, otherwise we will scroll to it
+        // when the page is loaded again
+        setScrollToSectionId(null);
+    };
 
     const Sections = useMemo(() => [
         {
@@ -98,7 +106,7 @@ export const IndexPage = () => {
                     <Transition
                         timeout={500}
                         unmountOnExit
-                        onExited={() => scrollToSection(scrollToSectionId)}
+                        onExited={onTransitionExited}
                         classNames='IndexPage-Loading'
                     >
                         <div block='IndexPage' elem='Loading'>

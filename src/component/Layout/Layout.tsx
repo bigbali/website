@@ -1,4 +1,7 @@
-import { type ReactNode } from 'react';
+import {
+    forwardRef,
+    type PropsWithChildren,
+} from 'react';
 import dynamic from 'next/dynamic';
 import Footer from 'Component/Footer';
 
@@ -14,15 +17,12 @@ const Notifications = dynamic(() => import('Component/Notifications'), {
     ssr: false
 });
 
-type LayoutProps = {
-    children: ReactNode
-};
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = forwardRef<HTMLElement, PropsWithChildren>(({ children }, ref) => {
     return (
         <>
             <Header />
-            <main className='Page'>
+            <main className='Page' ref={ref}>
                 {children}
             </main>
             <Footer />
@@ -30,6 +30,6 @@ const Layout = ({ children }: LayoutProps) => {
             <Notifications />
         </>
     );
-};
+});
 
 export default Layout;

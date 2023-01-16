@@ -9,11 +9,12 @@ import { Status, Tag } from 'data/projects';
 import Help, { Orientation } from 'Component/Help';
 import Icon from 'Component/Icon';
 import './filter.style';
+import { ScrollAnimationObserver } from 'Util';
 
 type FilterProps = {
     defaultLimit: number,
     elementsShownCount: number,
-    isDesktop: boolean,
+    isDesktop: boolean | undefined,
     setStatus: Dispatch<SetStateAction<Status>>,
     setTag: Dispatch<SetStateAction<string | undefined>>,
     setLimit: Dispatch<SetStateAction<number>>,
@@ -32,6 +33,14 @@ const Filter = ({
     const [isExpanded, setIsExpanded] = useState(isDesktop);
     const filterRef = useRef<HTMLFieldSetElement>(null);
 
+    // We need to render this dynamically, so it won't be rendered when we query for .animate-on-scroll.
+    // Therefore, we tell to observer to watch this as well
+    useEffect(() => {
+        if (filterRef.current) {
+            ScrollAnimationObserver?.add(filterRef.current);
+        }
+    }, [filterRef.current]);
+
     useEffect(() => { // using BEM mods={IS_EXPANDED: isExpanded} conflicted with animate-on-scroll
         filterRef.current?.classList.toggle('IS_EXPANDED', isExpanded);
     }, [isDesktop, isExpanded]);
@@ -47,8 +56,7 @@ const Filter = ({
                     Filter
                 </legend>
                 <p>
-                    {isDesktop && `Showing ${elementsShownCount} ${elementsShownCount === 1 ? 'element' : 'elements'}.`}
-                    {!isDesktop && `${elementsShownCount} ${elementsShownCount === 1 ? 'element' : 'elements'}.`}
+                    {`${elementsShownCount} shown.`}
                 </p>
                 <button title='Expand Filters' onClick={() => setIsExpanded(!isExpanded)}>
                     <Icon.Chevron />

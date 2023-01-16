@@ -7,8 +7,7 @@
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking",
-        "next"
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
     ],
     "env": {
         "browser": true,

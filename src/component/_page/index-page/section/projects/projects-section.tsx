@@ -9,11 +9,9 @@ import {
 } from 'data/projects';
 import { useDevice } from 'Store';
 import './projects-section.style';
-// import Cards from './cards';
 
-// can't disable SSR because then these won't be in the DOM when we query for .scroll-animation
-const Filter = dynamic(() => import('./filter'));
-const Cards = dynamic(() => import('./cards'));
+const Filter = dynamic(() => import('./filter'), { ssr: false });
+const Cards = dynamic(() => import('./cards'), { ssr: false });
 
 const Projects = ({ refFromParent: projectsRef }: { refFromParent: RefObject<HTMLElement> }) => {
     const isDesktop = useDevice((state) => state.isDesktop);

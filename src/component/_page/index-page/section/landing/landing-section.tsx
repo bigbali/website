@@ -29,6 +29,7 @@ import img__spline_light_mobile from 'Media/webp/spline-light-mobile.webp';
 import img__spline_dark_mobile from 'Media/webp/spline-dark-mobile.webp';
 import img__spline_light_desktop from 'Media/webp/spline-light-desktop.webp';
 import img__spline_dark_desktop from 'Media/webp/spline-dark-desktop.webp';
+import dynamic from 'next/dynamic';
 
 const SplineWEBP = {
     Mobile: {
@@ -134,6 +135,7 @@ const Landing = ({ onSplineLoaded, refFromParent, shouldTriggerAnimation }: Land
             triggerSplineAnimation();
             triggerLandingAnimation();
 
+            // TODO onSplineLoaded?
             setTimeout(() => {
                 event = fromEvent(
                     document,
@@ -157,11 +159,13 @@ const Landing = ({ onSplineLoaded, refFromParent, shouldTriggerAnimation }: Land
     // let's not re-render it unless necessary
     const SplineMemo = useMemo(() => {
         if (isDesktop && !useBackup) {
-            const Spline = lazy(() => import('@splinetool/react-spline'));
+            const Spline = dynamic(() => import('@splinetool/react-spline'), { ssr: false });
+
+            // TODO this ref causes "functional component no ref haha"
 
             return (
                 <Spline
-                    // @ts-ignore --- ignored because we need to set this ref to the image if Spline component times out
+                    // @ts-ignore - ignored because we need to set this ref to the image if Spline component times out
                     ref={splineCanvasRef}
                     onLoad={onSplineLoad}
                     scene={SplineURL.Switchable}
@@ -219,9 +223,7 @@ const Landing = ({ onSplineLoaded, refFromParent, shouldTriggerAnimation }: Land
                 </p>
             </div>
             <div elem='Spline' mods={{ IS_BACKUP: useBackup }}>
-                <Suspense fallback={null}>
-                    {SplineMemo}
-                </Suspense>
+                {SplineMemo}
             </div>
         </section>
     );
