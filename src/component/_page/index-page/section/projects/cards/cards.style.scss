@@ -2,7 +2,7 @@
     margin-block-start: 8rem;
 
     @include desktop {
-        padding-inline: calc(var(--content-padding-inner) - var(--content-padding));
+        padding-inline: min(5vh, 5rem);
     }
 
     @include mobile {

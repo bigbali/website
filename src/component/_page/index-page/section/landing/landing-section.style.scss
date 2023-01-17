@@ -131,6 +131,10 @@
         &_IS_BACKUP {
             padding: 10%;
         }
+
+        &_IS_LOADING {
+            opacity: 0;
+        }
     }
 
     .landing-initial-state {
@@ -140,7 +144,7 @@
         filter: blur(8px);
     }
 
-    .landing-animation {
+    .landing-animation:not(.animation-finished) {
         opacity: 1;
         translate: 0 0;
         scale: 1;

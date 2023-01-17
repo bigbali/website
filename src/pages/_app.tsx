@@ -29,6 +29,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
                     key={router.asPath}
                     classNames="cross-page"
                     exit={false}
+                    in={false}
                     enter={router.asPath !== '/'}
                     timeout={{
                         enter: 300

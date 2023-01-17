@@ -12,8 +12,8 @@ import { SectionID, useSection } from 'Store';
 import { scrollIntoView } from 'Util';
 import Icon from 'Component/Icon';
 import Transition from 'Component/Transition';
-import './Navigation.style';
 import Settings from 'Component/Settings';
+import './Navigation.style';
 
 type NavigationProps = {
     isMobile?: boolean

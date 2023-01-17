@@ -7,6 +7,7 @@ import {
 } from 'react';
 import lodash from 'lodash';
 import { isServer, useClickOutside } from 'Util';
+import { applySettings } from 'Util/settings';
 import {
     Color,
     DefaultColors,
@@ -17,7 +18,6 @@ import Switch from 'Component/Switch';
 import Slider from 'Component/Slider';
 import Icon from 'Component/Icon';
 import './Settings.style';
-import { applySettings } from 'Util/settings';
 
 const ColorMap = [
     null,

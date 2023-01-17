@@ -1,4 +1,5 @@
 import {
+    memo,
     useCallback,
     useEffect,
     useMemo,
@@ -52,7 +53,7 @@ export const IndexPage = () => {
         areFontsLoadedRef.current = true;
         setAreFontsLoaded(true);
     }, []);
-    const onSplineLoaded = useCallback(() => setIsSplineLoaded(true), []);
+    const setSplineLoaded = useCallback(() => setIsSplineLoaded(true), []);
     const onTransitionExited = () => {
         scrollToSection(scrollToSectionId);
 
@@ -135,8 +136,8 @@ export const IndexPage = () => {
                 )}
             </TransitionGroup>
             <Section.Landing
-                onSplineLoaded={onSplineLoaded}
-                shouldTriggerAnimation={areFontsLoaded && isSplineLoaded}
+                isSplineLoaded={isSplineLoaded}
+                setSplineLoaded={setSplineLoaded}
                 loadingRef={loadingRef}
                 refFromParent={landingRef}
             />
@@ -151,4 +152,4 @@ export const IndexPage = () => {
     );
 };
 
-export default IndexPage;
+export default memo(IndexPage);

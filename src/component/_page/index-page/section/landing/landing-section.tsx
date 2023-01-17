@@ -1,14 +1,11 @@
 import {
-    lazy,
     memo,
-    Suspense,
+    useCallback,
     useEffect,
-    useMemo,
     useRef,
     useState,
     type RefObject
 } from 'react';
-import Image from 'next/image';
 import {
     type SPEObject,
     type Application as SplineApplication
@@ -18,73 +15,71 @@ import {
     Subscription,
     throttleTime
 } from 'rxjs';
-import {
-    Theme,
-    useDevice,
-    useSettings
-} from 'Store';
+import dynamic from 'next/dynamic';
+import { useDevice } from 'Store';
 import './landing-section.style';
 
-import img__spline_light_mobile from 'Media/webp/spline-light-mobile.webp';
-import img__spline_dark_mobile from 'Media/webp/spline-dark-mobile.webp';
-import img__spline_light_desktop from 'Media/webp/spline-light-desktop.webp';
-import img__spline_dark_desktop from 'Media/webp/spline-dark-desktop.webp';
-import dynamic from 'next/dynamic';
 
-const SplineWEBP = {
-    Mobile: {
-        Dark: img__spline_dark_mobile,
-        Light: img__spline_light_mobile
-    },
-    Desktop: {
-        Dark: img__spline_dark_desktop,
-        Light: img__spline_light_desktop
-    }
-};
 
-const SplineURL = {
-    Dark: 'https://prod.spline.design/Orv626vNo2ELSt25/scene.splinecode',
-    Light: 'https://prod.spline.design/oE1PXrOYS773cHVg/scene.splinecode',
-    Switchable: 'https://prod.spline.design/2oNTUNbzmdhEMPUo/scene.splinecode'
-};
+const CustomSpline = dynamic(() => import('./spline'), { ssr: false });
 
 const triggerLandingAnimation = () => {
     document.querySelectorAll('.landing-initial-state').forEach((element) => {
         element.classList.replace('landing-initial-state', 'landing-animation');
+
+        // Need to cancel animation-delay because it delays the cursor-based translate as well
+        setTimeout(() => element.classList.add('animation-finished'), 1200);
     });
 };
 
 type LandingProps = {
-    onSplineLoaded: () => void,
+    isSplineLoaded: boolean,
+    setSplineLoaded: () => void,
     loadingRef: RefObject<HTMLDivElement>,
-    refFromParent: RefObject<HTMLElement>,
-    shouldTriggerAnimation: boolean
+    refFromParent: RefObject<HTMLElement>
 };
 
-// we use scale of background plane's X axis to determine color of background as such data isn't exposed
-// (scale is switched withing Spline)
-enum SplineBackgroundScaleX {
-    DARK = 1,
-    LIGHT = 2
-};
+let event: Subscription;
 
-const Landing = ({ onSplineLoaded, refFromParent, shouldTriggerAnimation }: LandingProps) => {
-    const { theme } = useSettings();
-    const { isDesktop } = useDevice();
+const Landing = ({ isSplineLoaded, setSplineLoaded, refFromParent }: LandingProps) => {
+    const isDesktop = useDevice(state => state.isDesktop);
     const splineRef = useRef<SplineApplication>();
     const splineAllRef = useRef<SPEObject>();
     const splineBackgroundRef = useRef<SPEObject>();
-    const splineCanvasRef = useRef<HTMLCanvasElement | HTMLImageElement>(null);
+    const splineCanvasRef = useRef<HTMLCanvasElement | HTMLImageElement>();
     const [useBackup, setUseBackup] = useState(false);
 
-    const onSplineLoad = (splineApp: SplineApplication) => {
-        splineRef.current = splineApp;
-        splineAllRef.current = splineApp.findObjectByName('All');
-        splineBackgroundRef.current = splineApp.findObjectByName('Background');
+    // Need to memoize the function because when shouldTriggerAnimation changes,
+    // this component re-renders and a new instance of onSplineLoad will be passed
+    // to CustomSpline, causing it to re-render while already loading
+    const onSplineLoad = useCallback((splineApp?: SplineApplication) => {
+        if (splineApp) {
+            splineRef.current = splineApp;
+            splineAllRef.current = splineApp.findObjectByName('All');
+            splineBackgroundRef.current = splineApp.findObjectByName('Background');
+        }
 
-        onSplineLoaded();
-        console.log('Spline is ready.', `${Math.round(performance.now())}ms`);
-    };
+        setSplineLoaded();
+        triggerSplineAnimation();
+        triggerLandingAnimation();
+
+        setTimeout(() => {
+            event = fromEvent(
+                document,
+                'mousemove'
+            )
+                .pipe( // 60 Hz => 16ms [30 Hz => 32ms]
+                    throttleTime(32),
+                )
+                .subscribe((e: Event) => translateSplineCanvas(e as MouseEvent));
+        }, 1200); // wait till the initial animation is finished, so the cursor-based animation doesn't bother it
+
+        return () => {
+            if (event) {
+                event.unsubscribe();
+            }
+        };
+    }, []);
 
     const triggerSplineAnimation = () => { // 'All' is the name of the object group we want to target
         splineRef.current?.emitEvent('mouseHover', 'All');
@@ -107,88 +102,15 @@ const Landing = ({ onSplineLoaded, refFromParent, shouldTriggerAnimation }: Land
 
     useEffect(() => { // Spline backup plan
         let timeout: NodeJS.Timeout;
-        if (isDesktop && !shouldTriggerAnimation) {
+
+        if (isDesktop && !isSplineLoaded) {
             timeout = setTimeout(() => {
                 setUseBackup(true);
-            }, 5000);
+            }, 7500);
         }
 
         return () => clearTimeout(timeout);
-    }, [isDesktop, shouldTriggerAnimation]);
-
-    useEffect(() => { // background color switch
-        if (!splineBackgroundRef.current) return;
-
-        if (splineBackgroundRef.current.scale.x === SplineBackgroundScaleX.DARK && theme === Theme.LIGHT) {
-            splineRef.current?.emitEvent('mouseUp', 'Background');
-        }
-        if (splineBackgroundRef.current.scale.x === SplineBackgroundScaleX.LIGHT && theme === Theme.DARK) {
-            splineRef.current?.emitEventReverse('mouseUp', 'Background');
-        }
-
-    }, [theme, splineBackgroundRef.current]);
-
-    useEffect(() => {
-        let event: Subscription;
-
-        if (shouldTriggerAnimation) {
-            triggerSplineAnimation();
-            triggerLandingAnimation();
-
-            // TODO onSplineLoaded?
-            setTimeout(() => {
-                event = fromEvent(
-                    document,
-                    'mousemove'
-                )
-                    .pipe( // 60 Hz => 16ms [30 Hz => 32ms]
-                        throttleTime(32),
-                    )
-                    .subscribe((e: Event) => translateSplineCanvas(e as MouseEvent));
-            }, 1000); // wait till the initial animation is finished, so the cursor-based animation doesn't bother it
-        }
-
-        return () => {
-            if (event) {
-                event.unsubscribe();
-            }
-        };
-    }, [shouldTriggerAnimation]);
-
-    // As this component eats performance for breakfast then spits it out and eats it again,
-    // let's not re-render it unless necessary
-    const SplineMemo = useMemo(() => {
-        if (isDesktop && !useBackup) {
-            const Spline = dynamic(() => import('@splinetool/react-spline'), { ssr: false });
-
-            // TODO this ref causes "functional component no ref haha"
-
-            return (
-                <Spline
-                    // @ts-ignore - ignored because we need to set this ref to the image if Spline component times out
-                    ref={splineCanvasRef}
-                    onLoad={onSplineLoad}
-                    scene={SplineURL.Switchable}
-                />
-            );
-        }
-
-        const src = SplineWEBP[isDesktop ? 'Desktop' : 'Mobile'][theme === Theme.LIGHT ? 'Light' : 'Dark'];
-
-        return (
-            <Image
-                src={src}
-                onLoad={onSplineLoaded}
-                // @ts-ignore --- ignored because we need to set this ref to the image if Spline component times out
-                ref={splineCanvasRef}
-                className='landing-initial-state'
-                alt={`
-                    An image of the 3D animation you would see on a desktop device,
-                    but alas, most mobile devices aren't powerful enough for that.
-                `}
-            />
-        );
-    }, [isDesktop, useBackup]);
+    }, [isDesktop, isSplineLoaded]);
 
     return (
         <section
@@ -222,8 +144,15 @@ const Landing = ({ onSplineLoaded, refFromParent, shouldTriggerAnimation }: Land
                     and intuitive user experiences in mind.
                 </p>
             </div>
-            <div elem='Spline' mods={{ IS_BACKUP: useBackup }}>
-                {SplineMemo}
+            <div elem='Spline' mods={{ IS_BACKUP: useBackup, IS_LOADING: !isSplineLoaded }}>
+                <CustomSpline
+                    isDesktop={isDesktop}
+                    onSplineLoad={onSplineLoad}
+                    splineBackgroundRef={splineBackgroundRef}
+                    splineCanvasRef={splineCanvasRef}
+                    splineRef={splineRef}
+                    useBackup={useBackup}
+                />
             </div>
         </section>
     );
