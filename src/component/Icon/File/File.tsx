@@ -1,6 +1,5 @@
 import { SVGProps } from 'react';
 import Base from '../_Base';
-import './File.style';
 
 const File = (props: SVGProps<SVGSVGElement>) => {
     return (

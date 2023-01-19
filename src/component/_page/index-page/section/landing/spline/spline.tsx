@@ -16,8 +16,8 @@ import img__spline_dark_mobile from 'Media/webp/spline-dark-mobile.webp';
 import img__spline_light_desktop from 'Media/webp/spline-light-desktop.webp';
 import img__spline_dark_desktop from 'Media/webp/spline-dark-desktop.webp';
 
-
 type CustomSplineProps = {
+    isSplineLoaded: boolean,
     isDesktop: boolean | undefined,
     onSplineLoad: (splineApp?: SplineApplication) => void,
     splineBackgroundRef: MutableRefObject<SPEObject | undefined>,
@@ -51,6 +51,7 @@ const SplineWEBP = {
 };
 
 const CustomSpline = ({
+    isSplineLoaded,
     splineBackgroundRef,
     splineRef,
     splineCanvasRef,
@@ -93,7 +94,7 @@ const CustomSpline = ({
             splineRef.current?.emitEventReverse('mouseUp', 'Background');
         }
 
-    }, [theme, splineBackgroundRef.current]);
+    }, [theme, isSplineLoaded, splineBackgroundRef.current]);
 
     if (isDesktop && !useBackup && SplineMemo) {
         return SplineMemo;

@@ -115,13 +115,13 @@
         }
 
         span {
-            padding-inline: 1rem;
             color: var(--color-content-tertiary);
             display: flex;
             align-items: center;
 
             @include mobile {
-                padding: 0.5rem;
+                padding-block: 0.5rem;
+                padding-inline-start: 0.5rem;
             }
         }
 

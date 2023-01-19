@@ -1,6 +1,5 @@
 import { SVGProps } from 'react';
 import Base from '../_Base';
-import './WPF.style';
 
 const WPF = (props: SVGProps<SVGSVGElement>) => {
     return (

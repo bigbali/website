@@ -6,10 +6,13 @@ import {
 import { useDevice, useSettings } from 'Store';
 import Icon from 'Component/Icon';
 import './contact-section.style';
+import dynamic from 'next/dynamic';
 
 const EMAIL = 'hello@balazsburjan.com';
 const LINKEDIN = 'https://www.linkedin.com/in/balázs-burján-35456194/';
 const GITHUB = 'https://github.com/bigbali';
+
+const LinkedIn = dynamic(() => import('./linkedin'), { ssr: false });
 
 const copyToClipboard = async (text: string) => {
     try {
@@ -22,8 +25,8 @@ const copyToClipboard = async (text: string) => {
 };
 
 const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => {
-    const { fontSize } = useSettings();
-    const { isMobile } = useDevice();
+    const fontSize = useSettings(state => state.fontSize);
+    const isMobile = useDevice(state => state.isMobile);
     const show = useNotifications(state => state.show);
     const preventOverflow = isMobile && fontSize > 1.2;
 
@@ -87,12 +90,8 @@ const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) =
                         <a href={LINKEDIN} target='_blank' rel='noopener noreferrer' title='Go to LinkedIn page'>
                             <Icon.LinkedIn />
                         </a>
-                        <span>
-                            {LINKEDIN.slice(0, 27)}
-                            <wbr /> {/* We really do need to break the line on mobile, it appears */}
-                            {LINKEDIN.slice(27)}
-
-                        </span>
+                        {/* Need to load dynamically so Next.js doesn't complain for hydration mismatch */}
+                        <LinkedIn isMobile={isMobile} text={LINKEDIN} />
                         <button title='Copy LinkedIn address to clipboard' onClick={() => handleCopy(LINKEDIN)}>
                             <Icon.Copy />
                         </button>

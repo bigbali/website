@@ -4,7 +4,7 @@ import './HamburgerMenu.style';
 
 const HamburgerMenu = ({ color, isExpanded = false }: IconProps & { isExpanded?: boolean }) => {
     return (
-        <Base icon='HamburgerMenu' modifiers={{ isExpanded }}>
+        <Base icon='HamburgerMenu' modifiers={{ IS_EXPANDED: isExpanded }}>
             <svg
                 viewBox='0 0 72 48'
                 xmlns='http://www.w3.org/2000/svg'

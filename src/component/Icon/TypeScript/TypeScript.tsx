@@ -1,6 +1,5 @@
 import { SVGProps } from 'react';
 import Base from '../_Base';
-import './TypeScript.style';
 
 const TypeScript = (props: SVGProps<SVGSVGElement>) => {
     return (

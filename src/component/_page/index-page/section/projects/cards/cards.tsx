@@ -5,6 +5,7 @@ import {
     useMemo,
     useRef,
     memo,
+    RefObject,
 } from 'react';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import projects, {
@@ -30,6 +31,7 @@ const filterTag = (project: Project, tag?: string) => !tag
 type CardsProps = {
     defaultLimit: number,
     elementsShownCount: number,
+    sectionHeadingRef: RefObject<HTMLHeadingElement>
     status: Status,
     tag?: string,
     title?: string
@@ -41,6 +43,7 @@ type CardsProps = {
 const Cards = ({
     defaultLimit,
     elementsShownCount,
+    sectionHeadingRef,
     status,
     tag,
     limit,
@@ -93,12 +96,16 @@ const Cards = ({
     }, [ProjectCards.length]);
 
     useEffect(() => {
-        if (elementsShownCount < elementsShownCountPrevious.current) {
-            scrollIntoView(cardsContainerRef);
+        if (elementsShownCount < elementsShownCountPrevious.current && sectionHeadingRef.current) {
+            const sectionHeadingBoundingRect = sectionHeadingRef.current.getBoundingClientRect();
+
+            if (sectionHeadingBoundingRect.top < -200) {
+                scrollIntoView(sectionHeadingRef);
+            }
         }
 
         elementsShownCountPrevious.current = elementsShownCount;
-    }, [elementsShownCount]);
+    }, [elementsShownCount, sectionHeadingRef.current]);
 
     const getShowMoreCount = () => {
         return projectsFiltered.length - ProjectCards.length <= 3

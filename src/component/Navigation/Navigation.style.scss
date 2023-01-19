@@ -167,22 +167,16 @@
         }
     }
 
-    .Icon-HamburgerMenu {
-        @include mobile {
-            width: 2.5rem;
-            height: 2.5rem;
-        }
 
-        svg {
-            path {
-                fill: var(--color-content-primary);
+    @include mobile {
+        &-HamburgerIconWrapper {
+            .Icon-HamburgerMenu {
+                width: 2.5rem;
+                height: 2.5rem;
             }
         }
-    }
 
-    &-Mobile {
         position: fixed;
-        display: flex;
         align-items: stretch;
         justify-content: space-between;
         z-index: 1000;
@@ -201,24 +195,26 @@
             background-color: var(--color-background-primary);
             z-index: 999;
             overflow-y: auto;
+        }
 
-            &-Exit {
-                display: flex;
-                justify-content: center;
-                flex: 0.25;
-                padding-block-start: 2rem;
-                z-index: 999;
+        &-Exit {
+            display: flex;
+            justify-content: center;
+            flex: 0.25;
+            padding-block-start: 2rem;
+            z-index: 999;
 
-                >.Icon {
-                    width: 2.5rem;
-                    height: 2.5rem;
+            >.Icon {
+                width: 2.5rem;
+                height: 2.5rem;
 
-                    >svg>path {
-                        fill: var(--color-white);
-                    }
+                >svg>path {
+                    fill: var(--color-white);
                 }
             }
         }
+
+        // }
 
         &:before {
             content: "";
@@ -237,7 +233,7 @@
                 opacity: 0;
             }
 
-            >.Navigation-Mobile-Menu {
+            >.Navigation-MobileMenu {
                 translate: -100% 0;
 
                 &-Exit {
@@ -253,7 +249,7 @@
                 transition: opacity 0.2s;
             }
 
-            >.Navigation-Mobile-Menu {
+            >.Navigation-MobileMenu {
                 translate: 0 0;
                 transition: translate 0.2s;
 
@@ -271,7 +267,7 @@
                 transition: opacity 0.2s;
             }
 
-            >.Navigation-Mobile-Menu {
+            >.Navigation-MobileMenu {
                 translate: -100% 0;
                 transition: translate 0.1s;
 
@@ -284,7 +280,7 @@
         }
     }
 
-    &-MobileHeader {
+    &-MobileHeading {
         position: relative;
         margin: 0;
         padding-block-end: 0.5rem;

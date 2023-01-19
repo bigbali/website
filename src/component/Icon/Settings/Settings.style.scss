@@ -1,26 +1,5 @@
-.Icon {
-    &-Settings {
-        display: grid;
-        place-items: center;
-        transition: rotate 0.2s;
-
-        &_IS_EXPANDED {
-            rotate: 90deg;
-
-            path {
-                fill: var(--color-content-primary);
-            }
-        }
-
-        path {
-            fill: var(--color-content-primary);
-            transition: fill 0.2s;
-        }
-
-        &:hover {
-            path {
-                fill: var(--color-theme);
-            }
-        }
+.Icon-Settings {
+    &_IS_EXPANDED {
+        rotate: 90deg;
     }
 }

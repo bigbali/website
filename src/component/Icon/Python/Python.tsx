@@ -1,6 +1,5 @@
 import { SVGProps } from 'react';
 import Base from '../_Base';
-import './Python.style';
 
 const Python = (props: SVGProps<SVGSVGElement>) => {
     return (

@@ -1,6 +1,5 @@
 import { SVGProps } from 'react';
 import Base from '../_Base';
-import './GitHub.style';
 
 const GitHub = (props: SVGProps<SVGSVGElement>) => {
     return (

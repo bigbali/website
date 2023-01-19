@@ -1,6 +1,5 @@
 import { SVGProps } from 'react';
 import Base from '../_Base';
-import './Django.style';
 
 const Django = (props: SVGProps<SVGSVGElement>) => {
     return (

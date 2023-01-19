@@ -19,8 +19,6 @@ import dynamic from 'next/dynamic';
 import { useDevice } from 'Store';
 import './landing-section.style';
 
-
-
 const CustomSpline = dynamic(() => import('./spline'), { ssr: false });
 
 const triggerLandingAnimation = () => {
@@ -49,7 +47,7 @@ const Landing = ({ isSplineLoaded, setSplineLoaded, refFromParent }: LandingProp
     const splineCanvasRef = useRef<HTMLCanvasElement | HTMLImageElement>();
     const [useBackup, setUseBackup] = useState(false);
 
-    // Need to memoize the function because when shouldTriggerAnimation changes,
+    // Need to memoize the function because when isSplineLoaded changes,
     // this component re-renders and a new instance of onSplineLoad will be passed
     // to CustomSpline, causing it to re-render while already loading
     const onSplineLoad = useCallback((splineApp?: SplineApplication) => {
@@ -100,6 +98,8 @@ const Landing = ({ isSplineLoaded, setSplineLoaded, refFromParent }: LandingProp
         }
     };
 
+    console.log(isSplineLoaded);
+
     useEffect(() => { // Spline backup plan
         let timeout: NodeJS.Timeout;
 
@@ -146,6 +146,7 @@ const Landing = ({ isSplineLoaded, setSplineLoaded, refFromParent }: LandingProp
             </div>
             <div elem='Spline' mods={{ IS_BACKUP: useBackup, IS_LOADING: !isSplineLoaded }}>
                 <CustomSpline
+                    isSplineLoaded={isSplineLoaded}
                     isDesktop={isDesktop}
                     onSplineLoad={onSplineLoad}
                     splineBackgroundRef={splineBackgroundRef}

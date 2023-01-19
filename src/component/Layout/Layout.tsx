@@ -17,7 +17,6 @@ const Notifications = dynamic(() => import('Component/Notifications'), {
     ssr: false
 });
 
-
 const Layout = forwardRef<HTMLElement, PropsWithChildren>(({ children }, ref) => {
     return (
         <>

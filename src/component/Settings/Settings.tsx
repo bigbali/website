@@ -1,13 +1,10 @@
 import {
-    memo,
     useCallback,
-    useEffect,
     useRef,
     useState
 } from 'react';
 import lodash from 'lodash';
 import { isServer, useClickOutside } from 'Util';
-import { applySettings } from 'Util/settings';
 import {
     Color,
     DefaultColors,
@@ -88,18 +85,8 @@ export const Settings = ({ isMobile }: SettingsProps) => {
         );
     };
 
-    useEffect(() => {
-        applySettings({
-            theme,
-            accentColor,
-            fontSize,
-            contrast
-        });
-    }, [theme, accentColor, fontSize, contrast]);
-
-
     const SettingsMenu = (
-        <div block='Settings' elem='Menu'>
+        <div block='Settings' elem='Menu' mods={{ IS_IN_MOBILE_NAVIGATION: isMobile }}>
             <p elem='Label'>
                 Settings
             </p>
@@ -161,7 +148,7 @@ export const Settings = ({ isMobile }: SettingsProps) => {
         <div
             ref={settingsRef}
             block='Settings'
-            mods={{ isExpanded: isExpanded }}
+            mods={{ IS_EXPANDED: isExpanded }}
         >
             <button
                 elem='Expander'
@@ -175,4 +162,4 @@ export const Settings = ({ isMobile }: SettingsProps) => {
     );
 };
 
-export default memo(Settings);
+export default Settings;

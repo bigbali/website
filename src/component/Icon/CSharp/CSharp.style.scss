@@ -1,11 +1,9 @@
-.Icon {
-    &-CSharp {
-        >svg>path {
+.Icon-CSharp {
+    >svg>path {
 
-            &:nth-of-type(2),
-            &:nth-of-type(3) {
-                fill: var(--color-background-primary) !important;
-            }
+        &:nth-of-type(2),
+        &:nth-of-type(3) {
+            fill: var(--color-background-primary) !important;
         }
     }
 }

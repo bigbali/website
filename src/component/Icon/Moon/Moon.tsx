@@ -1,6 +1,5 @@
 import { SVGProps } from 'react';
 import Base from '../_Base';
-import './Moon.style';
 
 const Moon = (props: SVGProps<SVGSVGElement>) => {
     return (
