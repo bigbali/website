@@ -68,7 +68,7 @@ export type ProjectProps = {
 const projects = [
     {
         title: 'balazsburjan.com',
-        description: `A web app to expose myself to the World Wide Web. It's built with React, using my own React Template
+        description: `The site you are currently browsing. It's built with React and Next.js, using my own React Template
                       project as a foundation. It's hosted on Vercel.`,
         status: Status.FINISHED,
         weight: Weight.HIGH,
@@ -76,6 +76,7 @@ const projects = [
             Tag.JS,
             Tag.TS,
             Tag.REACT,
+            Tag.NEXT,
             Tag.SASS
         ],
         thumbnail: {
@@ -87,9 +88,9 @@ const projects = [
     },
     {
         title: 'React Template',
-        description: `A template that eases the setup of a new project, as it is configured for my preference
-                      and has a few things already implemented, such as routing, some icons and components, Redux,
-                      a system for styles, custom hooks, etc.`,
+        description: `A custom-built template that eases the setup of a new project
+                      by having some features already implemented, such as routing,
+                      components, Redux, a system for styles, custom hooks, etc.`,
         status: Status.IN_PROGRESS,
         weight: Weight.HIGH,
         tags: [
@@ -106,10 +107,8 @@ const projects = [
         slug: 'react-template'
     },
     {
-        title: 'NPM Package: babel-plugin-transform-jsx-bem-attributes',
-        description: `A plugin for Babel (the JavaScript transpiler) for JSX transformation.
-                      It converts 'block', 'elem' and 'mods' JSX attributes into React's 'className'.
-                      This eases building classes significantly and is intended to be used with the BEM methodology.`,
+        title: 'Babel Plugin',
+        description: 'A plugin for the Babel JavaScript transpiler for JSX-to-JSX transformations.',
         status: Status.IN_PROGRESS,
         weight: Weight.HIGH,
         tags: [
@@ -128,10 +127,8 @@ const projects = [
     {
         title: 'YouTube Video Downloader',
         description: `A desktop application to allow batch downloading of music videos from YouTube.
-                      It exists because I thought it would be cool if I did not have to type in a command
-                      into a terminal every time I wanted to download music.
-                      It's blessed with a nice interface and does exactly what I need it to do, nothing more,
-                      and nothing less.`,
+                      It exists because I decided that there are more efficient ways of doing things
+                    than typing long and complex commands into a terminal.`,
         status: Status.FINISHED,
         weight: Weight.HIGH,
         tags: [
@@ -148,9 +145,7 @@ const projects = [
     },
     {
         title: 'Stardust Dark VS Code Theme',
-        description: `A dark theme for Visual Studio Code, published to the Visual Studio Marketplace.
-                      It was built for personal use, because I couldn't quite find an already existing one
-                      that I would keep using for a long period of time.`,
+        description: 'A dark theme for Visual Studio Code that is published to the Visual Studio Marketplace.',
         status: Status.FINISHED,
         weight: Weight.HIGH,
         tags: [
@@ -166,9 +161,9 @@ const projects = [
     },
     {
         title: 'Family Photos',
-        description: `A place to show my photos to my family. It's built with Django and it was hosted on Heroku's
-                      Free Tier dyno (until it was discontinued). It stored all static content on Amazon's S3 service.
-                      A remake is imminent in the future.`,
+        description: `A place where my family could see my photos, but mostly the ones taken at family events.
+                      It was built with Django and was hosted on Heroku's Free Tier dyno until it was discontinued.
+                      It stored all static content on Amazon's S3 service.`,
         status: Status.FINISHED,
         weight: Weight.MEDIUM,
         tags: [
@@ -205,9 +200,9 @@ const projects = [
     },
     {
         title: 'Tankstats',
-        description: `An application centered on strategies and statistics in World of Tanks. Although currently it's on pause,
-                      in the future I intend to build it from scratch with my updated knowledge, as at the time I was building it,
-                      it was a bit over my head. It includes decentralized, encrypted strategic maps, OpenID authentication and basic
+        description: `An application centered on strategies and statistics in World of Tanks. Although currently, it's on pause,
+                      in the future I intend to build it from scratch with my updated knowledge.
+                      It includes decentralized, encrypted strategic maps, OpenID authentication, and basic
                       statistics.`,
         status: Status.PAUSED,
         weight: Weight.MEDIUM,

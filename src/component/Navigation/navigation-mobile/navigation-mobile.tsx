@@ -1,4 +1,6 @@
 import {
+    useCallback,
+    useEffect,
     useRef,
     useState
 } from 'react';
@@ -6,12 +8,19 @@ import { TransitionGroup } from 'react-transition-group';
 import Icon from 'Component/Icon';
 import Transition from 'Component/Transition';
 import Settings from 'Component/Settings';
-import { NavigationElementProps } from '../nav.new';
+import { NavigationElementProps } from '../navigation';
 import './navigation-mobile.style';
+import NavigationList from '../navigation-list';
 
-const NavigationMobile = ({ NavigationList }: NavigationElementProps) => {
+const NavigationMobile = ({ listProps }: NavigationElementProps) => {
     const [isExpanded, setIsExpanded] = useState(false);
-    const transitionRef = useRef();
+    const transitionRef = useRef<HTMLDivElement>(null);
+
+    const closeMenu = useCallback(() => setIsExpanded(false), []);
+
+    useEffect(() => { // Disable scrolling while the menu is open
+        document.body.classList.toggle('disable-scrolling', isExpanded);
+    }, [isExpanded]);
 
     return (
         <TransitionGroup component={null}>
@@ -30,20 +39,21 @@ const NavigationMobile = ({ NavigationList }: NavigationElementProps) => {
                         enter: 200,
                         exit: 100
                     }}
+                    // @ts-ignore - nodeRef is expecting RefObject<undefined>, which is not reasonable
                     nodeRef={transitionRef}
                     classNames='Navigation'
                 >
-                    <div block='Navigation' elem='Menu'>
+                    <div block='Navigation' elem='Menu' ref={transitionRef}>
                         <div elem='MenuContent'>
                             <h1 elem='Heading'>
                                 Menu
                             </h1>
-                            {NavigationList}
+                            <NavigationList {...listProps} onNavigationItemClickEffect={closeMenu} />
                             <div elem='Settings'>
                                 <Settings isMobile />
                             </div>
                         </div>
-                        <div elem='Exit' onClick={() => setIsExpanded(false)}>
+                        <div elem='Exit' onClick={closeMenu}>
                             <Icon.Close />
                         </div>
                     </div>

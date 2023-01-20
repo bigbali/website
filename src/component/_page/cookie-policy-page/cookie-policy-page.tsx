@@ -33,7 +33,7 @@ export const CookiePolicyPage = () => {
                 </p>
                 <ul>
                     <li>
-                        whether or not you have accepted my cookie policy
+                        whether you have accepted my cookie policy
                     </li>
                     <li>
                         settings, which are:

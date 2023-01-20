@@ -1,16 +1,16 @@
 import React, {
     memo,
-    ReactElement,
     useCallback,
     useEffect,
-    useMemo,
     useRef,
     type MouseEvent as GenericMouseEvent
 } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { SectionID, useSection } from 'Store';
 import { scrollIntoView } from 'Util';
+import {
+    type NavigationListProps
+} from './navigation-list';
 import NavigationDesktop from './navigation-desktop';
 import NavigationMobile from './navigation-mobile';
 
@@ -19,7 +19,7 @@ export type NavigationProps = {
 };
 
 export type NavigationElementProps = {
-    NavigationList: ReactElement
+    listProps: NavigationListProps
 };
 
 const Navigation = ({ isMobile }: NavigationProps) => {
@@ -43,33 +43,6 @@ const Navigation = ({ isMobile }: NavigationProps) => {
         }
     }, [asPath]);
 
-    const NavigationList = useMemo(() => (
-        <ul block='Navigation' elem='List'>
-            {Object.values(SectionID).map((section) => (
-                <li block='Navigation' elem='ListItem' key={section}>
-                    <Link
-                        role='button'
-                        title={`Scroll to ${section} section`}
-                        onClick={(e) => onNavigationItemClick(e, section)}
-                        scroll={false}
-                        href={''}
-                        className={
-                            (asPath === '/' && currentSection?.id === section)
-                                ? 'active'
-                                : ''.concat(
-                                    previousSectionRef.current === section
-                                        ? 'previouslyactive'
-                                        : ''
-                                )
-                        }
-                    >
-                        {section}
-                    </Link>
-                </li>
-            ))}
-        </ul>
-    ), [asPath, currentSection, previousSectionRef.current]);
-
     useEffect(() => {
         previousSectionRef.current = currentSection?.id as SectionID || SectionID.LANDING;
     }, [currentSection?.id]);
@@ -78,11 +51,21 @@ const Navigation = ({ isMobile }: NavigationProps) => {
         <nav block='Navigation' mods={{ MOBILE: isMobile, DESKTOP: !isMobile }}>
             {
                 isMobile
-                    ? <NavigationMobile NavigationList={NavigationList} />
-                    : <NavigationDesktop NavigationList={NavigationList} />
+                    ? <NavigationMobile listProps={{
+                        asPath,
+                        currentSection,
+                        previousSectionRef,
+                        onNavigationItemClick
+                    }} />
+                    : <NavigationDesktop listProps={{
+                        asPath,
+                        currentSection,
+                        previousSectionRef,
+                        onNavigationItemClick
+                    }} />
             }
         </nav>
     );
 };
 
-export default memo(Navigation);
+export default memo(Navigation); 

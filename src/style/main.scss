@@ -164,21 +164,18 @@ html {
     scroll-behavior: smooth;
 }
 
-body,
-.root {
+body {
     margin: 0;
     background-color: var(--color-background-primary);
-    overflow-x: hidden;
-}
 
-body {
     &.disable-scrolling {
         overflow: hidden;
     }
 }
 
-.root {
-    scrollbar-gutter: stable both-edges;
+body,
+main {
+    overflow-x: hidden;
 }
 
 main {

@@ -1,6 +1,2 @@
-// import Navigation from './Navigation';
-// export * from './Navigation';
-
-// export default Navigation;
-
-export { default } from './nav.new';
+export { default } from './navigation';
+export * from './navigation';

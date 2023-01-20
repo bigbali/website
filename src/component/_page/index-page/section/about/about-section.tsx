@@ -18,7 +18,8 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
     const { isMobile } = useDevice();
     const { fontSize } = useSettings();
     const imageRef = useRef<HTMLDivElement>(null);
-    const preventOverflow = isMobile && fontSize > 1.2;
+    const figureRef = useRef<HTMLElement>(null);
+    const anchorRef = useRef<HTMLAnchorElement>(null);
 
     const transformImage = (e: MouseEvent) => {
         const centerX = window.innerWidth / 2;
@@ -30,6 +31,14 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
             rotateY(${((e.clientX - centerX) / centerX) * MAX_ROTATION_DEG}deg)
         `;
     };
+
+    // 'mods' attribute didn't initially work, so here we go
+    // (when fontSize modifier is too large, content is overflowing)
+    useEffect(() => {
+        const preventOverflow = isMobile && fontSize > 1.2;
+        anchorRef.current?.classList.toggle('REDUCE_WIDTH', preventOverflow);
+        figureRef.current?.classList.toggle('REDUCE_WIDTH', preventOverflow);
+    }, [fontSize, isMobile]);
 
     useEffect(() => {
         if (isMobile) return; // On mobile, it's pointless to add a mouse event listener
@@ -66,7 +75,7 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                         </h1>
                         <p>
                             I introduced myself to the art of computer science in 2016
-                            when I took interest in making games with Unity,
+                            when I took an interest in making games with Unity,
                             and not long after I started writing a desktop
                             networking tool using C# and the .NET Framework.
                             Soon after, I built a simple web application with ASP.NET which I hosted on my own computer.
@@ -97,8 +106,7 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                         <p>
                             As a self-taught software developer, I've accumulated most of my knowledge by relentlessly
                             tinkering with projects since 2016.
-                            On the other hand, I have taken Harvard University's CS50 and CS50's Web Programming courses,
-                            which have taught me many things.
+                            Additionally, I have taken Harvard University's CS50 and CS50's Web Programming courses.
                         </p>
                     </section>
                     <section elem='Content-Technologies' className='animate-on-scroll'>
@@ -106,22 +114,26 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                             Technologies
                         </h1>
                         <p>
-                            {`${new Date().getUTCFullYear() - 2016} `}
-                            years' worth of tinkering has introduced me to many various technologies,
-                            so here's a few I've used recently:
+                            I've recently worked with:
                         </p>
                         <ul>
                             <li>
-                                TypeScript & JavaScript
+                                TypeScript
+                            </li>
+                            <li>
+                                JavaScript
                             </li>
                             <li>
                                 React
                             </li>
                             <li>
+                                Next
+                            </li>
+                            <li>
                                 Babel
                             </li>
                             <li>
-                                Node.js
+                                Node
                             </li>
                             <li>
                                 SASS
@@ -133,7 +145,7 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                                 C#
                             </li>
                             <li>
-                                WPF
+                                WPF .NET
                             </li>
                         </ul>
                     </section>
@@ -163,7 +175,7 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                         </ul>
                     </section>
                 </div>
-                <figure elem='Content-Figure' mods={{ REDUCE_WIDTH: preventOverflow }}>
+                <figure elem='Content-Figure' ref={figureRef}>
                     <div ref={imageRef} className='animate-on-scroll'>
                         <Icon.Cat />
                         <Image src={Balazs} alt="Portrait of Balázs" />
@@ -174,7 +186,7 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                                 href='https://www.google.com/maps/place/Gheorgheni/@46.7210014,25.5814932,8552m/data=!3m2!1e3!4b1!4m5!3m4!1s0x474aeb61846fa94f:0x861cdca52511bf7a!8m2!3d46.7212112!4d25.5855275'
                                 target='_blank'
                                 block='Link'
-                                mods={{ REDUCE_WIDTH: preventOverflow }}
+                                ref={anchorRef}
                             >
                                 <Icon.Location />
                                 <span>

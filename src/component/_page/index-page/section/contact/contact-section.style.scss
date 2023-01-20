@@ -78,7 +78,7 @@
         place-items: center;
         margin-block-start: 15vh;
 
-        &_REDUCE_WIDTH {
+        &.REDUCE_WIDTH {
             margin-block-end: 1rem;
 
             >div {
@@ -110,18 +110,16 @@
                     padding-block: 0.5rem;
                 }
             }
-
-
         }
 
         span {
             color: var(--color-content-tertiary);
             display: flex;
             align-items: center;
+            padding-inline-start: 0.5rem;
 
             @include mobile {
                 padding-block: 0.5rem;
-                padding-inline-start: 0.5rem;
             }
         }
 
@@ -189,6 +187,10 @@
 
             >span {
                 font-size: 1.5rem;
+
+                @include desktop {
+                    padding-inline-start: 1rem;
+                }
 
                 @include mobile {
                     font-size: 1rem;

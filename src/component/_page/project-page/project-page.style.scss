@@ -1,19 +1,28 @@
 .ProjectPage {
+    padding-inline: var(--content-padding);
+    padding-block-start: calc(var(--header-height) + 2rem);
+    min-height: calc(100vh - var(--footer-height));
 
-    // fix this :)
-    &:not(:has(>.ProjectPage-Thumbnail)):not(.ProjectPage-Markdown) {
-        padding-inline: var(--content-padding);
-        padding-block-start: calc(var(--header-height) + 2rem);
-        min-height: calc(100vh - var(--footer-height));
-    }
-
-    .ProjectPage {
-        // this is selecting the thumbnail, but alas we had to redeclare block on it
-        // because the transformation plugin doesn't yet support short circuiting
-
+    .ProjectPage-Thumbnail {
         @include mobile {
             padding: 0 !important;
             margin-block-end: 3em;
+        }
+    }
+
+    &:has(.ProjectPage-NotFound) {
+        position: relative;
+    }
+
+    &-NotFound {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        inset: 0;
+
+        >p {
+            text-align: center;
         }
     }
 
@@ -78,6 +87,7 @@
                 margin-block-start: 0;
                 margin-block-end: 2rem;
                 width: fit-content;
+                word-break: break-word;
 
                 @include desktop {
                     @include separator {
@@ -105,43 +115,18 @@
             margin-inline: calc(-1 * var(--content-padding));
         }
 
-        >div {
-            position: relative;
-            border: 1px solid var(--color-border);
-            overflow: hidden;
-            height: 100%;
-
+        >img {
             @include desktop {
                 border-radius: 0.5rem;
             }
 
-            >img {
-                aspect-ratio: 1.46 / 1;
-                object-fit: cover;
-                opacity: 0;
-                transition: opacity 0.2s;
-            }
+            aspect-ratio: 1.46 / 1;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
 
-            >canvas {
-                position: absolute;
-                inset: 0;
-                z-index: -1;
-            }
-
-            >img,
-            >canvas {
-                width: 100%;
-                height: 100%;
-
-                @include desktop {
-                    border-radius: 0.5rem;
-                }
-            }
-        }
-
-        &_IS_LOADED {
-            >div>img {
-                opacity: 1;
+            @include desktop {
+                border-radius: 0.5rem;
             }
         }
     }
@@ -241,6 +226,7 @@
 
         p {
             margin-block: 0;
+            line-height: 1.5rem;
         }
 
         a {
@@ -256,9 +242,15 @@
         h2,
         h3,
         h4 {
-            margin-block-end: 0.5rem;
+            margin-block-end: 1rem;
+            width: fit-content;
             font-weight: 500;
             color: var(--color-content-primary);
+
+            @include separator {
+                inset-block-end: -0.5rem;
+                width: 63%;
+            }
         }
 
         h1 {

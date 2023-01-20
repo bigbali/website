@@ -1,4 +1,5 @@
-import { memo, RefObject } from 'react';
+import { memo, RefObject, useEffect, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import {
     NotificationStatus,
     useNotifications
@@ -6,7 +7,6 @@ import {
 import { useDevice, useSettings } from 'Store';
 import Icon from 'Component/Icon';
 import './contact-section.style';
-import dynamic from 'next/dynamic';
 
 const EMAIL = 'hello@balazsburjan.com';
 const LINKEDIN = 'https://www.linkedin.com/in/balázs-burján-35456194/';
@@ -28,7 +28,14 @@ const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) =
     const fontSize = useSettings(state => state.fontSize);
     const isMobile = useDevice(state => state.isMobile);
     const show = useNotifications(state => state.show);
-    const preventOverflow = isMobile && fontSize > 1.2;
+    const contentRef = useRef<HTMLDivElement>(null);
+
+    // 'mods' attribute didn't initially work, so here we go
+    // (when fontSize modifier is too large, content is overflowing)
+    useEffect(() => {
+        const preventOverflow = isMobile && fontSize > 1.2;
+        contentRef.current?.classList.toggle('REDUCE_WIDTH', preventOverflow);
+    }, [fontSize, isMobile]);
 
     const handleCopy = (text: string) => {
         copyToClipboard(text)
@@ -73,7 +80,7 @@ const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) =
                 <Icon.Message />
                 <Icon.Message />
             </div>
-            <div elem='Content' mods={{ REDUCE_WIDTH: preventOverflow }}>
+            <div elem='Content' ref={contentRef}>
                 <div>
                     <div elem='Content-Email' className='animate-on-scroll'>
                         <a href={`mailto:${EMAIL}`} target='_top' title={`Say Hello at ${EMAIL}`} role='button'>

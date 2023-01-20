@@ -6,10 +6,17 @@ import { useDevice } from 'Store';
 import Icon from 'Component/Icon';
 import { type ProjectProps } from 'data/projects';
 import './project-page.style';
-
+import { useEffect, useState } from 'react';
 
 export const ProjectPage = ({ project, markdown, slug }: ProjectProps) => {
-    const { isMobile } = useDevice();
+    const isMobile = useDevice(state => state.isMobile);
+    const [isMobileState, setIsMobileState] = useState(false);
+
+    // Use mobile layout only after desktop layout has been mounted
+    // to prevent hydration mismatch error
+    useEffect(() => {
+        setIsMobileState(!!isMobile);
+    }, [isMobile]);
 
     if (!project) {
         return (
@@ -26,9 +33,11 @@ export const ProjectPage = ({ project, markdown, slug }: ProjectProps) => {
                             BACK TO HOME
                         </a>
                     </div>
-                    <p>
-                        I couldn't find this project :(
-                    </p>
+                    <div elem='NotFound'>
+                        <p>
+                            I couldn't find this project :(
+                        </p>
+                    </div>
                 </div>
             </>
         );
@@ -45,7 +54,7 @@ export const ProjectPage = ({ project, markdown, slug }: ProjectProps) => {
     } = project;
 
     const thumbnail = (
-        <div block='ProjectPage' elem="Zokni">
+        <div block='ProjectPage' elem='ThumbnailWrapper'>
             <div elem='Thumbnail'>
                 <Image
                     src={image}
@@ -104,14 +113,14 @@ export const ProjectPage = ({ project, markdown, slug }: ProjectProps) => {
                         <div elem='Status' title={`This project is ${status.toLowerCase()}.`}>
                             {`Status: ${status}`}
                         </div>
-                        {isMobile && thumbnail}
+                        {isMobileState && thumbnail}
                         <section block='ProjectPage' elem='Markdown'>
                             {markdown && (
                                 <ReactMarkdown children={markdown} linkTarget="_blank" />
                             )}
                         </section>
                     </div>
-                    {!isMobile && thumbnail}
+                    {!isMobileState && thumbnail}
                 </div>
             </div>
         </>
