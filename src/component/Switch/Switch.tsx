@@ -74,11 +74,11 @@ const Switch = ({
                     )}
                 </div>
                 <Icon.Chevron
-                    direction={
-                        value === valueRight
-                            ? Direction.LEFT
-                            : Direction.RIGHT
-                    }
+                // direction={
+                //     value === valueRight
+                //         ? Direction.LEFT
+                //         : Direction.RIGHT
+                // }
                 />
             </div>
             <p elem='Label'>

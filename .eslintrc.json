@@ -51,24 +51,13 @@
                 "builtinGlobals": false
             }
         ],
-        // "sort-imports-es6-autofix/sort-imports-es6": [
-        //     2,
-        //     {
-        //         "ignoreCase": false,
-        //         "ignoreMemberSort": false,
-        //         "memberSyntaxSortOrder": [
-        //             "single",
-        //             "multiple",
-        //             "all",
-        //             "none"
-        //         ]
-        //     }
-        // ],
+        "@typescript-eslint/ban-ts-comment": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
         "@typescript-eslint/no-extra-semi": "off",
         "@typescript-eslint/no-explicit-any": "off",
-        "@typescript-eslint/ban-ts-comment": "off",
         "@typescript-eslint/no-empty-function": "off",
+        "@typescript-eslint/no-unsafe-assignment": "off",
+        "@typescript-eslint/require-await": "off",
         "@typescript-eslint/semi": "error",
         "@typescript-eslint/naming-convention": [
             "error",
@@ -92,7 +81,6 @@
                     "match": true
                 }
             }
-        ],
-        "@typescript-eslint/no-unsafe-assignment": "off"
+        ]
     }
 }

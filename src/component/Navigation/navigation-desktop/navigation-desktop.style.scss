@@ -1,0 +1,112 @@
+.Navigation_DESKTOP {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-inline-start: auto;
+
+    .Navigation {
+        &-List {
+            display: flex;
+            margin-block: auto;
+            padding-inline-start: 0;
+        }
+
+        &-ListItem {
+            margin-inline-start: 1rem;
+            list-style-type: none;
+            font-size: 1.125rem;
+
+            a {
+                display: block;
+                padding-inline: 16px;
+                padding-block: 8px;
+                height: 100%;
+                text-decoration: none;
+                background-image: linear-gradient(var(--color-theme),
+                        var(--color-theme));
+                background-repeat: no-repeat;
+                background-size: 100% 0;
+                background-position: top;
+                transition: background-size 0.2s ease-out,
+                    background-image 0.2s,
+                    color 0.3s ease-out;
+                color: var(--color-content-primary);
+                border-radius: 2rem;
+                position: relative;
+                font-size: 1rem;
+                user-select: none;
+                cursor: pointer;
+
+                &:hover {
+                    background-size: 100% 100%;
+                    background-position: bottom;
+                    color: var(--color-white);
+                    transition: color 0.1s, background-color 1s, background-size 0.2s ease-out;
+
+                    &:active {
+                        // note the difference between :active and .active
+                        filter: brightness(1.25);
+                        transform: scale(0.95);
+                    }
+                }
+
+                &.active {
+                    background-size: 100% 10%;
+                    background-position: bottom;
+                    transition: background-size 0.2s ease-out, background-position 0.2s,
+                        color 0.2s, border-radius 0.5s ease;
+                    border-radius: 0;
+
+                    &:hover {
+                        background-size: 100% 100%;
+                        border-radius: 2rem;
+                        transition: background-size 0.2s ease, background-position 0.2s,
+                            color 0.2s, border-radius 0.2s ease-out;
+
+                        &:active {
+                            // selected & clicked on
+                            background-position: center;
+                            background-size: 100% 75%;
+                            transition: none;
+                        }
+                    }
+                }
+
+                &.previouslyactive {
+
+                    // Gracefully transition from selected to deselected
+                    &:not(.active) {
+                        // Prevent animation when reselecting item
+                        animation-name: DeselectActive;
+                        animation-duration: 400ms;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes DeselectActive {
+    0% {
+        background-position: bottom;
+        background-size: 100% 10%;
+    }
+
+    25% {
+        background-position: bottom;
+        background-size: 65% 10%;
+    }
+
+    50% {
+        background-size: 65% 10%;
+    }
+
+    75% {
+        background-size: 65% 10%;
+        background-position: top;
+    }
+
+    100% {
+        background-size: 65% 0%;
+    }
+}

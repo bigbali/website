@@ -1,4 +1,5 @@
 import { SVGProps } from 'react';
+import Base from '../_Base';
 import './Chevron.style';
 
 export enum Direction {
@@ -14,7 +15,7 @@ export interface ChevronProps {
 
 export const Chevron = ({ direction = Direction.UP, ...props }: SVGProps<SVGSVGElement> & ChevronProps) => {
     return (
-        <div block='Icon' elem='Chevron' mods={{
+        <Base icon='Chevron' modifiers={{
             DIRECTION_LEFT: direction === Direction.LEFT,
             DIRECTION_RIGHT: direction === Direction.RIGHT,
             DIRECTION_UP: direction === Direction.UP,
@@ -28,7 +29,7 @@ export const Chevron = ({ direction = Direction.UP, ...props }: SVGProps<SVGSVGE
                 {/* eslint-disable-next-line max-len */}
                 <path d='M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z' />
             </svg>
-        </div>
+        </Base>
     );
 };
 

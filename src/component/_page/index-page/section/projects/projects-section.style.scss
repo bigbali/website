@@ -1,0 +1,23 @@
+.Projects {
+    padding-inline: var(--content-padding);
+    margin-block-end: 10rem !important;
+
+    @include mobile {
+        margin-block-end: 3rem;
+    }
+
+    >h1 {
+        display: inline-block;
+        margin-block: 0;
+        font-size: 3rem;
+
+        @include mobile {
+            font-size: 2rem;
+        }
+
+        @include separator {
+            width: 63%;
+            inset-block-end: -1rem;
+        }
+    }
+}

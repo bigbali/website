@@ -164,80 +164,40 @@ html {
     scroll-behavior: smooth;
 }
 
-body,
-.root {
+body {
     margin: 0;
     background-color: var(--color-background-primary);
-    overflow-x: hidden;
-}
 
-body {
     &.disable-scrolling {
         overflow: hidden;
     }
 }
 
-.root {
-    scrollbar-gutter: stable both-edges;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-    word-break: break-word;
+body,
+main {
+    overflow-x: hidden;
 }
 
 main {
     &.Page {
-        &>div::before {
-            // page transition overlay
-            content: "";
-            display: block;
-            position: fixed;
-            inset: 0;
-            background-color: var(--color-background-primary-transparent);
-            backdrop-filter: blur(1rem);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        &.cross-page {
-            &_enter {
-                &>div::before {
-                    opacity: 1;
-                }
-            }
-
-            &_exit {
-                &>div::before {
-                    opacity: 0;
-                }
-            }
-
-            &_enter-active {
-                &>div::before {
-                    opacity: 0;
-                    transition: opacity 0.3s;
-                    transition-timing-function: ease-out;
-                }
-            }
-
-            &_enter-done>div::before {
-                display: none;
-            }
-
-            &_exit-active {
-                &>div::before {
-                    opacity: 1;
-                    transition: opacity 0.1s;
-                    transition-timing-function: ease-out;
-                }
+        &.cross-page_enter-active>div {
+            @include not-prefers-reduced-motion {
+                animation-name: in;
+                animation-duration: 0.3s;
+                animation-fill-mode: forwards;
+                animation-iteration-count: 1;
             }
         }
+    }
+}
+
+@keyframes in {
+    from {
+        translate: 100% 0;
+    }
+
+    to {
+        translate: 0 0;
     }
 }
 
@@ -261,15 +221,6 @@ button {
             scale 0.15s,
             filter 0.15s;
 
-        &.landing-animation {
-            @for $i from 1 through 3 {
-                &:nth-child(#{$i}) {
-                    transition-delay: 600 + ($i *80ms) !important;
-                    transition-duration: 0.3s;
-                }
-            }
-        }
-
         &.begin-animation {
             opacity: 1;
             translate: 0 0;
@@ -282,13 +233,6 @@ button {
             }
         }
     }
-}
-
-.landing-initial-state {
-    opacity: 0;
-    translate: 0 -10rem;
-    scale: 0.9;
-    filter: blur(16px);
 }
 
 .debug {

@@ -1,9 +1,10 @@
 import type { IconProps } from '../index';
+import Base from '../_Base';
 import './HamburgerMenu.style';
 
 const HamburgerMenu = ({ color, isExpanded = false }: IconProps & { isExpanded?: boolean }) => {
     return (
-        <div block='Icon' elem='HamburgerMenu' mods={{ isExpanded }}>
+        <Base icon='HamburgerMenu' modifiers={{ IS_EXPANDED: isExpanded }}>
             <svg
                 viewBox='0 0 72 48'
                 xmlns='http://www.w3.org/2000/svg'
@@ -13,7 +14,7 @@ const HamburgerMenu = ({ color, isExpanded = false }: IconProps & { isExpanded?:
                     fill={color}
                 />
             </svg>
-        </div>
+        </Base>
     );
 };
 

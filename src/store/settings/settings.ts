@@ -1,4 +1,5 @@
-import create from 'zustand';
+import { create } from 'zustand';
+import { isClient } from 'Util';
 
 export enum Theme {
     DARK = 'dark',
@@ -38,7 +39,7 @@ export type ColorType = {
 
 export type Color = ColorType | null;
 
-export interface Settings {
+export type Settings = {
     theme: Theme,
     accentColor: Color | null,
     fontSize: number,
@@ -53,7 +54,7 @@ interface SettingsStore extends Settings {
     reset: () => void
 };
 
-const isOsThemeDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const isOsThemeDark = isClient && window.matchMedia('(prefers-color-scheme: dark)').matches;
 export const defaultSettings: Settings = {
     theme: isOsThemeDark ? Theme.DARK : Theme.LIGHT,
     accentColor: null,
@@ -61,7 +62,7 @@ export const defaultSettings: Settings = {
     contrast: 1
 };
 
-const storedStateJSON = localStorage.getItem('settings');
+const storedStateJSON = isClient && localStorage.getItem('settings');
 const storedSettings: Settings | null = (storedStateJSON && JSON.parse(storedStateJSON)) || null;
 const initialState: Settings = storedSettings || defaultSettings;
 

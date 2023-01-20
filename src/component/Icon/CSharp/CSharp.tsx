@@ -1,9 +1,10 @@
 import { SVGProps } from 'react';
+import Base from '../_Base';
 import './CSharp.style';
 
 const CSharp = (props: SVGProps<SVGSVGElement>) => {
     return (
-        <div block='Icon' elem='CSharp'>
+        <Base icon='CSharp'>
             <svg
                 xmlns='http://www.w3.org/2000/svg'
                 viewBox='0 0 256 288'
@@ -16,7 +17,7 @@ const CSharp = (props: SVGProps<SVGSVGElement>) => {
                 {/* eslint-disable-next-line max-len */}
                 <path d="M128.46,48.63a95,95,0,0,1,82.26,47.45l-.16-.27-41.35,23.81A47.29,47.29,0,0,0,129,96.32h-.54a47.31,47.31,0,1,0,41.22,70.5l-.2.35,41.29,23.91a95,95,0,0,1-81.26,47.54h-1a95,95,0,0,1,0-190Z" />
             </svg>
-        </div>
+        </Base>
     );
 };
 

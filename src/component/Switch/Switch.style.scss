@@ -1,4 +1,4 @@
-$border-radius: 1rem;
+$border-radius: 50vmin;
 
 .Switch {
     display: flex;
@@ -7,6 +7,7 @@ $border-radius: 1rem;
     padding: 0;
     border: none;
     background-color: transparent;
+    width: 100%;
 
     &-Value {
         display: flex;
@@ -103,6 +104,7 @@ $border-radius: 1rem;
         display: flex;
         align-items: center;
         margin-block: 0;
+        text-align: start;
         font-size: 1rem;
     }
 

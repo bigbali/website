@@ -4,6 +4,7 @@
     cursor: pointer;
 
     &-Input {
+        appearance: none;
         -webkit-appearance: none;
         margin: 0;
         background-color: transparent;
@@ -19,12 +20,16 @@
 
         &::-webkit-slider-thumb {
             -webkit-appearance: none;
-            height: 1rem;
             width: 1rem;
+            height: 1rem;
             border-radius: 0.5rem;
             background-color: var(--color-content-secondary);
             margin-block-start: -0.3rem;
             transition: background-color 0.2s;
+
+            &:hover {
+                filter: brightness(1.2);
+            }
         }
 
         &::-moz-range-track {

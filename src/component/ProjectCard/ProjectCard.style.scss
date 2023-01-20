@@ -9,6 +9,13 @@
     border-radius: 0.5rem;
     transition: scale 0.5s;
 
+    &.begin-animation:not(.animation-finished) {
+        transition: opacity 0.3s,
+            translate 0.3s,
+            scale 0.3s,
+            filter 0.3s;
+    }
+
     @include theme-dark(&) {
         box-shadow: 8px 8px 32px black,
             -8px -8px 32px #1f1f1f;
@@ -20,47 +27,56 @@
 
     &:hover {
         scale: 1.01;
+        z-index: 3;
     }
 
-    &_REVERSE {
-        flex-direction: row-reverse;
-        border-radius: 0.5rem;
+    &:nth-child(2n) {
+        @include desktop {
+            flex-direction: row-reverse;
+            border-radius: 0.5rem;
+        }
 
         .ProjectCard {
             &-Details {
-                >h3 {
-                    text-align: end;
-                }
+                @include desktop {
+                    >h3 {
+                        text-align: end;
+                    }
 
-                >p {
-                    margin-inline-start: -5rem;
-                    margin-inline-end: 0;
-                    text-align: end;
-                    border-radius: 0.5rem 0 0 0.5rem;
+                    >p {
+                        margin-inline-start: -5rem;
+                        margin-inline-end: 0;
+                        text-align: end;
+                        border-radius: 0.5rem 0 0 0.5rem;
+                    }
                 }
             }
 
             &-TagsAndAnchors {
-                flex-direction: row-reverse;
+                @include desktop {
+                    flex-direction: row-reverse;
+                }
             }
 
             &-Status {
-                inset-inline-start: 0.5rem;
-                inset-inline-end: unset;
+                @include desktop {
+                    inset-inline-start: 0.5rem;
+                    inset-inline-end: unset;
+                }
             }
 
             &-Thumbnail {
-                border-inline-start: unset;
-                border-inline-end: 1px solid var(--color-border-transparent);
+                @include desktop {
+                    border-inline-start: unset;
+                    border-inline-end: 1px solid var(--color-border-transparent);
 
-                >div {
                     >img {
                         border-radius: 0.5rem 0 0 0.5rem;
                     }
                 }
 
                 &:hover {
-                    >div {
+                    @include desktop {
                         >img {
                             scale: 1.2;
                             translate: -15% 0;
@@ -152,6 +168,26 @@
             width: 3rem;
             height: 3rem;
         }
+
+        >a {
+            &:first-child:not(:last-child) {
+                >.Icon {
+                    padding-inline-end: 0.25rem;
+                }
+            }
+
+            &:last-child:not(:first-child) {
+                >.Icon {
+                    padding-inline-start: 0.25rem;
+                }
+            }
+
+            &:not(:first-child):not(:last-child) {
+                >.Icon {
+                    padding-inline: 0.25rem;
+                }
+            }
+        }
     }
 
     &-Status {
@@ -182,44 +218,38 @@
             border-block-start: 1px solid var(--color-border);
         }
 
-        >div {
+        >img {
             position: absolute;
-            inset: 0;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            border-radius: 0 0.5em 0.5em 0;
+            transition: scale 0.2s, translate 0.2s, opacity 0.2s;
 
-            >img {
-                position: relative;
-                z-index: 2;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                opacity: 0;
-                border-radius: 0 0.5em 0.5em 0;
-                transition: scale 0.2s, translate 0.2s, opacity 0.2s;
-
-                @include mobile {
-                    border-radius: 0 0 0.5em 0.5em;
-                }
-            }
-
-            >canvas {
-                position: absolute;
-                inset: 0;
-                width: 100%;
-                height: 100%;
-                z-index: 1;
+            @include mobile {
+                border-radius: 0 0 0.5em 0.5em;
             }
         }
 
-        &:hover {
-            >div {
-                >img {
-                    scale: 1.2;
-                    translate: 15% 0;
+        >canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
 
-                    @include mobile {
-                        scale: 1.15;
-                        translate: 0 10%;
-                    }
+
+        &:hover {
+            >img {
+                scale: 1.2;
+                translate: 15% 0;
+
+                @include mobile {
+                    scale: 1.15;
+                    translate: 0 10%;
                 }
             }
         }
@@ -228,28 +258,18 @@
     &_LOADED {
         .ProjectCard {
             &-Thumbnail {
-                >div {
-                    >img {
-                        opacity: 1;
-                    }
+                >img {
+                    opacity: 1;
+                }
 
-                    >canvas {
-                        animation-name: canvas-exit;
-                        animation-duration: 0.1s;
-                        animation-delay: 0.2s;
-                        animation-fill-mode: forwards;
-                    }
+                >canvas {
+                    animation-name: canvas-exit;
+                    animation-duration: 0.1s;
+                    animation-delay: 0.2s;
+                    animation-fill-mode: forwards;
                 }
             }
         }
-    }
-
-    &_PREVENT_SCROLL_ANIMATION {
-        opacity: 1 !important;
-        translate: 0 0 !important;
-        scale: 1 !important;
-        filter: none !important;
-        transition: none !important;
     }
 }
 

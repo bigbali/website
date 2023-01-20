@@ -1,10 +1,9 @@
 import { SVGProps } from 'react';
-import './WPF.style';
-
+import Base from '../_Base';
 
 const WPF = (props: SVGProps<SVGSVGElement>) => {
     return (
-        <div block='Icon' elem='WPF'>
+        <Base icon='WPF'>
             <svg
                 xmlns='http://www.w3.org/2000/svg'
                 viewBox='0 0 512 204'
@@ -16,7 +15,7 @@ const WPF = (props: SVGProps<SVGSVGElement>) => {
                 <path d="M292.91,128.66v53.81H255.56v-161h56.8q17,0,29.22,4a56.24,56.24,0,0,1,20.12,11.1A43.35,43.35,0,0,1,373.35,53.3a56.45,56.45,0,0,1,3.76,20.77,61,61,0,0,1-3.87,22.1,44.37,44.37,0,0,1-11.82,17.24,55.7,55.7,0,0,1-20.17,11.22q-12.21,4-28.89,4Zm0-28.18h19.45q14.58,0,21-7t6.41-19.45a29,29,0,0,0-1.66-10,20.44,20.44,0,0,0-5-7.79,22.61,22.61,0,0,0-8.51-5,37.63,37.63,0,0,0-12.21-1.77H292.91Z" />
                 <path d="M500.21,21.47V50.2H434.13V91h55v28.84h-55v62.65H396.56v-161Z" />
             </svg>
-        </div>
+        </Base>
     );
 };
 

@@ -1,8 +1,8 @@
 {
     "include": [
-        "src/**/*.ts",
-        "src/**/*.tsx",
-        "src/index.d.ts"
+        "**/*.ts",
+        "**/*.tsx",
+        "**/*.d.ts"
     ],
     "exclude": [
         "build"

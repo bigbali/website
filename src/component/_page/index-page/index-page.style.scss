@@ -1,0 +1,89 @@
+.IndexPage {
+    min-height: 100vh;
+
+    .accent {
+        color: var(--color-theme);
+        font-weight: 900;
+    }
+
+    &-Loading {
+        position: fixed;
+        inset: 0;
+        background-color: rgb(15, 20, 25);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        z-index: 100;
+        will-change: clip-path;
+
+        &_exit-active {
+            animation-name: cover-exit;
+            animation-duration: 0.5s;
+            animation-fill-mode: forwards;
+            animation-timing-function: ease-in-out;
+        }
+
+        &-Logo {
+            >.Icon-BB {
+                width: 8rem;
+                height: 8rem;
+
+                >svg>path {
+                    fill: var(--color-content-primary-dark);
+                }
+            }
+        }
+
+        .loader {
+            >span {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+                color: var(--color-content-primary-dark);
+
+                >.Icon {
+                    width: 2.5rem;
+                    height: 2.5rem;
+                    animation-name: loader;
+                    animation-duration: 1s;
+                    animation-iteration-count: infinite;
+                    animation-timing-function: linear;
+
+                    >svg>path {
+                        fill: var(--color-content-primary-dark);
+                    }
+                }
+            }
+        }
+    }
+
+    >.Landing,
+    >.Projects,
+    >.About {
+        margin-block-end: 5em;
+    }
+}
+
+@keyframes cover-exit {
+    from {
+        clip-path: inset(0);
+    }
+
+    to {
+        clip-path: inset(100% 0 0 0);
+    }
+}
+
+@keyframes loader {
+    0% {
+        rotate: 0deg;
+    }
+
+    100% {
+        rotate: 360deg;
+    }
+
+}

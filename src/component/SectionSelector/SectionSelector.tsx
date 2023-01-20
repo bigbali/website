@@ -1,4 +1,5 @@
 import {
+    memo,
     RefObject,
     useEffect,
     useRef,
@@ -28,8 +29,7 @@ export const SectionSelector = ({ sections, onSelect }: SectionSelectorProps) =>
                 if ((section.intersectionRect.height > window.innerHeight / 2)
                     || (section.boundingClientRect.height < window.innerHeight / 2 && section.intersectionRatio > 0.5)) {
 
-                    const _currentSection = currentSectionRef.current;
-                    if (_currentSection && _currentSection.id === section.target.id) {
+                    if (currentSectionRef.current && currentSectionRef.current.id === section.target.id) {
                         return;
                     }
 
@@ -45,7 +45,7 @@ export const SectionSelector = ({ sections, onSelect }: SectionSelectorProps) =>
             // because on mobile, the content height could be taller than the viewport
             // it would be skipped by the observer.
             // to counter that, we observe every little movement and instead of using .isIntersecting,
-            // we check if the observed element's intersecting part takes at least half og viewport's
+            // we check if the observed element's intersecting part takes at least half of viewport's
         });
 
         sections.forEach((section) => observer.observe(section.ref.current!));
@@ -76,4 +76,4 @@ export const SectionSelector = ({ sections, onSelect }: SectionSelectorProps) =>
     );
 };
 
-export default SectionSelector;
+export default memo(SectionSelector);

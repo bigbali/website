@@ -1,9 +1,15 @@
 {
+    "presets": [
+        "next/babel"
+    ],
     "plugins": [
         [
             "transform-jsx-bem-attributes",
-            {}
+            {
+                "block": {
+                    "preserve": false
+                }
+            }
         ]
     ]
-    // "retainLines": true
 }
