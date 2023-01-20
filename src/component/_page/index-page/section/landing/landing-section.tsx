@@ -98,8 +98,6 @@ const Landing = ({ isSplineLoaded, setSplineLoaded, refFromParent }: LandingProp
         }
     };
 
-    console.log(isSplineLoaded);
-
     useEffect(() => { // Spline backup plan
         let timeout: NodeJS.Timeout;
 

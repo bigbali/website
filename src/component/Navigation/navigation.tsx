@@ -68,4 +68,4 @@ const Navigation = ({ isMobile }: NavigationProps) => {
     );
 };
 
-export default memo(Navigation); 
+export default memo(Navigation);

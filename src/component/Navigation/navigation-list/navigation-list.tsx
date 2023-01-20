@@ -1,15 +1,15 @@
 import {
     memo,
+    type MutableRefObject,
     type MouseEvent as GenericMouseEvent,
-    type RefObject
 } from 'react';
 import Link from 'next/link';
 import { SectionID } from 'Store';
 
 export type NavigationListProps = {
     asPath: string,
-    currentSection: HTMLElement,
-    previousSectionRef: RefObject<SectionID>,
+    currentSection: HTMLElement | null,
+    previousSectionRef: MutableRefObject<SectionID | undefined>,
     onNavigationItemClick: (e: GenericMouseEvent<HTMLAnchorElement, MouseEvent>, section: SectionID) => void,
     onNavigationItemClickEffect?: () => void
 };
