@@ -6,7 +6,7 @@ It's built with `Next` and is hosted on Vercel's amazing hosting service.
 I built this project based on my very own
 [React Template project](/project/react-template "Go to React Template project details"),
 which in turn is built with my very own [Babel Plugin](/project/babel-plugin "Go to Babel Plugin project details").\
-Initially it was built with `CRA`, but I migrated id to `Next`.
+Initially it was built with `CRA`, but I migrated it to `Next`.
 
 - The 3D animation on the Landing page (only on desktop, on mobile you're served with a static image!) is created with [Spline](https://spline.design/ "Go to Spline home page").
 - Scroll animations are done with `IntersectionObserver`.
