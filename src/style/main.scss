@@ -173,19 +173,18 @@ body {
     }
 }
 
-body,
-main {
-    overflow-x: hidden;
-}
-
 main {
     &.Page {
-        &.cross-page_enter-active>div {
-            @include not-prefers-reduced-motion {
-                animation-name: in;
-                animation-duration: 0.3s;
-                animation-fill-mode: forwards;
-                animation-iteration-count: 1;
+        &.cross-page_enter-active {
+            overflow-x: hidden;
+
+            >div {
+                @include not-prefers-reduced-motion {
+                    animation-name: in;
+                    animation-duration: 0.3s;
+                    animation-fill-mode: forwards;
+                    animation-iteration-count: 1;
+                }
             }
         }
     }
