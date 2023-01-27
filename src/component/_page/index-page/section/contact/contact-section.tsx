@@ -2,10 +2,11 @@ import { memo, RefObject, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import {
     NotificationStatus,
-    useNotifications
-} from 'Store';
-import { useDevice, useSettings } from 'Store';
-import Icon from 'Component/Icon';
+    useNotifications,
+    useDevice,
+    useSettings
+} from '@store';
+import Icon from '@component/icon';
 import './contact-section.style';
 
 const EMAIL = 'hello@balazsburjan.com';

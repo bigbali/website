@@ -1,6 +1,6 @@
 import { debounceTime, fromEvent } from 'rxjs';
 import { create } from 'zustand';
-import { getIsMobile, isClient } from 'Util';
+import { getIsMobile, isClient } from '@util';
 
 export interface Device {
     isMobile: boolean | undefined,

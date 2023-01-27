@@ -2,9 +2,9 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 import {
     NotificationStatus,
     useNotifications
-} from 'Store';
-import Icon from 'Component/Icon';
-import './Notifications.style';
+} from '@store';
+import Icon from '@component/icon';
+import './notifications.style';
 
 export const Notifications = () => {
     const { notifications, hide } = useNotifications();

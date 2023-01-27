@@ -1,12 +1,12 @@
+import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import Image from 'next/image';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useDevice } from 'Store';
-import Icon from 'Component/Icon';
-import { type ProjectProps } from 'data/projects';
+import { useDevice } from '@store';
+import { type ProjectProps } from '@data/projects';
+import Icon from '@component/icon';
 import './project-page.style';
-import { useEffect, useState } from 'react';
 
 export const ProjectPage = ({ project, markdown, slug }: ProjectProps) => {
     const isMobile = useDevice(state => state.isMobile);
@@ -46,8 +46,9 @@ export const ProjectPage = ({ project, markdown, slug }: ProjectProps) => {
     const {
         title,
         tags,
-        github,
         status,
+        github,
+        stackblitz,
         thumbnail: {
             image
         }
@@ -63,7 +64,7 @@ export const ProjectPage = ({ project, markdown, slug }: ProjectProps) => {
                     priority
                 />
             </div>
-            <div elem='GitHubAndTags'>
+            <div elem='AnchorsAndTags'>
                 {github && (
                     <a
                         href={github}
@@ -74,6 +75,19 @@ export const ProjectPage = ({ project, markdown, slug }: ProjectProps) => {
                         <Icon.GitHub />
                         <span>
                             See on GitHub
+                        </span>
+                    </a>
+                )}
+                {stackblitz && (
+                    <a
+                        href={stackblitz}
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        title='Go to StackBlitz page'
+                    >
+                        <Icon.Stackblitz />
+                        <span>
+                            See on StackBlitz
                         </span>
                     </a>
                 )}

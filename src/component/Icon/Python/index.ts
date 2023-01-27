@@ -1,1 +1,1 @@
-export { default } from './Python';
+export { default } from './python';

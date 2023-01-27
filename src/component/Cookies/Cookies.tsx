@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
-import { useDevice } from 'Store';
-import './Cookies.style';
+import { useDevice } from '@store';
+import './cookies.style';
 
 export const LOCAL_STORAGE_COOKIES_ACCEPTED = 'cookies_accepted';
 

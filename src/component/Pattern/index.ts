@@ -1,4 +1,4 @@
-import { default as Dots } from './Dots';
+import { default as Dots } from './dots';
 
 const Pattern = {
     Dots

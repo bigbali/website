@@ -1,1 +1,1 @@
-export { default } from './Babel';
+export { default } from './babel';

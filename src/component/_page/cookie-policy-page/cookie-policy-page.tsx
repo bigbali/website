@@ -1,8 +1,8 @@
-import Icon from 'Component/Icon';
+import Icon from '@component/icon';
 import {
     NotificationStatus,
     useNotifications
-} from 'Store';
+} from '@store';
 import './cookie-policy-page.style';
 
 export const CookiePolicyPage = () => {

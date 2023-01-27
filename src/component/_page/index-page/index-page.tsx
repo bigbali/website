@@ -8,11 +8,11 @@ import {
 } from 'react';
 import { TransitionGroup } from 'react-transition-group';
 import FontFaceObserver from 'fontfaceobserver';
-import { scrollIntoView } from 'Util';
-import { SectionID, useDevice, useSection } from 'Store';
-import Transition from 'Component/Transition';
-import SectionSelector from 'Component/SectionSelector';
-import Icon from 'Component/Icon';
+import { scrollIntoView } from '@util';
+import { SectionID, useDevice, useSection } from '@store';
+import Transition from '@component/transition';
+import SectionSelector from '@component/section-selector';
+import Icon from '@component/icon';
 import Section from './section';
 import './index-page.style';
 
@@ -46,7 +46,7 @@ export const IndexPage = () => {
     const scrollToSectionId = useSection((state) => state.scrollToSectionId);
     const setScrollToSectionId = useSection((state) => state.setScrollToSectionId);
 
-    const { isDesktop } = useDevice();
+    const isDesktop = useDevice(state => state.isDesktop);
 
     // Without useCallback, we get a hydration error, believe it or not
     const onFontsLoaded = useCallback(() => {

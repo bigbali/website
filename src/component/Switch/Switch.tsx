@@ -5,8 +5,8 @@ import {
 } from 'react';
 import Icon, {
     Direction
-} from 'Component/Icon';
-import './Switch.style';
+} from '@component/icon';
+import './switch.style';
 
 interface SwitchProps {
     onSwitch: (value: any) => void,
@@ -74,11 +74,11 @@ const Switch = ({
                     )}
                 </div>
                 <Icon.Chevron
-                // direction={
-                //     value === valueRight
-                //         ? Direction.LEFT
-                //         : Direction.RIGHT
-                // }
+                    direction={
+                        value === valueRight
+                            ? Direction.LEFT
+                            : Direction.RIGHT
+                    }
                 />
             </div>
             <p elem='Label'>

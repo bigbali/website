@@ -1,1 +1,1 @@
-export { default } from './React';
+export { default } from './react';

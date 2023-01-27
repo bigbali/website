@@ -4,7 +4,7 @@ import {
     type MouseEvent as GenericMouseEvent,
 } from 'react';
 import Link from 'next/link';
-import { SectionID } from 'Store';
+import { SectionID } from '@store';
 
 export type NavigationListProps = {
     asPath: string,

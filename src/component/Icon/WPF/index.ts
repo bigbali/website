@@ -1,1 +1,1 @@
-export { default } from './WPF';
+export { default } from './wpf';

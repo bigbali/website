@@ -1,6 +1,6 @@
 import { SVGProps } from 'react';
-import Base from '../_Base';
-import './Settings.style';
+import Base from '../_base';
+import './settings.style';
 
 type SettingsIconProps = {
     isExpanded?: boolean;

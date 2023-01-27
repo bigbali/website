@@ -3,17 +3,17 @@ import {
     type PropsWithChildren,
 } from 'react';
 import dynamic from 'next/dynamic';
-import Footer from 'Component/Footer';
+import Footer from '@component/footer';
 
-const Header = dynamic(() => import('Component/Header'), {
+const Header = dynamic(() => import('@component/header'), {
     ssr: false
 });
 
-const Cookies = dynamic(() => import('Component/Cookies'), {
+const Cookies = dynamic(() => import('@component/cookies'), {
     ssr: false
 });
 
-const Notifications = dynamic(() => import('Component/Notifications'), {
+const Notifications = dynamic(() => import('@component/notifications'), {
     ssr: false
 });
 

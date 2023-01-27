@@ -6,8 +6,8 @@ import React, {
     type MouseEvent as GenericMouseEvent
 } from 'react';
 import { useRouter } from 'next/router';
-import { SectionID, useSection } from 'Store';
-import { scrollIntoView } from 'Util';
+import { SectionID, useSection } from '@store';
+import { scrollIntoView } from '@util';
 import {
     type NavigationListProps
 } from './navigation-list';

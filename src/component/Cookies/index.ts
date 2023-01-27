@@ -1,1 +1,1 @@
-export { default } from './Cookies';
+export { default } from './cookies';

@@ -5,12 +5,12 @@ import {
     useState
 } from 'react';
 import { TransitionGroup } from 'react-transition-group';
-import Icon from 'Component/Icon';
-import Transition from 'Component/Transition';
-import Settings from 'Component/Settings';
+import Icon from '@component/icon';
+import Transition from '@component/transition';
+import Settings from '@component/settings';
 import { NavigationElementProps } from '../navigation';
-import './navigation-mobile.style';
 import NavigationList from '../navigation-list';
+import './navigation-mobile.style';
 
 const NavigationMobile = ({ listProps }: NavigationElementProps) => {
     const [isExpanded, setIsExpanded] = useState(false);

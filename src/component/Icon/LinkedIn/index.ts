@@ -1,1 +1,1 @@
-export { default } from './LinkedIn';
+export { default } from './linkedin';

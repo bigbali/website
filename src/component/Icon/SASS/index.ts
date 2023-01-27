@@ -1,1 +1,1 @@
-export { default } from './SASS';
+export { default } from './sass';

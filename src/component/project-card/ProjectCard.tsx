@@ -6,9 +6,9 @@ import {
 import Link from 'next/link';
 import Image from 'next/image';
 import { Project } from 'data/projects';
-import Icon from 'Component/Icon';
-import './ProjectCard.style';
-import { ScrollAnimationObserver } from 'Util';
+import { ScrollAnimationObserver } from '@util';
+import Icon from '@component/icon';
+import './project-card.style';
 
 type ProjectCardProps = Project & {
     applyScrollAnimation?: boolean

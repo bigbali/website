@@ -1,37 +1,38 @@
-export * from './Chevron';
+export * from './chevron';
 
-import { default as Base } from './_Base';
-import { default as Address } from './Address';
-import { default as Anchor } from './Anchor';
-import { default as Babel } from './Babel';
-import { default as BB } from './BB';
-import { default as Cat } from './Cat';
-import { default as Chevron } from './Chevron';
-import { default as Close } from './Close';
-import { default as Cookie } from './Cookie';
-import { default as Copy } from './Copy';
-import { default as CSharp } from './CSharp';
-import { default as Django } from './Django';
-import { default as File } from './File';
-import { default as GitHub } from './GitHub';
-import { default as HamburgerMenu } from './HamburgerMenu';
-import { default as Help } from './Help';
-import { default as JavaScript } from './JavaScript';
-import { default as LinkedIn } from './LinkedIn';
-import { default as Loader } from './Loader';
-import { default as Location } from './Location';
-import { default as Message } from './Message';
-import { default as Moon } from './Moon';
-import { default as NodeJS } from './NodeJS';
-import { default as Python } from './Python';
-import { default as React } from './React';
-import { default as SASS } from './SASS';
-import { default as Settings } from './Settings';
-import { default as Sun } from './Sun';
-import { default as TypeScript } from './TypeScript';
-import { default as VS } from './VS';
-import { default as VSCode } from './VSCode';
-import { default as WPF } from './WPF';
+import { default as Base } from './_base';
+import { default as Address } from './address';
+import { default as Anchor } from './anchor';
+import { default as Babel } from './babel';
+import { default as BB } from './logo';
+import { default as Cat } from './cat';
+import { default as Chevron } from './chevron';
+import { default as Close } from './close';
+import { default as Cookie } from './cookie';
+import { default as Copy } from './copy';
+import { default as CSharp } from './c-sharp';
+import { default as Django } from './django';
+import { default as File } from './file';
+import { default as GitHub } from './github';
+import { default as HamburgerMenu } from './hamburger-menu';
+import { default as Help } from './help';
+import { default as JavaScript } from './javascript';
+import { default as LinkedIn } from './linkedin';
+import { default as Loader } from './loader';
+import { default as Location } from './location';
+import { default as Message } from './message';
+import { default as Moon } from './moon';
+import { default as NodeJS } from './nodejs';
+import { default as Python } from './python';
+import { default as React } from './react';
+import { default as SASS } from './sass';
+import { default as Settings } from './settings';
+import { default as Stackblitz } from './stackblitz';
+import { default as Sun } from './sun';
+import { default as TypeScript } from './typescript';
+import { default as VS } from './visual-studio';
+import { default as VSCode } from './vs-code';
+import { default as WPF } from './wpf';
 
 const Icon = {
     Base,
@@ -61,6 +62,7 @@ const Icon = {
     React,
     SASS,
     Settings,
+    Stackblitz,
     Sun,
     TypeScript,
     VS,

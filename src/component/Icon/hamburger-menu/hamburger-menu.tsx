@@ -1,6 +1,6 @@
 import type { IconProps } from '../index';
-import Base from '../_Base';
-import './HamburgerMenu.style';
+import Base from '../_base';
+import './hamburger-menu.style';
 
 const HamburgerMenu = ({ color, isExpanded = false }: IconProps & { isExpanded?: boolean }) => {
     return (

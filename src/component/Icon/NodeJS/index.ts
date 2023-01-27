@@ -1,1 +1,1 @@
-export { default } from './NodeJS';
+export { default } from './nodejs';

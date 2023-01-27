@@ -1,1 +1,1 @@
-export { default } from './JavaScript';
+export { default } from './javascript';

@@ -4,17 +4,17 @@ import {
     useState
 } from 'react';
 import lodash from 'lodash';
-import { isServer, useClickOutside } from 'Util';
+import { isServer, useClickOutside } from '@util';
 import {
     Color,
     DefaultColors,
     Theme,
     useSettings
-} from 'Store';
-import Switch from 'Component/Switch';
-import Slider from 'Component/Slider';
-import Icon from 'Component/Icon';
-import './Settings.style';
+} from '@store';
+import Switch from '@component/switch';
+import Slider from '@component/slider';
+import Icon from '@component/icon';
+import './settings.style';
 
 const ColorMap = [
     null,

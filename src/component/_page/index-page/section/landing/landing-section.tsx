@@ -16,7 +16,7 @@ import {
     throttleTime
 } from 'rxjs';
 import dynamic from 'next/dynamic';
-import { useDevice } from 'Store';
+import { useDevice } from '@store';
 import './landing-section.style';
 
 const CustomSpline = dynamic(() => import('./spline'), { ssr: false });

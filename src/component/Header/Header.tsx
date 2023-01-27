@@ -1,11 +1,12 @@
-import { useDevice } from 'Store';
-import Navigation from 'Component/Navigation/';
-import Settings from 'Component/Settings';
+import { useDevice } from '@store';
+import Navigation from '@component/navigation';
+import Settings from '@component/settings';
 import Link from 'next/link';
-import './Header.style';
+import './header.style';
 
 export const Header = () => {
-    const { isDesktop, isMobile } = useDevice();
+    const isDesktop = useDevice(state => state.isDesktop);
+    const isMobile = useDevice(state => state.isMobile);
 
     return (
         <div block='Header'>

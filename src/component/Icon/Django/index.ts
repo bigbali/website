@@ -1,1 +1,1 @@
-export { default } from './Django';
+export { default } from './django';

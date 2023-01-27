@@ -1,2 +1,2 @@
-export * from './Help';
-export { default } from './Help';
+export * from './help';
+export { default } from './help';

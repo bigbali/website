@@ -6,7 +6,6 @@
     .ProjectPage-Thumbnail {
         @include mobile {
             padding: 0 !important;
-            margin-block-end: 3em;
         }
     }
 
@@ -131,23 +130,28 @@
         }
     }
 
-    &-GitHubAndTags {
+    &-AnchorsAndTags {
         display: flex;
         justify-content: space-between;
-        margin-block: 1em;
-        padding-inline: 1em;
-        gap: 1em;
+        margin-block: 1rem;
+        padding-inline: 1rem;
+        gap: 1rem;
 
         @include mobile {
             padding-inline: 0;
+            margin-block-end: 2rem;
         }
 
         >a {
             display: flex;
-            text-decoration: none;
             align-items: center;
-            gap: 1em;
+            gap: 1rem;
             font-size: 1.15rem;
+            text-decoration: none;
+
+            @include mobile {
+                align-items: flex-start;
+            }
 
             &:hover {
                 >span {

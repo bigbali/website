@@ -5,8 +5,8 @@ import {
     useRef,
 } from 'react';
 import { range } from 'lodash';
-import { useSection } from 'Store';
-import './SectionSelector.style';
+import { useSection } from '@store';
+import './section-selector.style';
 
 type SectionSelectorProps = {
     sections: {
@@ -17,7 +17,8 @@ type SectionSelectorProps = {
 };
 
 export const SectionSelector = ({ sections, onSelect }: SectionSelectorProps) => {
-    const { currentSection, setCurrentSection } = useSection();
+    const currentSection = useSection(state => state.currentSection);
+    const setCurrentSection = useSection(state => state.setCurrentSection);
     const currentSectionRef = useRef<HTMLElement | null>();
     currentSectionRef.current = currentSection; // avoid stale closure in observer callback
 

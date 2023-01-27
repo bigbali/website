@@ -1,2 +1,2 @@
-export { default } from './Notifications';
-export * from './Notifications';
+export { default } from './notifications';
+export * from './notifications';
