@@ -19,6 +19,7 @@ const ProjectCard = ({
     description,
     thumbnail,
     github,
+    stackblitz,
     slug,
     page,
     tags,
@@ -60,6 +61,11 @@ const ProjectCard = ({
                     </div>
                     <div elem='Anchors'>
                         {!!github && (
+                            <a href={stackblitz} target='_blank' rel="noopener noreferrer" title='Go to StackBlitz page'>
+                                <Icon.Stackblitz />
+                            </a>
+                        )}
+                        {!!stackblitz && (
                             <a href={github} target='_blank' rel="noopener noreferrer" title='Go to GitHub page'>
                                 <Icon.GitHub />
                             </a>
