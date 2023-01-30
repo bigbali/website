@@ -9,7 +9,7 @@ const Header = dynamic(() => import('@component/header'), {
     ssr: false
 });
 
-const Cookies = dynamic(() => import('@component/cookies'), {
+const Cookies = dynamic(() => import('@component/Cookies'), {
     ssr: false
 });
 
