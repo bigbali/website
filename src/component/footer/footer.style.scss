@@ -1,0 +1,74 @@
+.Footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: var(--content-padding);
+    background-color: var(--color-background-secondary-dark);
+    border-block-start: 1px solid var(--color-border);
+    height: var(--footer-height);
+
+    @include mobile {
+        flex-direction: column;
+        padding-block: 1rem;
+    }
+
+    span,
+    a {
+        font-size: 1rem;
+        color: var(--color-content-secondary-dark);
+        height: fit-content;
+    }
+
+    span {
+        flex: 1;
+
+        @include mobile {
+            flex: none;
+        }
+    }
+
+    &-By:not(.\9) {
+        // ↑ trick to increase specificity (let's pretend !important doesn't exist)
+        text-align: start;
+
+        @include mobile {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        >span {
+            @include desktop {
+                margin-inline-start: 0.5rem;
+            }
+        }
+    }
+
+    &-Date {
+        text-align: end;
+    }
+
+    &-Navigation {
+        display: flex;
+        justify-content: center;
+        flex: 1;
+        gap: 1.5rem;
+
+        @include mobile {
+            flex: none;
+            height: fit-content;
+        }
+
+        >a {
+            transition: color 0.2s;
+
+            @include desktop {
+                text-decoration: none;
+            }
+
+            &:hover {
+                color: var(--color-theme);
+            }
+        }
+    }
+}

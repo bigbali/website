@@ -1,0 +1,182 @@
+$border-radius: 50vmin;
+
+.Switch {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    width: 100%;
+
+    &-Value {
+        display: flex;
+        position: relative;
+        background-color: var(--color-background-secondary-transparent);
+        border-radius: $border-radius;
+        margin-inline-end: 1rem;
+        align-items: center;
+        border: 1px solid var(--color-border);
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset-block: 0;
+            width: 50%;
+            border: 3px solid var(--color-theme);
+            border-radius: $border-radius;
+            transition: translate 0.1s;
+            pointer-events: none;
+        }
+
+        &-Left,
+        &-Right {
+            display: flex;
+            flex: 1;
+            padding-inline: 0.75rem 1rem;
+            font-size: 0.75rem;
+            pointer-events: none;
+
+            &:hover {
+                path {
+                    fill: var(--color-theme);
+                }
+
+                span {
+                    color: var(--color-theme);
+                }
+            }
+
+            &-Icon,
+            &-Text {
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        &-Right {
+            opacity: 0.5;
+        }
+
+        .Icon {
+            width: 2rem;
+            height: 2rem;
+        }
+
+        >.Icon-Chevron {
+            position: absolute;
+            width: 100%;
+            height: 110%;
+            opacity: 0;
+            pointer-events: none;
+
+            path {
+                fill: var(--color-theme);
+            }
+
+            &_DIRECTION_LEFT {
+                translate: -0.5rem;
+            }
+
+            &_DIRECTION_RIGHT {
+                translate: 0.5rem;
+            }
+        }
+
+        &:hover {
+            >.Icon-Chevron {
+                animation-duration: 1.5s;
+                animation-iteration-count: infinite;
+                animation-delay: 0.5s;
+
+                &_DIRECTION_LEFT {
+                    animation-name: ChevronLeft;
+                }
+
+                &_DIRECTION_RIGHT {
+                    animation-name: ChevronRight;
+                }
+            }
+        }
+    }
+
+    &-Label {
+        display: flex;
+        align-items: center;
+        margin-block: 0;
+        text-align: start;
+        font-size: 1rem;
+    }
+
+    &_isSwitched {
+        .Switch-Value {
+            &::after {
+                translate: 100% 0;
+            }
+
+            &-Left {
+                opacity: 0.5;
+            }
+
+            &-Right {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+@keyframes ChevronLeft {
+    0% {
+        translate: -0.3rem 0;
+        opacity: 0;
+    }
+
+
+    50% {
+        translate: -1rem 0;
+        opacity: 1;
+    }
+
+    70% {
+        translate: -1rem 0;
+        opacity: 0;
+    }
+
+    71% {
+        translate: -0.3rem 0;
+        opacity: 0;
+    }
+
+    100% {
+        translate: -0.3rem 0;
+        opacity: 0;
+    }
+}
+
+@keyframes ChevronRight {
+    0% {
+        translate: 0.3rem 0;
+        opacity: 0;
+    }
+
+
+    50% {
+        translate: 1rem 0;
+        opacity: 1;
+    }
+
+    70% {
+        translate: 1rem 0;
+        opacity: 0;
+    }
+
+    71% {
+        translate: 0.3rem 0;
+        opacity: 0;
+    }
+
+    100% {
+        translate: 0.3rem 0;
+        opacity: 0;
+    }
+}
