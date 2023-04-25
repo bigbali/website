@@ -6,10 +6,10 @@ import {
     useState
 } from 'react';
 import { Status, Tag } from 'data/projects';
-import Help, { Orientation } from 'Component/Help';
-import Icon from 'Component/Icon';
+import { ScrollAnimationObserver } from '@util';
+import Help, { Orientation } from '@component/help';
+import Icon from '@component/icon';
 import './filter.style';
-import { ScrollAnimationObserver } from 'Util';
 
 type FilterProps = {
     defaultLimit: number,

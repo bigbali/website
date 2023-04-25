@@ -1,12 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { TransitionGroup } from 'react-transition-group';
 import { type AppProps } from 'next/app';
-import { useSettings } from 'Store';
-import { ScrollAnimationObserver } from 'Util';
-import { applySettings } from 'Util/settings';
-import Layout from 'Component/Layout';
-import Transition from 'Component/Transition';
-import 'Style/Global';
+import { useSettings } from '@store';
+import { ScrollAnimationObserver } from '@util';
+import { applySettings } from '@util/settings';
+import Layout from '@component/layout';
+import Transition from '@component/transition';
+import '@style/main';
 
 export default function App({ Component, pageProps, router }: AppProps) {
     const pageWrapperRef = useRef<HTMLElement>(null);

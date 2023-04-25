@@ -1,11 +1,11 @@
-import image__balazsburjan from 'Media/webp/balazs-burjan.webp';
-import image__sdl from 'Media/webp/sdl.webp';
-import image__react_template from 'Media/webp/react-template.webp';
-import image__babel_plugin from 'Media/webp/babel-plugin.webp';
-import image__stardust_dark from 'Media/webp/stardust-dark.webp';
-import image__family_photos from 'Media/webp/family-photos.webp';
-import image__eshop from 'Media/webp/eshop.webp';
-import image__tankstats from 'Media/webp/tankstats.webp';
+import image__balazsburjan from '@media/webp/balazs-burjan.webp';
+import image__sdl from '@media/webp/sdl.webp';
+import image__react_template from '@media/webp/react-template.webp';
+import image__babel_plugin from '@media/webp/babel-plugin.webp';
+import image__stardust_dark from '@media/webp/stardust-dark.webp';
+import image__family_photos from '@media/webp/family-photos.webp';
+import image__eshop from '@media/webp/eshop.webp';
+import image__tankstats from '@media/webp/tankstats.webp';
 import { StaticImageData } from 'next/image';
 
 export enum Status {
@@ -52,6 +52,7 @@ export type Project = {
     tags: Tag[],
     page?: string,
     github?: string,
+    stackblitz?: string,
     slug: string,
     thumbnail: {
         image: StaticImageData,

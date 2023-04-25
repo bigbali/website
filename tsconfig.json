@@ -4,49 +4,55 @@
         "module": "ESNext",
         "allowUmdGlobalAccess": true,
         "moduleResolution": "node",
-        "resolveJsonModule": true, // Enable importing .json files
-        "allowJs": true, // Allow JavaScript files to be a part of your program.
-        "checkJs": false, // Enable error reporting in type-checked JavaScript files.
-        "esModuleInterop": true, // Emit additional JavaScript to ease support for importing CommonJS modules.
+        "resolveJsonModule": true,
+        "allowJs": true,
+        "checkJs": true,
+        "esModuleInterop": true,
         "strict": true,
         "baseUrl": "./",
         "jsx": "preserve",
         "paths": {
-            "Style": [
+            "@style": [
                 "src/style"
             ],
-            "Style/Global": [
+            "@style/main": [
                 "src/style/main"
             ],
-            "Component": [
+            "@component": [
                 "src/component"
             ],
-            "Component/*": [
+            "@component/*": [
                 "src/component/*"
             ],
-            "Page": [
+            "@page": [
                 "src/component/_page"
             ],
-            "Page/*": [
+            "@page/*": [
                 "src/component/_page/*"
             ],
-            "Store": [
+            "@store": [
                 "src/store"
             ],
-            "Store/*": [
+            "@store/*": [
                 "src/store/*"
             ],
-            "Util": [
+            "@util": [
                 "src/util/index"
             ],
-            "Util/*": [
+            "@util/*": [
                 "src/util/*"
             ],
-            "Media": [
+            "@media": [
                 "src/media"
             ],
-            "Media/*": [
+            "@media/*": [
                 "src/media/*"
+            ],
+            "@data": [
+                "data"
+            ],
+            "@data/*": [
+                "data/*"
             ]
         },
         "lib": [

@@ -1,4 +1,4 @@
-import { type Settings, Theme } from 'Store';
+import { type Settings, Theme } from '@store';
 
 /**
  * Applies settings to the HTML.

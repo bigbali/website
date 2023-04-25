@@ -1,13 +1,13 @@
 import { readFile } from 'fs/promises';
 import path from 'path';
 import {
-    GetStaticPropsContext,
-    PreviewData
+    type GetStaticPropsContext,
+    type PreviewData
 } from 'next';
-import Page from 'Page';
+import Page from '@page';
 import projects, {
     type ProjectProps
-} from 'data/projects';
+} from '@data/projects';
 
 export const getStaticPaths = async () => {
     return {

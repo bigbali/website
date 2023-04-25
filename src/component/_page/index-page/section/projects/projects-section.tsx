@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic';
 import {
     Status
 } from 'data/projects';
-import { useDevice } from 'Store';
+import { useDevice } from '@store';
 import './projects-section.style';
 
 const Filter = dynamic(() => import('./filter'), { ssr: false });

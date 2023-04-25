@@ -6,17 +6,17 @@ import {
 } from 'react';
 import { fromEvent, throttleTime } from 'rxjs';
 import Image from 'next/image';
-import { useDevice, useSettings } from 'Store';
-import Icon from 'Component/Icon';
-import Pattern from 'Component/Pattern';
-import Balazs from 'Media/webp/balazs.webp';
+import { useDevice, useSettings } from '@store';
+import Icon from '@component/icon';
+import Pattern from '@component/pattern';
+import Balazs from '@media/webp/balazs.webp';
 import './about-section.style';
 
 const MAX_ROTATION_DEG = 5;
 
 const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => {
-    const { isMobile } = useDevice();
-    const { fontSize } = useSettings();
+    const isMobile = useDevice(state => state.isMobile);
+    const fontSize = useSettings(state => state.fontSize);
     const imageRef = useRef<HTMLDivElement>(null);
     const figureRef = useRef<HTMLElement>(null);
     const anchorRef = useRef<HTMLAnchorElement>(null);

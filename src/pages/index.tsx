@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Page from 'Page';
+import Page from '@page';
 
 const Index = () => {
     return (

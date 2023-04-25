@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { isClient } from 'Util';
+import { isClient } from '@util';
 
 export enum Theme {
     DARK = 'dark',

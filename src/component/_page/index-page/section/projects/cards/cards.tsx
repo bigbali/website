@@ -12,8 +12,8 @@ import projects, {
     type Project,
     Status
 } from 'data/projects';
-import { ScrollAnimationObserver, scrollIntoView } from 'Util';
-import ProjectCard from 'Component/ProjectCard';
+import { ScrollAnimationObserver, scrollIntoView } from '@util';
+import ProjectCard from '@component/project-card';
 import './cards.style';
 
 const filterStatus = (project: Project, status: Status) => status === Status.ANY

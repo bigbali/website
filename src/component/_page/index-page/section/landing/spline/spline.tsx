@@ -9,12 +9,12 @@ import {
 import { type SPEObject } from '@splinetool/react-spline';
 import { type Application as SplineApplication } from '@splinetool/runtime';
 import Image from 'next/image';
-import { Theme, useSettings } from 'Store';
+import { Theme, useSettings } from '@store';
 
-import img__spline_light_mobile from 'Media/webp/spline-light-mobile.webp';
-import img__spline_dark_mobile from 'Media/webp/spline-dark-mobile.webp';
-import img__spline_light_desktop from 'Media/webp/spline-light-desktop.webp';
-import img__spline_dark_desktop from 'Media/webp/spline-dark-desktop.webp';
+import img__spline_light_mobile from '@media/webp/spline-light-mobile.webp';
+import img__spline_dark_mobile from '@media/webp/spline-dark-mobile.webp';
+import img__spline_light_desktop from '@media/webp/spline-light-desktop.webp';
+import img__spline_dark_desktop from '@media/webp/spline-dark-desktop.webp';
 
 type CustomSplineProps = {
     isSplineLoaded: boolean,

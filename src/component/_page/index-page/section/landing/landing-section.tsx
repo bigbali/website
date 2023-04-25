@@ -16,7 +16,7 @@ import {
     throttleTime
 } from 'rxjs';
 import dynamic from 'next/dynamic';
-import { useDevice } from 'Store';
+import { useDevice } from '@store';
 import './landing-section.style';
 
 const CustomSpline = dynamic(() => import('./spline'), { ssr: false });
@@ -138,8 +138,14 @@ const Landing = ({ isSplineLoaded, setSplineLoaded, refFromParent }: LandingProp
                 </h2>
                 <p className='landing-initial-state'>
                     I bring your imagination to life
-                    by crafting applications with beautiful user interfaces
-                    and intuitive user experiences in mind.
+                    by crafting applications with
+                    <span className='highlight'>
+                        &nbsp;beautiful user interfaces&nbsp;
+                    </span>
+                    and
+                    <span className='highlight'>
+                        &nbsp;intuitive user experience in mind.
+                    </span>
                 </p>
             </div>
             <div elem='Spline' mods={{ IS_BACKUP: useBackup, IS_LOADING: !isSplineLoaded }}>
