@@ -85,7 +85,6 @@ const projects = [
             hash: 'WYQcn}_3M_M{%MRPNGxuaxRks:WB~pD%ozxtRPoz%2M{a}t7R*oM'
         },
         github: 'https://github.com/bigbali/website',
-        stackblitz: 'https://stackblitz.com/edit/balazs-burjan-com?file=README.md',
         slug: 'balazs-burjan'
     },
     {
