@@ -7,10 +7,7 @@ const nextConfig = {
     sassOptions: {
         additionalData: (content) => {
             // put something in here and all .scss files will have it
-            const importAutomatically = [
-                '@import "src/style/mixin.scss";',
-                '@import "src/style/function.scss";',
-            ];
+            const importAutomatically = ['@import "src/style/mixin.scss";', '@import "src/style/function.scss";'];
 
             return importAutomatically.join('').concat(content);
         }
@@ -21,6 +18,6 @@ const nextConfig = {
 
         return config;
     }
-}
+};
 
 module.exports = nextConfig;

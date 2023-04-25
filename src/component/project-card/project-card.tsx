@@ -60,12 +60,12 @@ const ProjectCard = ({
                         ))}
                     </div>
                     <div elem='Anchors'>
-                        {!!github && (
+                        {!!stackblitz && (
                             <a href={stackblitz} target='_blank' rel="noopener noreferrer" title='Go to StackBlitz page'>
                                 <Icon.Stackblitz />
                             </a>
                         )}
-                        {!!stackblitz && (
+                        {!!github && (
                             <a href={github} target='_blank' rel="noopener noreferrer" title='Go to GitHub page'>
                                 <Icon.GitHub />
                             </a>

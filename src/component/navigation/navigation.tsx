@@ -26,7 +26,8 @@ const Navigation = ({ isMobile }: NavigationProps) => {
     const currentSection = useSection(state => state.currentSection);
     const setScrollToSectionId = useSection(state => state.setScrollToSectionId);
 
-    const { asPath, push } = useRouter();
+    // FIXME should replace all asPath with pathname
+    const { pathname: asPath, push } = useRouter();
     const previousSectionRef = useRef<SectionID>();
 
     const onNavigationItemClick = useCallback((e: GenericMouseEvent<HTMLAnchorElement, MouseEvent>, section: SectionID) => {
