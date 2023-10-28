@@ -147,6 +147,9 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                             <li>
                                 WPF .NET
                             </li>
+                            <li>
+                                Rust
+                            </li>
                         </ul>
                     </section>
                     <section elem='Content-Hobbies' className='animate-on-scroll'>

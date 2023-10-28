@@ -9,10 +9,6 @@ const Header = dynamic(() => import('@component/header'), {
     ssr: false
 });
 
-const Cookies = dynamic(() => import('@component/cookies'), {
-    ssr: false
-});
-
 const Notifications = dynamic(() => import('@component/notifications'), {
     ssr: false
 });
@@ -25,7 +21,6 @@ const Layout = forwardRef<HTMLElement, PropsWithChildren>(({ children }, ref) =>
                 {children}
             </main>
             <Footer />
-            <Cookies />
             <Notifications />
         </>
     );

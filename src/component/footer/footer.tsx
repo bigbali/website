@@ -1,19 +1,15 @@
-import Link from 'next/link';
 import './footer.style.scss';
 
 const Footer = () => {
     return (
         <div block='Footer'>
             <span elem='By'>
-                Designed & Built by Balázs Burján,
+                designed and built by Balázs Burján,
                 <span>
-                    {process.env.NEXT_PUBLIC_VERSION}
+                    version {process.env.NEXT_PUBLIC_VERSION}
                 </span>
             </span>
             <nav elem='Navigation'>
-                <Link href='/cookie-policy' scroll={false}>
-                    Cookie Policy
-                </Link>
             </nav>
             <span elem='Date'>
                 {(new Date).getFullYear()}
