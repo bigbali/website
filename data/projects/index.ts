@@ -8,17 +8,13 @@ import image__eshop from '@media/webp/eshop.webp';
 import image__tankstats from '@media/webp/tankstats.webp';
 import { StaticImageData } from 'next/image';
 
-export enum Status {
-    FINISHED = 'Finished',
-    IN_PROGRESS = 'In Progress',
-    PAUSED = 'Paused',
-    ANY = 'Any'
-};
-
 export enum Tag {
     JS = 'JavaScript',
     TS = 'TypeScript',
-    REACT = 'React',
+    REACT = 'React.js',
+    SVELTE = 'Svelte',
+    SVELTEKIT = 'SvelteKit',
+    TW = 'Tailwind',
     NEXT = 'Next.js',
     BABEL = 'Babel',
     GUN = 'Gun.js',
@@ -47,12 +43,10 @@ export enum Weight {
 export type Project = {
     title: string,
     description: string,
-    status: Status,
     weight: number,
     tags: Tag[],
     page?: string,
     github?: string,
-    stackblitz?: string,
     slug: string,
     thumbnail: {
         image: StaticImageData,
@@ -66,12 +60,26 @@ export type ProjectProps = {
     slug: string
 };
 
-const projects = [
+export const projects = [
     {
-        title: 'balazsburjan.com',
-        description: `The site you are currently browsing. It's built with React and Next.js, using my own React Template
-                      project as a foundation. It's hosted on Vercel.`,
-        status: Status.FINISHED,
+        title: 'Photos',
+        description: `An outlet through which my family can browse and download photos.`,
+        weight: Weight.HIGH,
+        tags: [
+            Tag.TS,
+            Tag.SVELTEKIT,
+            Tag.TW
+        ],
+        slug: 'photos',
+        thumbnail: {
+            image: '' as unknown as StaticImageData,
+            hash: ''
+        },
+
+    },
+    {
+        title: 'Messages',
+        description: `An app using t`,
         weight: Weight.HIGH,
         tags: [
             Tag.JS,
@@ -92,7 +100,6 @@ const projects = [
         description: `A custom-built template that eases the setup of a new project
                       by having some features already implemented, such as routing,
                       components, Redux, a system for styles, custom hooks, etc.`,
-        status: Status.IN_PROGRESS,
         weight: Weight.HIGH,
         tags: [
             Tag.JS,
@@ -110,7 +117,6 @@ const projects = [
     {
         title: 'Babel Plugin',
         description: 'A plugin for the Babel JavaScript transpiler for JSX-to-JSX transformations.',
-        status: Status.IN_PROGRESS,
         weight: Weight.HIGH,
         tags: [
             Tag.JS,
@@ -130,7 +136,6 @@ const projects = [
         description: `A desktop application to allow batch downloading of music videos from YouTube.
                       It exists because I decided that there are more efficient ways of doing things
                     than typing long and complex commands into a terminal.`,
-        status: Status.FINISHED,
         weight: Weight.HIGH,
         tags: [
             Tag.CSHARP,
@@ -147,7 +152,6 @@ const projects = [
     {
         title: 'Stardust Dark VS Code Theme',
         description: 'A dark theme for Visual Studio Code that is published to the Visual Studio Marketplace.',
-        status: Status.FINISHED,
         weight: Weight.HIGH,
         tags: [
             Tag.JS
@@ -165,7 +169,6 @@ const projects = [
         description: `A place where my family could see my photos, but mostly the ones taken at family events.
                       It was built with Django and was hosted on Heroku's Free Tier dyno until it was discontinued.
                       It stored all static content on Amazon's S3 service.`,
-        status: Status.FINISHED,
         weight: Weight.MEDIUM,
         tags: [
             Tag.PYTHON,
@@ -183,7 +186,6 @@ const projects = [
         title: 'eShop',
         description: `My final project for Harvard University's CS50 course. It's an e-commerce application
                       built with Flask and MySQL.`,
-        status: Status.FINISHED,
         weight: Weight.MEDIUM,
         tags: [
             Tag.PYTHON,
@@ -205,7 +207,6 @@ const projects = [
                       in the future I intend to build it from scratch with my updated knowledge.
                       It includes decentralized, encrypted strategic maps, OpenID authentication, and basic
                       statistics.`,
-        status: Status.PAUSED,
         weight: Weight.MEDIUM,
         tags: [
             Tag.REACT,
@@ -225,6 +226,6 @@ const projects = [
         github: 'https://github.com/bigbali/tankstats-frontend',
         slug: 'tankstats'
     }
-];
+] satisfies Project[];
 
 export default projects;

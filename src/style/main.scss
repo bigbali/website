@@ -173,6 +173,10 @@ body {
     }
 }
 
+a {
+    text-decoration: none;
+}
+
 main {
     &.Page {
         &.cross-page_enter-active {
@@ -212,24 +216,23 @@ button {
 
 .animate-on-scroll {
     @include not-prefers-reduced-motion {
-        opacity: 0;
-        translate: -5rem 0;
-        scale: 0.9;
-        transition: opacity 0.15s,
-            translate 0.15s,
-            scale 0.15s,
-            filter 0.15s;
+        &:not(.animation-finished) {
+            opacity: 0;
+            translate: -5rem 0;
+            scale: 0.9;
+
+            transition: 
+                opacity 0.15s,
+                translate 0.15s,
+                scale 0.15s,
+                filter 0.15s;
+            transition-delay: 0.35s;
+        }
 
         &.begin-animation {
             opacity: 1;
             translate: 0 0;
             scale: 1;
-        }
-
-        @for $i from 1 through 10 {
-            &:nth-child(#{$i}) {
-                transition-delay: $i * 80ms;
-            }
         }
     }
 }

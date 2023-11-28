@@ -43,32 +43,4 @@
             }
         }
     }
-
-    &-Date {
-        text-align: end;
-    }
-
-    &-Navigation {
-        display: flex;
-        justify-content: center;
-        flex: 1;
-        gap: 1.5rem;
-
-        @include mobile {
-            flex: none;
-            height: fit-content;
-        }
-
-        >a {
-            transition: color 0.2s;
-
-            @include desktop {
-                text-decoration: none;
-            }
-
-            &:hover {
-                color: var(--color-theme);
-            }
-        }
-    }
 }

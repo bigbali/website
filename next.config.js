@@ -1,9 +1,9 @@
-const { patchWebpackConfig } = require('next-global-css');
+import { patchWebpackConfig } from 'next-global-css';
 
 /**
  * @type {import('next').NextConfig}
  */
-const nextConfig = {
+export default {
     sassOptions: {
         additionalData: (content) => {
             // put something in here and all .scss files will have it
@@ -19,5 +19,3 @@ const nextConfig = {
         return config;
     }
 };
-
-module.exports = nextConfig;

@@ -8,7 +8,7 @@ import { isClient } from './environment';
 export const scrollIntoView = (section: RefObject<HTMLElement>) => {
     // 10rem represented as integer
     const topOffset = Number.parseInt(getComputedStyle(document.body).fontSize.replace('px', '')) * 10;
-    const sectionOffset = section.current?.offsetTop || 0;
+    const sectionOffset = section.current?.offsetTop ?? 0;
     window.scrollTo({
         top: sectionOffset - topOffset,
         behavior: 'smooth'
@@ -54,14 +54,15 @@ export class ScrollObserver implements Observer {
 const scrollAnimationCallback: ScrollObserverCallback = (elements, observer) => {
     elements.forEach(element => {
         if (element.target.getAnimations().length === 0 && element.isIntersecting) {
-            element.target.classList.add('begin-animation');
-
-            setTimeout(() => {
+            const animationEnd = () => {
                 element.target.classList.add('animation-finished');
-            }, 350);
+                element.target.removeEventListener('transitionend', animationEnd);
 
-            // after an element has been animated in, we don't need to watch it any more
-            observer.delete(element.target as HTMLElement);
+                observer.delete(element.target as HTMLElement);
+            };
+
+            element.target.classList.add('begin-animation');
+            element.target.addEventListener('transitionend', animationEnd);
         }
     });
 };

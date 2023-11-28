@@ -1,44 +1,28 @@
 import {
-    useEffect,
     useRef,
     useState
 } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Project } from 'data/projects';
-import { ScrollAnimationObserver } from '@util';
+import type { Project } from 'data/projects';
 import Icon from '@component/icon';
 import './project-card.style';
-
-type ProjectCardProps = Project & {
-    applyScrollAnimation?: boolean
-};
 
 const ProjectCard = ({
     title,
     description,
     thumbnail,
     github,
-    stackblitz,
     slug,
-    page,
     tags,
-    status,
-    applyScrollAnimation
-}: ProjectCardProps) => {
+}: Project) => {
     const [isReady, setIsReady] = useState(false);
     const ref = useRef<HTMLElement>(null);
-
-    useEffect(() => {
-        if (ref.current && applyScrollAnimation) {
-            ScrollAnimationObserver?.add(ref.current);
-        }
-    }, [applyScrollAnimation]);
 
     return (
         <article
             block='ProjectCard'
-            className={applyScrollAnimation ? ' animate-on-scroll' : ''}
+            className='animate-on-scroll'
             ref={ref}
             mods={{
                 LOADED: isReady
@@ -60,34 +44,23 @@ const ProjectCard = ({
                         ))}
                     </div>
                     <div elem='Anchors'>
-                        {!!stackblitz && (
-                            <a href={stackblitz} target='_blank' rel="noopener noreferrer" title='Go to StackBlitz page'>
-                                <Icon.Stackblitz />
-                            </a>
-                        )}
                         {!!github && (
                             <a href={github} target='_blank' rel="noopener noreferrer" title='Go to GitHub page'>
                                 <Icon.GitHub />
+                                GitHub
                             </a>
                         )}
-                        {!!slug && (
-                            <Link href={`project/${slug}`} rel='bookmark' title='Go to project details'>
-                                <Icon.File />
-                            </Link>
-                        )}
-                        {!!page && (
-                            <a href={page} target='_blank' rel="noopener noreferrer" title='Go to external page'>
-                                <Icon.Anchor />
-                            </a>
-                        )}
+                        <Link href={`project/${slug}`} rel='bookmark' title='Go to project details'>
+                            <Icon.File />
+                            Go to project page
+                        </Link>
                     </div>
-                </div>
-                <div elem='Status'>
-                    {status}
                 </div>
             </div>
             <div elem='Thumbnail'>
-                <Image src={thumbnail.image} alt={title} placeholder='blur' onLoad={() => setIsReady(true)} />
+                <Link href={'/projects/' + slug}>
+                    <Image src={thumbnail.image} alt={title} placeholder='blur' onLoad={() => setIsReady(true)} />
+                </Link>
             </div>
         </article>
     );

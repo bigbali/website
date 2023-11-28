@@ -87,7 +87,7 @@ export const IndexPage = () => {
         void (async () => {
             await fontsReady();
             onFontsLoaded();
-            console.log('Fonts are ready.', `${Math.round(performance.now())}ms`);
+            console.log('Fonts are ready in', `${Math.round(performance.now())}ms.`);
         })();
 
         const timeout = setTimeout(() => {
@@ -102,43 +102,11 @@ export const IndexPage = () => {
 
     return (
         <div block='IndexPage'>
-            <TransitionGroup component={null}>
-                {(!areFontsLoaded || !isSplineLoaded) && (
-                    <Transition
-                        timeout={500}
-                        unmountOnExit
-                        onExited={onTransitionExited}
-                        classNames='IndexPage-Loading'
-                    >
-                        <div block='IndexPage' elem='Loading'>
-                            <div elem='Loading-Logo'>
-                                <Icon.BB />
-                            </div>
-                            {/* fonts will be loaded by the time JavaScript is run, but better safe than sorry */}
-                            {!areFontsLoaded || !isSplineLoaded && (
-                                <div className='loader'>
-                                    {!areFontsLoaded && (
-                                        <span>
-                                            Loading fonts
-                                            <Icon.Loader />
-                                        </span>
-                                    )}
-                                    {!isSplineLoaded && isDesktop && (
-                                        <span>
-                                            Loading 3D animation
-                                            <Icon.Loader />
-                                        </span>
-                                    )}
-                                </div>
-                            )}
-                        </div>
-                    </Transition>
-                )}
-            </TransitionGroup>
+
             <Section.Landing
                 isSplineLoaded={isSplineLoaded}
                 setSplineLoaded={setSplineLoaded}
-                loadingRef={loadingRef}
+                // loadingRef={loadingRef}
                 refFromParent={landingRef}
             />
             <Section.Projects refFromParent={projectsRef} />

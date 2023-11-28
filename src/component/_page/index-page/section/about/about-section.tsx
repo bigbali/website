@@ -11,6 +11,7 @@ import Icon from '@component/icon';
 import Pattern from '@component/pattern';
 import Balazs from '@media/webp/balazs.webp';
 import './about-section.style';
+import Link from 'next/link';
 
 const MAX_ROTATION_DEG = 5;
 
@@ -67,7 +68,8 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
             <div elem="Content">
                 <div>
                     <p className='animate-on-scroll'>
-                        I am a software developer who is always eager to learn something new and finds joy in creating stuff.
+                        I am a software developer who finds joy in self-improvement and in crafting high quality software with clean code,
+                        great user experience and visually stunning user interfaces.
                     </p>
                     <section elem='Content-Beginning' className='animate-on-scroll'>
                         <h1>
@@ -75,10 +77,9 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                         </h1>
                         <p>
                             I introduced myself to the art of computer science in 2016
-                            when I took an interest in making games with Unity,
-                            and not long after I started writing a desktop
-                            networking tool using C# and the .NET Framework.
-                            Soon after, I built a simple web application with ASP.NET which I hosted on my own computer.
+                            when I took an interest in making games with Unity.
+                            Soon after, I made a networking tool using C# and the .NET Framework,
+                            then I built a simple web application with ASP.NET that I hosted on my own computer.
                         </p>
                     </section>
                     <section elem='Content-Experience' className='animate-on-scroll'>
@@ -86,7 +87,7 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                             Experience
                         </h1>
                         <div>
-                            <div>
+                            {/* <div>
                                 React Developer
                             </div>
                             <a
@@ -101,11 +102,10 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                                 <span>2022-01</span>
                                 <span />
                                 <span>2022-03</span>
-                            </div>
+                            </div> */}
                         </div>
                         <p>
-                            As a self-taught software developer, I've accumulated most of my knowledge by relentlessly
-                            tinkering with projects since 2016.
+                            I've been constantly working on projects since 2016.
                             Additionally, I have taken Harvard University's CS50 and CS50's Web Programming courses.
                         </p>
                     </section>
@@ -121,19 +121,13 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                                 TypeScript
                             </li>
                             <li>
-                                JavaScript
-                            </li>
-                            <li>
-                                React
-                            </li>
-                            <li>
-                                Next
+                                React & Next.js
                             </li>
                             <li>
                                 Babel
                             </li>
                             <li>
-                                Node
+                                Node.js
                             </li>
                             <li>
                                 SASS
@@ -145,10 +139,13 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                                 C#
                             </li>
                             <li>
-                                WPF .NET
+                                .NET & WPF
                             </li>
                             <li>
                                 Rust
+                            </li>
+                            <li>
+                                Svelte & SvelteKit
                             </li>
                         </ul>
                     </section>
@@ -156,9 +153,6 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                         <h1>
                             Hobbies
                         </h1>
-                        <p>
-                            I spend my spare time on:
-                        </p>
                         <ul>
                             <li>
                                 programming
@@ -167,13 +161,7 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                                 photography
                             </li>
                             <li>
-                                video games
-                            </li>
-                            <li>
                                 gardening
-                            </li>
-                            <li>
-                                animals
                             </li>
                         </ul>
                     </section>

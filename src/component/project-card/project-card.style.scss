@@ -2,24 +2,9 @@
     position: relative;
     display: flex;
     margin-block-end: 3rem;
-    background: var(--color-background-primary);
-    box-shadow: 8px 8px 32px #dddddd,
-        -8px -8px 32px #ffffff;
-    border: 1px solid var(--color-border-transparent);
-    border-radius: 0.5rem;
-    transition: scale 0.5s;
-
-    &.begin-animation:not(.animation-finished) {
-        transition: opacity 0.3s,
-            translate 0.3s,
-            scale 0.3s,
-            filter 0.3s;
-    }
-
-    @include theme-dark(&) {
-        box-shadow: 8px 8px 32px black,
-            -8px -8px 32px #1f1f1f;
-    }
+    border: 1px solid transparent;
+    border-radius: 16px;
+    transition: scale 0.25s, background-color 0.25s;
 
     @include mobile {
         flex-direction: column;
@@ -28,18 +13,19 @@
     &:hover {
         scale: 1.01;
         z-index: 3;
+        border: 1px solid var(--color-border-transparent);
+        background-color: rgba(0, 0, 0, 0.05)
     }
 
     &:nth-child(2n) {
         @include desktop {
             flex-direction: row-reverse;
-            border-radius: 0.5rem;
         }
 
         .ProjectCard {
             &-Details {
                 @include desktop {
-                    >h3 {
+                    >h1 {
                         text-align: end;
                     }
 
@@ -47,41 +33,14 @@
                         margin-inline-start: -5rem;
                         margin-inline-end: 0;
                         text-align: end;
-                        border-radius: 0.5rem 0 0 0.5rem;
+                        border-radius: 8px 0 0 8px;
                     }
                 }
             }
 
-            &-TagsAndAnchors {
+            &-Anchors {
                 @include desktop {
-                    flex-direction: row-reverse;
-                }
-            }
-
-            &-Status {
-                @include desktop {
-                    inset-inline-start: 0.5rem;
-                    inset-inline-end: unset;
-                }
-            }
-
-            &-Thumbnail {
-                @include desktop {
-                    border-inline-start: unset;
-                    border-inline-end: 1px solid var(--color-border-transparent);
-
-                    >img {
-                        border-radius: 0.5rem 0 0 0.5rem;
-                    }
-                }
-
-                &:hover {
-                    @include desktop {
-                        >img {
-                            scale: 1.2;
-                            translate: -15% 0;
-                        }
-                    }
+                    justify-content: flex-end;
                 }
             }
         }
@@ -96,7 +55,7 @@
 
         >h1 {
             margin-block: 0;
-            padding: 1em;
+            padding: 1rem;
             font-size: 2rem;
             font-weight: 500;
 
@@ -111,11 +70,10 @@
             margin-inline-end: -5rem;
             margin-block: 0;
             padding: 1em;
-            min-height: 10rem;
             background-color: var(--color-background-secondary-dark-transparent-2);
             color: var(--color-white);
             backdrop-filter: blur(var(--blur-background));
-            border-radius: 0 0.5rem 0.5rem 0;
+            border-radius:0 8px 8px 0;
 
             @include mobile {
                 font-size: 1rem;
@@ -129,8 +87,10 @@
 
     &-TagsAndAnchors {
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         gap: 2rem;
+        height: 100%;
     }
 
     &-Tags {
@@ -139,8 +99,7 @@
         align-items: flex-start;
         column-gap: 1em;
         row-gap: 0.5em;
-        padding-block-start: 0.5rem;
-        padding-inline: 0.5rem;
+        padding: 1rem;
 
         @include mobile {
             column-gap: 0.5em;
@@ -150,8 +109,9 @@
             display: flex;
             align-items: center;
             padding-inline: 0.5rem;
+            padding-block: 0.25rem;
             font-size: 1.15rem;
-            border-radius: 0.25rem;
+            border-radius: 6px;
             background-color: var(--color-content-secondary-light);
             color: var(--color-content-primary-dark);
 
@@ -163,44 +123,29 @@
 
     &-Anchors {
         display: flex;
+        gap: 1rem;
+        padding: 1rem;
 
         .Icon {
             width: 3rem;
             height: 3rem;
         }
 
-        >a {
-            &:first-child:not(:last-child) {
-                >.Icon {
-                    padding-inline-end: 0.25rem;
-                }
+        > a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            &:hover {
+                color: var(--color-theme);
+                text-decoration: underline;
             }
 
-            &:last-child:not(:first-child) {
-                >.Icon {
-                    padding-inline-start: 0.25rem;
-                }
+            >.Icon {
+                padding: 0;
+                width: 2rem;
+                height: 2rem;
             }
-
-            &:not(:first-child):not(:last-child) {
-                >.Icon {
-                    padding-inline: 0.25rem;
-                }
-            }
-        }
-    }
-
-    &-Status {
-        margin-block-start: auto;
-        padding-inline: 0.5em;
-        padding-block-end: 0.5rem;
-        font-size: 1.15rem;
-        font-weight: 500;
-        color: var(--color-content-tertiary);
-
-        @include mobile {
-            font-size: 1rem;
-            margin-block-start: 0.5em;
         }
     }
 
@@ -212,28 +157,30 @@
         background-blend-mode: overlay;
         background-size: cover;
         background-position: 50%;
-        border-inline-start: 1px solid var(--color-border-transparent);
+        transition: scale 0.2s, filter 0.2s;
+        border: 1px solid var(--color-border-transparent);
+        border-radius: 16px;
+        overflow: hidden;
+        filter: grayscale(0.5);
 
         @include mobile {
             border-block-start: 1px solid var(--color-border);
         }
 
-        >img {
+        > a > img {
             position: absolute;
             z-index: 2;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0;
-            border-radius: 0 0.5em 0.5em 0;
-            transition: scale 0.2s, translate 0.2s, opacity 0.2s;
+            // opacity: 0;
 
             @include mobile {
                 border-radius: 0 0 0.5em 0.5em;
             }
         }
 
-        >canvas {
+        > canvas {
             position: absolute;
             inset: 0;
             width: 100%;
@@ -241,44 +188,35 @@
             z-index: 1;
         }
 
-
         &:hover {
-            >img {
-                scale: 1.2;
-                translate: 15% 0;
-
-                @include mobile {
-                    scale: 1.15;
-                    translate: 0 10%;
-                }
-            }
+            filter: grayscale(0);
         }
     }
 
-    &_LOADED {
-        .ProjectCard {
-            &-Thumbnail {
-                >img {
-                    opacity: 1;
-                }
+    // &_LOADED {
+    //     .ProjectCard {
+    //         &-Thumbnail {
+    //             > a > img {
+    //                 opacity: 1;
+    //             }
 
-                >canvas {
-                    animation-name: canvas-exit;
-                    animation-duration: 0.1s;
-                    animation-delay: 0.2s;
-                    animation-fill-mode: forwards;
-                }
-            }
-        }
-    }
+    //             > canvas {
+    //                 animation-name: canvas-exit;
+    //                 animation-duration: 0.1s;
+    //                 animation-delay: 0.2s;
+    //                 animation-fill-mode: forwards;
+    //             }
+    //         }
+    //     }
+    // }
 }
 
-@keyframes canvas-exit {
-    from {
-        opacity: 1;
-    }
+// @keyframes canvas-exit {
+//     from {
+//         opacity: 1;
+//     }
 
-    to {
-        opacity: 0;
-    }
-}
+//     to {
+//         opacity: 0;
+//     }
+// }
