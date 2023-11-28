@@ -29,7 +29,7 @@ type CustomSplineProps = {
 const SplineURL = {
     Dark: 'https://prod.spline.design/Orv626vNo2ELSt25/scene.splinecode',
     Light: 'https://prod.spline.design/oE1PXrOYS773cHVg/scene.splinecode',
-    Switchable: 'https://prod.spline.design/2oNTUNbzmdhEMPUo/scene.splinecode'
+    Switchable: '/scene.splinecode'
 };
 
 // we use scale of background plane's X axis to determine color of background as such data isn't exposed
