@@ -3,9 +3,7 @@ import './footer.style.scss';
 const Footer = () => {
     return (
         <div block='Footer'>
-            <span elem='By'>
-                designed and built by Balázs Burján
-            </span>
+            <span elem='By'>designed and built by Balázs Burján</span>
         </div>
     );
 };

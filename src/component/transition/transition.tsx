@@ -1,7 +1,10 @@
 import { CSSTransition } from 'react-transition-group';
 import { type CSSTransitionProps } from 'react-transition-group/CSSTransition';
 
-export const Transition = ({ classNames = 'element', ...props }: CSSTransitionProps) => {
+export const Transition = ({
+    classNames = 'element',
+    ...props
+}: CSSTransitionProps) => {
     const __classNames__ = (() => {
         if (typeof classNames === 'string') {
             return {
@@ -13,7 +16,7 @@ export const Transition = ({ classNames = 'element', ...props }: CSSTransitionPr
                 enterDone: `${classNames}_enter-done`,
                 exit: `${classNames}_exit`,
                 exitActive: `${classNames}_exit-active`,
-                exitDone: `${classNames}_exit-done`,
+                exitDone: `${classNames}_exit-done`
             };
         }
 
@@ -24,7 +27,7 @@ export const Transition = ({ classNames = 'element', ...props }: CSSTransitionPr
 
     return (
         <CSSTransition
-            {...props as CSSTransitionProps}
+            {...(props as CSSTransitionProps)}
             classNames={__classNames__}
         />
     );

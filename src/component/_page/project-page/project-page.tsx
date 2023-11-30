@@ -1,48 +1,38 @@
-import { ReactNode, useEffect, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-import Image from 'next/image';
 import Head from 'next/head';
-import Link from 'next/link';
-import { useDevice } from '@store';
-import projects, { type ProjectProps } from '@data/projects';
+import Image from 'next/image';
+import { type ProjectProps } from '@data/projects';
 import Icon from '@component/icon';
 import './project-page.style';
 
-import page__sdl from './project/sdl';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
-const Page = {
-    'sdl': page__sdl
+const page = {
+    'youtube-video-downloader': dynamic(() => import('./project/youtube-video-downloader'))
 };
 
-export const ProjectPage = ({ project, slug }: ProjectProps) => {
-    const isMobile = useDevice(state => state.isMobile);
-    const [isMobileState, setIsMobileState] = useState(false);
+const Back = () => (
+    <div block='ProjectPage' elem='Back'>
+        <a href='/' title='Back'>
+            <Icon.Chevron />
+            Back
+        </a>
+    </div>
+);
 
-    // Use mobile layout only after desktop layout has been mounted
-    // to prevent hydration mismatch error
-    useEffect(() => {
-        setIsMobileState(!!isMobile);
-    }, [isMobile]);
+export const ProjectPage = ({ project, slug }: ProjectProps) => {
+    const Content = page[slug as keyof typeof page];
 
     if (!project) {
         return (
             <>
                 <Head>
-                    <title>
-                        {`Not found: ${slug}`}
-                    </title>
+                    <title>{`Not found: ${slug}`}</title>
                 </Head>
                 <div block='ProjectPage'>
-                    <div elem='Back'>
-                        <a href='/' title='Back to Home Page'>
-                            <Icon.Chevron />
-                            BACK TO HOME
-                        </a>
-                    </div>
-                    <div elem='NotFound'>
-                        <p>
-                            I couldn't find this project :(
-                        </p>
+                    <Back />
+                    <div block='ProjectPage' elem='NotFound'>
+                        <p>I couldn't find this project :(</p>
                     </div>
                 </div>
             </>
@@ -50,17 +40,38 @@ export const ProjectPage = ({ project, slug }: ProjectProps) => {
     }
 
     return (
-        <div block='ProjectPage'>
-            <div elem='Back'>
-                <Link href='/' title='Back to Home Page'>
-                    <Icon.Chevron />
-                    BACK TO HOME
-                </Link>
+        <>
+            <Head>
+                <title>{`Project: ${project.title}`}</title>
+            </Head>
+            <div block='ProjectPage'>
+                <Back />
+                <div elem='Content'>
+                    <section className='Row0'>
+                        <h1>Simple YouTube Video Downloader</h1>
+                        {!!project.github && (
+                            <Link
+                                href={project.github}
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                title='Go to GitHub page'
+                                className='GitHub'
+                            >
+                                <Icon.GitHub />
+                                GitHub
+                            </Link>
+                        )}
+                        <Image
+                            alt='Simple YouTube Video Downloader'
+                            src={project.thumbnail.quality}
+                            placeholder='blur'
+                            priority
+                        />
+                    </section>
+                    <Content />
+                </div>
             </div>
-            <div elem='Content'>
-                {Page[slug as keyof typeof Page]()}
-            </div>
-        </div>
+        </>
     );
 };
 

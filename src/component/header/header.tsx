@@ -5,8 +5,8 @@ import Link from 'next/link';
 import './header.style';
 
 export const Header = () => {
-    const isDesktop = useDevice(state => state.isDesktop);
-    const isMobile = useDevice(state => state.isMobile);
+    const isDesktop = useDevice((state) => state.isDesktop);
+    const isMobile = useDevice((state) => state.isMobile);
 
     return (
         <div block='Header'>

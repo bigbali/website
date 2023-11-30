@@ -1,11 +1,4 @@
-import {
-    lazy,
-    memo,
-    Suspense,
-    useEffect,
-    useMemo,
-    useState
-} from 'react';
+import { lazy, memo, Suspense, useEffect, useMemo, useState } from 'react';
 import type { SPEObject } from '@splinetool/react-spline';
 import type { Application } from '@splinetool/runtime';
 import { type Application as SplineApplication } from '@splinetool/runtime';
@@ -21,10 +14,10 @@ import img__spline_light_desktop from '@media/webp/spline-light-desktop.webp';
 import img__spline_dark_desktop from '@media/webp/spline-dark-desktop.webp';
 
 type Spline = {
-    app: Application | null,
-    group: SPEObject | null,
-    background: SPEObject | null,
-    canvas: HTMLCanvasElement | null
+    app: Application | null;
+    group: SPEObject | null;
+    background: SPEObject | null;
+    canvas: HTMLCanvasElement | null;
 };
 
 const spline: Spline = {
@@ -39,12 +32,12 @@ const translate = (e: MouseEvent) => {
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
 
-    const x = (e.clientX - windowWidth / 2) / 100 * -1;
-    const y = (e.clientY - windowHeight / 2) / 100 * -1;
+    const x = ((e.clientX - windowWidth / 2) / 100) * -1;
+    const y = ((e.clientY - windowHeight / 2) / 100) * -1;
     spline.canvas!.style.translate = `${x * -4}px ${y * -4}px`;
 
-    spline.group!.rotation.y = (x * 0.01);
-    spline.group!.rotation.x = (y * 0.01);
+    spline.group!.rotation.y = x * 0.01;
+    spline.group!.rotation.x = y * 0.01;
 };
 
 let event: Subscription;
@@ -63,11 +56,9 @@ const load = (app: SplineApplication) => {
     updateSplineBackgroundColor(true);
 
     setTimeout(() => {
-        event = fromEvent(
-            document,
-            'mousemove'
-        )
-            .pipe( // 60 Hz => 16ms [30 Hz => 32ms]
+        event = fromEvent(document, 'mousemove')
+            .pipe(
+                // 60 Hz => 16ms [30 Hz => 32ms]
                 throttleTime(32)
             )
             .subscribe((e: Event) => translate(e as MouseEvent));
@@ -79,7 +70,6 @@ const load = (app: SplineApplication) => {
         }
     };
 };
-
 
 // we use scale of background plane's X axis to determine color of background as such data isn't exposed
 // (scale is switched within Spline)
@@ -110,20 +100,30 @@ const updateSplineBackgroundColor = (instant = false) => {
 
     if (!spline.app) return;
 
-    if (instant && spline.background!.scale.x === SplineBackgroundScaleX.DARK && theme === Theme.LIGHT) {
+    if (
+        instant &&
+        spline.background!.scale.x === SplineBackgroundScaleX.DARK &&
+        theme === Theme.LIGHT
+    ) {
         spline.app.emitEvent('mouseDown', 'Background');
-    } else if (spline.background!.scale.x === SplineBackgroundScaleX.DARK && theme === Theme.LIGHT) {
+    } else if (
+        spline.background!.scale.x === SplineBackgroundScaleX.DARK &&
+        theme === Theme.LIGHT
+    ) {
         spline.app.emitEvent('mouseUp', 'Background');
     }
 
-    if (spline.background!.scale.x === SplineBackgroundScaleX.LIGHT && theme === Theme.DARK) {
+    if (
+        spline.background!.scale.x === SplineBackgroundScaleX.LIGHT &&
+        theme === Theme.DARK
+    ) {
         spline.app.emitEventReverse('mouseUp', 'Background');
     }
 };
 
 const CustomSpline = () => {
-    const theme = useSettings(store => store.theme);
-    const desktop = useDevice(store => store.isDesktop);
+    const theme = useSettings((store) => store.theme);
+    const desktop = useDevice((store) => store.isDesktop);
     const [fallback, setFallback] = useState(false);
 
     loaded = false;
@@ -131,7 +131,7 @@ const CustomSpline = () => {
     useEffect(() => {
         updateSplineBackgroundColor();
 
-        const timeout = setTimeout(() => (setFallback(loaded)), TIMEOUT);
+        const timeout = setTimeout(() => setFallback(loaded), TIMEOUT);
 
         return () => clearTimeout(timeout);
     }, [theme]);
@@ -142,6 +142,13 @@ const CustomSpline = () => {
             // causing it to be dropped and throwing a console error.
             // Also, without Suspense we get render loop for a few seconds.
             const Spline = lazy(() => import('@splinetool/react-spline'));
+            // const Spline = lazy(() => import('@splinetool/react-spline').then((module) => {
+            //     return new Promise((resolve) => {
+            //         setTimeout(() => {
+            //             resolve(module as any);
+            //         }, 10000);
+            //     });
+            // }));
 
             return (
                 <Suspense fallback={<Fallback />}>

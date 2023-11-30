@@ -8,17 +8,17 @@ export enum SectionID {
     PROJECTS = 'Projects',
     ABOUT = 'About',
     CONTACT = 'Contact'
-};
+}
 
 interface Section {
-    currentSection: HTMLElement | null,
-    scrollToSectionId: string | null
-};
+    currentSection: HTMLElement | null;
+    scrollToSectionId: string | null;
+}
 
 interface SectionStore extends Section {
-    setCurrentSection: (section: HTMLElement | null) => void,
-    setScrollToSectionId: (section: string | null) => void
-};
+    setCurrentSection: (section: HTMLElement | null) => void;
+    setScrollToSectionId: (section: string | null) => void;
+}
 
 export const useSection = create<SectionStore>((set) => ({
     currentSection: null,
@@ -28,5 +28,5 @@ export const useSection = create<SectionStore>((set) => ({
     },
     setScrollToSectionId: (scrollToSectionId) => {
         set(() => ({ scrollToSectionId }));
-    },
+    }
 }));

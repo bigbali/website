@@ -5,12 +5,12 @@ export enum Orientation {
     LEFT = 'LEFT',
     RIGHT = 'RIGHT',
     ABOVE = 'ABOVE',
-    BELOW = 'BELOW',
+    BELOW = 'BELOW'
 }
 
 type HelpProps = {
-    content: string,
-    orientation?: Orientation
+    content: string;
+    orientation?: Orientation;
 };
 
 export const Help = ({ content, orientation }: HelpProps) => {
@@ -18,7 +18,9 @@ export const Help = ({ content, orientation }: HelpProps) => {
         <div block='Help'>
             <div
                 elem='Content'
-                mods={(prefix: string) => `${prefix}${orientation || Orientation.ABOVE}`}
+                mods={(prefix: string) =>
+                    `${prefix}${orientation || Orientation.ABOVE}`
+                }
                 dangerouslySetInnerHTML={{ __html: content }}
             />
             <Icon.Help />

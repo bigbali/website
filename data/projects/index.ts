@@ -6,7 +6,7 @@ import image__stardust_dark from '@media/webp/stardust-dark.webp';
 import image__family_photos from '@media/webp/family-photos.webp';
 import image__eshop from '@media/webp/eshop.webp';
 import image__tankstats from '@media/webp/tankstats.webp';
-import { StaticImageData } from 'next/image';
+import type { StaticImageData } from 'next/image';
 
 export enum Tag {
     JS = 'JavaScript',
@@ -32,13 +32,13 @@ export enum Tag {
     HEROKU = 'Heroku',
     AWS_RDS = 'Amazon RDS',
     AWS_S3 = 'Amazon S3',
-};
+}
 
 export enum Weight {
     HIGH = 1,
     MEDIUM = 2,
     LOW = 3
-};
+}
 
 export type Project = {
     title: string,
@@ -50,62 +50,25 @@ export type Project = {
     slug: string,
     thumbnail: {
         image: StaticImageData,
-        hash: string
+        hash: string,
+        quality: StaticImageData
     }
 };
 
 export type ProjectProps = {
     project: Project,
-    markdown: string,
     slug: string
 };
 
 export const projects = [
     {
-        title: 'Photos',
-        description: `An outlet through which my family can browse and download photos.`,
+        title: 'Algorithm Visualizer',
+        description: 'An app that aims to visualize how pathfinding algorithms work.',
         weight: Weight.HIGH,
         tags: [
             Tag.TS,
-            Tag.SVELTEKIT,
-            Tag.TW
-        ],
-        slug: 'photos',
-        thumbnail: {
-            image: '' as unknown as StaticImageData,
-            hash: ''
-        },
-
-    },
-    {
-        title: 'Messages',
-        description: `An app using t`,
-        weight: Weight.HIGH,
-        tags: [
-            Tag.JS,
-            Tag.TS,
-            Tag.REACT,
             Tag.NEXT,
-            Tag.SASS
-        ],
-        thumbnail: {
-            image: image__balazsburjan,
-            hash: 'WYQcn}_3M_M{%MRPNGxuaxRks:WB~pD%ozxtRPoz%2M{a}t7R*oM'
-        },
-        github: 'https://github.com/bigbali/website',
-        slug: 'balazs-burjan'
-    },
-    {
-        title: 'React Template',
-        description: `A custom-built template that eases the setup of a new project
-                      by having some features already implemented, such as routing,
-                      components, Redux, a system for styles, custom hooks, etc.`,
-        weight: Weight.HIGH,
-        tags: [
-            Tag.JS,
-            Tag.TS,
-            Tag.REACT,
-            Tag.SASS
+            Tag.TW
         ],
         thumbnail: {
             image: image__react_template,
@@ -115,11 +78,43 @@ export const projects = [
         slug: 'react-template'
     },
     {
-        title: 'Babel Plugin',
-        description: 'A plugin for the Babel JavaScript transpiler for JSX-to-JSX transformations.',
+        title: 'Photos',
+        description: 'An outlet through which my family can browse and download photos.',
+        weight: Weight.HIGH,
+        tags: [
+            Tag.TS,
+            Tag.SVELTEKIT,
+            Tag.TW
+        ],
+        slug: 'photos',
+        thumbnail: { // TODO
+            image: '' as unknown as StaticImageData,
+            hash: ''
+        }
+    },
+    {
+        title: 'Messages',
+        description: 'An app using t',
         weight: Weight.HIGH,
         tags: [
             Tag.JS,
+            Tag.TS,
+            Tag.NEXT,
+            Tag.TW
+        ],
+        thumbnail: {
+            image: image__balazsburjan,
+            hash: 'WYQcn}_3M_M{%MRPNGxuaxRks:WB~pD%ozxtRPoz%2M{a}t7R*oM'
+        },
+        github: 'https://github.com/bigbali/website',
+        slug: 'messages'
+    },
+    {
+        title: 'Babel Transpiler Plugin',
+        description: `A plugin for the Babel JavaScript transpiler that creates reactive 
+                      classNames from custom 'block', 'elem', and 'mods' attributes.`,
+        weight: Weight.HIGH,
+        tags: [
             Tag.TS,
             Tag.BABEL,
             Tag.NODE
@@ -133,9 +128,7 @@ export const projects = [
     },
     {
         title: 'YouTube Video Downloader',
-        description: `A desktop application to allow batch downloading of music videos from YouTube.
-                      It exists because I decided that there are more efficient ways of doing things
-                    than typing long and complex commands into a terminal.`,
+        description: 'A Windows application to allow batch downloading of music videos from YouTube.',
         weight: Weight.HIGH,
         tags: [
             Tag.CSHARP,
@@ -144,14 +137,15 @@ export const projects = [
         ],
         thumbnail: {
             image: image__sdl,
-            hash: 'E87UF=oct6s:oJoL~qjZj[j@f6js'
+            hash: 'E87UF=oct6s:oJoL~qjZj[j@f6js',
+            quality: image__sdl
         },
         github: 'https://github.com/bigbali/sdl-csharp',
-        slug: 'sdl'
+        slug: 'youtube-video-downloader'
     },
     {
         title: 'Stardust Dark VS Code Theme',
-        description: 'A dark theme for Visual Studio Code that is published to the Visual Studio Marketplace.',
+        description: 'A simplistic dark theme for Visual Studio Code that is published to the Visual Studio Marketplace.',
         weight: Weight.HIGH,
         tags: [
             Tag.JS
@@ -166,9 +160,8 @@ export const projects = [
     },
     {
         title: 'Family Photos',
-        description: `A place where my family could see my photos, but mostly the ones taken at family events.
-                      It was built with Django and was hosted on Heroku's Free Tier dyno until it was discontinued.
-                      It stored all static content on Amazon's S3 service.`,
+        description: `The original photos app built with Django.
+                      It was hosted on Heroku's Free Tier dyno until it was discontinued and used AWS S3 for storage.`,
         weight: Weight.MEDIUM,
         tags: [
             Tag.PYTHON,
@@ -200,32 +193,7 @@ export const projects = [
         },
         github: 'https://github.com/bigbali/eshop',
         slug: 'eshop'
-    },
-    {
-        title: 'Tankstats',
-        description: `An application centered on strategies and statistics in World of Tanks. Although currently, it's on pause,
-                      in the future I intend to build it from scratch with my updated knowledge.
-                      It includes decentralized, encrypted strategic maps, OpenID authentication, and basic
-                      statistics.`,
-        weight: Weight.MEDIUM,
-        tags: [
-            Tag.REACT,
-            Tag.NODE,
-            Tag.EXPRESS,
-            Tag.JS,
-            Tag.TS,
-            Tag.GUN,
-            Tag.DJANGO,
-            Tag.AWS_S3,
-            Tag.AWS_RDS
-        ],
-        thumbnail: {
-            image: image__tankstats,
-            hash: 'NQQ0da~Wx]D%V?W=_3E1Mxt7ozoy~p9GRi%MWrf5'
-        },
-        github: 'https://github.com/bigbali/tankstats-frontend',
-        slug: 'tankstats'
     }
-] satisfies Project[];
+] as Project[];
 
 export default projects;

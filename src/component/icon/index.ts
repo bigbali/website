@@ -72,5 +72,5 @@ const Icon = {
 
 export default Icon;
 export interface IconProps {
-    color?: string
+    color?: string;
 }

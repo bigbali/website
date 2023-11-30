@@ -10,6 +10,7 @@
     @include mobile {
         flex-direction: column;
         padding-block: 1rem;
+        height: auto;
     }
 
     span,

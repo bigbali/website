@@ -10,10 +10,10 @@ import '@style/main';
 
 export default function App({ Component, pageProps, router }: AppProps) {
     const pageWrapperRef = useRef<HTMLElement>(null);
-    const theme = useSettings(state => state.theme);
-    const accentColor = useSettings(state => state.accentColor);
-    const fontSize = useSettings(state => state.fontSize);
-    const contrast = useSettings(state => state.contrast);
+    const theme = useSettings((state) => state.theme);
+    const accentColor = useSettings((state) => state.accentColor);
+    const fontSize = useSettings((state) => state.fontSize);
+    const contrast = useSettings((state) => state.contrast);
 
     useEffect(() => {
         // When mounted, set style of body and change CSS variables
@@ -43,7 +43,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
                     //@ts-ignore (it's expecting RefObject<undefined>, which clearly isn't sensible)
                     nodeRef={pageWrapperRef}
                     key={router.asPath}
-                    classNames="cross-page"
+                    classNames='cross-page'
                     exit={false}
                     in={false}
                     enter={router.asPath !== '/'}

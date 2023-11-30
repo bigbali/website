@@ -1,21 +1,24 @@
 import {
     memo,
     type MutableRefObject,
-    type MouseEvent as GenericMouseEvent,
+    type MouseEvent as GenericMouseEvent
 } from 'react';
 import Link from 'next/link';
 import { SectionID } from '@store';
 
 export type NavigationListProps = {
-    asPath: string,
-    currentSection: HTMLElement | null,
-    previousSectionRef: MutableRefObject<SectionID | undefined>,
-    onNavigationItemClick: (e: GenericMouseEvent<HTMLAnchorElement, MouseEvent>, section: SectionID) => void,
-    onNavigationItemClickEffect?: () => void
+    pathname: string;
+    currentSection: HTMLElement | null;
+    previousSectionRef: MutableRefObject<SectionID | undefined>;
+    onNavigationItemClick: (
+        e: GenericMouseEvent<HTMLAnchorElement, MouseEvent>,
+        section: SectionID
+    ) => void;
+    onNavigationItemClickEffect?: () => void;
 };
 
 const NavigationList = ({
-    asPath,
+    pathname,
     currentSection,
     previousSectionRef,
     onNavigationItemClick,
@@ -37,13 +40,14 @@ const NavigationList = ({
                     scroll={false}
                     href={''}
                     className={
-                        (asPath === '/' && currentSection?.id === section)
+                        pathname === '/' && currentSection?.id === section
                             ? 'active'
                             : ''.concat(
                                 previousSectionRef?.current === section
                                     ? 'previouslyactive'
                                     : ''
-                            )}
+                            )
+                    }
                 >
                     {section}
                 </Link>

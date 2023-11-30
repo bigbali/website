@@ -11,7 +11,9 @@ export const useTimeout = () => {
     const _cleanup = useCallback(() => {
         _timeoutId.current
             ? clearTimeout(_timeoutId.current)
-            : console.error('You need to initialize a timer before cleaning it up!');
+            : console.error(
+                  'You need to initialize a timer before cleaning it up!'
+              );
     }, []);
 
     return [_timeout, _cleanup] as const;

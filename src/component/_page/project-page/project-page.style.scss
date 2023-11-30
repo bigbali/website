@@ -1,7 +1,13 @@
 .ProjectPage {
     padding-inline: var(--content-padding);
     padding-block-start: calc(var(--header-height) + 2rem);
-    min-height: calc(100vh - var(--footer-height));
+    min-height: calc(100dvh - var(--footer-height));
+    width: fit-content;
+    margin-inline: auto;
+
+    @include from-fhd {
+        max-width: 75%;
+    }
 
     .ProjectPage-Thumbnail {
         @include mobile {
@@ -65,10 +71,7 @@
     }
 
     &-Content {
-        display: flex;
-        justify-content: space-between;
-        margin-block-end: 2rem;
-        gap: 1rem;
+        margin-block-end: 5rem;
 
         >a {
             >.Icon {
@@ -104,6 +107,35 @@
         >div:nth-of-type(2) {
             flex: 1;
             aspect-ratio: 1.46 / 1;
+        }
+
+        &>section:not(:first-child) {
+            margin-block-start: 2rem;
+        }
+
+        .Row0 {
+            >img {
+                width: 100%;
+                height: 100%;
+            }
+
+            .GitHub {
+                display: flex;
+                width: fit-content;
+                align-items: center;
+                gap: 0.5rem;
+        
+                &:hover {
+                    color: var(--color-theme);
+                    text-decoration: underline;
+                }
+        
+                >.Icon {
+                    padding: 0;
+                    width: 2rem;
+                    height: 2rem;
+                }
+            }
         }
     }
 

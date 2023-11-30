@@ -6,35 +6,39 @@ export enum NotificationStatus {
     SUCCESS = 'SUCCESS',
     WARNING = 'WARNING',
     ERROR = 'ERROR'
-};
+}
 
 export type Notification = {
-    status: NotificationStatus,
-    title: string,
-    message: string,
-    id: string,
+    status: NotificationStatus;
+    title: string;
+    message: string;
+    id: string;
     timeout: {
-        id: NodeJS.Timeout,
-        duration: number
-    }
+        id: NodeJS.Timeout;
+        duration: number;
+    };
 };
 
 type NotificationPayload = {
-    status: NotificationStatus,
-    title: string,
-    message: string,
-    timeout: number
+    status: NotificationStatus;
+    title: string;
+    message: string;
+    timeout: number;
 };
 
 type NotificationStore = {
-    notifications: Notification[],
-    show: (options: NotificationPayload) => string,
-    hide: (id: string) => void
+    notifications: Notification[];
+    show: (options: NotificationPayload) => string;
+    hide: (id: string) => void;
 };
 
 export const useNotifications = create<NotificationStore>((set) => ({
     notifications: [],
-    show: ({ timeout = 5000, status = NotificationStatus.INFO, ...options }) => {
+    show: ({
+        timeout = 5000,
+        status = NotificationStatus.INFO,
+        ...options
+    }) => {
         const id = UUIDV4();
 
         set((state) => ({
@@ -58,7 +62,9 @@ export const useNotifications = create<NotificationStore>((set) => ({
     },
     hide: (idToRemove) => {
         set((state) => {
-            const notification = state.notifications.find(({ id }) => id === idToRemove);
+            const notification = state.notifications.find(
+                ({ id }) => id === idToRemove
+            );
 
             if (!notification) return state;
 
@@ -66,7 +72,9 @@ export const useNotifications = create<NotificationStore>((set) => ({
 
             return {
                 ...state,
-                notifications: state.notifications.filter(({ id }) => idToRemove !== id)
+                notifications: state.notifications.filter(
+                    ({ id }) => idToRemove !== id
+                )
             };
         });
     }

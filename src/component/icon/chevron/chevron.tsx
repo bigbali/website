@@ -6,21 +6,27 @@ export enum Direction {
     LEFT = 'left',
     RIGHT = 'right',
     UP = 'up',
-    DOWN = 'down',
+    DOWN = 'down'
 }
 
 export interface ChevronProps {
-    direction?: Direction
+    direction?: Direction;
 }
 
-export const Chevron = ({ direction = Direction.UP, ...props }: SVGProps<SVGSVGElement> & ChevronProps) => {
+export const Chevron = ({
+    direction = Direction.UP,
+    ...props
+}: SVGProps<SVGSVGElement> & ChevronProps) => {
     return (
-        <Base icon='Chevron' modifiers={{
-            DIRECTION_LEFT: direction === Direction.LEFT,
-            DIRECTION_RIGHT: direction === Direction.RIGHT,
-            DIRECTION_UP: direction === Direction.UP,
-            DIRECTION_DOWN: direction === Direction.DOWN
-        }}>
+        <Base
+            icon='Chevron'
+            modifiers={{
+                DIRECTION_LEFT: direction === Direction.LEFT,
+                DIRECTION_RIGHT: direction === Direction.RIGHT,
+                DIRECTION_UP: direction === Direction.UP,
+                DIRECTION_DOWN: direction === Direction.DOWN
+            }}
+        >
             <svg
                 xmlns='http://www.w3.org/2000/svg'
                 viewBox='0 0 512 512'
