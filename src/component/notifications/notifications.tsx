@@ -1,6 +1,6 @@
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { NotificationStatus, useNotifications } from '@store';
-import Icon from '@component/icon';
+import { Close } from '@component/icon';
 import './notifications.style';
 
 export const Notifications = () => {
@@ -32,7 +32,7 @@ export const Notifications = () => {
                             hide(id);
                         }}
                     >
-                        <Icon.Close />
+                        <Close />
                     </button>
                 </div>
             );

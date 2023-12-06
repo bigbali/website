@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Project } from 'data/projects';
-import Icon from '@component/icon';
+import { GitHub, File } from '@component/icon';
 import './project-card.style';
 
 const ProjectCard = ({
@@ -42,7 +42,7 @@ const ProjectCard = ({
                                 rel='noopener noreferrer'
                                 title='Go to GitHub page'
                             >
-                                <Icon.GitHub />
+                                <GitHub />
                                 GitHub
                             </Link>
                         )}
@@ -50,14 +50,14 @@ const ProjectCard = ({
                             href={`project/${slug}`}
                             title='Go to project details'
                         >
-                            <Icon.File />
+                            <File />
                             Go to project page
                         </Link>
                     </div>
                 </div>
             </div>
             <div elem='Thumbnail'>
-                <Link href={'/projects/' + slug}>
+                <Link href={'/project/' + slug}>
                     <Image
                         src={thumbnail.image}
                         alt={title}

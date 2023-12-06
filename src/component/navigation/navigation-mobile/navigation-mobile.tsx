@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { TransitionGroup } from 'react-transition-group';
-import Icon from '@component/icon';
+import { Close, HamburgerMenu } from '@component/icon';
 import Transition from '@component/transition';
 import Settings from '@component/settings';
-import { NavigationElementProps } from '../navigation';
+import type { NavigationElementProps } from '../navigation';
 import NavigationList from '../navigation-list';
 import './navigation-mobile.style';
 
@@ -25,7 +25,7 @@ const NavigationMobile = ({ listProps }: NavigationElementProps) => {
                 elem='Expander'
                 onClick={() => setIsExpanded((state) => !state)}
             >
-                <Icon.HamburgerMenu isExpanded={isExpanded} />
+                <HamburgerMenu isExpanded={isExpanded} />
             </div>
             {isExpanded && (
                 <Transition
@@ -51,7 +51,7 @@ const NavigationMobile = ({ listProps }: NavigationElementProps) => {
                             </div>
                         </div>
                         <div elem='Exit' onClick={closeMenu}>
-                            <Icon.Close />
+                            <Close />
                         </div>
                     </div>
                 </Transition>

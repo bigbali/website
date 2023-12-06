@@ -1,12 +1,12 @@
-import { memo, RefObject, useEffect, useRef } from 'react';
+import type { RefObject } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import { fromEvent, throttleTime } from 'rxjs';
 import Image from 'next/image';
 import { useDevice, useSettings } from '@store';
-import Icon from '@component/icon';
+import { Cat, Location, Address } from '@component/icon';
 import Pattern from '@component/pattern';
 import Balazs from '@media/webp/balazs.webp';
 import './about-section.style';
-import Link from 'next/link';
 
 const MAX_ROTATION_DEG = 5;
 
@@ -54,7 +54,7 @@ const About = ({
         <section id='About' block='About' ref={refFromParent}>
             <div elem='Header' className='animate-on-scroll'>
                 <h1>Who I am</h1>
-                <Icon.Address />
+                <Address />
             </div>
             <div elem='Content'>
                 <div>
@@ -140,7 +140,7 @@ const About = ({
                 </div>
                 <figure elem='Content-Figure' ref={figureRef}>
                     <div ref={imageRef} className='animate-on-scroll'>
-                        <Icon.Cat />
+                        <Cat />
                         <Image src={Balazs} alt='Portrait of Balázs' />
                         <div className='location'>
                             <div />
@@ -151,7 +151,7 @@ const About = ({
                                 block='Link'
                                 ref={anchorRef}
                             >
-                                <Icon.Location />
+                                <Location />
                                 <span>Gheorgheni, Harghita, Romania</span>
                             </a>
                         </div>

@@ -1,5 +1,5 @@
 import { type RefObject } from 'react';
-import { range } from 'lodash';
+import range from 'lodash-es/range';
 import { isClient } from './environment';
 
 /**
@@ -35,6 +35,7 @@ export class ScrollObserver implements Observer {
 
     constructor(
         callback: ScrollObserverCallback,
+        // eslint-disable-next-line no-undef
         options: IntersectionObserverInit
     ) {
         this.#observer = new IntersectionObserver(

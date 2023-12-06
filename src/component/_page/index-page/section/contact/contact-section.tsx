@@ -1,4 +1,5 @@
-import { memo, RefObject, useEffect, useRef } from 'react';
+import type { RefObject } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import {
     NotificationStatus,
@@ -6,7 +7,7 @@ import {
     useDevice,
     useSettings
 } from '@store';
-import Icon from '@component/icon';
+import { Copy, GitHub, Message, LinkedIn as LinkedInIcon } from '@component/icon';
 import './contact-section.style';
 
 const EMAIL = 'hello@balazsburjan.com';
@@ -55,7 +56,7 @@ const Contact = ({
                     show({
                         timeout: 5000,
                         status: NotificationStatus.ERROR,
-                        title: "Couldn't copy to clipboard",
+                        title: 'Couldn\'t copy to clipboard',
                         message: `Couldn't copy to clipboard: ${text}.`
                     });
                 }
@@ -72,8 +73,8 @@ const Contact = ({
                 </p>
             </div>
             <div elem='Icons' className='animate-on-scroll'>
-                <Icon.Message />
-                <Icon.Message />
+                <Message />
+                <Message />
             </div>
             <div elem='Content' ref={contentRef}>
                 <div>
@@ -82,7 +83,6 @@ const Contact = ({
                             href={`mailto:${EMAIL}`}
                             target='_top'
                             title={`Say Hello at ${EMAIL}`}
-                            role='button'
                         >
                             SAY HELLO
                         </a>
@@ -91,7 +91,7 @@ const Contact = ({
                             title='Copy email address to clipboard'
                             onClick={() => handleCopy(EMAIL)}
                         >
-                            <Icon.Copy />
+                            <Copy />
                         </button>
                     </div>
                     <div elem='Content-LinkedIn' className='animate-on-scroll'>
@@ -101,7 +101,7 @@ const Contact = ({
                             rel='noopener noreferrer'
                             title='Go to LinkedIn page'
                         >
-                            <Icon.LinkedIn />
+                            <LinkedInIcon />
                         </a>
                         {/* Need to load dynamically so Next.js doesn't complain for hydration mismatch */}
                         <LinkedIn isMobile={isMobile} text={LINKEDIN} />
@@ -109,7 +109,7 @@ const Contact = ({
                             title='Copy LinkedIn address to clipboard'
                             onClick={() => handleCopy(LINKEDIN)}
                         >
-                            <Icon.Copy />
+                            <Copy />
                         </button>
                     </div>
                     <div elem='Content-GitHub' className='animate-on-scroll'>
@@ -119,14 +119,14 @@ const Contact = ({
                             rel='noopener noreferrer'
                             title='Go to GitHub page'
                         >
-                            <Icon.GitHub />
+                            <GitHub />
                         </a>
                         <span>{GITHUB}</span>
                         <button
                             title='Copy GitHub address to clipboard'
                             onClick={() => handleCopy(GITHUB)}
                         >
-                            <Icon.Copy />
+                            <Copy />
                         </button>
                     </div>
                 </div>

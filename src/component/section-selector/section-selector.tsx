@@ -1,5 +1,6 @@
-import { memo, RefObject, useEffect, useRef } from 'react';
-import { range } from 'lodash';
+import type { RefObject } from 'react';
+import { memo, useEffect, useRef } from 'react';
+import range from 'lodash-es/range';
 import { useSection } from '@store';
 import './section-selector.style';
 
@@ -21,6 +22,8 @@ export const SectionSelector = ({
     currentSectionRef.current = currentSection; // avoid stale closure in observer callback
 
     useEffect(() => {
+        // it IS defined, as apparent from the type displayed on hover, whatever eslint says
+        // eslint-disable-next-line no-undef
         const observerAction: IntersectionObserverCallback = (
             observedSections
         ) => {

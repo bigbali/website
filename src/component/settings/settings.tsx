@@ -1,11 +1,11 @@
 import { useCallback, useRef, useState } from 'react';
-import lodash from 'lodash';
+import debounce from 'lodash-es/debounce';
 import { isServer, useClickOutside } from '@util';
 import type { Color } from '@store';
 import { DefaultColors, Theme, useSettings } from '@store';
 import Switch from '@component/switch';
 import Slider from '@component/slider';
-import Icon from '@component/icon';
+import { Moon, Sun, Settings as SettingsIcon } from '@component/icon';
 import './settings.style';
 
 const ColorMap = [null, ...Object.values(DefaultColors)];
@@ -34,7 +34,7 @@ export const Settings = ({ isMobile }: SettingsProps) => {
     const handleChangeAccentColor = (color: Color) => setAccentColor(color);
     const handleChangeContrast = (modifier: number) => setContrast(modifier);
     const handleChangeFontSize = useCallback(
-        lodash.debounce((modifier: number) => setFontSize(modifier), 300),
+        debounce((modifier: number) => setFontSize(modifier), 300),
         []
     );
 
@@ -93,8 +93,8 @@ export const Settings = ({ isMobile }: SettingsProps) => {
                 onSwitch={handleSwitchTheme}
                 valueLeft={Theme.LIGHT}
                 valueRight={Theme.DARK}
-                iconLeft={<Icon.Sun />}
-                iconRight={<Icon.Moon />}
+                iconLeft={<Sun />}
+                iconRight={<Moon />}
                 textLeft='Light'
                 textRight='Dark'
                 label='Color Scheme'
@@ -156,7 +156,7 @@ export const Settings = ({ isMobile }: SettingsProps) => {
                 onClick={() => setIsExpanded((state) => !state)}
                 title='Expand Settings'
             >
-                <Icon.Settings isExpanded={isExpanded} />
+                <SettingsIcon isExpanded={isExpanded} />
             </button>
             {SettingsMenu}
         </div>

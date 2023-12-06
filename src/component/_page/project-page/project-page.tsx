@@ -1,20 +1,25 @@
 import Head from 'next/head';
-import Image from 'next/image';
 import { type ProjectProps } from '@data/projects';
-import Icon from '@component/icon';
+import { Chevron, GitHub } from '@component/icon';
 import './project-page.style';
 
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 const page = {
-    'youtube-video-downloader': dynamic(() => import('./project/youtube-video-downloader'))
+    'youtube-video-downloader': dynamic(() => import('./project/youtube-video-downloader')),
+    'algorithm-visualizer': dynamic(() => import('./project/algorithm-visualizer')),
+    'messages': dynamic(() => import('./project/messages')),
+    'babel-plugin': dynamic(() => import('./project/babel-plugin-transform-bem-attributes')),
+    'stardust-dark': dynamic(() => import('./project/stardust-dark')),
+    'balazs-burjan': dynamic(() => import('./project/balazs-burjan')),
+    'photos': dynamic(() => import('./project/photos'))
 };
 
 const Back = () => (
     <div block='ProjectPage' elem='Back'>
         <a href='/' title='Back'>
-            <Icon.Chevron />
+            <Chevron />
             Back
         </a>
     </div>
@@ -57,16 +62,16 @@ export const ProjectPage = ({ project, slug }: ProjectProps) => {
                                 title='Go to GitHub page'
                                 className='GitHub'
                             >
-                                <Icon.GitHub />
+                                <GitHub />
                                 GitHub
                             </Link>
                         )}
-                        <Image
+                        {/* <Image
                             alt='Simple YouTube Video Downloader'
                             src={project.thumbnail.quality}
                             placeholder='blur'
                             priority
-                        />
+                        /> */}
                     </section>
                     <Content />
                 </div>

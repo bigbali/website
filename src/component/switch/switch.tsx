@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import Icon, { Direction } from '@component/icon';
+import { Chevron, Direction } from '@component/icon';
 import './switch.style';
 
 interface SwitchProps {
@@ -60,7 +60,7 @@ const Switch = ({
                         <span block='Switch-Value-Right-Text'>{textRight}</span>
                     )}
                 </div>
-                <Icon.Chevron
+                <Chevron
                     direction={
                         value === valueRight ? Direction.LEFT : Direction.RIGHT
                     }

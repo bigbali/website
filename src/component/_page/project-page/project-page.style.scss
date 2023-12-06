@@ -17,17 +17,16 @@
 
     &:has(.ProjectPage-NotFound) {
         position: relative;
+        display: flex;
+        flex-direction: column;
     }
 
     &-NotFound {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        inset: 0;
-
+        margin: auto;
+        
         >p {
             text-align: center;
+            font-size: 2rem;
         }
     }
 
@@ -327,6 +326,11 @@
             animation-iteration-count: infinite;
             animation-duration: 2s;
         }
+    }
+
+    video {
+        max-width: 100%;
+        max-height: 100%;
     }
 }
 

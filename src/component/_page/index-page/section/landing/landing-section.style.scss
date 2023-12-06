@@ -116,6 +116,10 @@
             >canvas {
                 pointer-events: none;
                 margin: auto;
+
+                // animate in from jsx
+                opacity: 0;
+                transition: opacity 0.5s;
     
                 @include mobile {
                     width: 95% !important;

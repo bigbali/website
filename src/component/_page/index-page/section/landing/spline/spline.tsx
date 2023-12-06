@@ -1,4 +1,4 @@
-import { lazy, memo, Suspense, useEffect, useMemo, useState } from 'react';
+import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 import type { SPEObject } from '@splinetool/react-spline';
 import type { Application } from '@splinetool/runtime';
 import { type Application as SplineApplication } from '@splinetool/runtime';
@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Theme, useDevice, useSettings } from '@store';
 import type { Subscription } from 'rxjs';
 import { fromEvent, throttleTime } from 'rxjs';
-import Icon from '@component/icon';
+import { Loader } from '@component/icon';
 
 import img__spline_light_mobile from '@media/webp/spline-light-mobile.webp';
 import img__spline_dark_mobile from '@media/webp/spline-dark-mobile.webp';
@@ -41,7 +41,6 @@ const translate = (e: MouseEvent) => {
 };
 
 let event: Subscription;
-let loaded = false;
 
 const DELAY = 1000;
 const DURATION = 1500;
@@ -91,7 +90,7 @@ const SplineWEBP = {
 
 const Fallback = () => (
     <div block='Fallback'>
-        <Icon.Loader />
+        <Loader />
     </div>
 );
 
@@ -121,12 +120,16 @@ const updateSplineBackgroundColor = (instant = false) => {
     }
 };
 
-const CustomSpline = () => {
+const CustomSpline = ({ deferRendering }: {deferRendering: boolean}) => {
     const theme = useSettings((store) => store.theme);
     const desktop = useDevice((store) => store.isDesktop);
     const [fallback, setFallback] = useState(false);
+    const [loaded, setLoaded] = useState(false);
 
-    loaded = false;
+    const onLoad = useCallback((app: SplineApplication) => {
+        setLoaded(true);
+        load(app);
+    }, []);
 
     useEffect(() => {
         updateSplineBackgroundColor();
@@ -136,12 +139,16 @@ const CustomSpline = () => {
         return () => clearTimeout(timeout);
     }, [theme]);
 
+    useEffect(() => {
+        if (loaded && !deferRendering && spline.canvas) {
+            spline.canvas.style.opacity = '1';
+        }
+    }, [loaded, deferRendering]);
+
     const SplineMemo = useMemo(() => {
         if (desktop) {
-            // If we use dynamic(), it apparently messes with Spline's forwardRef,
-            // causing it to be dropped and throwing a console error.
-            // Also, without Suspense we get render loop for a few seconds.
             const Spline = lazy(() => import('@splinetool/react-spline'));
+
             // const Spline = lazy(() => import('@splinetool/react-spline').then((module) => {
             //     return new Promise((resolve) => {
             //         setTimeout(() => {
@@ -153,13 +160,18 @@ const CustomSpline = () => {
             return (
                 <Suspense fallback={<Fallback />}>
                     <Spline
-                        onLoad={load}
-                        scene='https://prod.spline.design/2oNTUNbzmdhEMPUo/scene.splinecode'
+                        onLoad={onLoad}
+                        // scene='https://prod.spline.design/2oNTUNbzmdhEMPUo/scene.splinecode'
+                        scene='/scene.splinecode'
                     />
                 </Suspense>
             );
         }
     }, [desktop]);
+
+    if (desktop && deferRendering) {
+        return <Fallback />;
+    }
 
     if (desktop && !fallback) {
         return SplineMemo!;

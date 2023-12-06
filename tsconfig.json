@@ -35,5 +35,5 @@
         "forceConsistentCasingInFileNames": true
     },
     "exclude": ["build", "node_modules"],
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+    "include": ["next-env.d.ts", "src/env.d.ts", "**/*.ts", "**/*.tsx"]
 }

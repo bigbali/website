@@ -14,6 +14,7 @@ export enum Tag {
     REACT = 'React.js',
     SVELTE = 'Svelte',
     SVELTEKIT = 'SvelteKit',
+    TRPC = 'tRPC',
     TW = 'Tailwind',
     NEXT = 'Next.js',
     BABEL = 'Babel',
@@ -75,7 +76,7 @@ export const projects = [
             hash: 'W25OQqWB00jZx]WB-;WBM{jZofay00R*~qjZM{of4nR*?vjZRjof'
         },
         github: 'https://github.com/bigbali/react-template',
-        slug: 'react-template'
+        slug: 'algorithm-visualizer'
     },
     {
         title: 'Photos',
@@ -94,13 +95,13 @@ export const projects = [
     },
     {
         title: 'Messages',
-        description: 'An app using t',
+        description: 'An app that allows one to log in, post a message, edit it, delete it, then log out.',
         weight: Weight.HIGH,
         tags: [
-            Tag.JS,
             Tag.TS,
             Tag.NEXT,
-            Tag.TW
+            Tag.TW,
+            Tag.TRPC
         ],
         thumbnail: {
             image: image__balazsburjan,
@@ -158,33 +159,49 @@ export const projects = [
         page: 'https://marketplace.visualstudio.com/items?itemName=Starcrusher.stardust-dark',
         slug: 'stardust-dark'
     },
+    // {
+    //     title: 'Family Photos',
+    //     description: `The original photos app built with Django.
+    //                   It was hosted on Heroku's Free Tier dyno until it was discontinued and used AWS S3 for storage.`,
+    //     weight: Weight.MEDIUM,
+    //     tags: [
+    //         Tag.PYTHON,
+    //         Tag.DJANGO,
+    //         Tag.AWS_S3,
+    //         Tag.HEROKU
+    //     ],
+    //     thumbnail: {
+    //         image: image__family_photos,
+    //         hash: 'WAFYrv5W==Z}.T~WS8xtM}f,RiM{x]w[o}tSemIUJD%1IVRjadS5'
+    //     },
+    //     slug: 'family-photos'
+    // },
+    // {
+    //     title: 'eShop',
+    //     description: `My final project for Harvard University's CS50 course. It's an e-commerce application
+    //                   built with Flask and MySQL.`,
+    //     weight: Weight.MEDIUM,
+    //     tags: [
+    //         Tag.PYTHON,
+    //         Tag.FLASK,
+    //         Tag.MYSQL,
+    //         Tag.JS,
+    //         Tag.SASS
+    //     ],
+    //     thumbnail: {
+    //         image: image__eshop,
+    //         hash: 'WKQ0R4oH-;D%R*WAE4jERjWCt8oe?^ofM|s:aej]-otRozodM_WC'
+    //     },
+    //     github: 'https://github.com/bigbali/eshop',
+    //     slug: 'eshop'
+    // },
     {
-        title: 'Family Photos',
-        description: `The original photos app built with Django.
-                      It was hosted on Heroku's Free Tier dyno until it was discontinued and used AWS S3 for storage.`,
+        title: 'balazsburjan.com',
+        description: 'This website.',
         weight: Weight.MEDIUM,
         tags: [
-            Tag.PYTHON,
-            Tag.DJANGO,
-            Tag.AWS_S3,
-            Tag.HEROKU
-        ],
-        thumbnail: {
-            image: image__family_photos,
-            hash: 'WAFYrv5W==Z}.T~WS8xtM}f,RiM{x]w[o}tSemIUJD%1IVRjadS5'
-        },
-        slug: 'family-photos'
-    },
-    {
-        title: 'eShop',
-        description: `My final project for Harvard University's CS50 course. It's an e-commerce application
-                      built with Flask and MySQL.`,
-        weight: Weight.MEDIUM,
-        tags: [
-            Tag.PYTHON,
-            Tag.FLASK,
-            Tag.MYSQL,
-            Tag.JS,
+            Tag.TS,
+            Tag.NEXT,
             Tag.SASS
         ],
         thumbnail: {
@@ -192,7 +209,7 @@ export const projects = [
             hash: 'WKQ0R4oH-;D%R*WAE4jERjWCt8oe?^ofM|s:aej]-otRozodM_WC'
         },
         github: 'https://github.com/bigbali/eshop',
-        slug: 'eshop'
+        slug: 'balazs-burjan'
     }
 ] as Project[];
 

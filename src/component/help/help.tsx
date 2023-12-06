@@ -1,4 +1,4 @@
-import Icon from '@component/icon';
+import { Help as HelpIcon } from '@component/icon';
 import './help.style';
 
 export enum Orientation {
@@ -19,11 +19,11 @@ export const Help = ({ content, orientation }: HelpProps) => {
             <div
                 elem='Content'
                 mods={(prefix: string) =>
-                    `${prefix}${orientation || Orientation.ABOVE}`
+                    `${prefix}${orientation ?? Orientation.ABOVE}`
                 }
                 dangerouslySetInnerHTML={{ __html: content }}
             />
-            <Icon.Help />
+            <HelpIcon />
         </div>
     );
 };

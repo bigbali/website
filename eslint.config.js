@@ -9,7 +9,7 @@ export default [
     js.configs.recommended,
     {
         // general
-        files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.mjs', '**/*.cjs'],
+        files: ['**/*.{js,ts,jsx,tsx,cjs,mjs}'],
         plugins: {
             '@typescript-eslint': tsPlugin,
             prettier: prettierPlugin
@@ -58,7 +58,7 @@ export default [
     },
     {
         // TypeScript
-        files: ['**/*.ts', '**/*.tsx'],
+        files: ['**/*.{ts,tsx}'],
         plugins: {
             '@typescript-eslint': tsPlugin,
             prettier: prettierPlugin
@@ -67,7 +67,10 @@ export default [
             parser: tsParser,
             globals: {
                 ...globals.browser,
-                ...globals.node
+                ...globals.node,
+                React: true,
+                JSX: true,
+                NodeJS: true
             }
         },
         rules: {
@@ -99,14 +102,6 @@ export default [
                     }
                 }
             ]
-        }
-    },
-    {
-        files: ['**/*.tsx'],
-        languageOptions: {
-            globals: {
-                React: true
-            }
         }
     }
 ];

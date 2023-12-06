@@ -1,31 +1,40 @@
 import {
     memo,
     useEffect,
-    type RefObject
+    type RefObject,
+    useState,
+    useCallback
 } from 'react';
 import dynamic from 'next/dynamic';
 import './landing-section.style';
 
 const CustomSpline = dynamic(() => import('./spline'), { ssr: false });
 
-const triggerLandingAnimation = () => {
-    document.querySelectorAll('.landing-initial-state').forEach((element) => {
-        const animationEnd = () => {
-            element.classList.add('animation-finished');
-            element.removeEventListener('animationend', animationEnd);
-        };
-
-        element.classList.replace('landing-initial-state', 'landing-animation');
-        element.addEventListener('animationend', animationEnd);
-    });
-};
 
 type LandingProps = {
     refFromParent: RefObject<HTMLElement>;
 };
 
-
 const Landing = ({ refFromParent }: LandingProps) => {
+    const [deferSplineRender, setDeferSplineRender] = useState(true);
+
+    const triggerLandingAnimation = useCallback(() => {
+        const animated = document.querySelectorAll('.landing-initial-state');
+        animated.forEach((element, index) => {
+            const animationEnd = () => {
+                if (index + 1 === animated.length) {
+                    setDeferSplineRender(false);
+                }
+
+                element.classList.add('animation-finished');
+                element.removeEventListener('transitionend', animationEnd);
+            };
+
+            element.classList.replace('landing-initial-state', 'landing-animation');
+            element.addEventListener('transitionend', animationEnd);
+        });
+    }, []);
+
     useEffect(() => triggerLandingAnimation(), []);
 
     return (
@@ -59,7 +68,7 @@ const Landing = ({ refFromParent }: LandingProps) => {
                 </p>
             </div>
             <div elem='Spline'>
-                <CustomSpline />
+                <CustomSpline deferRendering={deferSplineRender} />
             </div>
         </section>
     );
