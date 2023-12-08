@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Image from 'next/image';
 import { type ProjectProps } from '@data/projects';
 import { Chevron, GitHub } from '@component/icon';
 import './project-page.style';
@@ -53,7 +54,7 @@ export const ProjectPage = ({ project, slug }: ProjectProps) => {
                 <Back />
                 <div elem='Content'>
                     <section className='Row0'>
-                        <h1>Simple YouTube Video Downloader</h1>
+                        <h1>{project.title}</h1>
                         {!!project.github && (
                             <Link
                                 href={project.github}
@@ -66,12 +67,14 @@ export const ProjectPage = ({ project, slug }: ProjectProps) => {
                                 GitHub
                             </Link>
                         )}
-                        {/* <Image
-                            alt='Simple YouTube Video Downloader'
-                            src={project.thumbnail.quality}
-                            placeholder='blur'
-                            priority
-                        /> */}
+                        {project.thumbnail.showOnProjectPage !== false && (
+                            <Image
+                                alt='Simple YouTube Video Downloader'
+                                src={project.thumbnail.image}
+                                placeholder='blur'
+                                priority
+                            />
+                        )}
                     </section>
                     <Content />
                 </div>

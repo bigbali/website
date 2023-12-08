@@ -2,9 +2,9 @@ export default () => {
     return (
         <>
             <section>
-                <h1>
+                <h2>
                     What it is
-                </h1>
+                </h2>
                 <p>
                     It is a plugin for the Babel JavaScript transpiler that takes 'block', 'elem', and 'mods'
                     attributes as per the BEM methodology for
@@ -14,9 +14,9 @@ export default () => {
                 </p>
             </section>
             <section>
-                <h1>
+                <h2>
                     Why I made it
-                </h1>
+                </h2>
                 <p>
                     At work, we used the 'rebem' Babel plugin which worked similarly to this.
                     I quickly started to appreciate how clean the the code is following BEM,
@@ -31,9 +31,9 @@ export default () => {
                 </p>
             </section>
             <section>
-                <h1>
+                <h2>
                     How I made it
-                </h1>
+                </h2>
                 <p>
                     Basically, I wrote tests and worked on the implementation until all the tests passed 🙌
                 </p>

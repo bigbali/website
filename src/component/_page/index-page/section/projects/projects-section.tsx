@@ -1,5 +1,5 @@
-import { memo, RefObject } from 'react';
-import Link from 'next/link';
+import type { RefObject } from 'react';
+import { memo } from 'react';
 import projects from 'data/projects';
 import ProjectCard from '@component/project-card';
 import './projects-section.style';
@@ -17,9 +17,9 @@ const Projects = ({
                     <ProjectCard {...project} key={project.title} />
                 ))}
             </div>
-            <div block='Cards' elem='ShowMore' className='animate-on-scroll'>
+            {/* <div block='Cards' elem='ShowMore' className='animate-on-scroll'>
                 <Link href='/projects'>See the rest</Link>
-            </div>
+            </div> */}
         </section>
     );
 };

@@ -23,7 +23,7 @@ export default function Document() {
                 />
                 <meta name='author' content='Balázs Burján' />
             </Head>
-            <body>
+            <body className='no-animation'>
                 <Main />
                 <NextScript />
             </body>

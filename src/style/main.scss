@@ -150,8 +150,13 @@
 ::after {
     box-sizing: border-box;
     color: var(--color-content-primary);
-    transition: color 0.2s, background-color 0.2s, font-size 0.1s;
     font-family: $raleway;
+
+    &:not(.no-animation, .landing-initial-state, .landing-animation, .animate-on-scroll) {
+        @include not-prefers-reduced-motion {
+            transition: color 0.2s, background-color 0.2s, font-size 0.1s;
+        }
+    }
 }
 
 ::selection {
@@ -169,6 +174,10 @@ body {
 
     &.disable-scrolling {
         overflow: hidden;
+    }
+
+    &.no-animation {
+        transition: none;
     }
 }
 

@@ -84,11 +84,11 @@ const About = ({
                     >
                         <h1>Experience</h1>
                         <div>
-                            {/* <div>
+                            <div>
                                 React Developer
                             </div>
                             <a
-                                href="https://scandiweb.com/"
+                                href='https://scandiweb.com/'
                                 rel='noopener noreferrer'
                                 title='Go to Scandiweb'
                                 target='_blank'
@@ -99,7 +99,7 @@ const About = ({
                                 <span>2022-01</span>
                                 <span />
                                 <span>2022-03</span>
-                            </div> */}
+                            </div>
                         </div>
                         <p>
                             I've been constantly working on projects since 2016.
@@ -116,6 +116,7 @@ const About = ({
                         <ul>
                             <li>TypeScript</li>
                             <li>React & Next.js</li>
+                            <li>Tailwind</li>
                             <li>Babel</li>
                             <li>Node.js</li>
                             <li>SASS</li>

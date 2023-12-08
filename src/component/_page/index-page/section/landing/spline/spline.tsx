@@ -88,11 +88,13 @@ const SplineWEBP = {
     }
 };
 
-const Fallback = () => (
-    <div block='Fallback'>
-        <Loader />
-    </div>
-);
+const Fallback = () => {
+    return (
+        <div block='Fallback'>
+            <Loader />
+        </div>
+    );
+};
 
 const updateSplineBackgroundColor = (instant = false) => {
     const theme = useSettings.getState().theme;
@@ -120,6 +122,8 @@ const updateSplineBackgroundColor = (instant = false) => {
     }
 };
 
+let resolver: any;
+
 const CustomSpline = ({ deferRendering }: {deferRendering: boolean}) => {
     const theme = useSettings((store) => store.theme);
     const desktop = useDevice((store) => store.isDesktop);
@@ -140,22 +144,23 @@ const CustomSpline = ({ deferRendering }: {deferRendering: boolean}) => {
     }, [theme]);
 
     useEffect(() => {
-        if (loaded && !deferRendering && spline.canvas) {
+        if (loaded && spline.canvas) {
             spline.canvas.style.opacity = '1';
         }
     }, [loaded, deferRendering]);
 
     const SplineMemo = useMemo(() => {
         if (desktop) {
-            const Spline = lazy(() => import('@splinetool/react-spline'));
-
-            // const Spline = lazy(() => import('@splinetool/react-spline').then((module) => {
-            //     return new Promise((resolve) => {
-            //         setTimeout(() => {
-            //             resolve(module as any);
-            //         }, 10000);
-            //     });
-            // }));
+            // NOTE we need to keep this from lagging the browser during the initial animations,
+            // so we start rendering it only after the animations are done
+            const Spline = lazy(() => import('@splinetool/react-spline').then((module) => {
+                return new Promise((resolve) => {
+                    resolver = () => resolve(module as any);
+                    setTimeout(() => {
+                        resolve(module as any);
+                    }, TIMEOUT);
+                });
+            }));
 
             return (
                 <Suspense fallback={<Fallback />}>
@@ -169,8 +174,8 @@ const CustomSpline = ({ deferRendering }: {deferRendering: boolean}) => {
         }
     }, [desktop]);
 
-    if (desktop && deferRendering) {
-        return <Fallback />;
+    if (!deferRendering) {
+        resolver && resolver();
     }
 
     if (desktop && !fallback) {

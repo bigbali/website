@@ -1,15 +1,15 @@
 export default () => {
     return (
         <section>
-            <h1>
+            <h2>
                 About
-            </h1>
+            </h2>
             <p>
-                It is a simple dark theme for VS Code that I made to my liking.
+                A simple dark theme for VS Code tailored to my liking.
                 It is published to the VS Code marketplace as well, and even has a single 5 star review 😊
             </p>
             <p>
-                It is tailored to JavaScript/TypeScript, but it's also doesn't look terrible for Rust and C#.
+                It was made for JavaScript/TypeScript, but it's also doesn't look terrible with Rust and C#.
                 I've made a Visual Studio extension as well. Feel free to ask me for the .vsix file if you care.
             </p>
         </section>

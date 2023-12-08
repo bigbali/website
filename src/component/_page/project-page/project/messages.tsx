@@ -2,27 +2,27 @@ export default () => {
     return (
         <>
             <section>
-                <h1>
-                    What it is
-                </h1>
+                <h2>
+                    About
+                </h2>
                 <p>
                     A simple messages app built with the T3 stack, meaning Next.js, tRPC, Prisma, TypeScript, and Tailwind.
                     It has lazy-loaded messages with "infinite" scrolling.
                 </p>
             </section>
             <section>
-                <h1>
+                <h2>
                     Why I made it
-                </h1>
+                </h2>
                 <p>
                     Practice, and fun. 🫡
                     It's part of my example projects initiative, just like the algorithms visualizer.
                 </p>
             </section>
             <section>
-                <h1>
+                <h2>
                     See it in action
-                </h1>
+                </h2>
                 <video src='/msgs.mp4' controls></video>
             </section>
         </>

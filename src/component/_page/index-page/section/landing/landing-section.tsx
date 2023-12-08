@@ -20,18 +20,19 @@ const Landing = ({ refFromParent }: LandingProps) => {
 
     const triggerLandingAnimation = useCallback(() => {
         const animated = document.querySelectorAll('.landing-initial-state');
+
         animated.forEach((element, index) => {
-            const animationEnd = () => {
+            const transitionEnd = () => {
                 if (index + 1 === animated.length) {
                     setDeferSplineRender(false);
                 }
 
                 element.classList.add('animation-finished');
-                element.removeEventListener('transitionend', animationEnd);
+                element.removeEventListener('transitionend', transitionEnd);
             };
 
             element.classList.replace('landing-initial-state', 'landing-animation');
-            element.addEventListener('transitionend', animationEnd);
+            element.addEventListener('transitionend', transitionEnd);
         });
     }, []);
 

@@ -23,8 +23,8 @@
 
     &-NotFound {
         margin: auto;
-        
-        >p {
+
+        > p {
             text-align: center;
             font-size: 2rem;
         }
@@ -44,14 +44,14 @@
         width: fit-content;
         margin-inline-start: -0.5rem;
 
-        >a {
+        > a {
             font-size: 1rem;
             text-decoration: none;
             display: flex;
             align-items: center;
             transition: color 0.2s;
 
-            >.Icon {
+            > .Icon {
                 width: 2rem;
                 height: 2rem;
                 rotate: -90deg;
@@ -60,8 +60,8 @@
             &:hover {
                 color: var(--color-theme);
 
-                >.Icon {
-                    svg>path {
+                > .Icon {
+                    svg > path {
                         fill: var(--color-theme);
                     }
                 }
@@ -72,18 +72,18 @@
     &-Content {
         margin-block-end: 5rem;
 
-        >a {
-            >.Icon {
+        > a {
+            > .Icon {
                 padding: 0;
                 width: 2.25rem;
                 height: 2.25rem;
             }
         }
 
-        >div:nth-of-type(1) {
+        > div:nth-of-type(1) {
             flex: 1;
 
-            >h1 {
+            > h1 {
                 font-size: 3rem;
                 margin-block-start: 0;
                 margin-block-end: 2rem;
@@ -103,19 +103,23 @@
             }
         }
 
-        >div:nth-of-type(2) {
+        > div:nth-of-type(2) {
             flex: 1;
             aspect-ratio: 1.46 / 1;
         }
 
-        &>section:not(:first-child) {
+        & > section:not(:first-child) {
             margin-block-start: 2rem;
         }
 
         .Row0 {
-            >img {
+            > img {
                 width: 100%;
                 height: 100%;
+            }
+
+            > a {
+                margin-block-end: 1rem;
             }
 
             .GitHub {
@@ -123,13 +127,13 @@
                 width: fit-content;
                 align-items: center;
                 gap: 0.5rem;
-        
+
                 &:hover {
                     color: var(--color-theme);
                     text-decoration: underline;
                 }
-        
-                >.Icon {
+
+                > .Icon {
                     padding: 0;
                     width: 2rem;
                     height: 2rem;
@@ -145,7 +149,7 @@
             margin-inline: calc(-1 * var(--content-padding));
         }
 
-        >img {
+        > img {
             @include desktop {
                 border-radius: 0.5rem;
             }
@@ -173,7 +177,7 @@
             margin-block-end: 2rem;
         }
 
-        >a {
+        > a {
             display: flex;
             align-items: center;
             gap: 1rem;
@@ -185,7 +189,7 @@
             }
 
             &:hover {
-                >span {
+                > span {
                     color: var(--color-theme);
                 }
 
@@ -194,7 +198,7 @@
                 }
             }
 
-            >.Icon {
+            > .Icon {
                 padding: 0;
                 width: 2.25rem;
                 height: 2.25rem;
@@ -209,7 +213,7 @@
         row-gap: 0.5rem;
         min-height: 2rem;
 
-        >span {
+        > span {
             display: flex;
             align-items: center;
             padding-inline: 0.5rem;
@@ -237,14 +241,13 @@
         padding-inline-end: 3rem;
         padding-block: 0;
 
-        >div {
+        > div {
             opacity: 0;
             transition: opacity 0.2s;
         }
 
-
         &_IS_LOADED {
-            >div {
+            > div {
                 opacity: 1;
             }
         }
@@ -254,7 +257,7 @@
         ul {
             font-size: 1rem;
 
-            >li {
+            > li {
                 margin-block: 0.25em;
             }
         }
@@ -314,10 +317,12 @@
         width: 100%;
         height: 2rem;
         margin-block: 2rem;
-        background-image: linear-gradient(90deg,
-                var(--color-background-primary),
-                var(--color-background-secondary),
-                var(--color-background-primary));
+        background-image: linear-gradient(
+            90deg,
+            var(--color-background-primary),
+            var(--color-background-secondary),
+            var(--color-background-primary)
+        );
 
         @include not-prefers-reduced-motion {
             background-size: 100%;

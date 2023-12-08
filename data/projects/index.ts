@@ -1,11 +1,11 @@
 import image__balazsburjan from '@media/webp/balazs-burjan.webp';
 import image__sdl from '@media/webp/sdl.webp';
-import image__react_template from '@media/webp/react-template.webp';
+import image__algorithms from '@media/webp/algorithms.webp';
 import image__babel_plugin from '@media/webp/babel-plugin.webp';
 import image__stardust_dark from '@media/webp/stardust-dark.webp';
-import image__family_photos from '@media/webp/family-photos.webp';
+import image__photos from '@media/webp/photos.webp';
 import image__eshop from '@media/webp/eshop.webp';
-import image__tankstats from '@media/webp/tankstats.webp';
+import image__messages from '@media/webp/messages.webp';
 import type { StaticImageData } from 'next/image';
 
 export enum Tag {
@@ -51,8 +51,7 @@ export type Project = {
     slug: string,
     thumbnail: {
         image: StaticImageData,
-        hash: string,
-        quality: StaticImageData
+        showOnProjectPage?: boolean
     }
 };
 
@@ -64,50 +63,40 @@ export type ProjectProps = {
 export const projects = [
     {
         title: 'Algorithm Visualizer',
-        description: 'An app that aims to visualize how pathfinding algorithms work.',
+        description:
+            'An app that aims to visualize how pathfinding algorithms work.',
         weight: Weight.HIGH,
-        tags: [
-            Tag.TS,
-            Tag.NEXT,
-            Tag.TW
-        ],
+        tags: [Tag.TS, Tag.NEXT, Tag.TW],
         thumbnail: {
-            image: image__react_template,
-            hash: 'W25OQqWB00jZx]WB-;WBM{jZofay00R*~qjZM{of4nR*?vjZRjof'
+            image: image__algorithms,
+            showOnProjectPage: false
         },
-        github: 'https://github.com/bigbali/react-template',
+        github: 'https://github.com/bigbali/balazs-burjan/tree/main/packages/algorithms',
         slug: 'algorithm-visualizer'
     },
     {
         title: 'Photos',
-        description: 'An outlet through which my family can browse and download photos.',
+        description:
+            'An outlet through which my family can browse and download photos.',
         weight: Weight.HIGH,
-        tags: [
-            Tag.TS,
-            Tag.SVELTEKIT,
-            Tag.TW
-        ],
+        tags: [Tag.TS, Tag.SVELTEKIT, Tag.TW],
         slug: 'photos',
-        thumbnail: { // TODO
-            image: '' as unknown as StaticImageData,
-            hash: ''
-        }
+        thumbnail: {
+            image: image__photos
+        },
+        github: 'https://github.com/bigbali/balazs-burjan/tree/main/apps/photos'
     },
     {
         title: 'Messages',
-        description: 'An app that allows one to log in, post a message, edit it, delete it, then log out.',
+        description:
+            'An app that allows one to log in, post a message, edit it, delete it, then log out.',
         weight: Weight.HIGH,
-        tags: [
-            Tag.TS,
-            Tag.NEXT,
-            Tag.TW,
-            Tag.TRPC
-        ],
+        tags: [Tag.TS, Tag.NEXT, Tag.TW, Tag.TRPC],
         thumbnail: {
-            image: image__balazsburjan,
-            hash: 'WYQcn}_3M_M{%MRPNGxuaxRks:WB~pD%ozxtRPoz%2M{a}t7R*oM'
+            image: image__messages,
+            showOnProjectPage: false
         },
-        github: 'https://github.com/bigbali/website',
+        github: 'https://github.com/bigbali/balazs-burjan/tree/main/packages/messages',
         slug: 'messages'
     },
     {
@@ -115,98 +104,45 @@ export const projects = [
         description: `A plugin for the Babel JavaScript transpiler that creates reactive 
                       classNames from custom 'block', 'elem', and 'mods' attributes.`,
         weight: Weight.HIGH,
-        tags: [
-            Tag.TS,
-            Tag.BABEL,
-            Tag.NODE
-        ],
+        tags: [Tag.TS, Tag.BABEL, Tag.NODE],
         thumbnail: {
-            image: image__babel_plugin,
-            hash: 'C26[2IIUMx_200-pxaD%'
+            image: image__babel_plugin
         },
         github: 'https://github.com/bigbali/babel-plugin-transform-jsx-bem-attributes',
         slug: 'babel-plugin'
     },
     {
         title: 'YouTube Video Downloader',
-        description: 'A Windows application to allow batch downloading of music videos from YouTube.',
+        description:
+            'A Windows application to allow batch downloading of music videos from YouTube.',
         weight: Weight.HIGH,
-        tags: [
-            Tag.CSHARP,
-            Tag.WPF,
-            Tag.DOTNET
-        ],
+        tags: [Tag.CSHARP, Tag.WPF, Tag.DOTNET],
         thumbnail: {
-            image: image__sdl,
-            hash: 'E87UF=oct6s:oJoL~qjZj[j@f6js',
-            quality: image__sdl
+            image: image__sdl
         },
         github: 'https://github.com/bigbali/sdl-csharp',
         slug: 'youtube-video-downloader'
     },
     {
         title: 'Stardust Dark VS Code Theme',
-        description: 'A simplistic dark theme for Visual Studio Code that is published to the Visual Studio Marketplace.',
+        description:
+            'A simplistic dark theme for Visual Studio Code that is published to the Visual Studio Marketplace.',
         weight: Weight.HIGH,
-        tags: [
-            Tag.JS
-        ],
+        tags: [Tag.JS],
         thumbnail: {
-            image: image__stardust_dark,
-            hash: 'W13l2M^lVaITI-NF$x%1ahR+WEaMt7slxbX9aenOW9bcR:SNbWoI'
+            image: image__stardust_dark
         },
         github: 'https://github.com/bigbali/stardust-dark-vscode',
         page: 'https://marketplace.visualstudio.com/items?itemName=Starcrusher.stardust-dark',
         slug: 'stardust-dark'
     },
-    // {
-    //     title: 'Family Photos',
-    //     description: `The original photos app built with Django.
-    //                   It was hosted on Heroku's Free Tier dyno until it was discontinued and used AWS S3 for storage.`,
-    //     weight: Weight.MEDIUM,
-    //     tags: [
-    //         Tag.PYTHON,
-    //         Tag.DJANGO,
-    //         Tag.AWS_S3,
-    //         Tag.HEROKU
-    //     ],
-    //     thumbnail: {
-    //         image: image__family_photos,
-    //         hash: 'WAFYrv5W==Z}.T~WS8xtM}f,RiM{x]w[o}tSemIUJD%1IVRjadS5'
-    //     },
-    //     slug: 'family-photos'
-    // },
-    // {
-    //     title: 'eShop',
-    //     description: `My final project for Harvard University's CS50 course. It's an e-commerce application
-    //                   built with Flask and MySQL.`,
-    //     weight: Weight.MEDIUM,
-    //     tags: [
-    //         Tag.PYTHON,
-    //         Tag.FLASK,
-    //         Tag.MYSQL,
-    //         Tag.JS,
-    //         Tag.SASS
-    //     ],
-    //     thumbnail: {
-    //         image: image__eshop,
-    //         hash: 'WKQ0R4oH-;D%R*WAE4jERjWCt8oe?^ofM|s:aej]-otRozodM_WC'
-    //     },
-    //     github: 'https://github.com/bigbali/eshop',
-    //     slug: 'eshop'
-    // },
     {
         title: 'balazsburjan.com',
         description: 'This website.',
         weight: Weight.MEDIUM,
-        tags: [
-            Tag.TS,
-            Tag.NEXT,
-            Tag.SASS
-        ],
+        tags: [Tag.TS, Tag.NEXT, Tag.SASS],
         thumbnail: {
-            image: image__eshop,
-            hash: 'WKQ0R4oH-;D%R*WAE4jERjWCt8oe?^ofM|s:aej]-otRozodM_WC'
+            image: image__eshop
         },
         github: 'https://github.com/bigbali/eshop',
         slug: 'balazs-burjan'

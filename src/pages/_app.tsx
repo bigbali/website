@@ -32,6 +32,12 @@ export default function App({ Component, pageProps, router }: AppProps) {
         return () => ScrollAnimationObserver?.disconnect();
     }, [router.asPath]);
 
+    useEffect(() => { // after transition on initial load is skipped, allow the rest of the animations
+        const timeout = setTimeout(() => document.querySelector('body')?.classList?.remove('no-animation'), 200);
+
+        return () => clearTimeout(timeout);
+    }, []);
+
     return (
         <Layout ref={pageWrapperRef}>
             {/*

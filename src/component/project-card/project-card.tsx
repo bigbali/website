@@ -61,7 +61,7 @@ const ProjectCard = ({
                     <Image
                         src={thumbnail.image}
                         alt={title}
-                        // placeholder='blur'
+                        placeholder='blur'
                         onLoad={() => setIsReady(true)}
                     />
                 </Link>

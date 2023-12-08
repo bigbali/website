@@ -24,7 +24,7 @@
             padding-block-start: 5rem;
         }
 
-        >h1 {
+        > h1 {
             font-size: 4rem;
             font-weight: 600;
             margin-block: 0;
@@ -33,7 +33,7 @@
                 font-size: 2.5rem;
             }
 
-            >span {
+            > span {
                 position: relative;
                 font-size: 5rem;
                 font-weight: 700;
@@ -55,13 +55,13 @@
                     border-block-end: 1px solid var(--color-border);
                 }
 
-                >span {
+                > span {
                     color: var(--color-theme);
                 }
             }
         }
 
-        >h2 {
+        > h2 {
             margin-block-start: 2rem;
             margin-block-end: 0;
             font-weight: 400;
@@ -71,13 +71,13 @@
                 font-size: 2.25rem;
             }
 
-            >span {
+            > span {
                 font-weight: 600;
                 color: inherit;
             }
         }
 
-        >p {
+        > p {
             margin-block-start: 1rem;
             font-size: 1.75rem;
             font-weight: 400;
@@ -109,18 +109,18 @@
             padding-inline-end: 5rem;
         }
 
-        >div {
+        > div {
             display: flex;
             overflow: hidden;
 
-            >canvas {
+            > canvas {
                 pointer-events: none;
                 margin: auto;
 
                 // animate in from jsx
                 opacity: 0;
                 transition: opacity 0.5s;
-    
+
                 @include mobile {
                     width: 95% !important;
                     height: auto !important;
@@ -128,7 +128,7 @@
             }
         }
 
-        >img {
+        > img {
             height: 100%;
             width: 100%;
             object-fit: contain;
@@ -151,8 +151,8 @@
             place-items: center;
             width: 100%;
             height: 100%;
-           
-            &>.Icon {
+
+            & > .Icon {
                 width: 3rem;
                 height: 3rem;
                 animation: rotate;
@@ -174,23 +174,24 @@
 
     .landing-initial-state {
         opacity: 0;
-        translate: 0 -10rem;
+        translate: -10rem 0;
         scale: 0.9;
         filter: blur(8px);
     }
 
-    .landing-animation:not(.animation-finished) {
+    .landing-animation:not(.animation-done) {
+        transition: opacity, translate, scale, filter;
+        transition-duration: 0.5s;
+        transition-timing-function: ease-out;
+        transition-delay: 0.1s;
         opacity: 1;
         translate: 0 0;
         scale: 1;
         filter: blur(0);
-        transition: opacity, translate, scale, filter;
-        transition-duration: 0.4s;
-        transition-timing-function: ease-out;
 
         @for $i from 1 through 3 {
             &:nth-child(#{$i}) {
-                transition-delay: 300 + ($i * 100ms);
+                transition-delay: 100 + ($i * 150ms);
             }
         }
     }
@@ -198,19 +199,5 @@
     .highlight {
         color: inherit;
         font-weight: 600;
-    }
-}
-
-@keyframes initial {
-    from {
-        translate: 0 -10rem;
-        scale: 0.9;
-        opacity: 0;
-    }
-
-    to {
-        translate: 0 0;
-        scale: 1;
-        opacity: 1;
     }
 }
