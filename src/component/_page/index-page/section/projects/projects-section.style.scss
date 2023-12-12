@@ -6,7 +6,7 @@
         margin-block-end: 3rem;
     }
 
-    >h1 {
+    > h1 {
         display: inline-block;
         margin-block: 0;
         font-size: 3rem;
@@ -20,7 +20,7 @@
             inset-block-end: -1rem;
         }
     }
-    
+
     & .Cards {
         margin-block-start: 8rem;
 
@@ -29,7 +29,7 @@
         }
 
         @include mobile {
-            margin-block-start: 2rem;
+            margin-block-start: 4rem;
         }
 
         &-ShowMore {
@@ -37,7 +37,7 @@
             justify-content: center;
             margin-block-start: 5rem;
 
-            >a {
+            > a {
                 padding-inline: 1.5rem;
                 padding-block: 1rem;
                 font-size: 1.25rem;

@@ -75,6 +75,18 @@ export const projects = [
         slug: 'algorithm-visualizer'
     },
     {
+        title: 'YouTube Video Downloader',
+        description:
+            'A Windows application to allow batch downloading of music videos from YouTube.',
+        weight: Weight.HIGH,
+        tags: [Tag.CSHARP, Tag.WPF, Tag.DOTNET],
+        thumbnail: {
+            image: image__sdl
+        },
+        github: 'https://github.com/bigbali/sdl-csharp',
+        slug: 'youtube-video-downloader'
+    },
+    {
         title: 'Photos',
         description:
             'An outlet through which my family can browse and download photos.',
@@ -110,18 +122,6 @@ export const projects = [
         },
         github: 'https://github.com/bigbali/babel-plugin-transform-jsx-bem-attributes',
         slug: 'babel-plugin'
-    },
-    {
-        title: 'YouTube Video Downloader',
-        description:
-            'A Windows application to allow batch downloading of music videos from YouTube.',
-        weight: Weight.HIGH,
-        tags: [Tag.CSHARP, Tag.WPF, Tag.DOTNET],
-        thumbnail: {
-            image: image__sdl
-        },
-        github: 'https://github.com/bigbali/sdl-csharp',
-        slug: 'youtube-video-downloader'
     },
     {
         title: 'Stardust Dark VS Code Theme',

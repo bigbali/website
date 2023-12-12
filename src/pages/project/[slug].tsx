@@ -1,6 +1,6 @@
 import { type GetStaticPropsContext, type PreviewData } from 'next';
 import Page from '@page';
-import projects, { type ProjectProps } from '@data/projects';
+import projects, { type ProjectProps } from 'src/projects';
 
 export const getStaticPaths = async () => {
     return {

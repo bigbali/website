@@ -1,4 +1,4 @@
-import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useState } from 'react';
+import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { SPEObject } from '@splinetool/react-spline';
 import type { Application } from '@splinetool/runtime';
 import { type Application as SplineApplication } from '@splinetool/runtime';
@@ -12,6 +12,9 @@ import img__spline_light_mobile from '@media/webp/spline-light-mobile.webp';
 import img__spline_dark_mobile from '@media/webp/spline-dark-mobile.webp';
 import img__spline_light_desktop from '@media/webp/spline-light-desktop.webp';
 import img__spline_dark_desktop from '@media/webp/spline-dark-desktop.webp';
+
+import img__spline_dark_loading from '@media/webp/spline-dark-loading.webp';
+import img__spline_light_loading from '@media/webp/spline-light-loading.webp';
 
 type Spline = {
     app: Application | null;
@@ -89,8 +92,15 @@ const SplineWEBP = {
 };
 
 const Fallback = () => {
+    const theme = useSettings(store => store.theme);
+
     return (
         <div block='Fallback'>
+            <Image
+                src={theme === Theme.DARK ? img__spline_dark_loading : img__spline_light_loading}
+                placeholder='blur'
+                alt='Loading 3D scene, please wait...'
+            />
             <Loader />
         </div>
     );
@@ -129,10 +139,11 @@ const CustomSpline = ({ deferRendering }: {deferRendering: boolean}) => {
     const desktop = useDevice((store) => store.isDesktop);
     const [fallback, setFallback] = useState(false);
     const [loaded, setLoaded] = useState(false);
+    const unloadRef = useRef<() => void>();
 
     const onLoad = useCallback((app: SplineApplication) => {
         setLoaded(true);
-        load(app);
+        unloadRef.current = load(app);
     }, []);
 
     useEffect(() => {
@@ -147,6 +158,8 @@ const CustomSpline = ({ deferRendering }: {deferRendering: boolean}) => {
         if (loaded && spline.canvas) {
             spline.canvas.style.opacity = '1';
         }
+
+        return unloadRef.current;
     }, [loaded, deferRendering]);
 
     const SplineMemo = useMemo(() => {
@@ -189,7 +202,7 @@ const CustomSpline = ({ deferRendering }: {deferRendering: boolean}) => {
             src={src}
             priority
             alt={`
-                    An image of the 3D animation you would see on a desktop device,
+                    An image of the 3D scene you would see on a desktop device,
                     but alas, most mobile devices aren't powerful enough for that.
                 `}
         />

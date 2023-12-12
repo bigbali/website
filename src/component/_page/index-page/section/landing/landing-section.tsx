@@ -3,7 +3,8 @@ import {
     useEffect,
     type RefObject,
     useState,
-    useCallback
+    useCallback,
+    TransitionEvent
 } from 'react';
 import dynamic from 'next/dynamic';
 import './landing-section.style';
@@ -22,17 +23,17 @@ const Landing = ({ refFromParent }: LandingProps) => {
         const animated = document.querySelectorAll('.landing-initial-state');
 
         animated.forEach((element, index) => {
-            const transitionEnd = () => {
+            const transitionEnd = (e: Event) => {
                 if (index + 1 === animated.length) {
                     setDeferSplineRender(false);
                 }
 
                 element.classList.add('animation-finished');
-                element.removeEventListener('transitionend', transitionEnd);
+                element.removeEventListener('animationend', transitionEnd);
             };
 
             element.classList.replace('landing-initial-state', 'landing-animation');
-            element.addEventListener('transitionend', transitionEnd);
+            element.addEventListener('animationend', transitionEnd);
         });
     }, []);
 

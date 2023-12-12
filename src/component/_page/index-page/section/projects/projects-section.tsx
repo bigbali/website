@@ -1,6 +1,6 @@
 import type { RefObject } from 'react';
 import { memo } from 'react';
-import projects from 'data/projects';
+import projects from 'src/projects';
 import ProjectCard from '@component/project-card';
 import './projects-section.style';
 
