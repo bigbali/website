@@ -142,7 +142,7 @@ const About = ({
                 <figure elem='Content-Figure' ref={figureRef}>
                     <div ref={imageRef} className='animate-on-scroll'>
                         <Cat />
-                        <Image src={Balazs} alt='Portrait of Balázs' />
+                        <Image src={Balazs} alt='Portrait of Balázs' placeholder='blur' />
                         <div className='location'>
                             <div />
                             <a

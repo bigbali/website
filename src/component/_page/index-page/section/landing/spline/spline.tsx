@@ -201,6 +201,7 @@ const CustomSpline = ({ deferRendering }: {deferRendering: boolean}) => {
         <Image
             src={src}
             priority
+            placeholder='blur'
             alt={`
                     An image of the 3D scene you would see on a desktop device,
                     but alas, most mobile devices aren't powerful enough for that.

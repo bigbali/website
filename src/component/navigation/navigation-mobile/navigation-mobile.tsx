@@ -20,13 +20,13 @@ const NavigationMobile = ({ listProps }: NavigationElementProps) => {
 
     return (
         <TransitionGroup component={null}>
-            <div
+            <button
                 block='Navigation'
                 elem='Expander'
                 onClick={() => setIsExpanded((state) => !state)}
             >
                 <HamburgerMenu isExpanded={isExpanded} />
-            </div>
+            </button>
             {isExpanded && (
                 <Transition
                     in
@@ -50,9 +50,9 @@ const NavigationMobile = ({ listProps }: NavigationElementProps) => {
                                 <Settings isMobile />
                             </div>
                         </div>
-                        <div elem='Exit' onClick={closeMenu}>
+                        <button elem='Exit' onClick={closeMenu}>
                             <Close />
-                        </div>
+                        </button>
                     </div>
                 </Transition>
             )}
