@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { type ProjectProps } from '@data/projects';
+import { type ProjectProps } from 'src/projects';
 import { Chevron, GitHub } from '@component/icon';
 import './project-page.style';
 
