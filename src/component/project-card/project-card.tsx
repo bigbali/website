@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import type { Project } from 'data/projects';
+import type { Project } from 'src/projects';
 import { GitHub, File } from '@component/icon';
 import './project-card.style';
 

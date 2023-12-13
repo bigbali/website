@@ -1,4 +1,4 @@
-import { SVGProps } from 'react';
+import type { SVGProps } from 'react';
 import Base from '../_base';
 
 const Cookie = (props: SVGProps<SVGSVGElement>) => {

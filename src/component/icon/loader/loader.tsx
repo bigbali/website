@@ -1,4 +1,4 @@
-import { SVGProps } from 'react';
+import type { SVGProps } from 'react';
 import Base from '../_base';
 
 const Loader = (props: SVGProps<SVGSVGElement>) => {

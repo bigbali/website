@@ -1,4 +1,3 @@
-import image__balazsburjan from '@media/webp/balazs-burjan.webp';
 import image__sdl from '@media/webp/sdl.webp';
 import image__algorithms from '@media/webp/algorithms.webp';
 import image__babel_plugin from '@media/webp/babel-plugin.webp';

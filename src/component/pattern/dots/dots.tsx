@@ -1,4 +1,4 @@
-import { SVGProps } from 'react';
+import type { SVGProps } from 'react';
 import './dots.style';
 
 const Dots = (props: SVGProps<SVGSVGElement>) => {
