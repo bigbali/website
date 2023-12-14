@@ -92,15 +92,8 @@ const SplineWEBP = {
 };
 
 const Fallback = () => {
-    const theme = useSettings(store => store.theme);
-
     return (
         <div block='Fallback'>
-            <Image
-                src={theme === Theme.DARK ? img__spline_dark_loading : img__spline_light_loading}
-                placeholder='blur'
-                alt='Loading 3D scene, please wait...'
-            />
             <Loader />
         </div>
     );

@@ -3140,13 +3140,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@splinetool/runtime@npm:^0.9.517":
-  version: 0.9.517
-  resolution: "@splinetool/runtime@npm:0.9.517"
+"@splinetool/runtime@npm:^0.9.522":
+  version: 0.9.522
+  resolution: "@splinetool/runtime@npm:0.9.522"
   dependencies:
     on-change: ^4.0.0
     semver-compare: ^1.0.0
-  checksum: 1b9be173be5382eaf5cd26554de775bb7e8d9f85b564823462bfcc2a83e22e18daf14d124a31a9b1fe394f90e2f1c6d4983f4980ae3e0f9669ca2ed1a303b1cd
+  checksum: f3c2b0c96a9b0a23a8ceec5c2dc3404b5cac3314394ee116cc7b6ab41af627bde1a357b10a6259b541210f64621ab154fba1a684281f62884151b9514a14616b
   languageName: node
   linkType: hard
 
@@ -3789,7 +3789,7 @@ __metadata:
     "@next/bundle-analyzer": ^14.0.3
     "@redux-devtools/extension": ^3.2.4
     "@splinetool/react-spline": ^2.2.6
-    "@splinetool/runtime": ^0.9.517
+    "@splinetool/runtime": ^0.9.522
     "@testing-library/jest-dom": ^5.16.2
     "@testing-library/react": ^13.3.0
     "@types/jest": ^28.1.3

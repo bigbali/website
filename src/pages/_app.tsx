@@ -8,6 +8,15 @@ import Layout from '@component/layout';
 import Transition from '@component/transition';
 import '@style/main';
 
+// we need to apply theme as early as possible to minimize flashing
+if (typeof window !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', () => {
+        applySettings({
+            ...useSettings.getState()
+        });
+    });
+}
+
 export default function App({ Component, pageProps, router }: AppProps) {
     const pageWrapperRef = useRef<HTMLElement>(null);
     const theme = useSettings((state) => state.theme);
@@ -16,7 +25,6 @@ export default function App({ Component, pageProps, router }: AppProps) {
     const contrast = useSettings((state) => state.contrast);
 
     useEffect(() => {
-        // When mounted, set style of body and change CSS variables
         applySettings({
             theme,
             accentColor,
