@@ -13,9 +13,6 @@ import img__spline_dark_mobile from '@media/webp/spline-dark-mobile.webp';
 import img__spline_light_desktop from '@media/webp/spline-light-desktop.webp';
 import img__spline_dark_desktop from '@media/webp/spline-dark-desktop.webp';
 
-import img__spline_dark_loading from '@media/webp/spline-dark-loading.webp';
-import img__spline_light_loading from '@media/webp/spline-light-loading.webp';
-
 type Spline = {
     app: Application | null;
     group: SPEObject | null;
@@ -141,11 +138,14 @@ const CustomSpline = ({ deferRendering }: {deferRendering: boolean}) => {
 
     useEffect(() => {
         updateSplineBackgroundColor();
-
-        const timeout = setTimeout(() => setFallback(loaded), TIMEOUT);
-
-        return () => clearTimeout(timeout);
     }, [theme]);
+
+    useEffect(() => {
+        if (!loaded) {
+            const timeout = setTimeout(() => setFallback(true), TIMEOUT);
+            return () => clearTimeout(timeout);
+        }
+    }, [loaded]);
 
     useEffect(() => {
         if (loaded && spline.canvas) {
@@ -156,27 +156,28 @@ const CustomSpline = ({ deferRendering }: {deferRendering: boolean}) => {
     }, [loaded, deferRendering]);
 
     const SplineMemo = useMemo(() => {
-        if (desktop) {
-            // NOTE we need to keep this from lagging the browser during the initial animations,
-            // so we start rendering it only after the animations are done
-            const Spline = lazy(() => import('@splinetool/react-spline').then((module) => {
-                return new Promise((resolve) => {
-                    resolver = () => resolve(module as any);
-                    setTimeout(() => {
-                        resolve(module as any);
-                    }, TIMEOUT);
-                });
-            }));
+        try {
+            if (desktop) {
+                // NOTE we need to keep this from lagging the browser during the initial animations,
+                // so we start rendering it only after the animations are done
+                const Spline = lazy(() => import('@splinetool/react-spline').then((module) => {
+                    return new Promise((resolve) => {
+                        resolver = () => resolve(module as any);
+                    });
+                }));
 
-            return (
-                <Suspense fallback={<Fallback />}>
-                    <Spline
-                        onLoad={onLoad}
-                        // scene='https://prod.spline.design/2oNTUNbzmdhEMPUo/scene.splinecode'
-                        scene='/scene.splinecode'
-                    />
-                </Suspense>
-            );
+                return (
+                    <Suspense fallback={<Fallback />}>
+                        <Spline
+                            onLoad={onLoad}
+                            // scene='https://prod.spline.design/2oNTUNbzmdhEMPUo/scene.splinecode'
+                            scene='/scene.splinecode'
+                        />
+                    </Suspense>
+                );
+            }
+        } catch {
+            setFallback(true);
         }
     }, [desktop]);
 
