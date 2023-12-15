@@ -1,7 +1,13 @@
 .ProjectPage {
     padding-inline: var(--content-padding);
     padding-block-start: calc(var(--header-height) + 2rem);
-    min-height: calc(100vh - var(--footer-height));
+    min-height: calc(100dvh - var(--footer-height));
+    width: fit-content;
+    margin-inline: auto;
+
+    @include from-fhd {
+        max-width: 75%;
+    }
 
     .ProjectPage-Thumbnail {
         @include mobile {
@@ -11,17 +17,16 @@
 
     &:has(.ProjectPage-NotFound) {
         position: relative;
+        display: flex;
+        flex-direction: column;
     }
 
     &-NotFound {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        inset: 0;
+        margin: auto;
 
-        >p {
+        > p {
             text-align: center;
+            font-size: 2rem;
         }
     }
 
@@ -39,14 +44,14 @@
         width: fit-content;
         margin-inline-start: -0.5rem;
 
-        >a {
+        > a {
             font-size: 1rem;
             text-decoration: none;
             display: flex;
             align-items: center;
             transition: color 0.2s;
 
-            >.Icon {
+            > .Icon {
                 width: 2rem;
                 height: 2rem;
                 rotate: -90deg;
@@ -55,8 +60,8 @@
             &:hover {
                 color: var(--color-theme);
 
-                >.Icon {
-                    svg>path {
+                > .Icon {
+                    svg > path {
                         fill: var(--color-theme);
                     }
                 }
@@ -65,23 +70,20 @@
     }
 
     &-Content {
-        display: flex;
-        justify-content: space-between;
-        margin-block-end: 2rem;
-        gap: 1rem;
+        margin-block-end: 5rem;
 
-        >a {
-            >.Icon {
+        > a {
+            > .Icon {
                 padding: 0;
                 width: 2.25rem;
                 height: 2.25rem;
             }
         }
 
-        >div:nth-of-type(1) {
+        > div:nth-of-type(1) {
             flex: 1;
 
-            >h1 {
+            > h1 {
                 font-size: 3rem;
                 margin-block-start: 0;
                 margin-block-end: 2rem;
@@ -101,9 +103,42 @@
             }
         }
 
-        >div:nth-of-type(2) {
+        > div:nth-of-type(2) {
             flex: 1;
             aspect-ratio: 1.46 / 1;
+        }
+
+        & > section:not(:first-child) {
+            margin-block-start: 2rem;
+        }
+
+        .Row0 {
+            > img {
+                width: 100%;
+                height: 100%;
+            }
+
+            > a {
+                margin-block-end: 1rem;
+            }
+
+            .GitHub {
+                display: flex;
+                width: fit-content;
+                align-items: center;
+                gap: 0.5rem;
+
+                &:hover {
+                    color: var(--color-theme);
+                    text-decoration: underline;
+                }
+
+                > .Icon {
+                    padding: 0;
+                    width: 2rem;
+                    height: 2rem;
+                }
+            }
         }
     }
 
@@ -114,7 +149,7 @@
             margin-inline: calc(-1 * var(--content-padding));
         }
 
-        >img {
+        > img {
             @include desktop {
                 border-radius: 0.5rem;
             }
@@ -142,7 +177,7 @@
             margin-block-end: 2rem;
         }
 
-        >a {
+        > a {
             display: flex;
             align-items: center;
             gap: 1rem;
@@ -154,7 +189,7 @@
             }
 
             &:hover {
-                >span {
+                > span {
                     color: var(--color-theme);
                 }
 
@@ -163,7 +198,7 @@
                 }
             }
 
-            >.Icon {
+            > .Icon {
                 padding: 0;
                 width: 2.25rem;
                 height: 2.25rem;
@@ -178,7 +213,7 @@
         row-gap: 0.5rem;
         min-height: 2rem;
 
-        >span {
+        > span {
             display: flex;
             align-items: center;
             padding-inline: 0.5rem;
@@ -206,14 +241,13 @@
         padding-inline-end: 3rem;
         padding-block: 0;
 
-        >div {
+        > div {
             opacity: 0;
             transition: opacity 0.2s;
         }
 
-
         &_IS_LOADED {
-            >div {
+            > div {
                 opacity: 1;
             }
         }
@@ -223,7 +257,7 @@
         ul {
             font-size: 1rem;
 
-            >li {
+            > li {
                 margin-block: 0.25em;
             }
         }
@@ -283,10 +317,12 @@
         width: 100%;
         height: 2rem;
         margin-block: 2rem;
-        background-image: linear-gradient(90deg,
-                var(--color-background-primary),
-                var(--color-background-secondary),
-                var(--color-background-primary));
+        background-image: linear-gradient(
+            90deg,
+            var(--color-background-primary),
+            var(--color-background-secondary),
+            var(--color-background-primary)
+        );
 
         @include not-prefers-reduced-motion {
             background-size: 100%;
@@ -295,6 +331,11 @@
             animation-iteration-count: infinite;
             animation-duration: 2s;
         }
+    }
+
+    video {
+        max-width: 100%;
+        max-height: 100%;
     }
 }
 

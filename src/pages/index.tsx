@@ -5,9 +5,7 @@ const Index = () => {
     return (
         <>
             <Head>
-                <title>
-                    Balázs Burján
-                </title>
+                <title>Balázs Burján</title>
             </Head>
             <Page.Index />
         </>

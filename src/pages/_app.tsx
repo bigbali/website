@@ -8,15 +8,23 @@ import Layout from '@component/layout';
 import Transition from '@component/transition';
 import '@style/main';
 
+// we need to apply theme as early as possible to minimize flashing
+if (typeof window !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', () => {
+        applySettings({
+            ...useSettings.getState()
+        });
+    });
+}
+
 export default function App({ Component, pageProps, router }: AppProps) {
     const pageWrapperRef = useRef<HTMLElement>(null);
-    const theme = useSettings(state => state.theme);
-    const accentColor = useSettings(state => state.accentColor);
-    const fontSize = useSettings(state => state.fontSize);
-    const contrast = useSettings(state => state.contrast);
+    const theme = useSettings((state) => state.theme);
+    const accentColor = useSettings((state) => state.accentColor);
+    const fontSize = useSettings((state) => state.fontSize);
+    const contrast = useSettings((state) => state.contrast);
 
     useEffect(() => {
-        // When mounted, set style of body and change CSS variables
         applySettings({
             theme,
             accentColor,
@@ -32,6 +40,12 @@ export default function App({ Component, pageProps, router }: AppProps) {
         return () => ScrollAnimationObserver?.disconnect();
     }, [router.asPath]);
 
+    useEffect(() => { // after transition on initial load is skipped, allow the rest of the animations
+        const timeout = setTimeout(() => document.querySelector('body')?.classList?.remove('no-animation'), 200);
+
+        return () => clearTimeout(timeout);
+    }, []);
+
     return (
         <Layout ref={pageWrapperRef}>
             {/*
@@ -43,7 +57,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
                     //@ts-ignore (it's expecting RefObject<undefined>, which clearly isn't sensible)
                     nodeRef={pageWrapperRef}
                     key={router.asPath}
-                    classNames="cross-page"
+                    classNames='cross-page'
                     exit={false}
                     in={false}
                     enter={router.asPath !== '/'}

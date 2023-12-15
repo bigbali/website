@@ -1,24 +1,18 @@
-import {
-    useCallback,
-    useEffect,
-    useState
-} from 'react';
-import Icon, {
-    Direction
-} from '@component/icon';
+import { useCallback, useEffect, useState } from 'react';
+import { Chevron, Direction } from '@component/icon';
 import './switch.style';
 
 interface SwitchProps {
-    onSwitch: (value: any) => void,
-    valueLeft?: any,
-    valueRight?: any,
-    iconLeft?: JSX.Element,
-    iconRight?: JSX.Element,
-    textLeft?: string,
-    textRight?: string,
-    label?: string,
-    externalValue?: any
-};
+    onSwitch: (value: any) => void;
+    valueLeft?: any;
+    valueRight?: any;
+    iconLeft?: JSX.Element;
+    iconRight?: JSX.Element;
+    textLeft?: string;
+    textRight?: string;
+    label?: string;
+    externalValue?: any;
+}
 
 const Switch = ({
     onSwitch,
@@ -47,43 +41,32 @@ const Switch = ({
         <button
             block='Switch'
             onClick={onClick}
-            mods={{ isSwitched: value === valueRight }}>
+            mods={{ isSwitched: value === valueRight }}
+        >
             <div elem='Value'>
                 <div elem='Value-Left'>
                     {iconLeft && ( // bem transform doesnt work here
-                        <span block='Switch-Value-Left-Icon'>
-                            {iconLeft}
-                        </span>
+                        <span block='Switch-Value-Left-Icon'>{iconLeft}</span>
                     )}
                     {textLeft && (
-                        <span block='Switch-Value-Left-Text'>
-                            {textLeft}
-                        </span>
+                        <span block='Switch-Value-Left-Text'>{textLeft}</span>
                     )}
                 </div>
                 <div elem='Value-Right'>
                     {iconRight && (
-                        <span block='Switch-Value-Right-Icon'>
-                            {iconRight}
-                        </span>
+                        <span block='Switch-Value-Right-Icon'>{iconRight}</span>
                     )}
                     {textRight && (
-                        <span block='Switch-Value-Right-Text'>
-                            {textRight}
-                        </span>
+                        <span block='Switch-Value-Right-Text'>{textRight}</span>
                     )}
                 </div>
-                <Icon.Chevron
+                <Chevron
                     direction={
-                        value === valueRight
-                            ? Direction.LEFT
-                            : Direction.RIGHT
+                        value === valueRight ? Direction.LEFT : Direction.RIGHT
                     }
                 />
             </div>
-            <p elem='Label'>
-                {label}
-            </p>
+            <p elem='Label'>{label}</p>
         </button>
     );
 };

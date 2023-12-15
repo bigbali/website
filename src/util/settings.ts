@@ -18,11 +18,10 @@ export const applySettings = ({
 
     if (accentColor) {
         body.style.setProperty('--color-theme', accentColor.value);
-    }
-    else {
+    } else {
         body.style.removeProperty('--color-theme');
     }
 
-    html.style.fontSize = `${(fontSize || 1)}em`;
+    html.style.fontSize = `${fontSize || 1}em`;
     html.style.filter = `contrast(${contrast || 1})`;
 };

@@ -1,140 +1,82 @@
-import { useEffect, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-import Image from 'next/image';
 import Head from 'next/head';
-import Link from 'next/link';
-import { useDevice } from '@store';
-import { type ProjectProps } from '@data/projects';
-import Icon from '@component/icon';
+import Image from 'next/image';
+import { type ProjectProps } from 'src/projects';
+import { Chevron, GitHub } from '@component/icon';
 import './project-page.style';
 
-export const ProjectPage = ({ project, markdown, slug }: ProjectProps) => {
-    const isMobile = useDevice(state => state.isMobile);
-    const [isMobileState, setIsMobileState] = useState(false);
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
-    // Use mobile layout only after desktop layout has been mounted
-    // to prevent hydration mismatch error
-    useEffect(() => {
-        setIsMobileState(!!isMobile);
-    }, [isMobile]);
+const page = {
+    'youtube-video-downloader': dynamic(() => import('./project/youtube-video-downloader')),
+    'algorithm-visualizer': dynamic(() => import('./project/algorithm-visualizer')),
+    'messages': dynamic(() => import('./project/messages')),
+    'babel-plugin': dynamic(() => import('./project/babel-plugin-transform-bem-attributes')),
+    'stardust-dark': dynamic(() => import('./project/stardust-dark')),
+    'balazs-burjan': dynamic(() => import('./project/balazs-burjan')),
+    'photos': dynamic(() => import('./project/photos'))
+};
+
+const Back = () => (
+    <div block='ProjectPage' elem='Back'>
+        <a href='/' title='Back'>
+            <Chevron />
+            Back
+        </a>
+    </div>
+);
+
+export const ProjectPage = ({ project, slug }: ProjectProps) => {
+    const Content = page[slug as keyof typeof page];
 
     if (!project) {
         return (
             <>
                 <Head>
-                    <title>
-                        {`Not found: ${slug}`}
-                    </title>
+                    <title>{`Not found: ${slug}`}</title>
                 </Head>
                 <div block='ProjectPage'>
-                    <div elem='Back'>
-                        <a href='/' title='Back to Home Page'>
-                            <Icon.Chevron />
-                            BACK TO HOME
-                        </a>
-                    </div>
-                    <div elem='NotFound'>
-                        <p>
-                            I couldn't find this project :(
-                        </p>
+                    <Back />
+                    <div block='ProjectPage' elem='NotFound'>
+                        <p>I couldn't find this project :(</p>
                     </div>
                 </div>
             </>
         );
     }
 
-    const {
-        title,
-        tags,
-        status,
-        github,
-        stackblitz,
-        thumbnail: {
-            image
-        }
-    } = project;
-
-    const thumbnail = (
-        <div block='ProjectPage' elem='ThumbnailWrapper'>
-            <div elem='Thumbnail'>
-                <Image
-                    src={image}
-                    alt={title}
-                    placeholder='blur'
-                    priority
-                />
-            </div>
-            <div elem='AnchorsAndTags'>
-                {github && (
-                    <a
-                        href={github}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        title='Go to GitHub page'
-                    >
-                        <Icon.GitHub />
-                        <span>
-                            See on GitHub
-                        </span>
-                    </a>
-                )}
-                {stackblitz && (
-                    <a
-                        href={stackblitz}
-                        target='_blank'
-                        rel='noopener noreferrer'
-                        title='Go to StackBlitz page'
-                    >
-                        <Icon.Stackblitz />
-                        <span>
-                            See on StackBlitz
-                        </span>
-                    </a>
-                )}
-                <div elem='Tags'>
-                    {tags.map((tag) => (
-                        <span key={tag}>
-                            {tag}
-                        </span>
-                    ))}
-                </div>
-            </div>
-        </div>
-    );
-
     return (
         <>
             <Head>
-                <title>
-                    {title}
-                </title>
+                <title>{`Project: ${project.title}`}</title>
             </Head>
             <div block='ProjectPage'>
-                <p elem='Project'>
-                    Project
-                </p>
-                <div elem='Back'>
-                    <Link href='/' title='Back to Home Page'>
-                        <Icon.Chevron />
-                        BACK TO HOME
-                    </Link>
-                </div>
+                <Back />
                 <div elem='Content'>
-                    <div>
-                        <h1>
-                            {title}
-                        </h1>
-                        <div elem='Status' title={`This project is ${status.toLowerCase()}.`}>
-                            {`Status: ${status}`}
-                        </div>
-                        {isMobileState && thumbnail}
-                        <section block='ProjectPage' elem='Markdown'>
-                            {markdown && (
-                                <ReactMarkdown children={markdown} linkTarget="_blank" />
-                            )}
-                        </section>
-                    </div>
-                    {!isMobileState && thumbnail}
+                    <section className='Row0'>
+                        <h1>{project.title}</h1>
+                        {!!project.github && (
+                            <Link
+                                href={project.github}
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                title='Go to GitHub page'
+                                className='GitHub'
+                            >
+                                <GitHub />
+                                GitHub
+                            </Link>
+                        )}
+                        {project.thumbnail.showOnProjectPage !== false && (
+                            <Image
+                                alt='Simple YouTube Video Downloader'
+                                src={project.thumbnail.image}
+                                placeholder='blur'
+                                priority
+                            />
+                        )}
+                    </section>
+                    <Content />
                 </div>
             </div>
         </>

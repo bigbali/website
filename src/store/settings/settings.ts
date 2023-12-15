@@ -33,28 +33,29 @@ export const DefaultColors = {
 };
 
 export type ColorType = {
-    name: string,
-    value: DefaultColorValue | string
+    name: string;
+    value: DefaultColorValue | string;
 };
 
 export type Color = ColorType | null;
 
 export type Settings = {
-    theme: Theme,
-    accentColor: Color | null,
-    fontSize: number,
-    contrast: number
+    theme: Theme;
+    accentColor: Color | null;
+    fontSize: number;
+    contrast: number;
 };
 
 interface SettingsStore extends Settings {
-    setTheme: (theme: Theme) => void,
-    setAccentColor: (accentColor: Color) => void,
-    setFontSize: (fontSize: number) => void,
-    setContrast: (contrast: number) => void,
-    reset: () => void
-};
+    setTheme: (theme: Theme) => void;
+    setAccentColor: (accentColor: Color) => void;
+    setFontSize: (fontSize: number) => void;
+    setContrast: (contrast: number) => void;
+    reset: () => void;
+}
 
-const isOsThemeDark = isClient && window.matchMedia('(prefers-color-scheme: dark)').matches;
+const isOsThemeDark =
+    isClient && window.matchMedia('(prefers-color-scheme: dark)').matches;
 export const defaultSettings: Settings = {
     theme: isOsThemeDark ? Theme.DARK : Theme.LIGHT,
     accentColor: null,
@@ -63,23 +64,22 @@ export const defaultSettings: Settings = {
 };
 
 const storedStateJSON = isClient && localStorage.getItem('settings');
-const storedSettings: Settings | null = (storedStateJSON && JSON.parse(storedStateJSON)) || null;
+const storedSettings: Settings | null =
+    (storedStateJSON && JSON.parse(storedStateJSON)) || null;
 const initialState: Settings = storedSettings || defaultSettings;
 
 const updateStoredState = (partialState: Partial<SettingsStore>) => {
-    const {
-        theme,
-        accentColor,
-        fontSize,
-        contrast
-    } = useSettings.getState();
-    localStorage.setItem('settings', JSON.stringify({
-        theme,
-        accentColor,
-        fontSize,
-        contrast,
-        ...partialState
-    }));
+    const { theme, accentColor, fontSize, contrast } = useSettings.getState();
+    localStorage.setItem(
+        'settings',
+        JSON.stringify({
+            theme,
+            accentColor,
+            fontSize,
+            contrast,
+            ...partialState
+        })
+    );
 };
 const resetStoredState = () => {
     localStorage.removeItem('settings');
@@ -112,11 +112,10 @@ export const useSettings = create<SettingsStore>((set) => ({
                 theme: defaultSettings.theme,
                 accentColor: defaultSettings.accentColor,
                 fontSize: defaultSettings.fontSize,
-                contrast: defaultSettings.contrast,
+                contrast: defaultSettings.contrast
             };
         });
     }
 }));
 
 export default useSettings;
-

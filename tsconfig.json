@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "es6",
+        "target": "es2022",
         "module": "ESNext",
         "allowUmdGlobalAccess": true,
         "moduleResolution": "node",
@@ -12,67 +12,28 @@
         "baseUrl": "./",
         "jsx": "preserve",
         "paths": {
-            "@style": [
-                "src/style"
-            ],
-            "@style/main": [
-                "src/style/main"
-            ],
-            "@component": [
-                "src/component"
-            ],
-            "@component/*": [
-                "src/component/*"
-            ],
-            "@page": [
-                "src/component/_page"
-            ],
-            "@page/*": [
-                "src/component/_page/*"
-            ],
-            "@store": [
-                "src/store"
-            ],
-            "@store/*": [
-                "src/store/*"
-            ],
-            "@util": [
-                "src/util/index"
-            ],
-            "@util/*": [
-                "src/util/*"
-            ],
-            "@media": [
-                "src/media"
-            ],
-            "@media/*": [
-                "src/media/*"
-            ],
-            "@data": [
-                "data"
-            ],
-            "@data/*": [
-                "data/*"
-            ]
+            "@style": ["src/style"],
+            "@style/main": ["src/style/main"],
+            "@component": ["src/component"],
+            "@component/*": ["src/component/*"],
+            "@page": ["src/component/_page"],
+            "@page/*": ["src/component/_page/*"],
+            "@store": ["src/store"],
+            "@store/*": ["src/store/*"],
+            "@util": ["src/util/index"],
+            "@util/*": ["src/util/*"],
+            "@media": ["src/media"],
+            "@media/*": ["src/media/*"],
+            "@data": ["data"],
+            "@data/*": ["data/*"]
         },
-        "lib": [
-            "dom",
-            "dom.iterable",
-            "esnext"
-        ],
+        "lib": ["dom", "dom.iterable", "esnext"],
         "skipLibCheck": true,
         "noEmit": true,
         "incremental": true,
         "isolatedModules": true,
         "forceConsistentCasingInFileNames": true
     },
-    "exclude": [
-        "build",
-        "node_modules"
-    ],
-    "include": [
-        "next-env.d.ts",
-        "**/*.ts",
-        "**/*.tsx"
-    ]
+    "exclude": ["build", "node_modules"],
+    "include": ["next-env.d.ts", "src/env.d.ts", "**/*.ts", "**/*.tsx"]
 }

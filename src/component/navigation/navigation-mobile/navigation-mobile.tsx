@@ -1,14 +1,9 @@
-import {
-    useCallback,
-    useEffect,
-    useRef,
-    useState
-} from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { TransitionGroup } from 'react-transition-group';
-import Icon from '@component/icon';
+import { Close, HamburgerMenu } from '@component/icon';
 import Transition from '@component/transition';
 import Settings from '@component/settings';
-import { NavigationElementProps } from '../navigation';
+import type { NavigationElementProps } from '../navigation';
 import NavigationList from '../navigation-list';
 import './navigation-mobile.style';
 
@@ -18,19 +13,20 @@ const NavigationMobile = ({ listProps }: NavigationElementProps) => {
 
     const closeMenu = useCallback(() => setIsExpanded(false), []);
 
-    useEffect(() => { // Disable scrolling while the menu is open
+    useEffect(() => {
+        // Disable scrolling while the menu is open
         document.body.classList.toggle('disable-scrolling', isExpanded);
     }, [isExpanded]);
 
     return (
         <TransitionGroup component={null}>
-            <div
+            <button
                 block='Navigation'
                 elem='Expander'
                 onClick={() => setIsExpanded((state) => !state)}
             >
-                <Icon.HamburgerMenu isExpanded={isExpanded} />
-            </div>
+                <HamburgerMenu isExpanded={isExpanded} />
+            </button>
             {isExpanded && (
                 <Transition
                     in
@@ -45,17 +41,18 @@ const NavigationMobile = ({ listProps }: NavigationElementProps) => {
                 >
                     <div block='Navigation' elem='Menu' ref={transitionRef}>
                         <div elem='MenuContent'>
-                            <h1 elem='Heading'>
-                                Menu
-                            </h1>
-                            <NavigationList {...listProps} onNavigationItemClickEffect={closeMenu} />
+                            <h1 elem='Heading'>Menu</h1>
+                            <NavigationList
+                                {...listProps}
+                                onNavigationItemClickEffect={closeMenu}
+                            />
                             <div elem='Settings'>
                                 <Settings isMobile />
                             </div>
                         </div>
-                        <div elem='Exit' onClick={closeMenu}>
-                            <Icon.Close />
-                        </div>
+                        <button elem='Exit' onClick={closeMenu}>
+                            <Close />
+                        </button>
                     </div>
                 </Transition>
             )}

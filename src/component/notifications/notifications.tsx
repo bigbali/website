@@ -1,9 +1,6 @@
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import {
-    NotificationStatus,
-    useNotifications
-} from '@store';
-import Icon from '@component/icon';
+import { NotificationStatus, useNotifications } from '@store';
+import { Close } from '@component/icon';
 import './notifications.style';
 
 export const Notifications = () => {
@@ -12,36 +9,35 @@ export const Notifications = () => {
         duration: 200
     });
 
-    const notificationElements = notifications.map(({ title, message, status, id }) => {
-        return (
-            <div
-                key={id}
-                block='Notification'
-                mods={{
-                    INFO: status === NotificationStatus.INFO,
-                    SUCCESS: status === NotificationStatus.SUCCESS,
-                    WARNING: status === NotificationStatus.WARNING,
-                    ERROR: status === NotificationStatus.ERROR
-                }}
-            >
-                <div elem='Content'>
-                    <h3 elem='Title'>
-                        {title}
-                    </h3>
-                    <p elem='Message'>
-                        {message}
-                    </p>
+    const notificationElements = notifications.map(
+        ({ title, message, status, id }) => {
+            return (
+                <div
+                    key={id}
+                    block='Notification'
+                    mods={{
+                        INFO: status === NotificationStatus.INFO,
+                        SUCCESS: status === NotificationStatus.SUCCESS,
+                        WARNING: status === NotificationStatus.WARNING,
+                        ERROR: status === NotificationStatus.ERROR
+                    }}
+                >
+                    <div elem='Content'>
+                        <h3 elem='Title'>{title}</h3>
+                        <p elem='Message'>{message}</p>
+                    </div>
+                    <button
+                        elem='Close'
+                        onClick={() => {
+                            hide(id);
+                        }}
+                    >
+                        <Close />
+                    </button>
                 </div>
-                <button
-                    elem='Close'
-                    onClick={() => {
-                        hide(id);
-                    }}>
-                    <Icon.Close />
-                </button>
-            </div>
-        );
-    });
+            );
+        }
+    );
 
     return (
         <div

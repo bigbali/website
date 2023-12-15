@@ -3,13 +3,13 @@ import { create } from 'zustand';
 import { getIsMobile, isClient } from '@util';
 
 export interface Device {
-    isMobile: boolean | undefined,
-    isDesktop: boolean | undefined
-};
+    isMobile: boolean | undefined;
+    isDesktop: boolean | undefined;
+}
 
 interface DeviceStore extends Device {
-    update: () => void
-};
+    update: () => void;
+}
 
 const isMobile = getIsMobile();
 export const useDevice = create<DeviceStore>((set) => ({
@@ -30,9 +30,7 @@ const WINDOW_SIZE_UPDATE_DELAY_MS = 100;
 
 if (isClient) {
     fromEvent(window, 'resize')
-        .pipe(
-            debounceTime(WINDOW_SIZE_UPDATE_DELAY_MS),
-        )
+        .pipe(debounceTime(WINDOW_SIZE_UPDATE_DELAY_MS))
         .subscribe(() => {
             useDevice.getState().update();
         });

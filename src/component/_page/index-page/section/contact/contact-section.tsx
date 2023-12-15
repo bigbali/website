@@ -1,4 +1,5 @@
-import { memo, RefObject, useEffect, useRef } from 'react';
+import type { RefObject } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import {
     NotificationStatus,
@@ -6,7 +7,7 @@ import {
     useDevice,
     useSettings
 } from '@store';
-import Icon from '@component/icon';
+import { Copy, GitHub, Message, LinkedIn as LinkedInIcon } from '@component/icon';
 import './contact-section.style';
 
 const EMAIL = 'hello@balazsburjan.com';
@@ -19,16 +20,19 @@ const copyToClipboard = async (text: string) => {
     try {
         await navigator.clipboard.writeText(text);
         return true;
-    }
-    catch (e) {
+    } catch (e) {
         return false;
     }
 };
 
-const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => {
-    const fontSize = useSettings(state => state.fontSize);
-    const isMobile = useDevice(state => state.isMobile);
-    const show = useNotifications(state => state.show);
+const Contact = ({
+    refFromParent
+}: {
+    refFromParent: RefObject<HTMLElement>;
+}) => {
+    const fontSize = useSettings((state) => state.fontSize);
+    const isMobile = useDevice((state) => state.isMobile);
+    const show = useNotifications((state) => state.show);
     const contentRef = useRef<HTMLDivElement>(null);
 
     // 'mods' attribute didn't initially work, so here we go
@@ -48,8 +52,7 @@ const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) =
                         title: 'Copied to clipboard',
                         message: `Copied to clipboard: ${text}.`
                     });
-                }
-                else {
+                } else {
                     show({
                         timeout: 5000,
                         status: NotificationStatus.ERROR,
@@ -58,61 +61,72 @@ const Contact = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) =
                     });
                 }
             })
-            .catch(() => { });
+            .catch(() => {});
     };
 
     return (
-        <section
-            id='Contact'
-            block='Contact'
-            ref={refFromParent}
-        >
+        <section id='Contact' block='Contact' ref={refFromParent}>
             <div elem='Header'>
-                <h1 className='animate-on-scroll'>
-                    Reach out to me
-                </h1>
+                <h1 className='animate-on-scroll'>Reach out to me</h1>
                 <p className='animate-on-scroll'>
-                    <span>
-                        feel free to say hello
-                    </span>
+                    <span>feel free to say hello</span>
                 </p>
             </div>
             <div elem='Icons' className='animate-on-scroll'>
-                <Icon.Message />
-                <Icon.Message />
+                <Message />
+                <Message />
             </div>
             <div elem='Content' ref={contentRef}>
                 <div>
                     <div elem='Content-Email' className='animate-on-scroll'>
-                        <a href={`mailto:${EMAIL}`} target='_top' title={`Say Hello at ${EMAIL}`} role='button'>
+                        <a
+                            href={`mailto:${EMAIL}`}
+                            target='_top'
+                            title={`Say Hello at ${EMAIL}`}
+                        >
                             SAY HELLO
                         </a>
-                        <span>
-                            {EMAIL}
-                        </span>
-                        <button title='Copy email address to clipboard' onClick={() => handleCopy(EMAIL)}>
-                            <Icon.Copy />
+                        <span>{EMAIL}</span>
+                        <button
+                            title='Copy email address to clipboard'
+                            onClick={() => handleCopy(EMAIL)}
+                        >
+                            <Copy />
                         </button>
                     </div>
                     <div elem='Content-LinkedIn' className='animate-on-scroll'>
-                        <a href={LINKEDIN} target='_blank' rel='noopener noreferrer' title='Go to LinkedIn page'>
-                            <Icon.LinkedIn />
+                        <a
+                            href={LINKEDIN}
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            title='Go to LinkedIn page'
+                        >
+                            <LinkedInIcon />
                         </a>
                         {/* Need to load dynamically so Next.js doesn't complain for hydration mismatch */}
                         <LinkedIn isMobile={isMobile} text={LINKEDIN} />
-                        <button title='Copy LinkedIn address to clipboard' onClick={() => handleCopy(LINKEDIN)}>
-                            <Icon.Copy />
+                        <button
+                            title='Copy LinkedIn address to clipboard'
+                            onClick={() => handleCopy(LINKEDIN)}
+                        >
+                            <Copy />
                         </button>
                     </div>
                     <div elem='Content-GitHub' className='animate-on-scroll'>
-                        <a href={GITHUB} target='_blank' rel='noopener noreferrer' title='Go to GitHub page'>
-                            <Icon.GitHub />
+                        <a
+                            href={GITHUB}
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            title='Go to GitHub page'
+                        >
+                            <GitHub />
                         </a>
-                        <span>
-                            {GITHUB}
-                        </span>
-                        <button title='Copy GitHub address to clipboard' onClick={() => handleCopy(GITHUB)}>
-                            <Icon.Copy />
+                        <span>{GITHUB}</span>
+                        <button
+                            title='Copy GitHub address to clipboard'
+                            onClick={() => handleCopy(GITHUB)}
+                        >
+                            <Copy />
                         </button>
                     </div>
                 </div>

@@ -1,22 +1,28 @@
-import {
-    ChangeEvent,
-    useEffect,
-    useState
-} from 'react';
+import type { ChangeEvent } from 'react';
+import { useEffect, useState } from 'react';
 import './slider.style';
 
 export interface SliderProps {
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void,
-    min: number,
-    max: number,
-    step: number,
-    label?: string,
-    name?: string,
-    externalValue?: number,
-    title?: string
+    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    min: number;
+    max: number;
+    step: number;
+    label?: string;
+    name?: string;
+    externalValue?: number;
+    title?: string;
 }
 
-const Slider = ({ min, max, step, label, name, title, externalValue, onChange }: SliderProps) => {
+const Slider = ({
+    min,
+    max,
+    step,
+    label,
+    name,
+    title,
+    externalValue,
+    onChange
+}: SliderProps) => {
     const [value, setValue] = useState(externalValue);
 
     const internalOnChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,8 +30,10 @@ const Slider = ({ min, max, step, label, name, title, externalValue, onChange }:
         onChange(e);
     };
 
-    useEffect(() => { // this is necessary in case the value is changed from somewhere else
-        if (value !== externalValue) { // which means the value here remains unchanged
+    useEffect(() => {
+        // this is necessary in case the value is changed from somewhere else
+        if (value !== externalValue) {
+            // which means the value here remains unchanged
             setValue(externalValue);
         }
     }, [externalValue]);
@@ -44,9 +52,7 @@ const Slider = ({ min, max, step, label, name, title, externalValue, onChange }:
                 onChange={internalOnChange}
                 title={title || value?.toString()}
             />
-            <label
-                elem='Label'
-                htmlFor={name}>
+            <label elem='Label' htmlFor={name}>
                 {label}
             </label>
         </div>

@@ -1,28 +1,17 @@
-import {
-    useCallback,
-    useRef,
-    useState
-} from 'react';
-import lodash from 'lodash';
+import { useCallback, useRef, useState } from 'react';
+import debounce from 'lodash-es/debounce';
 import { isServer, useClickOutside } from '@util';
-import {
-    Color,
-    DefaultColors,
-    Theme,
-    useSettings
-} from '@store';
+import type { Color } from '@store';
+import { DefaultColors, Theme, useSettings } from '@store';
 import Switch from '@component/switch';
 import Slider from '@component/slider';
-import Icon from '@component/icon';
+import { Moon, Sun, Settings as SettingsIcon } from '@component/icon';
 import './settings.style';
 
-const ColorMap = [
-    null,
-    ...Object.values(DefaultColors)
-];
+const ColorMap = [null, ...Object.values(DefaultColors)];
 
 type SettingsProps = {
-    isMobile?: boolean
+    isMobile?: boolean;
 };
 
 export const Settings = ({ isMobile }: SettingsProps) => {
@@ -44,16 +33,21 @@ export const Settings = ({ isMobile }: SettingsProps) => {
     const handleSwitchTheme = (theme: Theme) => setTheme(theme);
     const handleChangeAccentColor = (color: Color) => setAccentColor(color);
     const handleChangeContrast = (modifier: number) => setContrast(modifier);
-    const handleChangeFontSize = useCallback(lodash.debounce((modifier: number) => setFontSize(modifier), 300), []);
+    const handleChangeFontSize = useCallback(
+        debounce((modifier: number) => setFontSize(modifier), 300),
+        []
+    );
 
     const getIsColorSelected = (color: Color) => {
         if (isServer) return;
 
         // in this case, this means null === null
         const doesSelectedColorEqualDefault = accentColor === color;
-        const doesSelectedColorEqualValue = color && accentColor && color.value === accentColor.value;
+        const doesSelectedColorEqualValue =
+            color && accentColor && color.value === accentColor.value;
 
-        const isColorSelected = doesSelectedColorEqualDefault || doesSelectedColorEqualValue;
+        const isColorSelected =
+            doesSelectedColorEqualDefault || doesSelectedColorEqualValue;
 
         return isColorSelected;
     };
@@ -61,7 +55,10 @@ export const Settings = ({ isMobile }: SettingsProps) => {
     useClickOutside(settingsRef, handleClickOutside);
 
     const colorMapper = (color: Color) => {
-        const className = `color-swatch${getIsColorSelected(color) ? ' selected' : ''}`;
+        const className = `color-swatch${getIsColorSelected(color)
+            ? ' selected'
+            : ''
+        }`;
 
         if (color === null) {
             return (
@@ -86,23 +83,29 @@ export const Settings = ({ isMobile }: SettingsProps) => {
     };
 
     const SettingsMenu = (
-        <div block='Settings' elem='Menu' mods={{ IS_IN_MOBILE_NAVIGATION: isMobile }}>
-            <p elem='Label'>
-                Settings
-            </p>
+        <div
+            block='Settings'
+            elem='Menu'
+            mods={{ IS_IN_MOBILE_NAVIGATION: isMobile }}
+        >
+            <p elem='Label'>Settings</p>
             <Switch
                 onSwitch={handleSwitchTheme}
                 valueLeft={Theme.LIGHT}
                 valueRight={Theme.DARK}
-                iconLeft={<Icon.Sun />}
-                iconRight={<Icon.Moon />}
+                iconLeft={<Sun />}
+                iconRight={<Moon />}
                 textLeft='Light'
                 textRight='Dark'
                 label='Color Scheme'
                 externalValue={theme}
             />
             <Slider
-                onChange={(e) => handleChangeFontSize(Number.parseFloat(e.currentTarget.value))}
+                onChange={(e) =>
+                    handleChangeFontSize(
+                        Number.parseFloat(e.currentTarget.value)
+                    )
+                }
                 min={0.6}
                 max={1.4}
                 step={0.01}
@@ -110,10 +113,13 @@ export const Settings = ({ isMobile }: SettingsProps) => {
                 label='Font Size'
                 externalValue={fontSize}
                 title={`Multiplier: ${fontSize.toString()}`}
-
             />
             <Slider
-                onChange={(e) => handleChangeContrast(Number.parseFloat(e.currentTarget.value))}
+                onChange={(e) =>
+                    handleChangeContrast(
+                        Number.parseFloat(e.currentTarget.value)
+                    )
+                }
                 min={0.8}
                 max={1.2}
                 step={0.01}
@@ -126,14 +132,9 @@ export const Settings = ({ isMobile }: SettingsProps) => {
                 <div elem='ColorPicker-ColorsContainer'>
                     {ColorMap.map(colorMapper)}
                 </div>
-                <p elem='ColorLabel'>
-                    Accent Color
-                </p>
+                <p elem='ColorLabel'>Accent Color</p>
             </div>
-            <button
-                elem='Reset'
-                onClick={() => reset()}
-            >
+            <button elem='Reset' onClick={() => reset()}>
                 Reset
             </button>
         </div>
@@ -155,10 +156,10 @@ export const Settings = ({ isMobile }: SettingsProps) => {
                 onClick={() => setIsExpanded((state) => !state)}
                 title='Expand Settings'
             >
-                <Icon.Settings isExpanded={isExpanded} />
+                <SettingsIcon isExpanded={isExpanded} />
             </button>
             {SettingsMenu}
-        </div >
+        </div>
     );
 };
 

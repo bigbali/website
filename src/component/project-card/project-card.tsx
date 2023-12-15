@@ -1,93 +1,70 @@
-import {
-    useEffect,
-    useRef,
-    useState
-} from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Project } from 'data/projects';
-import { ScrollAnimationObserver } from '@util';
-import Icon from '@component/icon';
+import type { Project } from 'src/projects';
+import { GitHub, File } from '@component/icon';
 import './project-card.style';
-
-type ProjectCardProps = Project & {
-    applyScrollAnimation?: boolean
-};
 
 const ProjectCard = ({
     title,
     description,
     thumbnail,
     github,
-    stackblitz,
     slug,
-    page,
-    tags,
-    status,
-    applyScrollAnimation
-}: ProjectCardProps) => {
+    tags
+}: Project) => {
     const [isReady, setIsReady] = useState(false);
     const ref = useRef<HTMLElement>(null);
-
-    useEffect(() => {
-        if (ref.current && applyScrollAnimation) {
-            ScrollAnimationObserver?.add(ref.current);
-        }
-    }, [applyScrollAnimation]);
 
     return (
         <article
             block='ProjectCard'
-            className={applyScrollAnimation ? ' animate-on-scroll' : ''}
+            className='animate-on-scroll'
             ref={ref}
             mods={{
                 LOADED: isReady
             }}
         >
             <div elem='Details'>
-                <h1>
-                    {title}
-                </h1>
-                <p>
-                    {description}
-                </p>
+                <h1>{title}</h1>
+                <p>{description}</p>
                 <div elem='TagsAndAnchors'>
                     <div elem='Tags'>
                         {tags.map((tag) => (
-                            <span key={tag}>
-                                {tag}
-                            </span>
+                            <span key={tag}>{tag}</span>
                         ))}
                     </div>
                     <div elem='Anchors'>
-                        {!!stackblitz && (
-                            <a href={stackblitz} target='_blank' rel="noopener noreferrer" title='Go to StackBlitz page'>
-                                <Icon.Stackblitz />
-                            </a>
-                        )}
                         {!!github && (
-                            <a href={github} target='_blank' rel="noopener noreferrer" title='Go to GitHub page'>
-                                <Icon.GitHub />
-                            </a>
-                        )}
-                        {!!slug && (
-                            <Link href={`project/${slug}`} rel='bookmark' title='Go to project details'>
-                                <Icon.File />
+                            <Link
+                                href={github}
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                title='Go to GitHub page'
+                            >
+                                <GitHub />
+                                GitHub
                             </Link>
                         )}
-                        {!!page && (
-                            <a href={page} target='_blank' rel="noopener noreferrer" title='Go to external page'>
-                                <Icon.Anchor />
-                            </a>
-                        )}
+                        <Link
+                            href={`project/${slug}`}
+                            title='Go to project details'
+                        >
+                            <File />
+                            Go to project page
+                        </Link>
                     </div>
-                </div>
-                <div elem='Status'>
-                    {status}
                 </div>
             </div>
             <div elem='Thumbnail'>
-                <Image src={thumbnail.image} alt={title} placeholder='blur' onLoad={() => setIsReady(true)} />
+                <Link href={'/project/' + slug}>
+                    <Image
+                        src={thumbnail.image}
+                        alt={title}
+                        placeholder='blur'
+                        onLoad={() => setIsReady(true)}
+                    />
+                </Link>
             </div>
         </article>
     );

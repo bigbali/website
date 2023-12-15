@@ -6,7 +6,9 @@ import './cookies.style';
 export const LOCAL_STORAGE_COOKIES_ACCEPTED = 'cookies_accepted';
 
 export const Cookies = () => {
-    const areCookiesAccepted = !!localStorage.getItem(LOCAL_STORAGE_COOKIES_ACCEPTED);
+    const areCookiesAccepted = !!localStorage.getItem(
+        LOCAL_STORAGE_COOKIES_ACCEPTED
+    );
     const [isExpanded, setIsExpanded] = useState(!areCookiesAccepted);
     const { isMobile } = useDevice();
 
@@ -24,8 +26,9 @@ export const Cookies = () => {
             <div elem='Body'>
                 <div elem='Body-Left'>
                     <p>
-                        I utilize your browser’s built-in storage system to store some data in order
-                        to improve your experience while browsing this site.
+                        I utilize your browser’s built-in storage system to
+                        store some data in order to improve your experience
+                        while browsing this site.
                         <span>
                             You can read more about my&nbsp;
                             {isMobile && <br />}

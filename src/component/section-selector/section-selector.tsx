@@ -1,36 +1,45 @@
-import {
-    memo,
-    RefObject,
-    useEffect,
-    useRef,
-} from 'react';
-import { range } from 'lodash';
+import type { RefObject } from 'react';
+import { memo, useEffect, useRef } from 'react';
+import range from 'lodash-es/range';
 import { useSection } from '@store';
 import './section-selector.style';
 
 type SectionSelectorProps = {
     sections: {
-        label: string,
-        ref: RefObject<HTMLElement>
-    }[],
-    onSelect?: (section: RefObject<HTMLElement>) => void
+        label: string;
+        ref: RefObject<HTMLElement>;
+    }[];
+    onSelect?: (section: RefObject<HTMLElement>) => void;
 };
 
-export const SectionSelector = ({ sections, onSelect }: SectionSelectorProps) => {
-    const currentSection = useSection(state => state.currentSection);
-    const setCurrentSection = useSection(state => state.setCurrentSection);
+export const SectionSelector = ({
+    sections,
+    onSelect
+}: SectionSelectorProps) => {
+    const currentSection = useSection((state) => state.currentSection);
+    const setCurrentSection = useSection((state) => state.setCurrentSection);
     const currentSectionRef = useRef<HTMLElement | null>();
     currentSectionRef.current = currentSection; // avoid stale closure in observer callback
 
     useEffect(() => {
-        const observerAction: IntersectionObserverCallback = (observedSections) => {
-            observedSections.forEach(section => {
+        // it IS defined, as apparent from the type displayed on hover, whatever eslint says
+        // eslint-disable-next-line no-undef
+        const observerAction: IntersectionObserverCallback = (
+            observedSections
+        ) => {
+            observedSections.forEach((section) => {
                 // if the observed element covers more than half of the screen, set it as active,
                 // but if it's smaller than that, check if 50% of that element is in view and if so, set it anyway
-                if ((section.intersectionRect.height > window.innerHeight / 2)
-                    || (section.boundingClientRect.height < window.innerHeight / 2 && section.intersectionRatio > 0.5)) {
-
-                    if (currentSectionRef.current && currentSectionRef.current.id === section.target.id) {
+                if (
+                    section.intersectionRect.height > window.innerHeight / 2 ||
+                    (section.boundingClientRect.height <
+                        window.innerHeight / 2 &&
+                        section.intersectionRatio > 0.5)
+                ) {
+                    if (
+                        currentSectionRef.current &&
+                        currentSectionRef.current.id === section.target.id
+                    ) {
                         return;
                     }
 
@@ -59,14 +68,16 @@ export const SectionSelector = ({ sections, onSelect }: SectionSelectorProps) =>
             {sections.map((section) => {
                 return (
                     <div key={section.label}>
-                        <div>
-                            {section.label}
-                        </div>
+                        <div>{section.label}</div>
                         <button
                             title={`Go to ${section.label}`}
                             onClick={() => onSelect && onSelect(section.ref)}
                             className={(() => {
-                                if (section.ref.current && currentSection && section.ref.current.id === currentSection.id)
+                                if (
+                                    section.ref.current &&
+                                    currentSection &&
+                                    section.ref.current.id === currentSection.id
+                                )
                                     return 'active';
                             })()}
                         />

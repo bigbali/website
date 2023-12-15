@@ -10,8 +10,18 @@
     --color-background-primary-dark: rgb(30, 30, 35);
     --color-background-primary-dark-transparent: rgba(30, 30, 35, 0.75);
 
-    --color-background-primary-light-transparent-less-transparent: rgba(250, 250, 250, 0.9);
-    --color-background-primary-dark-transparent-less-transparent: rgba(30, 30, 35, 0.9);
+    --color-background-primary-light-transparent-less-transparent: rgba(
+        250,
+        250,
+        250,
+        0.9
+    );
+    --color-background-primary-dark-transparent-less-transparent: rgba(
+        30,
+        30,
+        35,
+        0.9
+    );
 
     --color-background-secondary-light: rgb(229, 232, 238);
     --color-background-secondary-light-transparent: rgba(229, 232, 238, 0.9);
@@ -51,7 +61,7 @@
     --color-secondary-background: rgb(238, 241, 247);
     --color-primary-background-transparent: rgba(255, 255, 255, 0.75);
 
-    --color-icon-light: #EEF1F7;
+    --color-icon-light: #eef1f7;
     --color-icon-dark: rgb(33, 34, 39);
 
     --color-neutral-background: rgb(27, 152, 168);
@@ -72,7 +82,6 @@
     @include mobile {
         --content-padding: 1.5rem;
         --header-height: 2.5rem;
-        --footer-height: 10rem;
     }
 
     @include uhd {
@@ -91,22 +100,34 @@
 .theme-dark {
     // background
     --color-background-primary: var(--color-background-primary-dark);
-    --color-background-primary-transparent: var(--color-background-primary-dark-transparent);
+    --color-background-primary-transparent: var(
+        --color-background-primary-dark-transparent
+    );
     --color-background-secondary: var(--color-background-secondary-dark);
-    --color-background-secondary-transparent: var(--color-background-secondary-dark-transparent);
-    --color-background-secondary-transparent-2: var(--color-background-secondary-dark-transparent-2);
+    --color-background-secondary-transparent: var(
+        --color-background-secondary-dark-transparent
+    );
+    --color-background-secondary-transparent-2: var(
+        --color-background-secondary-dark-transparent-2
+    );
 
     // content
     --color-content-primary: var(--color-content-primary-dark);
-    --color-content-primary-transparent: var(--color-content-primary-dark-transparent);
+    --color-content-primary-transparent: var(
+        --color-content-primary-dark-transparent
+    );
     --color-content-secondary: var(--color-content-secondary-dark);
-    --color-content-secondary-transparent: var(--color-content-secondary-dark-transparent);
+    --color-content-secondary-transparent: var(
+        --color-content-secondary-dark-transparent
+    );
     --color-content-tertiary: var(--color-content-tertiary-dark);
     --color-content-quaternary: var(--color-content-quaternary-dark);
 
     --color-icon: var(--color-icon-dark);
 
-    --color-background-primary-transparent-less-transparent: var(--color-background-primary-dark-transparent-less-transparent);
+    --color-background-primary-transparent-less-transparent: var(
+        --color-background-primary-dark-transparent-less-transparent
+    );
 
     --color-header-background: var(--color-background-primary-dark-transparent);
 
@@ -120,24 +141,38 @@
 .theme-light {
     // background
     --color-background-primary: var(--color-background-primary-light);
-    --color-background-primary-transparent: var(--color-background-primary-light-transparent);
+    --color-background-primary-transparent: var(
+        --color-background-primary-light-transparent
+    );
     --color-background-secondary: var(--color-background-secondary-light);
-    --color-background-secondary-transparent: var(--color-background-secondary-light-transparent);
-    --color-background-secondary-transparent-2: var(--color-background-secondary-light-transparent-2);
+    --color-background-secondary-transparent: var(
+        --color-background-secondary-light-transparent
+    );
+    --color-background-secondary-transparent-2: var(
+        --color-background-secondary-light-transparent-2
+    );
 
     // content
     --color-content-primary: var(--color-content-primary-light);
-    --color-content-primary-transparent: var(--color-content-primary-light-transparent);
+    --color-content-primary-transparent: var(
+        --color-content-primary-light-transparent
+    );
     --color-content-secondary: var(--color-content-secondary-light);
-    --color-content-secondary-transparent: var(--color-content-secondary-light-transparent);
+    --color-content-secondary-transparent: var(
+        --color-content-secondary-light-transparent
+    );
     --color-content-tertiary: var(--color-content-tertiary-light);
     --color-content-quaternary: var(--color-content-quaternary-light);
 
     --color-icon: var(--color-icon-light);
 
-    --color-background-primary-transparent-less-transparent: var(--color-background-primary-light-transparent-less-transparent);
+    --color-background-primary-transparent-less-transparent: var(
+        --color-background-primary-light-transparent-less-transparent
+    );
 
-    --color-header-background: var(--color-background-primary-light-transparent);
+    --color-header-background: var(
+        --color-background-primary-light-transparent
+    );
 
     // border
     --color-border: var(--color-border-light);
@@ -151,8 +186,19 @@
 ::after {
     box-sizing: border-box;
     color: var(--color-content-primary);
-    transition: color 0.2s, background-color 0.2s, font-size 0.1s;
     font-family: $raleway;
+}
+
+*:not(
+        .no-animation,
+        .landing-initial-state,
+        .landing-animation,
+        .animate-on-scroll
+    ) {
+    transition:
+        color 0.2s,
+        background-color 0.2s,
+        font-size 0.1s;
 }
 
 ::selection {
@@ -171,6 +217,14 @@ body {
     &.disable-scrolling {
         overflow: hidden;
     }
+
+    &.no-animation {
+        transition: none;
+    }
+}
+
+a {
+    text-decoration: none;
 }
 
 main {
@@ -178,7 +232,7 @@ main {
         &.cross-page_enter-active {
             overflow-x: hidden;
 
-            >div {
+            > div {
                 @include not-prefers-reduced-motion {
                     animation-name: in;
                     animation-duration: 0.3s;
@@ -190,21 +244,11 @@ main {
     }
 }
 
-@keyframes in {
-    from {
-        translate: 100% 0;
-    }
-
-    to {
-        translate: 0 0;
-    }
-}
-
 button {
     cursor: pointer;
 
     &:hover {
-        >.Icon>svg>path {
+        > .Icon > svg > path {
             fill: var(--color-theme);
         }
     }
@@ -212,24 +256,23 @@ button {
 
 .animate-on-scroll {
     @include not-prefers-reduced-motion {
-        opacity: 0;
-        translate: -5rem 0;
-        scale: 0.9;
-        transition: opacity 0.15s,
-            translate 0.15s,
-            scale 0.15s,
-            filter 0.15s;
+        &:not(.animation-finished) {
+            opacity: 0;
+            translate: -5rem 0;
+            scale: 0.9;
+
+            transition:
+                opacity 0.15s,
+                translate 0.15s,
+                scale 0.15s,
+                filter 0.15s;
+            transition-delay: 0.35s;
+        }
 
         &.begin-animation {
             opacity: 1;
             translate: 0 0;
             scale: 1;
-        }
-
-        @for $i from 1 through 10 {
-            &:nth-child(#{$i}) {
-                transition-delay: $i * 80ms;
-            }
         }
     }
 }

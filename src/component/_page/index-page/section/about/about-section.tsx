@@ -1,22 +1,22 @@
-import {
-    memo,
-    RefObject,
-    useEffect,
-    useRef,
-} from 'react';
+import type { RefObject } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import { fromEvent, throttleTime } from 'rxjs';
 import Image from 'next/image';
 import { useDevice, useSettings } from '@store';
-import Icon from '@component/icon';
+import { Cat, Location, Address } from '@component/icon';
 import Pattern from '@component/pattern';
 import Balazs from '@media/webp/balazs.webp';
 import './about-section.style';
 
 const MAX_ROTATION_DEG = 5;
 
-const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => {
-    const isMobile = useDevice(state => state.isMobile);
-    const fontSize = useSettings(state => state.fontSize);
+const About = ({
+    refFromParent
+}: {
+    refFromParent: RefObject<HTMLElement>;
+}) => {
+    const isMobile = useDevice((state) => state.isMobile);
+    const fontSize = useSettings((state) => state.fontSize);
     const imageRef = useRef<HTMLDivElement>(null);
     const figureRef = useRef<HTMLElement>(null);
     const anchorRef = useRef<HTMLAnchorElement>(null);
@@ -44,53 +44,51 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
         if (isMobile) return; // On mobile, it's pointless to add a mouse event listener
 
         const event = fromEvent(document, 'mousemove')
-            .pipe(
-                throttleTime(16),
-            )
+            .pipe(throttleTime(16))
             .subscribe((e: Event) => transformImage(e as MouseEvent));
 
         return () => event.unsubscribe();
     }, []);
 
     return (
-        <section
-            id='About'
-            block='About'
-            ref={refFromParent}
-        >
-            <div elem="Header" className='animate-on-scroll'>
-                <h1>
-                    Who I am
-                </h1>
-                <Icon.Address />
+        <section id='About' block='About' ref={refFromParent}>
+            <div elem='Header' className='animate-on-scroll'>
+                <h1>Who I am</h1>
+                <Address />
             </div>
-            <div elem="Content">
+            <div elem='Content'>
                 <div>
                     <p className='animate-on-scroll'>
-                        I am a software developer who is always eager to learn something new and finds joy in creating stuff.
+                        I am a software developer who finds joy in
+                        self-improvement and in crafting high quality software
+                        with clean code, great user experience and visually
+                        stunning user interfaces.
                     </p>
-                    <section elem='Content-Beginning' className='animate-on-scroll'>
-                        <h1>
-                            The Beginning
-                        </h1>
+                    <section
+                        elem='Content-Beginning'
+                        className='animate-on-scroll'
+                    >
+                        <h1>The Beginning</h1>
                         <p>
-                            I introduced myself to the art of computer science in 2016
-                            when I took an interest in making games with Unity,
-                            and not long after I started writing a desktop
-                            networking tool using C# and the .NET Framework.
-                            Soon after, I built a simple web application with ASP.NET which I hosted on my own computer.
+                            I introduced myself to the art of computer science
+                            in 2016 when I took an interest in making games with
+                            Unity. Soon after, I made a networking tool using C#
+                            and the .NET Framework, then I built a simple web
+                            application with ASP.NET that I hosted on my own
+                            computer.
                         </p>
                     </section>
-                    <section elem='Content-Experience' className='animate-on-scroll'>
-                        <h1>
-                            Experience
-                        </h1>
+                    <section
+                        elem='Content-Experience'
+                        className='animate-on-scroll'
+                    >
+                        <h1>Experience</h1>
                         <div>
                             <div>
                                 React Developer
                             </div>
                             <a
-                                href="https://scandiweb.com/"
+                                href='https://scandiweb.com/'
                                 rel='noopener noreferrer'
                                 title='Go to Scandiweb'
                                 target='_blank'
@@ -104,84 +102,47 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                             </div>
                         </div>
                         <p>
-                            As a self-taught software developer, I've accumulated most of my knowledge by relentlessly
-                            tinkering with projects since 2016.
-                            Additionally, I have taken Harvard University's CS50 and CS50's Web Programming courses.
+                            I've been constantly working on projects since 2016.
+                            Additionally, I have taken Harvard University's CS50
+                            and CS50's Web Programming courses.
                         </p>
                     </section>
-                    <section elem='Content-Technologies' className='animate-on-scroll'>
-                        <h1>
-                            Technologies
-                        </h1>
-                        <p>
-                            I've recently worked with:
-                        </p>
+                    <section
+                        elem='Content-Technologies'
+                        className='animate-on-scroll'
+                    >
+                        <h1>Technologies</h1>
+                        <p>I've recently worked with:</p>
                         <ul>
-                            <li>
-                                TypeScript
-                            </li>
-                            <li>
-                                JavaScript
-                            </li>
-                            <li>
-                                React
-                            </li>
-                            <li>
-                                Next
-                            </li>
-                            <li>
-                                Babel
-                            </li>
-                            <li>
-                                Node
-                            </li>
-                            <li>
-                                SASS
-                            </li>
-                            <li>
-                                Python
-                            </li>
-                            <li>
-                                C#
-                            </li>
-                            <li>
-                                WPF .NET
-                            </li>
-                            <li>
-                                Rust
-                            </li>
+                            <li>TypeScript</li>
+                            <li>React & Next.js</li>
+                            <li>Tailwind</li>
+                            <li>Babel</li>
+                            <li>Node.js</li>
+                            <li>SASS</li>
+                            <li>Python</li>
+                            <li>C#</li>
+                            <li>.NET & WPF</li>
+                            <li>Rust</li>
+                            <li>Svelte & SvelteKit</li>
                         </ul>
                     </section>
-                    <section elem='Content-Hobbies' className='animate-on-scroll'>
-                        <h1>
-                            Hobbies
-                        </h1>
-                        <p>
-                            I spend my spare time on:
-                        </p>
+                    <section
+                        elem='Content-Hobbies'
+                        className='animate-on-scroll'
+                    >
+                        <h1>Hobbies</h1>
                         <ul>
-                            <li>
-                                programming
-                            </li>
-                            <li>
-                                photography
-                            </li>
-                            <li>
-                                video games
-                            </li>
-                            <li>
-                                gardening
-                            </li>
-                            <li>
-                                animals
-                            </li>
+                            <li>programming</li>
+                            <li>photography</li>
+                            <li>gardening</li>
                         </ul>
                     </section>
                 </div>
                 <figure elem='Content-Figure' ref={figureRef}>
                     <div ref={imageRef} className='animate-on-scroll'>
-                        <Icon.Cat />
-                        <Image src={Balazs} alt="Portrait of Balázs" />
+                        <Cat />
+                        <Image src={Balazs} alt='Portrait of Balázs' placeholder='blur' />
                         <div className='location'>
                             <div />
                             <a
@@ -191,10 +152,8 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                                 block='Link'
                                 ref={anchorRef}
                             >
-                                <Icon.Location />
-                                <span>
-                                    Gheorgheni, Harghita, Romania
-                                </span>
+                                <Location />
+                                <span>Gheorgheni, Harghita, Romania</span>
                             </a>
                         </div>
                     </div>
@@ -202,7 +161,7 @@ const About = ({ refFromParent }: { refFromParent: RefObject<HTMLElement> }) => 
                     <Pattern.Dots className='animate-on-scroll' />
                 </figure>
             </div>
-        </section >
+        </section>
     );
 };
 
