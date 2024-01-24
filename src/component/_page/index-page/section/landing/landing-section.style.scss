@@ -3,14 +3,38 @@
     position: relative;
     padding-inline-start: var(--content-padding);
     min-height: 100dvh;
-    display: flex;
 
     @include mobile {
         flex-direction: column;
         padding-inline: var(--content-padding);
     }
 
+    &::after {
+        content: '';
+        position: absolute;
+        display: block;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        background-image: linear-gradient(
+            transparent 80%,
+            var(--color-background-primary)
+        );
+        pointer-events: none;
+    }
+
+    #Flowfield {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
     &-Content {
+        margin: auto;
+
         @include desktop {
             display: flex;
             flex-direction: column;
@@ -85,89 +109,6 @@
 
             @include mobile {
                 font-size: 1.25rem;
-            }
-        }
-    }
-
-    &-Spline {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        inset-inline-end: 0;
-        inset-block-start: 0;
-        margin-block: auto; // center vertically
-        overflow: visible;
-        z-index: -1;
-
-        @include desktop {
-            width: 60%;
-            height: 100dvh;
-        }
-
-        @include from-fhd {
-            padding-inline-end: 5rem;
-        }
-
-        > div {
-            display: flex;
-            overflow: hidden;
-
-            > canvas {
-                pointer-events: none;
-                margin: auto;
-
-                // animate in from jsx
-                opacity: 0;
-                transition: opacity 0.5s;
-
-                @include mobile {
-                    width: 95% !important;
-                    height: auto !important;
-                }
-            }
-        }
-
-        > img {
-            height: 100%;
-            width: 100%;
-            object-fit: contain;
-
-            @include desktop {
-                transition: none;
-            }
-        }
-
-        &_IS_BACKUP {
-            padding: 10%;
-        }
-
-        &_IS_LOADING {
-            opacity: 0;
-        }
-
-        .Fallback {
-            display: grid;
-            place-items: center;
-            width: 100%;
-            height: 100%;
-
-            & > .Icon {
-                width: 3rem;
-                height: 3rem;
-                animation: rotate;
-                animation-duration: 3s;
-                animation-timing-function: linear;
-                animation-iteration-count: infinite;
-
-                @keyframes rotate {
-                    from {
-                        rotate: 0deg;
-                    }
-                    to {
-                        rotate: 360deg;
-                    }
-                }
             }
         }
     }

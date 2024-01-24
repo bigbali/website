@@ -7,13 +7,18 @@ export enum Theme {
 }
 
 export enum DefaultColorValue {
-    GREEN = '#008000',
-    BLUE = '#1b6099',
-    PURPLE = '#870c87',
-    YELLOW = '#e0af00'
+    RED = 'hsl(0, 83.78%, 43.53%)',
+    GREEN = 'hsl(120, 100%, 25.1%)',
+    BLUE = 'hsl(207.14, 70%, 35.29%)',
+    PURPLE = 'hsl(300, 83.67%, 28.82%)',
+    YELLOW = 'hsl(46.88, 100%, 43.92%)'
 }
 
 export const DefaultColors = {
+    RED: {
+        name: 'Red',
+        value: DefaultColorValue.RED
+    },
     BLUE: {
         name: 'Blue',
         value: DefaultColorValue.BLUE
@@ -32,16 +37,14 @@ export const DefaultColors = {
     }
 };
 
-export type ColorType = {
+export type Color = {
     name: string;
     value: DefaultColorValue | string;
 };
 
-export type Color = ColorType | null;
-
 export type Settings = {
     theme: Theme;
-    accentColor: Color | null;
+    accentColor: Color;
     fontSize: number;
     contrast: number;
 };
@@ -58,7 +61,7 @@ const isOsThemeDark =
     isClient && window.matchMedia('(prefers-color-scheme: dark)').matches;
 export const defaultSettings: Settings = {
     theme: isOsThemeDark ? Theme.DARK : Theme.LIGHT,
-    accentColor: null,
+    accentColor: DefaultColors.RED,
     fontSize: 1,
     contrast: 1
 };

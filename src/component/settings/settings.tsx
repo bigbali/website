@@ -8,7 +8,7 @@ import Slider from '@component/slider';
 import { Moon, Sun, Settings as SettingsIcon } from '@component/icon';
 import './settings.style';
 
-const ColorMap = [null, ...Object.values(DefaultColors)];
+const ColorMap = Object.values(DefaultColors);
 
 type SettingsProps = {
     isMobile?: boolean;
@@ -59,17 +59,6 @@ export const Settings = ({ isMobile }: SettingsProps) => {
             ? ' selected'
             : ''
         }`;
-
-        if (color === null) {
-            return (
-                <button
-                    key='defaultcolor'
-                    className={`default-color ${className}`}
-                    onClick={() => handleChangeAccentColor(null)}
-                    title='Default (Red)'
-                />
-            );
-        }
 
         return (
             <button
