@@ -23,6 +23,7 @@ const NavigationMobile = ({ listProps }: NavigationElementProps) => {
             <button
                 block='Navigation'
                 elem='Expander'
+                title='Expand navigation menu'
                 onClick={() => setIsExpanded((state) => !state)}
             >
                 <HamburgerMenu isExpanded={isExpanded} />
@@ -50,7 +51,7 @@ const NavigationMobile = ({ listProps }: NavigationElementProps) => {
                                 <Settings isMobile />
                             </div>
                         </div>
-                        <button elem='Exit' onClick={closeMenu}>
+                        <button elem='Exit' onClick={closeMenu} title='Close navigation menu'>
                             <Close />
                         </button>
                     </div>
