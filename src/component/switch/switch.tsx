@@ -44,7 +44,7 @@ const Switch = ({
             mods={{ isSwitched: value === valueRight }}
         >
             <div elem='Value'>
-                <div elem='Value-Left'>
+                <div elem='Value-Left' mods={{ withoutIcon: !iconLeft }}>
                     {iconLeft && ( // bem transform doesnt work here
                         <span block='Switch-Value-Left-Icon'>{iconLeft}</span>
                     )}
@@ -52,7 +52,7 @@ const Switch = ({
                         <span block='Switch-Value-Left-Text'>{textLeft}</span>
                     )}
                 </div>
-                <div elem='Value-Right'>
+                <div elem='Value-Right' mods={{ withoutIcon: !iconRight }}>
                     {iconRight && (
                         <span block='Switch-Value-Right-Icon'>{iconRight}</span>
                     )}

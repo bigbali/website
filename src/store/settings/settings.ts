@@ -44,6 +44,7 @@ export type Settings = {
     accentColor: Color | null;
     fontSize: number;
     contrast: number;
+    customCursor: boolean
 };
 
 interface SettingsStore extends Settings {
@@ -51,6 +52,7 @@ interface SettingsStore extends Settings {
     setAccentColor: (accentColor: Color) => void;
     setFontSize: (fontSize: number) => void;
     setContrast: (contrast: number) => void;
+    setCustomCursor: (value: boolean) => void;
     reset: () => void;
 }
 
@@ -60,7 +62,8 @@ export const defaultSettings: Settings = {
     theme: isOsThemeDark ? Theme.DARK : Theme.LIGHT,
     accentColor: null,
     fontSize: 1,
-    contrast: 1
+    contrast: 1,
+    customCursor: true
 };
 
 const storedStateJSON = isClient && localStorage.getItem('settings');
@@ -69,7 +72,7 @@ const storedSettings: Settings | null =
 const initialState: Settings = storedSettings || defaultSettings;
 
 const updateStoredState = (partialState: Partial<SettingsStore>) => {
-    const { theme, accentColor, fontSize, contrast } = useSettings.getState();
+    const { theme, accentColor, fontSize, contrast, customCursor } = useSettings.getState();
     localStorage.setItem(
         'settings',
         JSON.stringify({
@@ -77,6 +80,7 @@ const updateStoredState = (partialState: Partial<SettingsStore>) => {
             accentColor,
             fontSize,
             contrast,
+            customCursor,
             ...partialState
         })
     );
@@ -104,6 +108,9 @@ export const useSettings = create<SettingsStore>((set) => ({
     setContrast: (contrast) => {
         set(() => setFunction({ contrast }));
     },
+    setCustomCursor: (customCursor) => {
+        set(() => setFunction({ customCursor }));
+    },
     reset: () => {
         set(() => {
             resetStoredState();
@@ -112,7 +119,8 @@ export const useSettings = create<SettingsStore>((set) => ({
                 theme: defaultSettings.theme,
                 accentColor: defaultSettings.accentColor,
                 fontSize: defaultSettings.fontSize,
-                contrast: defaultSettings.contrast
+                contrast: defaultSettings.contrast,
+                customCursor: defaultSettings.customCursor
             };
         });
     }

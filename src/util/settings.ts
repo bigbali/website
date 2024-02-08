@@ -8,13 +8,15 @@ export const applySettings = ({
     theme,
     accentColor,
     fontSize,
-    contrast
+    contrast,
+    customCursor
 }: Settings) => {
     const body = document.body;
     const html = document.documentElement;
 
     body.classList.toggle('theme-light', theme === Theme.LIGHT);
     body.classList.toggle('theme-dark', theme === Theme.DARK);
+    body.classList.toggle('custom-cursor', customCursor);
 
     if (accentColor) {
         body.style.setProperty('--color-theme', accentColor.value);

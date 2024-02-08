@@ -23,15 +23,17 @@ export default function App({ Component, pageProps, router }: AppProps) {
     const accentColor = useSettings((state) => state.accentColor);
     const fontSize = useSettings((state) => state.fontSize);
     const contrast = useSettings((state) => state.contrast);
+    const customCursor = useSettings((state) => state.customCursor);
 
     useEffect(() => {
         applySettings({
             theme,
             accentColor,
             fontSize,
-            contrast
+            contrast,
+            customCursor
         });
-    }, [theme, accentColor, fontSize, contrast]);
+    }, [theme, accentColor, fontSize, contrast, customCursor]);
 
     useEffect(() => {
         // On every new page, gather all .animate-on-scroll elements and observe them

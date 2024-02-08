@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import debounce from 'lodash-es/debounce';
 import { isServer, useClickOutside } from '@util';
 import type { Color } from '@store';
-import { DefaultColors, Theme, useSettings } from '@store';
+import { DefaultColors, Theme, useDevice, useSettings } from '@store';
 import Switch from '@component/switch';
 import Slider from '@component/slider';
 import { Moon, Sun, Settings as SettingsIcon } from '@component/icon';
@@ -21,16 +21,19 @@ export const Settings = ({ isMobile }: SettingsProps) => {
         accentColor,
         fontSize,
         contrast,
+        customCursor,
         setTheme,
         setAccentColor,
         setFontSize,
         setContrast,
+        setCustomCursor,
         reset
     } = useSettings();
     const settingsRef = useRef(null);
 
     const handleClickOutside = () => setIsExpanded(false);
     const handleSwitchTheme = (theme: Theme) => setTheme(theme);
+    const handleSwitchCustomCursor = (value: boolean) => setCustomCursor(value);
     const handleChangeAccentColor = (color: Color) => setAccentColor(color);
     const handleChangeContrast = (modifier: number) => setContrast(modifier);
     const handleChangeFontSize = useCallback(
@@ -100,6 +103,17 @@ export const Settings = ({ isMobile }: SettingsProps) => {
                 label='Color Scheme'
                 externalValue={theme}
             />
+            {!isMobile &&
+                <Switch
+                    onSwitch={handleSwitchCustomCursor}
+                    valueLeft={true}
+                    valueRight={false}
+                    textLeft='Yes'
+                    textRight='No'
+                    label='Custom Cursor'
+                    externalValue={customCursor}
+                />
+            }
             <Slider
                 onChange={(e) =>
                     handleChangeFontSize(

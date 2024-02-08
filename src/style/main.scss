@@ -47,7 +47,7 @@
     --color-content-quaternary-light: rgb(135, 149, 166);
     --color-content-quaternary-dark: rgb(135, 149, 166);
 
-    --color-theme-initial: rgb(204, 18, 18);
+    --color-theme-initial: hsl(0, 83.78%, 43.53%);
     --color-theme: var(--color-theme-initial);
 
     --color-border-light: rgb(225, 225, 235);
@@ -221,6 +221,12 @@ body {
     &.no-animation {
         transition: none;
     }
+
+    &.custom-cursor {
+        * {
+            cursor: none !important;
+        }
+    }
 }
 
 a {
@@ -291,5 +297,29 @@ button {
     h3,
     p {
         outline: 1px solid blue !important;
+    }
+}
+
+.cursor-effect {
+    $size: 3rem;
+
+    position: absolute;
+    z-index: 9999999;
+    width: $size;
+    height: $size;
+    border-radius: $size;
+    border: 2px solid var(--color-content-primary);
+    pointer-events: none;
+
+    &::before {
+        $dotsize: 5px;
+
+        content: '';
+        margin: calc($size / 2 - $dotsize);
+        background-color: var(--color-theme);
+        width: $dotsize;
+        height: $dotsize;
+        border-radius: $dotsize;
+        display: block;
     }
 }
