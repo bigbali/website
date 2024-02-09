@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import debounce from 'lodash-es/debounce';
 import { isServer, useClickOutside } from '@util';
 import type { Color } from '@store';
-import { DefaultColors, Theme, useDevice, useSettings } from '@store';
+import { DefaultColors, Theme, useSettings } from '@store';
 import Switch from '@component/switch';
 import Slider from '@component/slider';
 import { Moon, Sun, Settings as SettingsIcon } from '@component/icon';
@@ -70,6 +70,7 @@ export const Settings = ({ isMobile }: SettingsProps) => {
                     className={`default-color ${className}`}
                     onClick={() => handleChangeAccentColor(null)}
                     title='Default (Red)'
+                    data-interactable
                 />
             );
         }
@@ -81,6 +82,7 @@ export const Settings = ({ isMobile }: SettingsProps) => {
                 style={{ backgroundColor: color.value }}
                 onClick={() => handleChangeAccentColor(color)}
                 title={color.name}
+                data-interactable
             />
         );
     };
@@ -148,7 +150,7 @@ export const Settings = ({ isMobile }: SettingsProps) => {
                 </div>
                 <p elem='ColorLabel'>Accent Color</p>
             </div>
-            <button elem='Reset' onClick={() => reset()}>
+            <button elem='Reset' onClick={() => reset()} data-interactable>
                 Reset
             </button>
         </div>
@@ -169,6 +171,7 @@ export const Settings = ({ isMobile }: SettingsProps) => {
                 elem='Expander'
                 onClick={() => setIsExpanded((state) => !state)}
                 title='Expand Settings'
+                data-interactable
             >
                 <SettingsIcon isExpanded={isExpanded} />
             </button>

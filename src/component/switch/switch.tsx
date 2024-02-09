@@ -42,6 +42,7 @@ const Switch = ({
             block='Switch'
             onClick={onClick}
             mods={{ isSwitched: value === valueRight }}
+            data-interactable
         >
             <div elem='Value'>
                 <div elem='Value-Left' mods={{ withoutIcon: !iconLeft }}>

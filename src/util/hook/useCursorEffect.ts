@@ -1,43 +1,43 @@
 import { useSettings } from '@store';
-import { useCallback, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function useCursorEffect() {
     const cursorEffectElement = useRef<HTMLDivElement>();
     const abort = useSettings(state => !state.customCursor);
 
-    const cursorPosition = {
-        x: 0,
-        y: 0
-    };
-
-    const updateCursor = useCallback((e: MouseEvent) => {
+    const updateCursorPosition = (e: MouseEvent) => {
         if (!cursorEffectElement.current)
             return;
 
         const size = cursorEffectElement.current.getBoundingClientRect().width;
         const offsetFromCenter = size / 2;
 
-        const absoluteX = e.pageX - offsetFromCenter;
-        const absoluteY = e.pageY - offsetFromCenter;
         const x = e.clientX - offsetFromCenter;
         const y = e.clientY - offsetFromCenter;
 
-        // important not to count scrollbox width
-        if (x > 0 && x < document.documentElement.clientWidth - size) {
-            cursorPosition.x = x;
-        }
+        cursorEffectElement.current.style.translate = `${x}px ${y}px`;
 
-        if (y > 0 && y < document.documentElement.clientHeight - size) {
-            cursorPosition.y = y;
-        }
-
-        cursorEffectElement.current.style.transform = `translate(${cursorPosition.x}px, ${cursorPosition.y}px)`;
-
-        const interactionPossible = document.elementsFromPoint(absoluteX, absoluteY)
-            .some(element => element.classList.contains('interactable'));
+        // if cursor is over any element that fulfills one of these conditions:
+        //     1. has a 'data-interactive' attribute
+        //     2. is a link
+        //     3. is a button
+        // ... then set the 'interaction' class to true
+        const interactionPossible = document.elementsFromPoint(e.clientX, e.clientY)
+            .some(element => (
+                element.hasAttribute('data-interactable')
+                || element.tagName === 'A'
+                || (element.tagName === 'BUTTON' && !(element as HTMLButtonElement).disabled)));
 
         cursorEffectElement.current.classList.toggle('interaction', interactionPossible);
-    }, []);
+    };
+
+    const handleMouseDown = () => {
+        cursorEffectElement.current?.classList.add('pressed');
+    };
+
+    const handleMouseUp = () => {
+        cursorEffectElement.current?.classList.remove('pressed');
+    };
 
     useEffect(() => {
         if (abort)
@@ -47,12 +47,20 @@ export default function useCursorEffect() {
         cursorEffectElement.current.classList.add('cursor-effect');
 
         document.body.appendChild(cursorEffectElement.current);
-        document.documentElement.style.cursor = 'none';
-        document.addEventListener('mousemove', updateCursor);
+
+        document.addEventListener('mousemove', updateCursorPosition);
+        document.addEventListener('mousedown', handleMouseDown);
+        document.addEventListener('mouseup', handleMouseUp);
+        document.addEventListener('dragend', handleMouseUp);
 
         return () => {
             document.documentElement.style.cursor = 'initial';
-            document.removeEventListener('mousemove', updateCursor);
+
+            document.removeEventListener('mousemove', updateCursorPosition);
+            document.removeEventListener('mousedown', handleMouseDown);
+            document.removeEventListener('mouseup', handleMouseUp);
+            document.removeEventListener('dragenx', handleMouseUp);
+
             cursorEffectElement.current?.remove();
         };
     }, [abort]);

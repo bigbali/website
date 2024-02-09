@@ -30,6 +30,7 @@ const NavigationList = ({
                 <Link
                     role='button'
                     title={`Scroll to ${section} section`}
+                    data-interactable
                     onClick={(e) => {
                         if (onNavigationItemClickEffect) {
                             onNavigationItemClickEffect();

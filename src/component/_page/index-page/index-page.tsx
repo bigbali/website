@@ -4,7 +4,6 @@ import { SectionID, useSection } from '@store';
 import SectionSelector from '@component/section-selector';
 import Section from './section';
 import './index-page.style';
-import useCursorEffect from '@util/hook/useCursorEffect';
 
 const scrollToSection = (id: string | null) => {
     if (!id) return;
@@ -21,8 +20,6 @@ export const IndexPage = () => {
     const setScrollToSectionId = useSection(
         (state) => state.setScrollToSectionId
     );
-
-    useCursorEffect();
 
     useEffect(() => {
         if (scrollToSectionId) {

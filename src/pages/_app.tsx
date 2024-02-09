@@ -7,6 +7,7 @@ import { applySettings } from '@util/settings';
 import Layout from '@component/layout';
 import Transition from '@component/transition';
 import '@style/main';
+import useCursorEffect from '@util/hook/useCursorEffect';
 
 // we need to apply theme as early as possible to minimize flashing
 if (typeof window !== 'undefined') {
@@ -24,6 +25,8 @@ export default function App({ Component, pageProps, router }: AppProps) {
     const fontSize = useSettings((state) => state.fontSize);
     const contrast = useSettings((state) => state.contrast);
     const customCursor = useSettings((state) => state.customCursor);
+
+    useCursorEffect();
 
     useEffect(() => {
         applySettings({

@@ -39,7 +39,7 @@ const Slider = ({
     }, [externalValue]);
 
     return (
-        <div block='Slider'>
+        <div block='Slider' data-interactable>
             <input
                 elem='Input'
                 type='range'

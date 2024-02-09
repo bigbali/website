@@ -3,8 +3,7 @@ import {
     useEffect,
     type RefObject,
     useState,
-    useCallback,
-    TransitionEvent
+    useCallback
 } from 'react';
 import dynamic from 'next/dynamic';
 import './landing-section.style';
