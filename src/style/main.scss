@@ -213,6 +213,7 @@ html {
 body {
     margin: 0;
     background-color: var(--color-background-primary);
+    position: relative;
 
     &.disable-scrolling {
         overflow: hidden;
@@ -303,7 +304,10 @@ button {
 .cursor-effect {
     $size: 3rem;
 
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(calc(50dvw - $size / 2), calc((50dvh - $size / 2)));
     z-index: 9999999;
     width: $size;
     height: $size;
@@ -321,5 +325,10 @@ button {
         height: $dotsize;
         border-radius: $dotsize;
         display: block;
+    }
+
+    &.interaction {
+        width: 4rem;
+        height: 4rem;
     }
 }

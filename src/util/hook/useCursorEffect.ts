@@ -5,6 +5,11 @@ export default function useCursorEffect() {
     const cursorEffectElement = useRef<HTMLDivElement>();
     const abort = useSettings(state => !state.customCursor);
 
+    const cursorPosition = {
+        x: 0,
+        y: 0
+    };
+
     const updateCursor = useCallback((e: MouseEvent) => {
         if (!cursorEffectElement.current)
             return;
@@ -14,19 +19,24 @@ export default function useCursorEffect() {
 
         const absoluteX = e.pageX - offsetFromCenter;
         const absoluteY = e.pageY - offsetFromCenter;
-        const relativeX = e.clientX - offsetFromCenter;
-        const relativeY = e.clientY - offsetFromCenter;
+        const x = e.clientX - offsetFromCenter;
+        const y = e.clientY - offsetFromCenter;
 
-        //                               important not to count scrollbox width
-        // if (relativeX > 0 && relativeX < document.documentElement.clientWidth - size) {
-        //     cursorEffectElement.current.style.left =  absoluteX + 'px';
-        // }
+        // important not to count scrollbox width
+        if (x > 0 && x < document.documentElement.clientWidth - size) {
+            cursorPosition.x = x;
+        }
 
-        // if (relativeY > 0 && relativeY < document.documentElement.clientHeight - size) {
-        //     cursorEffectElement.current.style.top = absoluteY + 'px';
-        // }
+        if (y > 0 && y < document.documentElement.clientHeight - size) {
+            cursorPosition.y = y;
+        }
 
-        cursorEffectElement.current.style.transform = `translate(${relativeX}px, ${relativeY}px)`;
+        cursorEffectElement.current.style.transform = `translate(${cursorPosition.x}px, ${cursorPosition.y}px)`;
+
+        const interactionPossible = document.elementsFromPoint(absoluteX, absoluteY)
+            .some(element => element.classList.contains('interactable'));
+
+        cursorEffectElement.current.classList.toggle('interaction', interactionPossible);
     }, []);
 
     useEffect(() => {
@@ -39,7 +49,6 @@ export default function useCursorEffect() {
         document.body.appendChild(cursorEffectElement.current);
         document.documentElement.style.cursor = 'none';
         document.addEventListener('mousemove', updateCursor);
-        // document.addEventListener('scroll', updateCursor);
 
         return () => {
             document.documentElement.style.cursor = 'initial';
