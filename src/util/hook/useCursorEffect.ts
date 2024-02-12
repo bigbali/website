@@ -1,9 +1,10 @@
-import { useSettings } from '@store';
+import { useDevice, useSettings } from '@store';
 import { useEffect, useRef } from 'react';
 
 export default function useCursorEffect() {
     const cursorEffectElement = useRef<HTMLDivElement>();
-    const abort = useSettings(state => !state.customCursor);
+    const customCursorDisabled = useSettings(state => !state.customCursor);
+    const isMobile = useDevice(state => state.isMobile);
 
     const updateCursorPosition = (e: MouseEvent) => {
         if (!cursorEffectElement.current)
@@ -40,7 +41,7 @@ export default function useCursorEffect() {
     };
 
     useEffect(() => {
-        if (abort)
+        if (customCursorDisabled || isMobile)
             return;
 
         cursorEffectElement.current = document.createElement('div');
@@ -63,5 +64,5 @@ export default function useCursorEffect() {
 
             cursorEffectElement.current?.remove();
         };
-    }, [abort]);
+    }, [customCursorDisabled]);
 }
